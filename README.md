@@ -7,3 +7,4 @@ A full stack web application
 - James Tennant
 - Nout Reusken
 - José Chavez
+- Cody Lambert
