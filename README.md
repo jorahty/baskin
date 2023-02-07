@@ -8,4 +8,4 @@ A full stack web application
 - Nout Reusken
 - José Chavez
 - Cody Lambert
-- Ash Yaw
+- Ash  Yaw
