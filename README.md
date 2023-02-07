@@ -9,3 +9,4 @@ A full stack web application
 - José Chavez
 - Cody Lambert
 - Ash  Yaw
+- Eric Hernandez
