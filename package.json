@@ -1,0 +1,69 @@
+{
+  "name": "baskin-bargain",
+  "scripts": {
+    "dev": "next dev",
+    "lint": "next lint --fix",
+    "test": "jest",
+    "zip": "bestzip Assignment3.Submission.zip tsconfig.json src/* sql/*"
+  },
+  "devDependencies": {
+    "@jest/globals": "*",
+    "@testing-library/jest-dom": "*",
+    "@testing-library/react": "*",
+    "@testing-library/user-event": "*",
+    "@types/bcrypt": "*",
+    "@types/jsonwebtoken": "*",
+    "@types/node": "*",
+    "@types/pg": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "@types/supertest": "*",
+    "@types/testing-library__jest-dom": "*",
+    "bestzip": "*",
+    "eslint": "*",
+    "eslint-config-next": "*",
+    "eslint-config-typescript": "*",
+    "jest": "*",
+    "jest-environment-jsdom": "*",
+    "msw": "*",
+    "supertest": "*",
+    "ts-jest": "*",
+    "ts-node": "*",
+    "ts-postgres": "*",
+    "typescript": "*",
+    "whatwg-fetch": "*"
+  },
+  "dependencies": {
+    "@emotion/react": "*",
+    "@emotion/styled": "*",
+    "@mui/icons-material": "*",
+    "@mui/joy": "*",
+    "@next/font": "*",
+    "bcrypt": "*",
+    "graphql": "*",
+    "graphql-request": "*",
+    "graphql-yoga": "*",
+    "jsonwebtoken": "*",
+    "pg": "*",
+    "next": "*",
+    "react": "*",
+    "react-dom": "*",
+    "reflect-metadata": "*",
+    "type-graphql": "*"
+  },
+  "eslintConfig": {
+    "extends": [
+      "next/core-web-vitals",
+      "typescript"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 13
+    },
+    "rules": {
+      "indent": [
+        "warn",
+        2
+      ]
+    }
+  }
+}
