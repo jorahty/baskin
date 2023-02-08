@@ -1,8 +1,8 @@
-# CSE 187 Project
+# Baskin Bargain
 
-A full stack web application
+A full stack web application that enables individual commerce.
 
-## Project Team 9
+## CSE187: Project Team 9
 
 - James Tennant
 - Nout Reusken
