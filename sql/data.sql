@@ -1,4 +1,4 @@
 -- Your insert statements go here
-INSERT INTO users (id, email, data) VALUES ('af956320-a052-11ed-a8fc-0242ac120001', 'molly@books.com', '{"name":"Molly Member","roles":["member"],"password":"$2b$10$Y00XOZD/f5gBSpDusPUgU.iJufk6Nxx6gAoHRG8t2eHyGgoP2bK4y"}');
-INSERT INTO users (id, email, data) VALUES ('af956320-a052-11ed-a8fc-0242ac120002', 'anna@books.com', '{"name":"Anna Admin","roles":["member","admin"],"password":"$2b$10$Y00XOZD/f5gBSpDusPUgU.G1ohpR3oQbbBHK4KzX7dU219Pv/lzze"}');
-INSERT INTO users (id, email, data) VALUES ('af956320-a052-11ed-a8fc-0242ac120003', 'nobby@books.com', '{"name":"Nobby Nobody","roles":[],"password":"$2a$12$ZnrvkMk9jn56NlyJGOyTE.biz5xvJUr1iKIFsWyFWPFF/x3j5fUhm"}');
+INSERT INTO member (id, email, data) VALUES ('af956320-a052-11ed-a8fc-0242ac120001', 'molly@books.com', '{"name":"Molly Member","roles":["member"],"password":"$2b$10$Y00XOZD/f5gBSpDusPUgU.iJufk6Nxx6gAoHRG8t2eHyGgoP2bK4y"}');
+INSERT INTO member (id, email, data) VALUES ('af956320-a052-11ed-a8fc-0242ac120002', 'anna@books.com', '{"name":"Anna Admin","roles":["member","admin"],"password":"$2b$10$Y00XOZD/f5gBSpDusPUgU.G1ohpR3oQbbBHK4KzX7dU219Pv/lzze"}');
+INSERT INTO member (id, email, data) VALUES ('af956320-a052-11ed-a8fc-0242ac120003', 'nobby@books.com', '{"name":"Nobby Nobody","roles":[],"password":"$2a$12$ZnrvkMk9jn56NlyJGOyTE.biz5xvJUr1iKIFsWyFWPFF/x3j5fUhm"}');

@@ -2,4 +2,4 @@
 drop schema public cascade;
 create schema public;
 
-CREATE TABLE users (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), email VARCHAR(255), data jsonb);
+CREATE TABLE member (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), email VARCHAR(255), data jsonb);
