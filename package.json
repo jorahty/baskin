@@ -3,7 +3,9 @@
   "scripts": {
     "dev": "next dev",
     "lint": "next lint --fix",
-    "test": "jest"
+    "test": "jest --runInBand --forceExit",
+    "test:silent": "jest --runInBand --forceExit --silent",
+    "test:watch": "jest --runInBand --forceExit --watchAll"
   },
   "devDependencies": {
     "@jest/globals": "*",
