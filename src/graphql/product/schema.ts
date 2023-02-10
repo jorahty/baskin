@@ -1,8 +1,8 @@
-import { Field, ObjectType } from "type-graphql";
+import { ArgsType, Field, ObjectType } from "type-graphql";
 import { Matches } from "class-validator";
 
 const UUIDFormat =
-  /[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}/;
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
 @ObjectType()
 export class Product {
@@ -25,4 +25,17 @@ export class Product {
     description!: string;
   @Field()
     date!: string;
+}
+
+@ArgsType()
+export class ProductArgs {
+  @Field({ nullable: true })
+  @Matches(UUIDFormat)
+    id?: string;
+  @Field({ nullable: true })
+  @Matches(UUIDFormat)
+    mid?: string;
+  @Field({ nullable: true })
+  @Matches(UUIDFormat)
+    cid?: string;
 }

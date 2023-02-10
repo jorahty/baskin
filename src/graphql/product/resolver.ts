@@ -1,13 +1,13 @@
-import { Resolver, Query } from "type-graphql";
+import { Args, Resolver, Query } from "type-graphql";
 
-import { Product } from "./schema";
+import { Product, ProductArgs } from "./schema";
 import { ProductService } from "./service";
 
 @Resolver()
 export class ProductResolver {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @Query(returns => [Product])
-  async product(): Promise<Product[]> {
-    return new ProductService().list();
+  @Query((returns) => [Product])
+  async product(@Args() args: ProductArgs): Promise<Product[]> {
+    return new ProductService().list(args);
   }
 }
