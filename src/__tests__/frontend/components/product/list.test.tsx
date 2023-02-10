@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
-import ProductCard from "../../../../components/product/card";
+import ProductList from "../../../../components/product/list";
 
-const product = {
+const products = [{
   mid: "string",
   id: "string",
   cid: "string",
@@ -10,10 +10,10 @@ const product = {
   quantity: 1,
   description: "string",
   date: "string",
-};
+}];
 
 const renderView = async () => {
-  render(<ProductCard product={product} />);
+  render(<ProductList products={products}/>);
 };
 
 test('Renders', async () => {
