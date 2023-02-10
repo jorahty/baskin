@@ -13,32 +13,9 @@
 
 ## Usage
 
-To install node packages:
-```
-npm install
-```
-
-To start the database: 
-```
-docker-compose up -d
-```
-
-To run the dev server:
-```
-npm run dev
-```
-
-To run tests and examine code coverage:
-```
-npm run test
-```
-
-To run the linter:
-```
-npm run lint
-```
-
-To stop the database: 
-```
-docker-compose down
-```
+- To install node packages: `npm install`
+- To start the database: `docker-compose up -d`
+- To run the dev server: `npm run dev`
+- To run tests and examine code coverage: `npm run test`
+- To run the linter: `npm run lint`
+- To stop the database: `docker-compose down`
