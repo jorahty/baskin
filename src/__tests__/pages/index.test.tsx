@@ -1,9 +1,14 @@
-import { render, screen } from '@testing-library/react'
-
 import Index from '../../pages/index';
+import { render, screen } from '@testing-library/react'
+import { CssVarsProvider } from '@mui/joy/styles';
+import '../matchMedia';
 
 const renderView = async () => {
-  render(<Index />)
+  render(
+    <CssVarsProvider>
+      <Index />
+    </CssVarsProvider>
+  );
 };
 
 test('Renders', async () => {
