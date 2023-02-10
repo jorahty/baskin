@@ -36,6 +36,7 @@
   "dependencies": {
     "@emotion/react": "*",
     "@emotion/styled": "*",
+    "@fontsource/public-sans": "^4.5.12",
     "@mui/icons-material": "*",
     "@mui/joy": "*",
     "@next/font": "*",
@@ -44,8 +45,8 @@
     "graphql-request": "*",
     "graphql-yoga": "*",
     "jsonwebtoken": "*",
-    "pg": "*",
     "next": "*",
+    "pg": "*",
     "react": "*",
     "react-dom": "*",
     "reflect-metadata": "*",

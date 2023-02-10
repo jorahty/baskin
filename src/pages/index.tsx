@@ -1,7 +1,9 @@
+import { Button } from "@mui/joy";
+
 export default function Index() {
   return (
     <>
-      Hello World!
+      <Button>Hello World!</Button>
     </>
   )
 }
