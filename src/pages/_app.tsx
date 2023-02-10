@@ -7,12 +7,12 @@ import CssBaseline from '@mui/joy/CssBaseline';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <CssVarsProvider>
-      <CssBaseline />
       <Head>
         <title>Baskin</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <CssBaseline />
       <Component {...pageProps} />
     </CssVarsProvider>
   );
