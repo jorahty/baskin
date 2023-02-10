@@ -2,20 +2,21 @@ import Router from 'next/router'
 import Button from '@mui/joy/Button';
 import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
-import React from 'react';
 import { Stack } from '@mui/joy';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 export default function Signin() {
-  const [credentials, setCredentials] = React.useState({email: '', password: ''});
+  const [credentials, setCredentials] = useState({email: '', password: ''});
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.removeItem('user');
   }, []);
 
-  const handleInputChange = (event) => {
-    const {value, name} = event.target;
+  const handleInputChange = (event: ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    const name = target.name as "email"|"password";
     const u = credentials;
-    u[name] = value;
+    u[name] = target.value;
     setCredentials(u);
   };
 
