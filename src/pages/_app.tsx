@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import '@fontsource/public-sans';
 import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import { GlobalStyles } from '@mui/joy';

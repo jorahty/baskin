@@ -14,7 +14,7 @@ export default function Header() {
       gap={3}
     >
       <Link href="/" style={{ flexGrow: 1 }} passHref>
-        <Typography level="h4">
+        <Typography level="h3" fontWeight={800}>
           Baskin Bargain
         </Typography>
       </Link>

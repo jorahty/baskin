@@ -1,54 +1,46 @@
-import { List, ListItem, ListItemButton, ListSubheader } from "@mui/joy";
-import { Box } from "@mui/system";
+import { List, ListItem, ListItemButton } from "@mui/joy";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-/*
-  Currently the Category list items will be hard coded,
-  but in the future they will be dynamically generated
-  from the database if, for instance, we were to add a
-  new category to the database.
-*/
+const categories = [
+  { name: 'Electronics',  slug: 'electronics'},
+  { name: 'Clothing', slug: 'clothing'},
+  { name: 'Sports Equipment', slug: 'sports-equipment'},
+  { name: 'Toys', slug: 'toys'},
+  { name: 'Furniture', slug: 'furniture'},
+  { name: 'Instruments', slug: 'instruments'},
+  { name: 'Office', slug: 'office'},
+  { name: 'Free', slug: 'free'},
+];
 
 export default function Sidebar() {
-
-  const categories = [
-    "Electronics", 
-    "Clothing",
-    "Sports Equipment",
-    "Toys",
-    "Furniture",
-    "Instruments",
-    "Office",
-    "Free"
-  ];
+  const router = useRouter();
+  const { id } = router.query;
 
   return (
-    <>
-      <Box sx={{ width: "100%", height: "90%" }}>
-        <List
-          variant="outlined"
-          sx={{
-            margin: 2,
-            width: 200,
-            bgcolor: 'background.body',
-            borderRadius: 'sm',
-          }}
-        >
-          <ListItem nested>
-            <ListSubheader>
-              Shop by Category
-            </ListSubheader>
-            <List>
-              {categories.map((category) => (
-                <ListItem key={category}>
-                  <ListItemButton href="/">
-                    {category}
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </ListItem>
-        </List>
-      </Box>
-    </>
+    <List
+      sx={{
+        p: 2,
+        '--List-item-radius': '8px',
+        '& .MuiListItemButton-root': { width: 240 },
+      }}
+    >
+      <ListItem>
+        <Link href="/">
+          <ListItemButton sx={{ fontWeight: 800 }}>
+              All categories
+          </ListItemButton>
+        </Link>
+      </ListItem>
+      {categories.map(({ name, slug}) => (
+        <ListItem key={slug}>
+          <Link href={`/category/${slug}`}>
+            <ListItemButton selected={ id === slug }>
+              {name}
+            </ListItemButton>
+          </Link>
+        </ListItem>
+      ))}
+    </List>
   );
 }
