@@ -1,33 +1,10 @@
 import Router from 'next/router'
-
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-//Citation: https://github.com/mui/material-ui/tree/v5.11.6/docs/data/material/getting-started/templates/sign-in
-
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        Baskin Bargin
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const theme = createTheme();
+import Button from '@mui/joy/Button';
+import Input from '@mui/joy/Input';
+import Box from '@mui/joy/Box';
+import Typography from '@mui/joy/Typography';
+import Container from '@mui/joy/Container';
+import React from 'react';
 
 export default function Signin() {
   const [user, setUser] = React.useState({email: '', password: ''});
@@ -69,64 +46,39 @@ export default function Signin() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              onChange={handleInputChange}
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              name="email"
-              type="email"
-              label="Email Address"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              onChange={handleInputChange}
-              margin="normal"
-              required
-              fullWidth
-              id="password"
-              name="password"
-              type="password"
-              label="Password"
-              aria-label="Password"
-              autoComplete="password"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography>
+          Sign in
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit}>
+          <Input 
+            onChange={handleInputChange}
+            name="email"
+            placeholder='Email address'
+          />
+          <Input 
+            type="password"
+            onChange={handleInputChange}
+            name="password"
+            placeholder="•••••••"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="solid"
+          >
+            Sign In
+          </Button>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+      </Box>
+    </Container>
   );
 }

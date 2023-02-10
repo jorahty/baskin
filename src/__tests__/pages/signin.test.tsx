@@ -44,9 +44,9 @@ test('Sucess', async () => {
   renderView()
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   window.alert = () => { }
-  const email = screen.getByText('Email Address')
+  const email = screen.getByPlaceholderText('Email address');
   await userEvent.type(email, 'molly@books.com')
-  const passwd = screen.getByLabelText('Password')
+  const passwd = screen.getByPlaceholderText('•••••••');
   await userEvent.type(passwd, 'mollymember')
   fireEvent.click(screen.getByText('Sign In'))
   await waitFor(() => {
