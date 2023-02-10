@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react'
 
-import SimpleLayout from "../../../components/SimpleLayout";
+import DashboardLayout from "../../../../components/layout/DashboardLayout";
 
 const renderView = async () => {
   render(
-    <SimpleLayout>
+    <DashboardLayout>
       <p>Children components go here.</p>
-    </SimpleLayout>
+    </DashboardLayout>
   )
 };
 

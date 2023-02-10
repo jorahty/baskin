@@ -1,6 +1,6 @@
-import ModeToggle from "../components/ModeToggle";
+import ModeToggle from "../components/layout/ModeToggle";
 import { Button } from "@mui/joy";
-import DashboardLayout from "../components/DashboardLayout";
+import DashboardLayout from "../components/layout/DashboardLayout";
 
 export default function Index() {
   return (
