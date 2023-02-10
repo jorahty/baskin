@@ -36,7 +36,7 @@
   "dependencies": {
     "@emotion/react": "*",
     "@emotion/styled": "*",
-    "@fontsource/public-sans": "^4.5.12",
+    "@fontsource/public-sans": "*",
     "@mui/icons-material": "*",
     "@mui/joy": "*",
     "@next/font": "*",
