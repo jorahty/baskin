@@ -49,7 +49,7 @@ export default function Signin() {
       sx={{
         margin: '100px auto',
         alignItems: 'center',
-        width: 400,
+        width: 300,
         gap: 2,
       }}
     >
