@@ -1,13 +1,12 @@
 import Router from 'next/router'
 import Button from '@mui/joy/Button';
 import Input from '@mui/joy/Input';
-import Box from '@mui/joy/Box';
 import Typography from '@mui/joy/Typography';
-import Container from '@mui/joy/Container';
 import React from 'react';
+import { Stack } from '@mui/joy';
 
 export default function Signin() {
-  const [user, setUser] = React.useState({email: '', password: ''});
+  const [credentials, setCredentials] = React.useState({email: '', password: ''});
 
   React.useEffect(() => {
     localStorage.removeItem('user');
@@ -15,14 +14,14 @@ export default function Signin() {
 
   const handleInputChange = (event) => {
     const {value, name} = event.target;
-    const u = user;
+    const u = credentials;
     u[name] = value;
-    setUser(u);
+    setCredentials(u);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const query = {query: `query login{login(email: "${user.email}" password: "${user.password}") { name, accessToken }}`}
+    const query = {query: `query login{login(email: "${credentials.email}" password: "${credentials.password}") { name, accessToken }}`}
     fetch('/api/graphql', {
       method: 'POST',
       body: JSON.stringify(query),
@@ -46,39 +45,37 @@ export default function Signin() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
+    <Stack component="form" onSubmit={handleSubmit}
+      sx={{
+        margin: '100px auto',
+        alignItems: 'center',
+        width: 400,
+        gap: 2,
+      }}
+    >
+      <Typography component="h2" fontSize="xl2" fontWeight="lg">
+        Sign in
+      </Typography>
+      <Input 
+        fullWidth
+        onChange={handleInputChange}
+        name="email"
+        placeholder='Email address'
+      />
+      <Input
+        fullWidth
+        type="password"
+        onChange={handleInputChange}
+        name="password"
+        placeholder="•••••••"
+      />
+      <Button
+        type="submit"
+        fullWidth
+        variant="solid"
       >
-        <Typography>
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit}>
-          <Input 
-            onChange={handleInputChange}
-            name="email"
-            placeholder='Email address'
-          />
-          <Input 
-            type="password"
-            onChange={handleInputChange}
-            name="password"
-            placeholder="•••••••"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="solid"
-          >
-            Sign In
-          </Button>
-        </Box>
-      </Box>
-    </Container>
+        Sign In
+      </Button>
+    </Stack>
   );
 }
