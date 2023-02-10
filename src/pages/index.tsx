@@ -7,6 +7,7 @@ export default function Index() {
     <DashboardLayout>
       <Button>Hello World!</Button>
       <ModeToggle />
+      All the main content can go here!
     </DashboardLayout>
   )
 }
