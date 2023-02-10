@@ -4,7 +4,7 @@ import {graphql} from 'msw'
 import {setupServer} from 'msw/node'
 import 'whatwg-fetch'
 
-import Signin from '../../pages/signin'
+import Signin from '../../../pages/signin'
 
 const handlers = [
   graphql.query('login', async (req, res, ctx) => {

@@ -5,7 +5,9 @@
     "lint": "next lint --fix",
     "test": "jest --runInBand --forceExit",
     "test:silent": "jest --runInBand --forceExit --silent",
-    "test:watch": "jest --runInBand --forceExit --watchAll"
+    "test:watch": "jest --runInBand --forceExit --watchAll",
+    "test:backend": "jest --runInBand --forceExit --silent --collectCoverageFrom=src/graphql/**/*.* src/__tests__/graphql",
+    "test:frontend": "jest --silent --collectCoverageFrom=src/{pages,components}/**/*.tsx src/__tests__/frontend"
   },
   "devDependencies": {
     "@jest/globals": "*",
