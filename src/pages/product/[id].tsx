@@ -1,16 +1,26 @@
-import SimpleLayout from '../../components/layout/SimpleLayout';
-import { Box } from '@mui/joy';
-import { useRouter } from 'next/router';
+import ProductDetails from "../../components/product/details";
+import SimpleLayout from "../../components/layout/SimpleLayout";
+import { GetServerSideProps } from "next";
+import { Product } from "@/graphql/product/schema";
+import { ProductService } from "../../graphql/product/service";
+import { Stack } from "@mui/joy";
 
-export default function ProductPage() {
-  const router = useRouter()
-  const { id } = router.query
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const { id } = query;
+  const [product] = await new ProductService().list({ id: id as string });
+  return {
+    props: {
+      product,
+    },
+  }
+}
 
+export default function ProductPage({ product }: { product: Product }) {
   return (
     <SimpleLayout>
-      <Box p={10}>
-        Show detials of product with id {id}
-      </Box>
+      <Stack maxWidth={900} margin="auto" alignItems="center">
+        <ProductDetails product={product}/>
+      </Stack>
     </SimpleLayout>
-  );
+  )
 }

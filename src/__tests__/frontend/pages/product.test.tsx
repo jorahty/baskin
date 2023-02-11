@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react'
 import ProductPage from '../../../pages/product/[id]';
+import { getServerSideProps } from '../../../pages/product/[id]';
+import { render, screen } from '@testing-library/react'
 import { CssVarsProvider } from '@mui/joy/styles';
 import '../matchMedia';
 
@@ -12,14 +13,18 @@ jest.mock('next/router', () => ({
 }));
 
 const renderView = async () => {
+  const { props } = await getServerSideProps({
+    req: { headers: { host: 'localhost:3000' } },
+    query: { id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d' },
+  });
   render(
     <CssVarsProvider>
-      <ProductPage />
+      <ProductPage product={props.product}/>
     </CssVarsProvider>
   );
 };
 
 test('Renders', async () => {
   renderView();
-  screen.getByText('Show detials of product with id 123');
+  await screen.findByText('Product details');
 });

@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react'
 import ProductCard from "../../../../components/product/card";
 
 const product = {
-  owner_username: "string",
+  user: "string",
   id: "string",
-  product_category: "string",
-  title: "string",
+  category: "string",
+  name: "string",
   price: 0,
   quantity: 90,
   description: "string",
