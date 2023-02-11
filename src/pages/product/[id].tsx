@@ -8,7 +8,7 @@ export default function ProductPage() {
 
   return (
     <SimpleLayout>
-      <Box data-testid="test" p={10}>
+      <Box p={10}>
         Show detials of product with id {id}
       </Box>
     </SimpleLayout>

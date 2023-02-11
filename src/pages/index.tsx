@@ -1,11 +1,10 @@
-import { Button } from "@mui/joy";
+import ProductList from "../components/product/list";
 import DashboardLayout from "../components/layout/DashboardLayout";
 
 export default function Index() {
   return (
     <DashboardLayout>
-      <Button>Hello World!</Button>
-      All the main content can go here!
+      <ProductList />
     </DashboardLayout>
   )
 }

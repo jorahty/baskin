@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react'
-import CategoryPage from '../../../pages/category/[id]';
+import CategoryPage from '../../../pages/category/[slug]';
 import { CssVarsProvider } from '@mui/joy/styles';
 import '../matchMedia';
 
 jest.mock('next/router', () => ({
   useRouter() {
     return ({
-      query: { id: '123' },
+      query: { slug: 'clothing' },
     });
   },
 }));
@@ -21,5 +21,5 @@ const renderView = async () => {
 
 test('Renders', async () => {
   renderView();
-  screen.getByText('List by category id: 123');
+  screen.getByText('Hello World!');
 });
