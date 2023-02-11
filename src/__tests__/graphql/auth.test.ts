@@ -23,12 +23,12 @@ afterAll((done) => {
 });
 
 const bad = {
-  email: 'molly_at_books.com',
+  username: 'molly_at_book',
   password: 'mollymember',
 };
 
 const wrong = {
-  email: 'molly@slack.com',
+  username: 'molly_member',
   password: 'notmollyspasswd',
 };
 
@@ -36,7 +36,7 @@ const wrong = {
 test('OK', async () => {
   const member = login.molly;
   await request.post('/api/graphql')
-    .send({query: `{login(email: "${member.email}" password: 
+    .send({query: `{login(username: "${member.username}" password: 
       "${member.password}") { username, accessToken }}`})
     .expect(200)
     .then((res) => {
@@ -50,7 +50,7 @@ test('OK', async () => {
 test('Wrong Credentials', async () => {
   const member = wrong;
   await request.post('/api/graphql')
-    .send({query: `{login(email: "${member.email}" password: 
+    .send({query: `{login(username: "${member.username}" password: 
       "${member.password}") { username, accessToken }}`})
     .expect('Content-Type', /json/)
     .then((data) => {
@@ -61,7 +61,7 @@ test('Wrong Credentials', async () => {
 test('Non-existent user', async () => {
   const member = wrong;
   await request.post('/api/graphql')
-    .send({query: `{login(email: "anna@book.com" password: 
+    .send({query: `{login(username: "anna@book.com" password: 
       "${member.password}") { username, accessToken }}`})
     .expect('Content-Type', /json/)
     .then((data) => {
@@ -72,7 +72,7 @@ test('Non-existent user', async () => {
 test('Bad Format', async () => {
   const member = bad;
   await request.post('/api/graphql')
-    .send({query: `{login(email: "${member.email}" password: 
+    .send({query: `{login(username: "${member.username}" password: 
       "${member.password}") { username, accessToken }}`})
     .expect('Content-Type', /json/)
     .then((data) => {

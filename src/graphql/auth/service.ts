@@ -15,17 +15,16 @@ export interface User {
 }
 
 export class AuthService {
-  async getUser(email: string): Promise<User|undefined> {
-    const select = "Select * FROM member WHERE data->>'email'=$1";
+  async getUser(username: string): Promise<User|undefined> {
+    const select = "Select * FROM member WHERE username = $1";
     const query = {
       text: select,
-      values: [`${email}`],
+      values: [`${username}`],
     };
     const {rows} = await pool.query(query);
     if (rows[0]){
       const user:User = rows[0]['data'];
       user['username'] = rows[0]['username'];
-      console.log(user);
       return user;
     } else {
       return undefined;
@@ -34,7 +33,7 @@ export class AuthService {
 
   public async login(credentials: Credentials): Promise<SignInPayload>  {
     return new Promise((resolve, reject) => {
-      this.getUser(credentials.email)
+      this.getUser(credentials.username)
         .then((user) => {
           if (user && bcrypt.compareSync(credentials.password, user.password)) {
             const accessToken = jwt.sign(

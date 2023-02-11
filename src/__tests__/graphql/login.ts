@@ -1,4 +1,4 @@
 export const molly = {
-  email: 'molly@books.com',
+  username: 'molly_member',
   password: 'mollymember',
 };
