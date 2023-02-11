@@ -14,7 +14,7 @@ export default function DashbaordLayout({children}: {children: React.ReactNode})
   return (
     <SimpleLayout>
       <Stack direction="row" height="100%" alignItems="flex-start" >
-        <Box sx={{ minWidth: 240, ...sx }}>
+        <Box sx={{ minWidth: 240, maxWidth: 240, ...sx }}>
           <Sidebar />
         </Box>
         <Divider orientation="vertical"/>
