@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
 
-import {Credentials, UserAuth} from './schema';
+import {Credentials, SignInPayload} from './schema';
 import {pool} from '../db';
 
 import secrets from '../../../data/secrets.json';
@@ -32,7 +32,7 @@ export class AuthService {
     }
   }
 
-  public async login(credentials: Credentials): Promise<UserAuth>  {
+  public async login(credentials: Credentials): Promise<SignInPayload>  {
     return new Promise((resolve, reject) => {
       this.getUser(credentials.email)
         .then((user) => {

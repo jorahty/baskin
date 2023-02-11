@@ -1,15 +1,15 @@
 import { Query, Resolver, Args } from "type-graphql"
 
-import { Credentials, UserAuth } from "./schema"
+import { Credentials, SignInPayload } from "./schema"
 import { AuthService } from "./service"
 
 @Resolver()
 export class AuthResolver {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @Query(returns => UserAuth)
+  @Query(returns => SignInPayload)
   async login(
     @Args() credentials: Credentials,
-  ): Promise<UserAuth> {
+  ): Promise<SignInPayload> {
     return new AuthService().login(credentials);
   }
 
