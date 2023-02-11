@@ -7,17 +7,18 @@ import SimpleLayout from "./SimpleLayout";
 const sx = {
   overflowY: 'scroll',
   height: `calc(100vh - ${headerHeight})`,
+  flexGrow: 1,
 };
 
 export default function DashbaordLayout({children}: {children: React.ReactNode}) {
   return (
     <SimpleLayout>
       <Stack direction="row" height="100%" alignItems="flex-start" >
-        <Box sx={{ width: 240, ...sx }}>
+        <Box sx={{ minWidth: 240, ...sx }}>
           <Sidebar />
         </Box>
         <Divider orientation="vertical"/>
-        <Box sx={{ flexGrow: 1, ...sx }}>
+        <Box sx={sx}>
           {children}
         </Box>
       </Stack>

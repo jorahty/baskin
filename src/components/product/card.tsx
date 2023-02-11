@@ -4,11 +4,13 @@ import Link from "next/link";
 import {Stack, Typography} from "@mui/joy";
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
+// 208
+
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <Link href={`/pages/product/${product.category}`}>
+    <Link href={`/product/${product.id}`}>
       <Stack className={"product-card"}>
-        <Image src={"https://via.placeholder.com/250"} alt={"Placeholder for the product image"} width={250} height={250} />
+        <Image src={"https://picsum.photos/210"} alt={"Placeholder for the product image"} width={250} height={250} />
         <Typography component={"h4"}>
           {product.name}
         </Typography>

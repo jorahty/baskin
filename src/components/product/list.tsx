@@ -1,37 +1,118 @@
-import { Button, Typography } from "@mui/joy";
+import { Box, Stack } from "@mui/joy";
 import ProductCard from "./card";
 
 const products = [{
-  mid: "string",
+  user: "string",
   id: "string",
-  cid: "string",
-  title: "Air force 1",
+  category: "string",
+  name: "Air force 1",
   price: 249.99,
   quantity: 1,
   description: "string",
   date: "string",
 }, {
-  mid: "string",
+  user: "string",
   id: "string",
-  cid: "string",
-  title: "Coffee mug",
+  category: "string",
+  name: "Coffee mug",
+  price: 30.99,
+  quantity: 1,
+  description: "string",
+  date: "string",
+}, {
+  user: "string",
+  id: "string",
+  category: "string",
+  name: "Coffee mug",
+  price: 30.99,
+  quantity: 1,
+  description: "string",
+  date: "string",
+}, {
+  user: "string",
+  id: "string",
+  category: "string",
+  name: "Coffee mug",
+  price: 30.99,
+  quantity: 1,
+  description: "string",
+  date: "string",
+}, {
+  user: "string",
+  id: "string",
+  category: "string",
+  name: "Coffee mug",
+  price: 30.99,
+  quantity: 1,
+  description: "string",
+  date: "string",
+}, {
+  user: "string",
+  id: "string",
+  category: "string",
+  name: "Coffee mug",
+  price: 30.99,
+  quantity: 1,
+  description: "string",
+  date: "string",
+}, {
+  user: "string",
+  id: "string",
+  category: "string",
+  name: "Coffee mug",
+  price: 30.99,
+  quantity: 1,
+  description: "string",
+  date: "string",
+}, {
+  user: "string",
+  id: "string",
+  category: "string",
+  name: "Coffee mug",
+  price: 30.99,
+  quantity: 1,
+  description: "string",
+  date: "string",
+}, {
+  user: "string",
+  id: "string",
+  category: "string",
+  name: "Coffee mug",
+  price: 30.99,
+  quantity: 1,
+  description: "string",
+  date: "string",
+}, {
+  user: "string",
+  id: "string",
+  category: "string",
+  name: "Coffee mug",
+  price: 30.99,
+  quantity: 1,
+  description: "string",
+  date: "string",
+}, {
+  user: "string",
+  id: "string",
+  category: "string",
+  name: "Coffee mug",
   price: 30.99,
   quantity: 1,
   description: "string",
   date: "string",
 }];
 
-export default function ProductList({ cid }: { cid?: string }) {
+export default function ProductList({ category }: { category?: string }) {
   return (
     <>
-      <Button>Hello World!</Button>
-      <Typography>
-        Below will be a list of { cid ? `products in ${cid}` : `all products`}.
-        The list is hard coded for now.
-      </Typography>
-      {products.map((product, index) => (
-        <ProductCard key={index} product={product} />
-      ))}
+      category: {category}
+      <Stack direction="row" gap={3} p={3} flexWrap="wrap">
+        {products.map((product, index) => (
+          <Box key={index}>
+            <ProductCard product={product} />
+          </Box>
+        ))}
+      </Stack>
     </>
   );
 }

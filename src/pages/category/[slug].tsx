@@ -8,7 +8,7 @@ export default function CategoryPage() {
 
   return (
     <DashbaordLayout>
-      <ProductList cid={slug}/>
+      <ProductList category={slug}/>
     </DashbaordLayout>
   );
 }
