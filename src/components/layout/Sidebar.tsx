@@ -15,7 +15,7 @@ const categories = [
 
 export default function Sidebar() {
   const router = useRouter();
-  const { id } = router.query;
+  const { query } = router;
 
   return (
     <List
@@ -35,7 +35,7 @@ export default function Sidebar() {
       {categories.map(({ name, slug}) => (
         <ListItem key={slug}>
           <Link href={`/category/${slug}`}>
-            <ListItemButton selected={ id === slug }>
+            <ListItemButton selected={ query.slug === slug }>
               {name}
             </ListItemButton>
           </Link>
