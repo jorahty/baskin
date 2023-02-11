@@ -23,7 +23,7 @@ export default function Sidebar() {
           onClick={() => Router.push('/')}
           sx={{ fontWeight: 800 }}
         >
-          All categories
+          All Categories
         </ListItemButton>
       </ListItem>
       {categories.map(({ name, slug }) => (
