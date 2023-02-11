@@ -37,12 +37,12 @@ test('OK', async () => {
   const member = login.molly;
   await request.post('/api/graphql')
     .send({query: `{login(email: "${member.email}" password: 
-      "${member.password}") { name, accessToken }}`})
+      "${member.password}") { username, accessToken }}`})
     .expect(200)
     .then((res) => {
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
-      expect(res.body.data.login.name).toEqual('Molly Member');
+      expect(res.body.data.login.username).toEqual('molly.member');
       expect(res.body.data.login.accessToken).toBeDefined();
     });
 });
@@ -51,7 +51,7 @@ test('Wrong Credentials', async () => {
   const member = wrong;
   await request.post('/api/graphql')
     .send({query: `{login(email: "${member.email}" password: 
-      "${member.password}") { name, accessToken }}`})
+      "${member.password}") { username, accessToken }}`})
     .expect('Content-Type', /json/)
     .then((data) => {
       expect(data.body.errors.length).toEqual(1);
@@ -62,7 +62,7 @@ test('Non-existent user', async () => {
   const member = wrong;
   await request.post('/api/graphql')
     .send({query: `{login(email: "anna@book.com" password: 
-      "${member.password}") { name, accessToken }}`})
+      "${member.password}") { username, accessToken }}`})
     .expect('Content-Type', /json/)
     .then((data) => {
       expect(data.body.errors.length).toEqual(1);
@@ -73,7 +73,7 @@ test('Bad Format', async () => {
   const member = bad;
   await request.post('/api/graphql')
     .send({query: `{login(email: "${member.email}" password: 
-      "${member.password}") { name, accessToken }}`})
+      "${member.password}") { username, accessToken }}`})
     .expect('Content-Type', /json/)
     .then((data) => {
       expect(data.body.errors.length).toEqual(1);

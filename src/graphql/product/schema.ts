@@ -7,14 +7,11 @@ const UUIDFormat =
 @ObjectType()
 export class Product {
   @Field()
-  @Matches(UUIDFormat)
     id!: string;
   @Field()
-  @Matches(UUIDFormat)
-    mid!: string;
+    owner_username!: string;
   @Field()
-  @Matches(UUIDFormat)
-    cid!: string;
+    product_category!: string;
   @Field()
     title!: string;
   @Field()
@@ -33,9 +30,7 @@ export class ProductArgs {
   @Matches(UUIDFormat)
     id?: string;
   @Field({ nullable: true })
-  @Matches(UUIDFormat)
-    mid?: string;
+    owner_username?: string;
   @Field({ nullable: true })
-  @Matches(UUIDFormat)
-    cid?: string;
+    product_category?: string;
 }

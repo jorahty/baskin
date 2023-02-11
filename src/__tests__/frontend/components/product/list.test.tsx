@@ -2,9 +2,9 @@ import { render } from '@testing-library/react'
 import ProductList from "../../../../components/product/list";
 
 const products = [{
-  mid: "string",
+  owner_username: "string",
   id: "string",
-  cid: "string",
+  product_category: "string",
   title: "string",
   price: 0,
   quantity: 1,

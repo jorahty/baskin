@@ -14,10 +14,7 @@ export class Credentials {
 @ObjectType()
 export class UserAuth {
   @Field()
-    name!: string
-  @Field()
-  @Matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)
-    email!: string
+    username!: string
   @Field()
     accessToken!: string
 }

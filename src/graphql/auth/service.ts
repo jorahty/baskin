@@ -6,7 +6,8 @@ import {pool} from '../db';
 
 import secrets from '../../../data/secrets.json';
 
-interface User {
+export interface User {
+  username: string,
   name: string,
   email: string,
   roles: string[],
@@ -15,7 +16,7 @@ interface User {
 
 export class AuthService {
   async getUser(email: string): Promise<User|undefined> {
-    const select = "Select * FROM member WHERE email= $1"
+    const select = "Select * FROM member WHERE data->>'email'=$1";
     const query = {
       text: select,
       values: [`${email}`],
@@ -23,7 +24,8 @@ export class AuthService {
     const {rows} = await pool.query(query);
     if (rows[0]){
       const user:User = rows[0]['data'];
-      user['email'] = rows[0]['email'];
+      user['username'] = rows[0]['username'];
+      console.log(user);
       return user;
     } else {
       return undefined;
@@ -41,7 +43,7 @@ export class AuthService {
                 expiresIn: '30m',
                 algorithm: 'HS256'
               });
-            resolve({name: user.name, email: user.email, accessToken: accessToken});
+            resolve({username: user.username, accessToken: accessToken});
           } else {
             reject(new Error("Unauthorised"));
           }

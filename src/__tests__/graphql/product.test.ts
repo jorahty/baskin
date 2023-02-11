@@ -11,9 +11,8 @@ let server: http.Server<
 >;
 let request: supertest.SuperTest<supertest.Test>;
 
-const id = "af956320-a052-11ed-a8fc-0242ac130000";
-const mid = "af956320-a052-11ed-a8fc-0242ac120001";
-const cid = "af956320-a052-11ed-a8fc-0242ac140002";
+const owner_username = "anna.admin";
+const product_category = "clothing";
 
 beforeAll(async () => {
   server = http.createServer(requestHandler);
@@ -32,7 +31,7 @@ test("Fetch All Products", async () => {
   await request
     .post("/api/graphql")
     .send({
-      query: `{product { id, mid, cid, title }}`,
+      query: `{product { id, owner_username, product_category, title }}`,
     })
     .expect(200)
     .then((res) => {
@@ -45,10 +44,20 @@ test("Fetch All Products", async () => {
 });
 
 test("Fetch Product By ID", async () => {
+  let id;
   await request
     .post("/api/graphql")
     .send({
-      query: `{product (id: "${id}") { id, mid, cid, title }}`,
+      query: `{product { id }}`,
+    })
+    .expect(200)
+    .then((res) => {
+      id = res.body.data.product[0].id;
+    });
+  await request
+    .post("/api/graphql")
+    .send({
+      query: `{product (id: "${id}") { id, owner_username, product_category, title }}`,
     })
     .expect(200)
     .then((res) => {
@@ -64,7 +73,7 @@ test("Fetch Product By Member ID", async () => {
   await request
     .post("/api/graphql")
     .send({
-      query: `{product (mid: "${mid}") { id, mid, cid, title }}`,
+      query: `{product (owner_username: "${owner_username}") { id, owner_username, product_category, title }}`,
     })
     .expect(200)
     .then((res) => {
@@ -79,7 +88,7 @@ test("Fetch Product By Category ID", async () => {
   await request
     .post("/api/graphql")
     .send({
-      query: `{product (cid: "${cid}") { id, mid, cid, title }}`,
+      query: `{product (product_category: "${product_category}") { id, owner_username, product_category, title }}`,
     })
     .expect(200)
     .then((res) => {
