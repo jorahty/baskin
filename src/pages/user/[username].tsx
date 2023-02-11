@@ -1,16 +1,30 @@
-import SimpleLayout from '../../components/layout/SimpleLayout';
-import { Box } from '@mui/joy';
-import { useRouter } from 'next/router';
+import SimpleLayout from "../../components/layout/SimpleLayout";
+import { GetServerSideProps } from "next";
+import { Product } from "@/graphql/product/schema";
+import { ProductService } from "../../graphql/product/service";
+import { Stack, Typography } from "@mui/joy";
+import ProductList from "../../components/product/list";
 
-export default function UserPage() {
-  const router = useRouter()
-  const { username } = router.query
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const { username } = query;
+  // const [user] = await new UserService().list(username);
+  return {
+    props: {
+      user: username,
+      products: await new ProductService().list({ user: username as string })
+    },
+  }
+}
 
+export default function UserPage({ user, products }: { user: string, products: Product[] }) {
   return (
     <SimpleLayout>
-      <Box p={10}>
-        User profile of user with username {username}
-      </Box>
+      <Stack maxWidth={900} margin="auto" alignItems="center">
+        <Typography sx={{ pb: 40 }} level="h1">User details for {user}</Typography>
+        {/* <UserDetails user={user}/> */}
+        <Typography level="h3">This user&apos;s stuff:</Typography>
+        <ProductList products={products}/>
+      </Stack>
     </SimpleLayout>
-  );
+  )
 }
