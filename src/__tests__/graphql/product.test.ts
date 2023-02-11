@@ -11,14 +11,11 @@ let server: http.Server<
 >;
 let request: supertest.SuperTest<supertest.Test>;
 
-const owner_username = "anna.admin";
-const product_category = "clothing";
-
 beforeAll(async () => {
   server = http.createServer(requestHandler);
   server.listen();
   request = supertest(server);
-  db.reset();
+  await db.reset();
   return new Promise((resolve) => setTimeout(resolve, 500));
 });
 
@@ -31,7 +28,7 @@ test("Fetch All Products", async () => {
   await request
     .post("/api/graphql")
     .send({
-      query: `{product { id, owner_username, product_category, title }}`,
+      query: `{product { id, user, category, name }}`,
     })
     .expect(200)
     .then((res) => {
@@ -57,7 +54,7 @@ test("Fetch Product By ID", async () => {
   await request
     .post("/api/graphql")
     .send({
-      query: `{product (id: "${id}") { id, owner_username, product_category, title }}`,
+      query: `{product (id: "${id}") { id, user, category, name }}`,
     })
     .expect(200)
     .then((res) => {
@@ -69,11 +66,11 @@ test("Fetch Product By ID", async () => {
     });
 });
 
-test("Fetch Product By Member ID", async () => {
+test("Fetch Product By User", async () => {
   await request
     .post("/api/graphql")
     .send({
-      query: `{product (owner_username: "${owner_username}") { id, owner_username, product_category, title }}`,
+      query: `{product (user: "molly_member") { id, user, category, name }}`,
     })
     .expect(200)
     .then((res) => {
@@ -84,11 +81,11 @@ test("Fetch Product By Member ID", async () => {
     });
 });
 
-test("Fetch Product By Category ID", async () => {
+test("Fetch Product By Category", async () => {
   await request
     .post("/api/graphql")
     .send({
-      query: `{product (product_category: "${product_category}") { id, owner_username, product_category, title }}`,
+      query: `{product (category: "toys") { id, user, category, name }}`,
     })
     .expect(200)
     .then((res) => {

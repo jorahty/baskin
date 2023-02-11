@@ -10,15 +10,15 @@ export class Product {
 
   @Field()
   @Matches(regexUsername)
-    owner_username!: string;
+    user!: string;
 
   @Field()
   @Matches(regexSlug)
-    product_category!: string;
+    category!: string;
 
   @Field()
   @Length(1, 32)
-    title!: string;
+    name!: string;
 
   @Field()
     price!: number;
@@ -42,8 +42,8 @@ export class ProductArgs {
     id?: string;
 
   @Field({ nullable: true })
-    owner_username?: string;
+    user?: string;
 
   @Field({ nullable: true })
-    product_category?: string;
+    category?: string;
 }

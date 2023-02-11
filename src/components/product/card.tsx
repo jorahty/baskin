@@ -6,11 +6,11 @@ import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <Link href={`/pages/product/${product.product_category}`}>
+    <Link href={`/pages/product/${product.category}`}>
       <Stack className={"product-card"}>
         <Image src={"https://via.placeholder.com/250"} alt={"Placeholder for the product image"} width={250} height={250} />
         <Typography component={"h4"}>
-          {product.title}
+          {product.name}
         </Typography>
         <Typography level={"body2"} component={"strong"}>
           ${product.price}

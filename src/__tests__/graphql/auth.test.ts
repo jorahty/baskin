@@ -42,7 +42,7 @@ test('OK', async () => {
     .then((res) => {
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
-      expect(res.body.data.login.username).toEqual('molly.member');
+      expect(res.body.data.login.username).toEqual('molly_member');
       expect(res.body.data.login.accessToken).toBeDefined();
     });
 });

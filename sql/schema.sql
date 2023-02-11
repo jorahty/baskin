@@ -6,4 +6,4 @@ CREATE TABLE member (username VARCHAR(32) PRIMARY KEY NOT NULL, data jsonb, UNIQ
 
 CREATE TABLE category (slug VARCHAR(32) PRIMARY KEY NOT NULL, data jsonb, UNIQUE(slug));
 
-CREATE TABLE product (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), owner_username VARCHAR(32) REFERENCES member(username) ON DELETE CASCADE, product_category VARCHAR(32) REFERENCES category(slug) ON DELETE CASCADE, data jsonb);
+CREATE TABLE product (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), member_username VARCHAR(32) REFERENCES member(username) ON DELETE CASCADE, category_slug VARCHAR(32) REFERENCES category(slug) ON DELETE CASCADE, data jsonb);

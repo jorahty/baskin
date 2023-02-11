@@ -1,22 +1,31 @@
 import { Product, ProductArgs } from "./schema";
-
 import { pool } from "../db";
 
 export class ProductService {
-  public async list({ id, owner_username, product_category }: ProductArgs): Promise<Product[]> {
-    let select = `SELECT data || jsonb_build_object('id', id, 'owner_username', owner_username, 'product_category', product_category) AS product FROM product`;
+  public async list({ id, user, category }: ProductArgs): Promise<Product[]> {
+    let select = `
+      SELECT data || jsonb_build_object(
+        'id', id,
+        'user', member_username,
+        'category', category_slug
+      ) AS product FROM product
+    `;
+    let values: string[] = [];
     if (id) {
       select += ` WHERE id = $1`;
-    } else if (owner_username) {
-      select += ` WHERE owner_username = $1`;
-    } else if (product_category) {
-      select += ` WHERE product_category = $1`;
+      values = [id];
+    } else if (user) {
+      select += ` WHERE member_username = $1`
+      values = [user];
+    } else if (category) {
+      select += ` WHERE category_slug = $1`
+      values = [category];
     }
     const query = {
       text: select,
-      values: id ? [id] : owner_username ? [owner_username] : product_category ? [product_category] : [],
+      values: values,
     };
     const { rows } = await pool.query(query);
-    return rows.map((row) => row.product);
+    return rows.map(row => row.product);
   }
 }
