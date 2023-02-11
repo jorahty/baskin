@@ -1,5 +1,6 @@
 import Index from '../../../pages/index';
-import { render } from '@testing-library/react'
+import { getServerSideProps } from '../../../pages/index';
+import { render, screen } from '@testing-library/react'
 import { CssVarsProvider } from '@mui/joy/styles';
 import '../matchMedia';
 
@@ -12,13 +13,16 @@ jest.mock('next/router', () => ({
 }));
 
 const renderView = async () => {
+  const { props } = await getServerSideProps(
+    {req: { headers: { host: 'localhost:3000'}}});
   render(
     <CssVarsProvider>
-      <Index />
+      <Index products={props.products}/>
     </CssVarsProvider>
   );
 };
 
 test('Renders', async () => {
   renderView();
+  await screen.findByText('All Categories');
 });

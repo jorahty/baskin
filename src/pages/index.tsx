@@ -1,18 +1,18 @@
 import ProductList from "../components/product/list";
 import DashboardLayout from "../components/layout/DashboardLayout";
+import { GetServerSideProps } from "next";
+import { Product } from "@/graphql/product/schema";
+import { ProductService } from "../graphql/product/service";
 
-const products = [{
-  user: "string",
-  id: "string",
-  category: "string",
-  name: "string",
-  price: 0,
-  quantity: 1,
-  description: "string",
-  date: "string",
-}];
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {
+      products: await new ProductService().list({}),
+    },
+  }
+}
 
-export default function Index() {
+export default function Index({ products }: { products: Product[] }) {
   return (
     <DashboardLayout>
       <ProductList products={products}/>
