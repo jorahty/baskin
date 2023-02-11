@@ -8,8 +8,6 @@ const categories = [
   { name: 'Toys', slug: 'toys'},
   { name: 'Furniture', slug: 'furniture'},
   { name: 'Instruments', slug: 'instruments'},
-  { name: 'Office', slug: 'office'},
-  { name: 'Free', slug: 'free'},
 ];
 
 export default function Sidebar() {
