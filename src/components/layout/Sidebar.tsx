@@ -1,6 +1,5 @@
 import { List, ListItem, ListItemButton } from "@mui/joy";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 
 const categories = [
   { name: 'Electronics',  slug: 'electronics'},
@@ -15,30 +14,26 @@ const categories = [
 
 export default function Sidebar() {
   const router = useRouter();
-  const { id } = router.query;
+  const { query } = router;
 
   return (
-    <List
-      sx={{
-        p: 2,
-        '--List-item-radius': '8px',
-        '& .MuiListItemButton-root': { width: 240 },
-      }}
-    >
+    <List sx={{ p: 2 }}>
       <ListItem>
-        <Link href="/">
-          <ListItemButton sx={{ fontWeight: 800 }}>
-              All categories
-          </ListItemButton>
-        </Link>
+        <ListItemButton
+          onClick={() => Router.push('/')}
+          sx={{ fontWeight: 800 }}
+        >
+          All Categories
+        </ListItemButton>
       </ListItem>
-      {categories.map(({ name, slug}) => (
+      {categories.map(({ name, slug }) => (
         <ListItem key={slug}>
-          <Link href={`/category/${slug}`}>
-            <ListItemButton selected={ id === slug }>
-              {name}
-            </ListItemButton>
-          </Link>
+          <ListItemButton
+            onClick={() => Router.push(`/category/${slug}`)}
+            selected={ query.slug === slug }
+          >
+            {name}
+          </ListItemButton>
         </ListItem>
       ))}
     </List>

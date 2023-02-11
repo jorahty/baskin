@@ -1,12 +1,13 @@
-import { render } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import Sidebar from "../../../../components/layout/Sidebar";
 
 jest.mock('next/router', () => ({
   useRouter() {
     return ({
-      query: { id: '123' },
+      query: { slug: 'toys' },
     });
   },
+  push: jest.fn(),
 }));
 
 const renderView = async () => {
@@ -17,4 +18,10 @@ const renderView = async () => {
 
 test('Renders', async () => {
   renderView();
+});
+
+test('Select Catagory', async () => {
+  renderView();
+  fireEvent.click(screen.getByText('Clothing'));
+  fireEvent.click(screen.getByText('All Categories'));
 });

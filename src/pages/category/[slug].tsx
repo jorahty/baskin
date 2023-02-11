@@ -1,16 +1,14 @@
 import DashbaordLayout from '../../components/layout/DashboardLayout';
-import { Box } from '@mui/joy';
 import { useRouter } from 'next/router';
+import ProductList from '../../components/product/list';
 
 export default function CategoryPage() {
-  const router = useRouter()
-  const { id } = router.query
+  const router = useRouter();
+  const slug = router.query.slug as string;
 
   return (
     <DashbaordLayout>
-      <Box data-testid="test" p={10}>
-        List by category id: {id}
-      </Box>
+      <ProductList cid={slug}/>
     </DashbaordLayout>
   );
 }
