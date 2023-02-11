@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CssBaseline />
-      <GlobalStyles styles={{ a: { 'text-decoration': 'none' } }}/>
+      <GlobalStyles styles={{ a: { textDecoration: 'none' } }}/>
       <Component {...pageProps} />
     </CssVarsProvider>
   );
