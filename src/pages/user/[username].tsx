@@ -4,12 +4,12 @@ import { useRouter } from 'next/router';
 
 export default function UserPage() {
   const router = useRouter()
-  const { id } = router.query
+  const { username } = router.query
 
   return (
     <SimpleLayout>
-      <Box data-testid="test" p={10}>
-        User profile of user with id {id}
+      <Box p={10}>
+        User profile of user with username {username}
       </Box>
     </SimpleLayout>
   );
