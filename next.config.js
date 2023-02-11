@@ -5,7 +5,7 @@ module.exports = {
         protocol: 'https',
         hostname: 'via.placeholder.com',
         port: '',
-        pathname: '/*',
+        pathname: '/**',
       },
     ],
   },
