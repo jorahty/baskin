@@ -8,6 +8,7 @@ import Avatar from '@mui/joy/Avatar';
 import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
 import Link from "next/link";
 import Image from "next/image";
+import { Tooltip } from "@mui/joy";
 
 export default function BasicCard({ product }: { product: Product }) {
   const randomImage = 200 + Math.round(product.quantity * product.price / 20);
@@ -47,9 +48,11 @@ export default function BasicCard({ product }: { product: Product }) {
         <Typography fontSize="lg" fontWeight="lg" flexGrow={1}>
           ${product.price}
         </Typography>
-        <Link href={`/user/${product.user}`}>
-          <Avatar />
-        </Link>
+        <Tooltip title={`${product.user}`} variant="outlined">
+          <Link href={`/user/${product.user}`}>
+            <Avatar src={`https://robohash.org/${product.user}`}/>
+          </Link>
+        </Tooltip>
       </Box>
     </Card>
   );
