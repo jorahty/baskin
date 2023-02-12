@@ -4,6 +4,7 @@ import { GetServerSideProps } from "next";
 import { Product } from "@/graphql/product/schema";
 import { ProductService } from "../../graphql/product/service";
 import { CategoryService } from "../../graphql/category/service";
+import { Category } from "@/graphql/category/schema";
 
 interface Props {
   products: Product[];
