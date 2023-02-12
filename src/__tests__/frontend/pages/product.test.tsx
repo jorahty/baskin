@@ -1,8 +1,6 @@
 import ProductPage, {getServerSideProps} from '../../../pages/product/[id]';
 import { render, screen } from '@testing-library/react'
 import { CssVarsProvider } from '@mui/joy/styles';
-import {graphql} from "msw";
-import {setupServer} from "msw/node";
 import '../matchMedia';
 
 const product = {
@@ -21,32 +19,6 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
 });
 
-const handlers = [
-
-  graphql.query('product', async (req, res, ctx) => {
-    const { id } = req.variables;
-
-    if ( id === '038b7e70-a5c0-47e6-80f3-5b1772bb4a0e' ) {
-
-      return res(
-        ctx.data({
-          product: [product]
-        }),
-      );
-
-    } else {
-      // Error!?
-    }
-  }),
-
-];
-
-const server = setupServer(...handlers)
-
-beforeAll(() => server.listen())
-afterEach(() => server.resetHandlers())
-afterAll(() => server.close())
-
 jest.mock('next/router', () => ({
   useRouter() {
     return ({
@@ -58,10 +30,8 @@ jest.mock('next/router', () => ({
 
 const renderView = async () => {
   const { props } = await getServerSideProps({
-    req: { headers: {} },
-    query: { id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0e' },
-    res: {},
-    resolvedUrl: ''
+    req: { headers: { host: 'localhost:3000' } },
+    query: { id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d' },
   });
 
   render(

@@ -9,40 +9,11 @@ import {gql, GraphQLClient} from "graphql-request";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { id } = query;
-  // const [product] = await new ProductService().list({ id: id as string });
-
-  const graphQLClient = new GraphQLClient(
-    'http://localhost:3000/api/graphql', {
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    }
-  );
-
-  const gqlQuery = gql`
-    query product($id: String!){
-      product(
-        id: $id
-      ) {
-        name
-        date
-        id
-        price
-        category
-        user
-        quantity
-        description
-      }
-    }
-  `;
-
-  const res = await graphQLClient.request(gqlQuery, {
-    "id": `${id}`
-  });
+  const [product] = await new ProductService().list({ id: id as string });
 
   return {
     props: {
-      product: res.product[0],
+      product: product,
     },
   }
 }
