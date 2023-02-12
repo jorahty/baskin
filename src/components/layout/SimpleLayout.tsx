@@ -6,7 +6,9 @@ export default function SimpleLayout({children}: {children: React.ReactNode}) {
   return (
     <>
       <GlobalStyles styles={{ body: { overflow: 'hidden' } }} />
-      <Header />
+      <Box bgcolor="background.surface">
+        <Header />
+      </Box>
       <Divider />
       <Box sx={{ overflowY: 'scroll', height: `calc(100vh - ${headerHeight})` }}>
         {children}
