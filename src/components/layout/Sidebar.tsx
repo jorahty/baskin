@@ -1,16 +1,10 @@
 import { List, ListItem, ListItemButton } from "@mui/joy";
 import Router, { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+import { Category } from "../../graphql/category/schema";
+import { CategoryService } from "../../graphql/category/service";
 
-const categories = [
-  { name: 'Electronics',  slug: 'electronics'},
-  { name: 'Clothing', slug: 'clothing'},
-  { name: 'Sports Equipment', slug: 'sports-equipment'},
-  { name: 'Toys', slug: 'toys'},
-  { name: 'Furniture', slug: 'furniture'},
-  { name: 'Instruments', slug: 'instruments'},
-];
-
-export default function Sidebar() {
+export default function Sidebar({ categories }: { categories: Category[] }) {
   const router = useRouter();
   const { query } = router;
 
@@ -24,7 +18,7 @@ export default function Sidebar() {
           All Categories
         </ListItemButton>
       </ListItem>
-      {categories.map(({ name, slug }) => (
+      {categories?.map(({ name, slug }) => (
         <ListItem key={slug}>
           <ListItemButton
             onClick={() => Router.push(`/category/${slug}`)}

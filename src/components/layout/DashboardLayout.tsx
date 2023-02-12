@@ -1,4 +1,7 @@
+import { Category } from "@/graphql/category/schema";
+import { CategoryService } from "@/graphql/category/service";
 import { Box, Divider, Stack } from "@mui/joy";
+import { GetServerSideProps } from "next";
 import React from "react";
 import { headerHeight } from "./Header";
 import Sidebar from "./Sidebar";
@@ -10,12 +13,12 @@ const sx = {
   flexGrow: 1,
 };
 
-export default function DashbaordLayout({children}: {children: React.ReactNode}) {
+export default function DashbaordLayout({children, categories}: {children: React.ReactNode, categories: Category[]}) {
   return (
     <SimpleLayout>
       <Stack direction="row" height="100%" alignItems="flex-start" >
         <Box sx={{ minWidth: 240, maxWidth: 240, ...sx }}>
-          <Sidebar />
+          <Sidebar categories={categories}/>
         </Box>
         <Divider orientation="vertical"/>
         <Box sx={sx}>

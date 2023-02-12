@@ -10,9 +10,18 @@ jest.mock('next/router', () => ({
   push: jest.fn(),
 }));
 
+const categories = [
+  { name: 'Electronics',  slug: 'electronics'},
+  { name: 'Clothing', slug: 'clothing'},
+  { name: 'Sports Equipment', slug: 'sports-equipment'},
+  { name: 'Toys', slug: 'toys'},
+  { name: 'Furniture', slug: 'furniture'},
+  { name: 'Instruments', slug: 'instruments'},
+];
+
 const renderView = async () => {
   render(
-    <Sidebar />
+    <Sidebar categories={categories} />
   )
 };
 

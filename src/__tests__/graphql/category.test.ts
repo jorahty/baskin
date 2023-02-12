@@ -32,7 +32,6 @@ test("Fetch All Categories", async () => {
     })
     .expect(200)
     .then((res) => {
-      console.log(res.body);
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
       expect(res.body.data).toBeDefined();
