@@ -15,11 +15,11 @@ export class AuthResolver {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Mutation(returns => SignUpPayload)
-    async signUp(
+  async signUp(
       @Arg("input") input: NewUser,
-    ): Promise<SignUpPayload> {
-      return new AuthService().add(input);
-    }
+  ): Promise<SignUpPayload> {
+    return new AuthService().add(input);
+  }
   
 
 }
