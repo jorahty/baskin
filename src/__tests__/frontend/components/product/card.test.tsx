@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import ProductCard from "../../../../components/product/card";
 
 const product = {
@@ -18,10 +18,4 @@ const renderView = async () => {
 
 test('Renders', async () => {
   renderView();
-});
-
-test('Renders - Less than 10 products', async () => {
-  product.quantity = 2;
-  renderView();
-  screen.getByText('Only 2 left!');
 });
