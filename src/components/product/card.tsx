@@ -1,5 +1,4 @@
 import { Product } from "@/graphql/product/schema";
-
 import AspectRatio from '@mui/joy/AspectRatio';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
@@ -8,9 +7,10 @@ import Typography from '@mui/joy/Typography';
 import Avatar from '@mui/joy/Avatar';
 import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
 import Link from "next/link";
+import Image from "next/image";
 
 export default function BasicCard({ product }: { product: Product }) {
-  const random = 200 + Math.round(product.quantity * product.price / 20);
+  const randomImage = 200 + Math.round(product.quantity * product.price / 20);
 
   return (
     <Card variant="outlined" sx={{ width: 320 }}>
@@ -36,10 +36,10 @@ export default function BasicCard({ product }: { product: Product }) {
       </IconButton>
       <Link href={`product/${product.id}`}>
         <AspectRatio minHeight="120px" maxHeight="200px" sx={{ my: 2 }}>
-          <img
-            src={`https://picsum.photos/${random}`}
-            loading="lazy"
-            alt=""
+          <Image
+            alt={product.name}
+            src={`https://picsum.photos/${randomImage}`}
+            fill
           />
         </AspectRatio>
       </Link>
