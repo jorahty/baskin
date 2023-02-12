@@ -156,11 +156,6 @@ export default function Signin() {
               </Button>
             </form>
           </Box>
-          <Box component="footer" sx={{ py: 3 }}>
-            <Typography level="body3" textAlign="center">
-              © Baskin Bargin {new Date().getFullYear()}
-            </Typography>
-          </Box>
         </Box>
       </Box>
       <Box
