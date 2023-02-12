@@ -15,7 +15,7 @@ export default function Sidebar() {
   const { query } = router;
 
   return (
-    <List sx={{ p: 2 }}>
+    <List sx={{ p: 2, '--List-item-radius': 'var(--joy-radius-sm)' }}>
       <ListItem>
         <ListItemButton
           onClick={() => Router.push('/')}
@@ -28,7 +28,8 @@ export default function Sidebar() {
         <ListItem key={slug}>
           <ListItemButton
             onClick={() => Router.push(`/category/${slug}`)}
-            selected={ query.slug === slug }
+            selected={query.slug === slug}
+            variant={query.slug === slug ? "soft" : "plain"}
           >
             {name}
           </ListItemButton>

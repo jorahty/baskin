@@ -2,7 +2,7 @@ import SimpleLayout from "../../components/layout/SimpleLayout";
 import { GetServerSideProps } from "next";
 import { Product } from "@/graphql/product/schema";
 import { ProductService } from "../../graphql/product/service";
-import { Stack, Typography } from "@mui/joy";
+import { Box, Stack, Typography } from "@mui/joy";
 import ProductList from "../../components/product/list";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
@@ -19,11 +19,13 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 export default function UserPage({ user, products }: { user: string, products: Product[] }) {
   return (
     <SimpleLayout>
-      <Stack maxWidth={900} margin="auto" alignItems="center">
+      <Stack maxWidth="lg" margin="auto" alignItems="center">
         <Typography sx={{ pb: 40 }} level="h1">User details for {user}</Typography>
         {/* <UserDetails user={user}/> */}
         <Typography level="h3">This user&apos;s stuff:</Typography>
-        <ProductList products={products}/>
+        <Box maxWidth={1060}>
+          <ProductList products={products}/>
+        </Box>
       </Stack>
     </SimpleLayout>
   )

@@ -19,7 +19,7 @@ export default function Header() {
         </Typography>
       </Link>
       <Link href="/signin">
-        <Button variant="outlined">
+        <Button variant="soft">
           Sign in
         </Button>
       </Link>
