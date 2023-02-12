@@ -26,5 +26,5 @@ const renderView = async () => {
 
 test('Renders', async () => {
   renderView();
-  await screen.findByText(`This user's stuff:`);
+  await screen.findByText(`Molly Member`);
 });

@@ -25,19 +25,19 @@ export default function BasicCard({ product }: { product: Product }) {
         </Link>
       </CardOverflow>
       <Stack direction="row" pt={1} alignItems="flex-end">
-      <Box flexGrow={1}>
-        <Typography fontSize="lg" fontWeight="lg">
+        <Box flexGrow={1}>
+          <Typography fontSize="lg" fontWeight="lg">
           ${product.price}
-        </Typography>
-        <Typography>
-          {product.name}
-        </Typography>
-      </Box>
-      <Tooltip title={`${product.user}`} variant="outlined" >
-        <Link href={`/user/${product.user}`}>
-          <Avatar src={`https://robohash.org/${product.user}`}/>
-        </Link>
-      </Tooltip>
+          </Typography>
+          <Typography>
+            {product.name}
+          </Typography>
+        </Box>
+        <Tooltip title={`${product.user}`} variant="outlined" >
+          <Link href={`/user/${product.user}`}>
+            <Avatar src={`https://robohash.org/${product.user}`}/>
+          </Link>
+        </Tooltip>
       </Stack>
     </Card>
   );
