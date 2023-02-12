@@ -3,12 +3,13 @@ import "reflect-metadata"; // must come before buildSchema
 import { buildSchemaSync } from "type-graphql";
 
 import { AuthResolver } from "../../graphql/auth/resolver";
-import { ProductResolver } from "../../graphql/product/resolver"
+import { ProductResolver } from "../../graphql/product/resolver";
 import { CategoryResolver } from "../../graphql/category/resolver";
+import { UserResolver } from "../../graphql/user/resolver";
 
 const schema = buildSchemaSync({
-  resolvers: [AuthResolver, ProductResolver, CategoryResolver],
-  validate: { forbidUnknownValues: false }
+  resolvers: [AuthResolver, ProductResolver, CategoryResolver, UserResolver],
+  validate: { forbidUnknownValues: false },
   // authChecker: nextAuthChecker,
 });
 
