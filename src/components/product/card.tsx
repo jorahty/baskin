@@ -47,7 +47,7 @@ export default function BasicCard({ product }: { product: Product }) {
         <Typography fontSize="lg" fontWeight="lg" flexGrow={1}>
           ${product.price}
         </Typography>
-        <Link href={`user/${product.user}`}>
+        <Link href={`/user/${product.user}`}>
           <Avatar />
         </Link>
       </Box>
