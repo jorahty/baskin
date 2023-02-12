@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import ProductCard from "../../../../components/product/card";
 
 const product = {
