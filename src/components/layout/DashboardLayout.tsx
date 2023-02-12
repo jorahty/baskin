@@ -11,11 +11,13 @@ const sx = {
   flexGrow: 1,
 };
 
-export default function DashbaordLayout({children, categories}: {children: React.ReactNode, categories: Category[]}) {
+export default function DashbaordLayout(
+  {children, categories}: {children: React.ReactNode, categories: Category[]}
+) {
   return (
     <SimpleLayout>
       <Stack direction="row" height="100%" alignItems="flex-start" >
-        <Box sx={{ minWidth: 240, maxWidth: 240, ...sx }}>
+        <Box sx={{ minWidth: 240, maxWidth: 240, ...sx }} bgcolor="background.surface">
           <Sidebar categories={categories}/>
         </Box>
         <Divider orientation="vertical"/>

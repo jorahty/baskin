@@ -23,7 +23,7 @@ export default function UserPage({ user, products }: { user: string, products: P
         <Typography sx={{ pb: 40 }} level="h1">User details for {user}</Typography>
         {/* <UserDetails user={user}/> */}
         <Typography level="h3">This user&apos;s stuff:</Typography>
-        <Box maxWidth={1060}>
+        <Box>
           <ProductList products={products}/>
         </Box>
       </Stack>
