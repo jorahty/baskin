@@ -1,7 +1,5 @@
 import { Category } from "@/graphql/category/schema";
-import { CategoryService } from "@/graphql/category/service";
 import { Box, Divider, Stack } from "@mui/joy";
-import { GetServerSideProps } from "next";
 import React from "react";
 import { headerHeight } from "./Header";
 import Sidebar from "./Sidebar";

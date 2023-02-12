@@ -1,8 +1,6 @@
 import { List, ListItem, ListItemButton } from "@mui/joy";
 import Router, { useRouter } from "next/router";
-import { GetServerSideProps } from "next";
 import { Category } from "../../graphql/category/schema";
-import { CategoryService } from "../../graphql/category/service";
 
 export default function Sidebar({ categories }: { categories: Category[] }) {
   const router = useRouter();
