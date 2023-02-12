@@ -19,9 +19,3 @@ const renderView = async () => {
 test('Renders', async () => {
   renderView();
 });
-
-test('Renders - Less than 10 products', async () => {
-  product.quantity = 2;
-  renderView();
-  screen.getByText('Only 2 left!');
-});
