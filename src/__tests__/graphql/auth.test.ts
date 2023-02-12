@@ -79,3 +79,25 @@ test('Bad Format', async () => {
       expect(data.body.errors.length).toEqual(1);
     });
 });
+
+test('Sign up', async () => {
+  await request.post('/api/graphql')
+    .send({query: `mutation {signUp (input: {
+        username: "johndoes1"
+        name: "John Doe"
+        email: "jd@books.com"
+        password: "johndoes"
+      }) {
+        name, email, username
+      }}`})
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then((data) => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.signUp.name).toEqual('John Doe');
+      expect(data.body.data.signUp.email).toEqual('jd@books.com');
+      expect(data.body.data.signUp.username).toEqual('johndoes1');
+    });
+});

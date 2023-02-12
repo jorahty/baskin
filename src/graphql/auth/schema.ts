@@ -1,6 +1,6 @@
-import { Field, ObjectType, ArgsType } from "type-graphql"
+import { Field, ObjectType, ArgsType, InputType } from "type-graphql"
 import { Length, Matches } from "class-validator";
-import { regexUsername } from "../regex";
+import { regexEmail, regexUsername } from "../regex";
 
 @ArgsType()
 export class Credentials {
@@ -22,3 +22,33 @@ export class SignInPayload {
     accessToken!: string
 }
 
+@ObjectType()
+export class SignUpPayload {
+  @Field()
+    username!: string
+
+  @Field()
+    name!: string
+    
+  @Field()
+    email!: string
+}
+
+@ObjectType()
+@InputType("UserInput")
+export class NewUser {
+  @Field()
+  @Matches(regexEmail)
+    email!: string
+
+  @Field()
+    name!: string
+  
+  @Field()
+  @Matches(regexUsername)
+    username!: string
+  
+  @Field()
+  @Length(8, 16)
+    password!: string
+}
