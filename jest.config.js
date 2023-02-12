@@ -16,9 +16,9 @@ const customJestConfig = {
   ],
   collectCoverage: true,
   coveragePathIgnorePatterns: [
+    "src/pages/_document.tsx",
     "src/pages/_app.tsx",
-    "src/theme.tsx",
-    "src/pages/_document.tsx"
+    "src/theme.ts",
   ],
   testMatch: [
     "**/?(*.)+(spec|test).[jt]s?(x)"
