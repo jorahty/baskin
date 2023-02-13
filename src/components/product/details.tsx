@@ -1,5 +1,5 @@
 import { Product } from "@/graphql/product/schema";
-import {Grid, Typography} from "@mui/joy";
+import {Box, Grid, Typography} from "@mui/joy";
 import Image from "next/image";
 import Button from "@mui/joy/Button";
 
@@ -11,13 +11,7 @@ export default function ProductDetails({ product }: { product: Product }) {
   });
 
   return (
-    <Grid
-      container
-      rowSpacing={{ xs: 2, md: 0 }}
-      columnSpacing={{xs: 0, md: 2}}
-      columns={2}
-      sx={{flexGrow: 1}}
-    >
+    <Box margin="auto" maxWidth="sm">
       <Grid style={{margin: "auto"}}>
         <Image src={`https://picsum.photos/${random}`}
           alt={`${product.name} thumbnail`}
@@ -39,6 +33,6 @@ export default function ProductDetails({ product }: { product: Product }) {
         <Button>Add to Cart!</Button>
         <Typography>{product.description}</Typography>
       </Grid>
-    </Grid>
+    </Box>
   );
 }

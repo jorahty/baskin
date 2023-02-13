@@ -8,14 +8,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { CardOverflow, Stack, Tooltip } from "@mui/joy";
 
-export default function BasicCard({ product }: { product: Product }) {
+export default function ProductCard({ product }: { product: Product }) {
   const randomImage = 200 + Math.round(product.quantity * product.price / 20);
 
   return (
-    <Card variant="outlined" sx={{ width: 260 }}>
+    <Card variant="outlined" sx={{ width: 269 }}>
       <CardOverflow>
         <Link href={`/product/${product.id}`}>
-          <AspectRatio minHeight="260px">
+          <AspectRatio minHeight="269px">
             <Image
               alt={product.name}
               src={`https://picsum.photos/${randomImage}`}
