@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button, Stack, Typography } from "@mui/joy";
+import { Button, Stack } from "@mui/joy";
 import ModeToggle from "./ModeToggle";
 import Logo from "./Logo";
 
