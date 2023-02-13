@@ -1,4 +1,4 @@
-import SimpleLayout from "../../components/layout/SimpleLayout";
+import Layout from "../../components/layout/Layout";
 import { GetServerSideProps } from "next";
 import { Product } from "@/graphql/product/schema";
 import { ProductService } from "../../graphql/product/service";
@@ -22,7 +22,7 @@ export default function UserPage(
   { user, products }: { user: User, products: Product[] }
 ) {
   return (
-    <SimpleLayout>
+    <Layout>
       <Stack
         maxWidth="lg"
         margin="auto"
@@ -45,6 +45,6 @@ export default function UserPage(
           <ProductList products={products}/>
         </Box>
       </Stack>
-    </SimpleLayout>
+    </Layout>
   )
 }

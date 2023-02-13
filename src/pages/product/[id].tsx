@@ -1,9 +1,9 @@
 import ProductDetails from "../../components/product/details";
-import SimpleLayout from "../../components/layout/SimpleLayout";
 import { GetServerSideProps } from "next";
 import { Product } from "@/graphql/product/schema";
 import { ProductService } from "../../graphql/product/service";
 import { Stack } from "@mui/joy";
+import Layout from "../../components/layout/Layout";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { id } = query;
@@ -17,10 +17,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
 export default function ProductPage({ product }: { product: Product }) {
   return (
-    <SimpleLayout>
+    <Layout>
       <Stack maxWidth={900} margin="30px auto" alignItems="center">
         <ProductDetails product={product}/>
       </Stack>
-    </SimpleLayout>
+    </Layout>
   )
 }
