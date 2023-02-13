@@ -4,9 +4,8 @@ import Avatar from "@mui/joy/Avatar";
 import Menu from "@mui/joy/Menu";
 import MenuItem from "@mui/joy/MenuItem";
 import { Box, Divider, ListItemDecorator, Stack, Typography } from "@mui/joy";
-import SignOutIcon from '@mui/icons-material/Logout';
-import PersonIcon from '@mui/icons-material/Person';
-
+import SignOutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
 
 import { SignInPayload } from "@/graphql/auth/schema";
 
@@ -38,14 +37,17 @@ export default function UserMenu({
         aria-label="user-avatar"
         src={`https://robohash.org/${user.username}`}
         onClick={handleClick}
-        sx={{ cursor: 'pointer' }}
+        sx={{ cursor: "pointer" }}
       />
-      <Menu placement="bottom-end" anchorEl={anchor} open={open} onClose={handleClose} sx={{ p: 0 }}>
+      <Menu
+        placement="bottom-end"
+        anchorEl={anchor}
+        open={open}
+        onClose={handleClose}
+        sx={{ p: 0 }}
+      >
         <Stack direction="row" gap={1.5} p={1.5}>
-          <Avatar
-            size="lg"
-            src={`https://robohash.org/${user.username}`}
-          />
+          <Avatar size="lg" src={`https://robohash.org/${user.username}`} />
           <Box>
             <Typography level="h6">{user.name}</Typography>
             <Typography level="body2">{user.username}</Typography>
@@ -60,9 +62,8 @@ export default function UserMenu({
             Profile
           </MenuItem>
         </Link>
-        <Divider />
         <MenuItem onClick={handleSignOut} color="danger">
-          <ListItemDecorator sx={{ color: 'inherit' }}>
+          <ListItemDecorator sx={{ color: "inherit" }}>
             <SignOutIcon />
           </ListItemDecorator>
           Sign out
