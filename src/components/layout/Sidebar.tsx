@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemButton } from "@mui/joy";
+import { List, ListItem, ListItemButton, Typography } from "@mui/joy";
 import Router, { useRouter } from "next/router";
 import { Category } from "../../graphql/category/schema";
 
@@ -7,18 +7,18 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
   const { query } = router;
 
   return (
-    <List sx={{ p: 2, '--List-item-radius': 'var(--joy-radius-sm)' }}>
+    <List sx={{ gap: 0.5, p: 2, '--List-item-radius': 'var(--joy-radius-sm)' }}>
       <ListItem>
-        <ListItemButton
-          onClick={() => Router.push('/')}
-          sx={{ fontWeight: 800 }}
-        >
-          All Categories
+        <ListItemButton onClick={() => Router.push('/')}>
+          <Typography fontWeight="xl" level="h6">
+            All Categories
+          </Typography>
         </ListItemButton>
       </ListItem>
       {categories?.map(({ name, slug }) => (
         <ListItem key={slug}>
           <ListItemButton
+            sx={{ fontWeight: 500 }}
             onClick={() => Router.push(`/category/${slug}`)}
             selected={query.slug === slug}
             variant={query.slug === slug ? "soft" : "plain"}
