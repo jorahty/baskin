@@ -40,9 +40,9 @@ export default function Signin() {
       })
       .then((json) => {
         if (json.errors) {
-          alert("Error signing up, please try again");
+          alert("Error signing in, please try again");
         } else {
-          localStorage.setItem("user", JSON.stringify(json.data.login));
+          localStorage.setItem("user", JSON.stringify(json.data.signin));
           Router.push({
             pathname: "/",
           });
