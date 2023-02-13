@@ -21,7 +21,6 @@ export default function Header() {
   useEffect(() => {
     const token = localStorage.getItem("user");
     if (token) {
-      console.log(token);
       setUser(JSON.parse(token));
       setSignedIn(true);
     }
