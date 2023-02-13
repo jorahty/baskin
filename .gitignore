@@ -20,5 +20,8 @@ package-lock.json
 .DS_Store
 /.swc
 
+# local env files
+.env
+
 # JetBrains
 .idea
