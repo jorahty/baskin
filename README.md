@@ -1,4 +1,4 @@
-# Baskin Bargain
+# ![Baskin](public/logo.svg)
 
 - A social marketplace
 - Full stack web application
