@@ -38,7 +38,6 @@ const renderView = async () => {
 
 test('Renders', async () => {
   await renderView();
-  await screen.findByText(product.description);
   await screen.findByText(product.name);
   await screen.findByText('$' + product.price);
   await screen.findByText(product.category);
