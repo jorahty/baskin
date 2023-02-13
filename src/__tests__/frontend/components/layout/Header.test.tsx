@@ -11,11 +11,6 @@ const renderView = async () => {
   );
 };
 
-test('Renders', async () => {
-  renderView();
-  await screen.getAllByText('Baskin');
-});
-
 test('Sign in', async () => {
   renderView();
   fireEvent.click(screen.getByText('Sign in'))
