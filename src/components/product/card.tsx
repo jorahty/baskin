@@ -9,7 +9,7 @@ import Image from "next/image";
 import { CardOverflow, Stack, Tooltip } from "@mui/joy";
 
 export default function ProductCard({ product }: { product: Product }) {
-  const randomImage = 200 + Math.round(product.quantity * product.price / 20);
+  const randomImage = 720 + Math.round(product.quantity * product.price / 20);
 
   return (
     <Card variant="outlined" sx={{ width: 269 }}>

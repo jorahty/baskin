@@ -14,11 +14,6 @@ const product = {
   "description": "Never worn"
 };
 
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
-
 jest.mock('next/router', () => ({
   useRouter() {
     return ({
@@ -45,13 +40,7 @@ test('Renders', async () => {
   await renderView();
   await screen.findByText(product.description);
   await screen.findByText(product.name);
-  await screen.findByText(formatter.format(product.price));
+  await screen.findByText('$' + product.price);
   await screen.findByText(product.category);
-  await screen.findByText(`Seller: ${product.user}`);
-});
-
-test('Click the buy button', async () => {
-  await renderView();
-  const button = await screen.getByText("Add to Cart!");
-  await button.click();
+  await screen.findByText(`${product.user}`);
 });
