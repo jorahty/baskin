@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button, Stack, Typography } from "@mui/joy";
 import ModeToggle from "./ModeToggle";
+import Logo from "./Logo";
 
 export const headerHeight = "80px";
 
@@ -14,9 +15,7 @@ export default function Header() {
       gap={3}
     >
       <Link href="/" style={{ flexGrow: 1 }} passHref>
-        <Typography level="h3" fontWeight={800}>
-          Baskin
-        </Typography>
+        <Logo />
       </Link>
       <Link href="/signin">
         <Button variant="soft">
