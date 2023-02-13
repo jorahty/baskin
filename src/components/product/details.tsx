@@ -9,15 +9,15 @@ export default function ProductDetails({ product }: { product: Product }) {
   return (
     <Box maxWidth="lg" margin="auto" p={6}>
       <Typography pb={2} level="h1">{product.name}</Typography>
-      <Stack direction="row" flexWrap="wrap" gap={5}>
-        <AspectRatio ratio="1/1" sx={{ borderRadius: 'xl', flexGrow: 3 }}>
+      <Stack direction="row" gap={5}>
+        <AspectRatio ratio="1/1" sx={{ borderRadius: 'xl', flexGrow: 1 }}>
           <Image
             alt={product.name}
             src={`https://picsum.photos/${randomImage}`}
             fill
           />
         </AspectRatio>
-        <Stack flexGrow={2} gap={2}>
+        <Stack width={512} gap={2}>
           <Typography level="h2">${product.price}</Typography>
           <Link href={`user/${product.user}`}>
             <Stack direction="row" alignItems="center" gap={1}>
