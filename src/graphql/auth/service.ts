@@ -34,7 +34,7 @@ export class AuthService {
     }
   }
 
-  public async login(credentials: Credentials): Promise<SignInPayload>  {
+  public async signin(credentials: Credentials): Promise<SignInPayload>  {
     return new Promise((resolve, reject) => {
       this.getUser(credentials.username)
         .then((user) => {

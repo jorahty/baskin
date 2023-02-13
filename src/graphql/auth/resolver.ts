@@ -7,19 +7,17 @@ import { AuthService } from "./service"
 export class AuthResolver {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Query(returns => SignInPayload)
-  async login(
+  async signin(
     @Args() credentials: Credentials,
   ): Promise<SignInPayload> {
-    return new AuthService().login(credentials);
+    return new AuthService().signin(credentials);
   }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    @Mutation(returns => SignUpPayload)
-  async signUp(
-      @Arg("input") input: NewUser,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @Mutation(returns => SignUpPayload)
+  async signup(
+    @Arg("input") input: NewUser,
   ): Promise<SignUpPayload> {
     return new AuthService().add(input);
   }
-  
-
 }

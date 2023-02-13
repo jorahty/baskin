@@ -36,21 +36,21 @@ const wrong = {
 test('OK', async () => {
   const member = login.molly;
   await request.post('/api/graphql')
-    .send({query: `{login(username: "${member.username}" password: 
+    .send({query: `{signin(username: "${member.username}" password: 
       "${member.password}") { username, accessToken }}`})
     .expect(200)
     .then((res) => {
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
-      expect(res.body.data.login.username).toEqual('molly_member');
-      expect(res.body.data.login.accessToken).toBeDefined();
+      expect(res.body.data.signin.username).toEqual('molly_member');
+      expect(res.body.data.signin.accessToken).toBeDefined();
     });
 });
 
 test('Wrong Credentials', async () => {
   const member = wrong;
   await request.post('/api/graphql')
-    .send({query: `{login(username: "${member.username}" password: 
+    .send({query: `{signin(username: "${member.username}" password: 
       "${member.password}") { username, accessToken }}`})
     .expect('Content-Type', /json/)
     .then((data) => {
@@ -61,7 +61,7 @@ test('Wrong Credentials', async () => {
 test('Non-existent user', async () => {
   const member = wrong;
   await request.post('/api/graphql')
-    .send({query: `{login(username: "anna@book.com" password: 
+    .send({query: `{signin(username: "anna@book.com" password: 
       "${member.password}") { username, accessToken }}`})
     .expect('Content-Type', /json/)
     .then((data) => {
@@ -72,7 +72,7 @@ test('Non-existent user', async () => {
 test('Bad Format', async () => {
   const member = bad;
   await request.post('/api/graphql')
-    .send({query: `{login(username: "${member.username}" password: 
+    .send({query: `{signin(username: "${member.username}" password: 
       "${member.password}") { username, accessToken }}`})
     .expect('Content-Type', /json/)
     .then((data) => {
@@ -82,7 +82,7 @@ test('Bad Format', async () => {
 
 test('Sign up', async () => {
   await request.post('/api/graphql')
-    .send({query: `mutation {signUp (input: {
+    .send({query: `mutation {signup (input: {
         username: "johndoes1"
         name: "John Doe"
         email: "jd@books.com"
@@ -96,8 +96,8 @@ test('Sign up', async () => {
       expect(data).toBeDefined();
       expect(data.body).toBeDefined();
       expect(data.body.data).toBeDefined();
-      expect(data.body.data.signUp.name).toEqual('John Doe');
-      expect(data.body.data.signUp.email).toEqual('jd@books.com');
-      expect(data.body.data.signUp.username).toEqual('johndoes1');
+      expect(data.body.data.signup.name).toEqual('John Doe');
+      expect(data.body.data.signup.email).toEqual('jd@books.com');
+      expect(data.body.data.signup.username).toEqual('johndoes1');
     });
 });
