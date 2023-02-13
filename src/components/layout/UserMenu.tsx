@@ -3,7 +3,10 @@ import Link from "next/link";
 import Avatar from "@mui/joy/Avatar";
 import Menu from "@mui/joy/Menu";
 import MenuItem from "@mui/joy/MenuItem";
-import { Stack, Typography } from "@mui/joy";
+import { Box, Divider, ListItemDecorator, Stack, Typography } from "@mui/joy";
+import SignOutIcon from '@mui/icons-material/Logout';
+import PersonIcon from '@mui/icons-material/Person';
+
 
 import { SignInPayload } from "@/graphql/auth/schema";
 
@@ -33,23 +36,37 @@ export default function UserMenu({
     <>
       <Avatar
         aria-label="user-avatar"
-        color="primary"
         src={`https://robohash.org/${user.username}`}
         onClick={handleClick}
-        sx={{ cursor: "pointer" }}
+        sx={{ cursor: 'pointer' }}
       />
-      <Menu anchorEl={anchor} open={open} onClose={handleClose}>
+      <Menu placement="bottom-end" anchorEl={anchor} open={open} onClose={handleClose} sx={{ p: 0 }}>
         <Stack direction="row" gap={1.5} p={1.5}>
           <Avatar
-            color="primary"
+            size="lg"
             src={`https://robohash.org/${user.username}`}
           />
-          <Typography sx={{ m: "auto" }}>{user.username}</Typography>
+          <Box>
+            <Typography level="h6">{user.name}</Typography>
+            <Typography level="body2">{user.username}</Typography>
+          </Box>
         </Stack>
+        <Divider />
         <Link href={`/user/${user.username}`}>
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>
+            <ListItemDecorator>
+              <PersonIcon />
+            </ListItemDecorator>
+            Profile
+          </MenuItem>
         </Link>
-        <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
+        <Divider />
+        <MenuItem onClick={handleSignOut} color="danger">
+          <ListItemDecorator sx={{ color: 'inherit' }}>
+            <SignOutIcon />
+          </ListItemDecorator>
+          Sign out
+        </MenuItem>
       </Menu>
     </>
   );

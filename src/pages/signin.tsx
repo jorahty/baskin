@@ -26,7 +26,7 @@ export default function Signin() {
 
   const handleSubmit = (username: string, password: string) => {
     const query = {
-      query: `query signin{signin(username: "${username}" password: "${password}") { username, accessToken }}`,
+      query: `query signin{signin(username: "${username}" password: "${password}") { username, accessToken, name }}`,
     };
     fetch("/api/graphql", {
       method: "POST",

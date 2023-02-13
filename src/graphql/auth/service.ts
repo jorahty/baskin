@@ -45,7 +45,11 @@ export class AuthService {
                 expiresIn: '30m',
                 algorithm: 'HS256'
               });
-            resolve({username: user.username, accessToken: accessToken});
+            resolve({
+              username: user.username,
+              accessToken: accessToken,
+              name: user.name
+            });
           } else {
             reject(new Error("Unauthorised"));
           }

@@ -16,21 +16,29 @@ export class Credentials {
 @ObjectType()
 export class SignInPayload {
   @Field()
+  @Matches(regexUsername)
     username!: string
 
   @Field()
     accessToken!: string
+  
+  @Field()
+  @Length(1, 32)
+    name!: string
 }
 
 @ObjectType()
 export class SignUpPayload {
   @Field()
+  @Matches(regexUsername)
     username!: string
 
   @Field()
+  @Length(1, 32)
     name!: string
     
   @Field()
+  @Matches(regexEmail)
     email!: string
 }
 
@@ -42,6 +50,7 @@ export class NewUser {
     email!: string
 
   @Field()
+  @Length(1, 32)
     name!: string
   
   @Field()

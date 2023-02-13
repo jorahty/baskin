@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button, Stack } from "@mui/joy";
+import { Box, Button, Stack } from "@mui/joy";
 
 import ModeToggle from "./ModeToggle";
 import Logo from "./Logo";
@@ -34,9 +34,10 @@ export default function Header() {
       px={3}
       gap={3}
     >
-      <Link href="/" style={{ flexGrow: 1 }} passHref>
+      <Link href="/">
         <Logo />
       </Link>
+      <Box ml="auto" />
       {signedIn && user ? (
         <UserMenu user={user} handleSignOut={handleSignOut} />
       ) : (
