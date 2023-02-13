@@ -1,4 +1,4 @@
-# Baskin Bargain
+# Baskin
 
 - A social marketplace
 - Full stack web application

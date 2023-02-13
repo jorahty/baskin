@@ -15,7 +15,7 @@ export default function Header() {
     >
       <Link href="/" style={{ flexGrow: 1 }} passHref>
         <Typography level="h3" fontWeight={800}>
-          Baskin Bargain
+          Baskin
         </Typography>
       </Link>
       <Link href="/signin">

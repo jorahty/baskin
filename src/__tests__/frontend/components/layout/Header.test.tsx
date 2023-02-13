@@ -13,7 +13,7 @@ const renderView = async () => {
 
 test('Renders', async () => {
   renderView();
-  await screen.getAllByText('Baskin Bargain');
+  await screen.getAllByText('Baskin');
 });
 
 test('Sign in', async () => {
