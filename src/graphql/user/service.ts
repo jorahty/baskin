@@ -16,7 +16,6 @@ export class UserService {
       values: username ? [username] : [],
     };
     const { rows } = await pool.query(query);
-    console.log(rows);
     return rows.map((row) => row.member);
   }
 }
