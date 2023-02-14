@@ -10,9 +10,52 @@ import {
 } from "@mui/joy";
 import Image from "next/image";
 import Link from "next/link";
+import {useState} from "react";
+
+interface CartItem {
+  id: string,
+  quantity: number
+}
 
 export default function ProductDetails({ product }: { product: Product }) {
   const randomImage = 720 + Math.round((product.quantity * product.price) / 20);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const cartButtonHandler = () => {
+    setIsLoading(true);
+
+    // Adds to the cart
+    const currentStorage = localStorage.getItem('cart');
+    let items : CartItem[] = [];
+    if (currentStorage === null) {
+      items = [{
+        id: product.id,
+        quantity: 1
+      }];
+    } else {
+      items = JSON.parse(currentStorage);
+
+      // Check to see if the item exists to update
+      const itemIndex = items.findIndex(item => item.id === product.id);
+      // If the item exists, update its quantity
+      if (itemIndex !== -1) {
+        items[itemIndex].quantity = 1;  // Bound to change later
+      } else {
+        // If the item doesn't exist, add it to the cart
+        items.push({
+          id: product.id,
+          quantity: 1
+        });
+      }
+    }
+
+    localStorage.setItem('cart', JSON.stringify(items));
+
+    // Mock it's adding to cart
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }
 
   return (
     <Box maxWidth="lg" margin="auto" p={6}>
@@ -63,8 +106,13 @@ export default function ProductDetails({ product }: { product: Product }) {
             </Typography>
           </Stack>
           <Typography>{product.description}</Typography>
-          <Button size="lg" sx={{ mt: "auto", borderRadius: "lg" }}>
-            Add to cart
+          <Button
+            size="lg"
+            sx={{ mt: "auto", borderRadius: "lg" }}
+            loading={isLoading}
+            onClick={cartButtonHandler}
+          >
+            Add to Cart
           </Button>
         </Stack>
       </Stack>

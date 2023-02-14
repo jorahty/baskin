@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react'
 import ProductDetails from "../../../../components/product/details";
+import {Product} from "../../../../graphql/product/schema";
 
-const product = {
+const product : Product = {
   user: "string",
   id: "string",
   category: "string",
@@ -10,6 +11,7 @@ const product = {
   quantity: 90,
   description: "string",
   date: "string",
+  discount: 20,
 };
 
 const renderView = async () => {
@@ -17,5 +19,15 @@ const renderView = async () => {
 };
 
 test('Renders', async () => {
-  renderView();
+  await renderView();
 });
+
+// test('Button Timeout', async () => {
+//   const component = shallow(<ProductDetails product={product} />);
+//   jest.useFakeTimers();
+//   expect(component.state("index")).toEqual(0);
+//   component.instance().setTimeoutFn();
+//   jest.advanceTimersByTime(1000);
+//   expect(component.state("index")).toEqual(1);
+//   jest.useRealTimers();
+// });
