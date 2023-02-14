@@ -15,10 +15,10 @@ export class ProductService {
       select += ` WHERE id = $1`;
       values = [id];
     } else if (user) {
-      select += ` WHERE member_username = $1`
+      select += ` WHERE member_username = $1`;
       values = [user];
     } else if (category) {
-      select += ` WHERE category_slug = $1`
+      select += ` WHERE category_slug = $1`;
       values = [category];
     }
     const query = {
