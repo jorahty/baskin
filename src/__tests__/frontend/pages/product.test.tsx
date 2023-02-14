@@ -1,6 +1,7 @@
 import ProductPage, { getServerSideProps } from "../../../pages/product/[id]";
 import { render, screen } from "@testing-library/react";
 import { CssVarsProvider } from "@mui/joy/styles";
+import * as db from '../../graphql/db';
 import "../matchMedia";
 
 const product = {
@@ -34,6 +35,9 @@ jest.mock("next/router", () => ({
     };
   },
 }));
+
+beforeAll(() => db.reset());
+afterAll(() => db.shutdown());
 
 const renderView = async () => {
   const { props } = await getServerSideProps({

@@ -7,7 +7,7 @@ import Logo from "./Logo";
 import { SignInPayload } from "@/graphql/auth/schema";
 import UserMenu from "./UserMenu";
 
-export const headerHeight: string = "80px";
+export const headerHeight = "80px";
 
 export default function Header() {
   const [user, setUser] = useState<SignInPayload | undefined>(undefined);

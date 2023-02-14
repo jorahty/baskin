@@ -2,6 +2,7 @@ import UserPage from '../../../pages/user/[username]';
 import { getServerSideProps } from '../../../pages/user/[username]';
 import { render, screen } from '@testing-library/react'
 import { CssVarsProvider } from '@mui/joy/styles';
+import * as db from '../../graphql/db';
 import '../matchMedia';
 
 jest.mock('next/router', () => ({
@@ -11,6 +12,9 @@ jest.mock('next/router', () => ({
     });
   },
 }));
+
+beforeAll(() => db.reset());
+afterAll(() => db.shutdown());
 
 const renderView = async () => {
   const { props } = await getServerSideProps({

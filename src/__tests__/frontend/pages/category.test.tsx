@@ -2,6 +2,7 @@ import CategoryPage from '../../../pages/category/[slug]';
 import { getServerSideProps } from '../../../pages/category/[slug]';
 import { render, screen } from '@testing-library/react'
 import { CssVarsProvider } from '@mui/joy/styles';
+import * as db from '../../graphql/db';
 import '../matchMedia';
 
 jest.mock('next/router', () => ({
@@ -12,6 +13,9 @@ jest.mock('next/router', () => ({
   },
 }));
 
+beforeAll(() => db.reset());
+afterAll(() => db.shutdown());
+
 const renderView = async () => {
   const { props } = await getServerSideProps({
     req: { headers: { host: 'localhost:3000' } },
@@ -19,7 +23,7 @@ const renderView = async () => {
   });
   render(
     <CssVarsProvider>
-      <CategoryPage products={props.products}/>
+      <CategoryPage categories={[]} products={props.products}/>
     </CssVarsProvider>
   );
 };
