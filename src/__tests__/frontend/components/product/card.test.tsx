@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render } from "@testing-library/react";
 import ProductCard from "../../../../components/product/card";
 
 const product = {
@@ -16,6 +16,6 @@ const renderView = async () => {
   render(<ProductCard product={product} />);
 };
 
-test('Renders', async () => {
+test("Renders", async () => {
   renderView();
 });
