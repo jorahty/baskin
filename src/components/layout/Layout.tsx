@@ -22,9 +22,11 @@ export default function Layout({children, sidebar}: Props) {
       </Box>
       <Divider />
       <Stack direction="row" height="100%" alignItems="flex-start" >
-        {sidebar && <Box sx={{ minWidth: 240, maxWidth: 240, ...sx }} bgcolor="background.surface">
-          {sidebar}
-        </Box>}
+        {sidebar &&
+          <Box sx={{ minWidth: 240, maxWidth: 240, ...sx }} bgcolor="background.surface">
+            {sidebar}
+          </Box>
+        }
         <Divider orientation="vertical"/>
         <Box sx={sx}>
           {children}
