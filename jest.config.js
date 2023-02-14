@@ -19,6 +19,7 @@ const customJestConfig = {
     "src/pages/_document.tsx",
     "src/pages/_app.tsx",
     "src/theme.ts",
+    "src/components/Favicon.tsx",
   ],
   testMatch: [
     "**/?(*.)+(spec|test).[jt]s?(x)"
