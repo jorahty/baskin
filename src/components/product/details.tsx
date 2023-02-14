@@ -19,7 +19,7 @@ export default function ProductDetails({ product }: { product: Product }) {
         </AspectRatio>
         <Stack width={512} gap={2}>
           <Typography level="h2">${product.price}</Typography>
-          <Link href={`user/${product.user}`}>
+          <Link href={`/user/${product.user}`}>
             <Stack direction="row" alignItems="center" gap={1}>
               <Avatar
                 src={`https://robohash.org/${product.user}`}
