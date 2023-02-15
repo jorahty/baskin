@@ -34,8 +34,15 @@ INSERT INTO conversation (data) VALUES ( '{"title": "Product Feedback", "descrip
 INSERT INTO conversation (data) VALUES ( '{"title": "Return Request", "description": "Requesting a return for a defective product"}');
 
 -- Messages
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"content": "molly_member", "message": "Hello, can you tell me the status of my order?"}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"content": "anna_admin", "message": "Sure, please provide me with your order number"}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"content": "molly_member", "message": "My order number is 12345"}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"content": "anna_admin", "message": "Thank you, let me check on that for you."}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"content": "anna_admin", "message": "Your order has been shipped and should arrive in 2-3 business days."}');
+INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "molly_member", "content": "Hello, can you tell me the status of my order?"}');
+INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Sure, please provide me with your order number"}');
+INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "molly_member", "content": "My order number is 12345"}');
+INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Thank you, let me check on that for you."}');
+INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Your order has been shipped and should arrive in 2-3 business days."}');
+
+-- Conversation User joint
+
+
+INSERT INTO conversation_user(member_username,conversation_id) VALUES('molly_member', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
+
+INSERT INTO conversation_user(member_username,conversation_id) VALUES('anna_admin', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
