@@ -86,7 +86,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           </Stack>
           <Divider />
           <Typography>
-            {product.description}
+            {product.description.slice(0, 280)}
           </Typography>
           <Input
             sx={{ mt: 'auto', bgcolor: 'background.body' }}
