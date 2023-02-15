@@ -27,22 +27,18 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('4951a289
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('19b2a9dc-b085-41d1-970a-69a2b1cbd8e1', 'anna_admin', 'electronics', '{"name": "Canon EOS R6", "quantity": 1,"price": 1000, "discount": 0, "description": "Used but no damage, has about 20,000 shutter count. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2022-01-19T02:43:08.000Z"}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('0ce2da04-d05d-46cf-8602-ae58ab7ec215', 'anna_admin', 'sports-equipment', '{"name": "Surfboard", "quantity": 4,"price": 400, "discount": 0, "description": "Brand new custom made surf boards, different size. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2022-02-09T00:15:08.000Z"}');
 
+-- Conversations
+INSERT INTO conversation (id) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a4028');
+INSERT INTO conversation (id) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
+INSERT INTO conversation (id) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68');
 
--- Conversations 
-INSERT INTO conversation (id, data) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"title": "Order Inquiry", "description": "Asking about an order status"}');
-INSERT INTO conversation (data) VALUES ( '{"title": "Product Feedback", "description": "Leaving feedback on a recent purchase"}');
-INSERT INTO conversation (data) VALUES ( '{"title": "Return Request", "description": "Requesting a return for a defective product"}');
+-- Put Molly and Anna into a conversation together
+INSERT INTO conversation_user(member_username,conversation_id) VALUES('molly_member', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
+INSERT INTO conversation_user(member_username,conversation_id) VALUES('anna_admin', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
 
--- Messages
+-- Add some messages to one of their conversations
 INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "molly_member", "content": "Hello, can you tell me the status of my order?"}');
 INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Sure, please provide me with your order number"}');
 INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "molly_member", "content": "My order number is 12345"}');
 INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Thank you, let me check on that for you."}');
 INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Your order has been shipped and should arrive in 2-3 business days."}');
-
--- Conversation User joint
-
-
-INSERT INTO conversation_user(member_username,conversation_id) VALUES('molly_member', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
-
-INSERT INTO conversation_user(member_username,conversation_id) VALUES('anna_admin', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
