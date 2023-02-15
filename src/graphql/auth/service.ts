@@ -1,11 +1,9 @@
 import * as jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
-import {hashSync} from 'bcrypt';
 
-import {Credentials, SignInPayload, SignUpPayload, UserCheck} from './schema';
+import {Credentials, SignInPayload, UserCheck} from './schema';
 import {pool} from '../db';
 
-import { NewUser } from "./schema";
 
 export interface User {
   username: string,
@@ -53,20 +51,6 @@ export class AuthService {
           }
         });
     });
-  }
-  
-  public async add(newMember: NewUser): Promise<SignUpPayload> {
-    const insert = 'INSERT INTO member(username, data) VALUES ($1, $2) RETURNING *';
-    const query = {
-      text: insert,
-      values: [`${newMember.username}`, {"email": newMember.email,"name": newMember.name, "roles": ["member"], "password": hashSync(newMember.password, 10)}]
-    }
-
-    const {rows} = await pool.query(query);
-  
-    const user:SignUpPayload = {'email': rows[0].data.email, 'name': rows[0].data.name, 'username': rows[0].username}
-    
-    return user;
   }
 
   public async check(authHeader?: string, roles?: string[]): Promise<UserCheck>  {
