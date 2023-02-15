@@ -6,6 +6,7 @@ import MenuItem from "@mui/joy/MenuItem";
 import { Box, Divider, ListItemDecorator, Stack, Typography } from "@mui/joy";
 import SignOutIcon from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
+import ForumIcon from '@mui/icons-material/Forum';
 
 import { SignInPayload } from "@/graphql/auth/schema";
 
@@ -60,6 +61,14 @@ export default function UserMenu({
               <PersonIcon />
             </ListItemDecorator>
             Profile
+          </MenuItem>
+        </Link>
+        <Link href={`/messages`}>
+          <MenuItem onClick={handleClose}>
+            <ListItemDecorator>
+              <ForumIcon />
+            </ListItemDecorator>
+            Messages
           </MenuItem>
         </Link>
         <MenuItem onClick={handleSignOut} color="danger">

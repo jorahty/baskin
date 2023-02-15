@@ -7,7 +7,7 @@ import Layout from "../components/layout/Layout";
 //   }
 // }
 
-export default function MessagePage() {
+export default function MessagesPage() {
   return (
     <Layout
       sidebar={<>conversations go here</>}

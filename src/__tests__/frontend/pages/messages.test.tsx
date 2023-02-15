@@ -1,4 +1,4 @@
-import MessagePage, { /* getServerSideProps */ } from "../../../pages/message";
+import MessagesPage, { /* getServerSideProps */ } from "../../../pages/messages";
 import { render } from "@testing-library/react";
 import { CssVarsProvider } from "@mui/joy/styles";
 import * as db from '../../graphql/db';
@@ -13,7 +13,7 @@ const renderView = async () => {
   // });
   render(
     <CssVarsProvider>
-      <MessagePage />
+      <MessagesPage />
     </CssVarsProvider>
   );
 };
