@@ -5,8 +5,6 @@ import {hashSync} from 'bcrypt';
 import {Credentials, SignInPayload, SignUpPayload, UserCheck} from './schema';
 import {pool} from '../db';
 
-import secrets from '../../../data/secrets.json';
-
 import { NewUser } from "./schema";
 
 export interface User {
@@ -41,7 +39,7 @@ export class AuthService {
           if (user && bcrypt.compareSync(credentials.password, user.password)) {
             const accessToken = jwt.sign(
               {email: user.email, name: user.name, roles: user.roles, username: user.username,}, 
-              secrets.accessToken, {
+              process.env.SECRET, {
                 expiresIn: '30m',
                 algorithm: 'HS256'
               });
@@ -78,7 +76,7 @@ export class AuthService {
       }
       else {
         const token = authHeader.split(' ')[1];
-        jwt.verify(token, secrets.accessToken, (err, user) => {
+        jwt.verify(token, process.env.SECRET, (err, user) => {
           const newUser: User = user as User
           if (err) {
             reject(err);
