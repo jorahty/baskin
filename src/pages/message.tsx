@@ -1,4 +1,11 @@
-import Layout from "@/components/layout/Layout";
+import Layout from "../components/layout/Layout";
+// import { GetServerSideProps } from "next";
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   return {
+//     props: {},
+//   }
+// }
 
 export default function MessagePage() {
   return (

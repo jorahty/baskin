@@ -25,7 +25,6 @@ afterAll((done) => {
 });
 
 test("Fetch messages by convo id", async () => {
-  console.log("hit");
   await request
     .post("/api/graphql")
     .send({
@@ -35,7 +34,6 @@ test("Fetch messages by convo id", async () => {
     })
     .expect(200)
     .then((res) => {
-      console.log(res);
       expect(res).toBeDefined();
     });
 });

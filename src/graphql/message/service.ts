@@ -11,7 +11,6 @@ export class MessageService{
       values: [id]
     };
     const { rows } = await pool.query(query);
-    console.log(rows);
     return rows.map(row => row.message);
   }
 }

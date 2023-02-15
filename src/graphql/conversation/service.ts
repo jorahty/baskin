@@ -14,7 +14,6 @@ export class ConversationService{
       values: [username]
     };
     const { rows } = await pool.query(query);
-    console.log(rows);
     return rows;
   }
 }

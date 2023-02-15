@@ -25,7 +25,6 @@ afterAll((done) => {
 });
 
 test("Fetch conversations molly", async () => {
-  console.log("hit");
   await request
     .post("/api/graphql")
     .send({
@@ -33,7 +32,6 @@ test("Fetch conversations molly", async () => {
     })
     .expect(200)
     .then((res) => {
-      console.log(res);
       expect(res).toBeDefined();
     });
 });
