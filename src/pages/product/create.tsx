@@ -18,10 +18,6 @@ import { CategoryService } from "../../graphql/category/service";
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 
-interface Props {
-  categories: Category[];
-}
-
 export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
@@ -36,10 +32,12 @@ interface FormElements extends HTMLFormControlsCollection {
   quantity: HTMLInputElement;
   price: HTMLInputElement;
 }
+
 interface ProductFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
-export default function Create({categories}: Props) {
+
+export default function Create({ categories }: { categories: Category[] }) {
   const [category, setCategory] = React.useState("Choose Category")
   const handleCancel = () => {
     Router.push({
@@ -47,7 +45,6 @@ export default function Create({categories}: Props) {
     })
   };
   
-
   const handleCreate = async (name:string, description:string, price:number, category:string, quantity:number) => {
     const item = localStorage.getItem('user')
     const user = JSON.parse(item)
@@ -95,8 +92,8 @@ export default function Create({categories}: Props) {
                 </Grid>
                 <Grid sx={{height: '75px'}}>
                   <FormControl required>
-                    <FormLabel>Name</FormLabel>
-                    <Input placeholder="Enter name" type="name" name="name"/>
+                    <FormLabel>Product Name</FormLabel>
+                    <Input placeholder="Vintage Hoodie Sweatshirt" type="name" name="name"/>
                   </FormControl>
                 </Grid>
                 <Grid sx={{height: '75px'}}>
@@ -112,11 +109,14 @@ export default function Create({categories}: Props) {
                 <Grid sx={{height: '75px'}}>
                   <FormControl required>
                     <FormLabel>Price</FormLabel>
-                    <Input placeholder="Enter price" type="number" name="price"
-                      defaultValue={1.00}
+                    <Input
+                      type="number"
+                      name="price"
+                      placeholder="Amount"
+                      startDecorator="$"
                       slotProps={{
                         input: {
-                          min: 0.01,
+                          min: 0,
                           step: .01,
                         },
                       }}
@@ -126,7 +126,9 @@ export default function Create({categories}: Props) {
                 <Grid sx={{height: '75px'}}>
                   <FormControl required>
                     <FormLabel>Quantity</FormLabel>
-                    <Input placeholder="Enter quantity"  name="quantity"
+                    <Input
+                      placeholder="1"
+                      name="quantity"
                       type="number"
                       defaultValue={1}
                       slotProps={{
@@ -161,7 +163,7 @@ export default function Create({categories}: Props) {
                     <FormLabel>Description</FormLabel>
                     <Textarea
                       name='description'
-                      placeholder="Enter description"
+                      placeholder="Product description"
                       minRows={8}
                       maxRows={8}
                     />
