@@ -40,3 +40,21 @@ export class ProductArgs {
   @Field({ nullable: true })
     category?: string;
 }
+
+
+@ArgsType()
+export class NewProductArgs {
+  @Field()
+  @Matches(regexSlug)
+    category!: string;
+  @Field()
+  @Length(1, 32)
+    name!: string;
+  @Field()
+    price!: number;
+  @Field()
+    quantity!: number;
+  @Field()
+  @Length(1, 1024)
+    description!: string;
+}

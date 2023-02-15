@@ -2,7 +2,7 @@ import * as jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
 import {hashSync} from 'bcrypt';
 
-import {Credentials, SignInPayload, SignUpPayload} from './schema';
+import {Credentials, SignInPayload, SignUpPayload, UserCheck} from './schema';
 import {pool} from '../db';
 
 import secrets from '../../../data/secrets.json';
@@ -40,7 +40,7 @@ export class AuthService {
         .then((user) => {
           if (user && bcrypt.compareSync(credentials.password, user.password)) {
             const accessToken = jwt.sign(
-              {email: user.email, name: user.name, roles: user.roles}, 
+              {email: user.email, name: user.name, roles: user.roles, username: user.username,}, 
               secrets.accessToken, {
                 expiresIn: '30m',
                 algorithm: 'HS256'
@@ -69,5 +69,29 @@ export class AuthService {
     const user:SignUpPayload = {'email': rows[0].data.email, 'name': rows[0].data.name, 'username': rows[0].username}
     
     return user;
+  }
+
+  public async check(authHeader?: string, roles?: string[]): Promise<UserCheck>  {
+    return new Promise((resolve, reject) => {
+      if (!authHeader) {
+        reject(new Error("Unauthorised"));
+      }
+      else {
+        const token = authHeader.split(' ')[1];
+        jwt.verify(token, secrets.accessToken, (err, user) => {
+          const newUser: User = user as User
+          if (err) {
+            reject(err);
+          } else if (roles){
+            for (const role of roles) {
+              if (!newUser.roles || !newUser.roles.includes(role)) {
+                reject(new Error("Unauthorised"));
+              }
+            }
+          }
+          resolve({email: newUser.email, name: newUser.name, username: newUser.username});
+        });
+      }
+    });
   }
 }

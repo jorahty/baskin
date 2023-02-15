@@ -61,3 +61,15 @@ export class NewUser {
   @Length(8, 16)
     password!: string
 }
+
+@ObjectType()
+export class UserCheck {
+  @Field()
+    name!: string
+  @Field()
+  @Matches(regexEmail)
+    email!: string
+  @Field()
+  @Matches(regexUsername)
+    username!: string
+}
