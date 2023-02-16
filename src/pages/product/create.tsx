@@ -26,6 +26,7 @@ import CardCover from '@mui/joy/CardCover';
 import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
 import Stack from '@mui/joy/Stack';
+import {useAppContext} from "../../context";
 
 
 interface Props {
@@ -58,6 +59,7 @@ interface PictureFormElement extends HTMLFormElement {
   readonly elements: PictureFormElements;
 }
 export default function Create({categories}: Props) {
+  const { signedInUser } = useAppContext();
   const [category, setCategory] = React.useState("Choose Category")
   const array:string[] = []
   const [pictures, setPictures] = React.useState(array)
@@ -77,11 +79,8 @@ export default function Create({categories}: Props) {
 
 
   const handleCreate = async (name:string, description:string, price:number, category:string, quantity:number, pictures:string[]) => {
-    const item = localStorage.getItem('user')
-    const user = JSON.parse(item)
-    const bearerToken = user.accessToken
+    const bearerToken = signedInUser?.accessToken
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-    // const graphQLClient = new GraphQLClient('/api/graphql', {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },
@@ -130,11 +129,11 @@ export default function Create({categories}: Props) {
                       "--Card-radius": theme.vars.radius.sm
                     }
                   })}
-                > 
+                >
                   {pictures.map((picture, index) => (
                     <Card variant="outlined" key={index}>
                       <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
-                        {/* eslint-disable-next-line @next/next/no-img-element*/}  
+                        {/* eslint-disable-next-line @next/next/no-img-element*/}
                         <img
                           srcSet={picture}
                           alt="Picture not availabe"
@@ -152,7 +151,7 @@ export default function Create({categories}: Props) {
                               alignSelf: 'flex-start',
                             }}
                           >
-                            <IconButton 
+                            <IconButton
                               aria-label={'remove' + index}
                               value='pict' size="sm" color="neutral" onClick={() => removePicture(index)}>
                               <CloseIcon />
@@ -162,7 +161,7 @@ export default function Create({categories}: Props) {
                       </CardCover>
                     </Card>
                   ))}
-                    
+
                   <Card variant="outlined">
                     <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
                       <Button size="lg" variant='soft' color="neutral"
@@ -266,16 +265,16 @@ export default function Create({categories}: Props) {
                   <Box sx={{display:'flex', gap: 2}}>
                     <Button onClick={handleCancel} fullWidth aria-label='cancel' variant='soft'>
                         Cancel
-                    </Button> 
+                    </Button>
                     <Button type="submit" fullWidth aria-label='create'>
                         Create
-                    </Button> 
+                    </Button>
                   </Box>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>     
-        </form> 
+          </Grid>
+        </form>
         <Modal open={open} onClose={() => setOpen(false)}>
           <ModalDialog
             aria-labelledby="basic-modal-dialog-title"

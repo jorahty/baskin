@@ -9,6 +9,7 @@ import FormControl from '@mui/joy/FormControl';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
+import {useAppContext} from "../context";
 
 interface FormElements extends HTMLFormControlsCollection {
   firstname: HTMLInputElement;
@@ -25,9 +26,11 @@ interface SignInFormElement extends HTMLFormElement {
  * This template uses [`Inter`](https://fonts.google.com/specimen/Inter?query=inter) font.
  */
 export default function Signup() {
+  const { signOut } = useAppContext();
+
   React.useEffect(() => {
-    localStorage.removeItem('user');
-  }, []);
+    signOut();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = (email:string, password:string, first:string, last:string, username:string) => {
     const query = {query: `mutation addUser {addUser (input: {username: "${username}" email: "${email}" password: "${password}", name: "${first +' '+ last}"}) { name, email }}`}

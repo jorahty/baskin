@@ -7,6 +7,7 @@ import 'whatwg-fetch'
 import '../matchMedia';
 
 import Signup from '../../../pages/signup'
+import {AppContextProvider} from "../../../context";
 
 const handlers = [
   graphql.mutation('addUser', async (req, res, ctx) => {
@@ -41,7 +42,9 @@ jest.mock('next/router', ()=> ({push: jest.fn()}))
 const renderView = () => {
   render(
     <CssVarsProvider>
-      <Signup />
+      <AppContextProvider>
+        <Signup />
+      </AppContextProvider>
     </CssVarsProvider>
   );
 };
