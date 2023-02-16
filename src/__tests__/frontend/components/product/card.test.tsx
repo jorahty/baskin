@@ -10,7 +10,8 @@ const product = {
   quantity: 90,
   description: "string",
   date: "string",
-  pictures: ["string"]
+  pictures: ["string"],
+  discount: 0,
 };
 
 const renderView = async () => {
