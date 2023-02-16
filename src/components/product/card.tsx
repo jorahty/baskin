@@ -11,13 +11,12 @@ import Typography from "@mui/joy/Typography";
 import { CardOverflow, Stack, Tooltip } from "@mui/joy";
 
 export default function ProductCard({ product }: { product: Product }) {
-
   return (
-    <Card variant="outlined" sx={{ width: 269, overflow: "hidden" }}>
+    <Card variant="outlined">
       <CardOverflow>
         <Link href={`/product/${product.id}`}>
           <AspectRatio minHeight="269px">
-            {/* eslint-disable-next-line @next/next/no-img-element*/}  
+            {/* eslint-disable-next-line @next/next/no-img-element*/}
             <img
               alt={product.name}
               src={product.pictures[0]}

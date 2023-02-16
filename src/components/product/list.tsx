@@ -1,15 +1,15 @@
 import { Product } from "@/graphql/product/schema";
-import { Box, Stack } from "@mui/joy";
+import { Grid } from "@mui/joy";
 import ProductCard from "./card";
 
 export default function ProductList({ products }: { products: Product[] }) {
   return (
-    <Stack direction="row" gap={3} p={3} flexWrap="wrap">
+    <Grid container spacing={2} p={2} m={0}>
       {products.map((product, index) => (
-        <Box key={index}>
+        <Grid xl={3} lg={4} md={6} sm={6} xs={12} key={index}>
           <ProductCard product={product} />
-        </Box>
+        </Grid>
       ))}
-    </Stack>
+    </Grid>
   );
 }
