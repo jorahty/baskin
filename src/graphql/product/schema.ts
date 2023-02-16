@@ -28,6 +28,9 @@ export class Product {
   @Field()
   @Matches(regexISODate)
     date!: string;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars  
+  @Field(type => [String])
+    pictures!: string[];
 }
 
 @ArgsType()
@@ -57,4 +60,7 @@ export class NewProductArgs {
   @Field()
   @Length(1, 1024)
     description!: string;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars  
+  @Field(type => [String])
+    pictures!: string[];
 }

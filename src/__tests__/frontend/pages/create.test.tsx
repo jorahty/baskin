@@ -89,6 +89,10 @@ test('Click create', async () => {
   await userEvent.type(quantity, '1')
   const description = screen.getByPlaceholderText('Enter description');
   await userEvent.type(description, 'great product')
+  await userEvent.click((await screen.findByLabelText("add")));
+  const url = await screen.getByLabelText('picture');
+  await userEvent.type(url, 'temp')
+  await fireEvent.click(screen.getByLabelText('submit'));
   await fireEvent.click(screen.getByLabelText('create'));
   await waitFor(() => {
     expect(alerted).toBe(false)
@@ -116,5 +120,48 @@ test('Click create invalid', async () => {
   fireEvent.click(screen.getByLabelText('create'));
   await waitFor(() => {
     expect(alerted).toBe(true)
+  })
+});
+
+test('Add image and remove', async () => {
+  localStorage.setItem('user', `{"username":"molly_member","accessToken":"whatever"}`)
+
+  renderView();
+  let alerted = false
+  window.alert = () => {
+    alerted = true
+  }
+  await screen.findByText('Create New Product');
+  await userEvent.click((await screen.findByLabelText("add")));
+  const url = await screen.getByLabelText('picture');
+  await userEvent.type(url, 'temp')
+  await fireEvent.click(screen.getByLabelText('submit'));
+  await fireEvent.click(screen.getByLabelText('remove0'));
+  await waitFor(() => {
+    expect(alerted).toBe(false)
+  })
+});
+
+
+test('Add image and cancel', async () => {
+  localStorage.setItem('user', `{"username":"molly_member","accessToken":"whatever"}`)
+
+  renderView();
+  let alerted = false
+  window.alert = () => {
+    alerted = true
+  }
+  await screen.findByText('Create New Product');
+  await userEvent.click((await screen.findByLabelText("add")));
+  const url = await screen.getByLabelText('picture');
+  await userEvent.type(url, 'temp')
+  fireEvent.keyDown(screen.getByText('Submit'), {
+    key: "Escape",
+    code: "Escape",
+    keyCode: 27,
+    charCode: 27
+  });
+  await waitFor(() => {
+    expect(alerted).toBe(false)
   })
 });

@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/joy";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import {useState} from "react";
 
@@ -18,7 +18,6 @@ interface CartItem {
 }
 
 export default function ProductDetails({ product }: { product: Product }) {
-  const randomImage = 720 + Math.round((product.quantity * product.price) / 20);
   const [isLoading, setIsLoading] = useState(false);
 
   const cartButtonHandler = () => {
@@ -64,10 +63,11 @@ export default function ProductDetails({ product }: { product: Product }) {
       </Typography>
       <Stack direction="row" gap={5}>
         <AspectRatio ratio="1/1" sx={{ borderRadius: "xl", flexGrow: 1 }}>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element*/}  
+          <img
             alt={product.name}
-            src={`https://picsum.photos/${randomImage}`}
-            fill
+            src={product.pictures[0]}
+            // fill
           />
         </AspectRatio>
         <Stack width={512} gap={2}>

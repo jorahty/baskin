@@ -3,7 +3,6 @@ import { CssVarsProvider } from '@mui/joy/styles';
 import Layout from '../../components/layout/Layout';
 import {Typography } from '@mui/joy';
 import Button from '@mui/joy/Button';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
@@ -17,6 +16,17 @@ import { Category } from "@/graphql/category/schema";
 import { CategoryService } from "../../graphql/category/service";
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
+import Sheet from "@mui/joy/Sheet";
+import Card from "@mui/joy/Card";
+import AspectRatio from "@mui/joy/AspectRatio";
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/joy/IconButton';
+import CardCover from '@mui/joy/CardCover';
+import Modal from '@mui/joy/Modal';
+import ModalDialog from '@mui/joy/ModalDialog';
+import Stack from '@mui/joy/Stack';
+
 
 interface Props {
   categories: Category[];
@@ -39,16 +49,33 @@ interface FormElements extends HTMLFormControlsCollection {
 interface ProductFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
+
+interface PictureFormElements extends HTMLFormControlsCollection {
+  picture: HTMLInputElement;
+}
+interface PictureFormElement extends HTMLFormElement {
+  readonly elements: PictureFormElements;
+}
 export default function Create({categories}: Props) {
   const [category, setCategory] = React.useState("Choose Category")
+  const array:string[] = []
+  const [pictures, setPictures] = React.useState(array)
+  const [open, setOpen] = React.useState(false)
+
   const handleCancel = () => {
     Router.push({
       pathname: '/'
     })
   };
-  
 
-  const handleCreate = async (name:string, description:string, price:number, category:string, quantity:number) => {
+  const removePicture = (index:number) => {
+    const temp = [...pictures]
+    temp.splice(index, 1)
+    setPictures(temp)
+  }
+
+
+  const handleCreate = async (name:string, description:string, price:number, category:string, quantity:number, pictures:string[]) => {
     const item = localStorage.getItem('user')
     const user = JSON.parse(item)
     const bearerToken = user.accessToken
@@ -58,8 +85,7 @@ export default function Create({categories}: Props) {
         Authorization: `Bearer ${bearerToken}`,
       },
     })
-
-    const query = gql`mutation create {create (name: "${name}" description: "${description}" price: ${price} category: "${category}" quantity: ${quantity}) {id}}`
+    const query = gql`mutation create {create (name: "${name}" description: "${description}" price: ${price} category: "${category}" quantity: ${quantity}, pictures: [${pictures.map(x => '"' + x + '"' )}]) {id}}`
 
     await graphQLClient.request(query)
       .then(() => Router.push({pathname: '/'}))
@@ -73,11 +99,85 @@ export default function Create({categories}: Props) {
           onSubmit={(event: React.FormEvent<ProductFormElement>) => {
             event.preventDefault();
             const formElements = event.currentTarget.elements;
-            handleCreate(formElements.name.value, formElements.description.value, parseFloat(formElements.price.value), category, parseInt(formElements.quantity.value));
+            handleCreate(formElements.name.value, formElements.description.value, parseFloat(formElements.price.value), category, parseInt(formElements.quantity.value), pictures);
           }}
         >
-          <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%', padding: '50px'}}>
-            <Grid xs={6}>
+          <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%', paddingTop: '50px'}}>
+            <Grid xs={6} sx={{paddingLeft:'50px'}}>
+              <Typography component="h2" fontSize="xl3" fontWeight="lg">
+                  Create New Product
+              </Typography>
+            </Grid>
+            <Grid xs={10}>
+              <Sheet
+                variant="outlined"
+                sx={{
+                  minHeight: '150px',
+                  borderRadius: "sm",
+                  p: 2,
+                  mb: 3
+                }}
+              >
+                <Box
+                  sx={(theme) => ({
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 2,
+                    "& > div": {
+                      boxShadow: "none",
+                      "--Card-padding": "0px",
+                      "--Card-radius": theme.vars.radius.sm
+                    }
+                  })}
+                > 
+                  {pictures.map((picture, index) => (
+                    <Card variant="outlined" key={index}>
+                      <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element*/}  
+                        <img
+                          srcSet={picture}
+                          alt="Picture not availabe"
+                        />
+                      </AspectRatio>
+                      <CardCover>
+                        <Box>
+                          <Box
+                            sx={{
+                              p: 1,
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 1.5,
+                              flexGrow: 1,
+                              alignSelf: 'flex-start',
+                            }}
+                          >
+                            <IconButton 
+                              aria-label={'remove' + index}
+                              value='pict' size="sm" color="neutral" onClick={() => removePicture(index)}>
+                              <CloseIcon />
+                            </IconButton>
+                          </Box>
+                        </Box>
+                      </CardCover>
+                    </Card>
+                  ))}
+                    
+                  <Card variant="outlined">
+                    <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
+                      <Button size="lg" variant='soft' color="neutral"
+                        aria-label='add'
+                        onClick={()=>setOpen(true)}
+                        startDecorator={<PhotoCameraIcon />}>
+                          Add Picture
+                      </Button>
+                    </AspectRatio>
+                  </Card>
+                </Box>
+              </Sheet>
+            </Grid>
+          </Grid>
+          <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%'}}>
+            <Grid xs={6} sx={{paddingLeft:'25px'}}>
               <Grid container direction='column' alignItems="stretch" sx={{
                 "& form": {
                   display: "flex",
@@ -88,11 +188,6 @@ export default function Create({categories}: Props) {
                   visibility: "hidden",
                 }}}
               >
-                <Grid sx={{height: '75px'}}>
-                  <Typography component="h2" fontSize="xl3" fontWeight="lg">
-                    Create New Product
-                  </Typography>
-                </Grid>
                 <Grid sx={{height: '75px'}}>
                   <FormControl required>
                     <FormLabel>Name</FormLabel>
@@ -150,12 +245,6 @@ export default function Create({categories}: Props) {
                 [`& .${formLabelClasses.asterisk}`]: {
                   visibility: "hidden",
                 }}}>
-                <Grid sx={{height: '75px'}}>
-                  <Button size="lg" variant='soft' color="neutral" fullWidth
-                    startDecorator={<PhotoCameraIcon />}>
-                    Add Pictures
-                  </Button>
-                </Grid>
                 <Grid sx={{height: '250px'}}>
                   <FormControl required>
                     <FormLabel>Description</FormLabel>
@@ -170,10 +259,10 @@ export default function Create({categories}: Props) {
                 <Grid>
                   <Box sx={{display:'flex', gap: 2}}>
                     <Button onClick={handleCancel} fullWidth aria-label='cancel' variant='soft'>
-                      Cancel
+                        Cancel
                     </Button> 
                     <Button type="submit" fullWidth aria-label='create'>
-                      Create
+                        Create
                     </Button> 
                   </Box>
                 </Grid>
@@ -181,6 +270,37 @@ export default function Create({categories}: Props) {
             </Grid>
           </Grid>     
         </form> 
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <ModalDialog
+            aria-labelledby="basic-modal-dialog-title"
+            aria-describedby="basic-modal-dialog-description"
+            sx={{ maxWidth: 500 }}
+          >
+            <Typography id="basic-modal-dialog-title" component="h2">
+              Add new picture
+            </Typography>
+            <Typography id="basic-modal-dialog-description" textColor="text.tertiary">
+              Fill in the url of picture
+            </Typography>
+            <form
+              onSubmit={(event: React.FormEvent<PictureFormElement>) => {
+                event.preventDefault();
+                const formElements = event.currentTarget.elements;
+                const picture:string = formElements.picture.value;
+                setPictures([...pictures, picture])
+                setOpen(false);
+              }}
+            >
+              <Stack spacing={2}>
+                <FormControl>
+                  <FormLabel>URL</FormLabel>
+                  <Input autoFocus required aria-label='picture' name='picture' type='string'/>
+                </FormControl>
+                <Button type="submit" aria-label='submit'>Submit</Button>
+              </Stack>
+            </form>
+          </ModalDialog>
+        </Modal>
       </Layout>
     </CssVarsProvider>
   )

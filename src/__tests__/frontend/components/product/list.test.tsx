@@ -10,6 +10,7 @@ const products = [{
   quantity: 1,
   description: "string",
   date: "string",
+  pictures: ["string"]
 }];
 
 const renderView = async () => {

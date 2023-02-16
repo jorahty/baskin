@@ -31,11 +31,11 @@ export class ProductService {
     return rows.map(row => row.product);
   }
 
-  public async create({name, category, price, quantity, description}:NewProductArgs, request: Request): Promise<Product> {
+  public async create({name, category, price, quantity, description, pictures}:NewProductArgs, request: Request): Promise<Product> {
     const insert = 'INSERT INTO product(member_username, category_slug, data) VALUES ($1, $2, $3) RETURNING *';
     const query = {
       text: insert,
-      values: [request.user.username, category,{"name": name, "quantity": quantity, "price": price, "discount": 0, "description": description, "date": (new Date())}]
+      values: [request.user.username, category,{"name": name, "quantity": quantity, "price": price, "discount": 0, "description": description, "pictures": pictures, "date": (new Date())}]
     }
 
     const { rows } = await pool.query(query);
