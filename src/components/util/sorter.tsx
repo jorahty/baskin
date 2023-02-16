@@ -21,7 +21,7 @@ export default function Sorter({
     setSortedProducts([...products].sort(sort));
   };
 
-  const handleChange = (e: unknown, newValue: string) => {
+  const handleChange = (e: unknown, newValue: any) => {
     const sort = sorts[newValue];
     handleSort(sort);
   };
