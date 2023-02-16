@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { findByRole, fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import ProductList from "../../../../components/product/list";
 
 const products = [
@@ -28,7 +29,7 @@ const products = [
   }];
 
 const renderView = async () => {
-  render(<ProductList products={products}/>);
+  render(<ProductList products={products} showSorter={true}/>);
 };
 
 test('Renders', async () => {
@@ -37,14 +38,12 @@ test('Renders', async () => {
 
 test('Sorting', async () => {
   renderView();
-  fireEvent.click(screen.getByText("sort products"));
-  fireEvent.click(screen.getByText("Newest"));
-  fireEvent.click(screen.getByText("sort products"));
-  fireEvent.click(screen.getByText("Oldest"));
-  fireEvent.click(screen.getByText("sort products"));
-  fireEvent.click(screen.getByText("Price High"));
-  fireEvent.click(screen.getByText("sort products"));
-  fireEvent.click(screen.getByText("Price Low"));
+  await userEvent.click(await findByRole((await screen.findByTestId("sort")), "combobox"));
+  fireEvent.click(screen.getByLabelText("newest"));
+  await userEvent.click(await findByRole((await screen.findByTestId("sort")), "combobox"));
+  fireEvent.click(screen.getByLabelText("oldest"));
+  await userEvent.click(await findByRole((await screen.findByTestId("sort")), "combobox"));
+  fireEvent.click(screen.getByLabelText("price-high"));
+  await userEvent.click(await findByRole((await screen.findByTestId("sort")), "combobox"));
+  fireEvent.click(screen.getByLabelText("price-low"));
 });
-
-

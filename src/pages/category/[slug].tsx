@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
     props: {
       products: await new ProductService().list({ category: slug as string }),
-      categories: await new CategoryService().list({})
+      categories: await new CategoryService().list({}),
     },
   }
 }
@@ -29,7 +29,7 @@ export default function CategoryPage({ products, categories }: Props) {
         <Sidebar categories={categories}/>
       }
     >
-      <ProductList products={products}/>
+      <ProductList products={products} showSorter={true}/>
     </Layout>
   )
 }

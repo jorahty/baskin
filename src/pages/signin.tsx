@@ -26,7 +26,7 @@ export default function Signin() {
 
   React.useEffect(() => {
     signOut();
-  }, [signOut]);
+  }, []);
 
   const handleSubmit = (username: string, password: string) => {
     const query = {

@@ -27,7 +27,7 @@ export default function Header({
         aria-label="menu-icon"
         onClick={handleSidebarOpen}
         sx={{
-          display: { xs: "block", md: "none" },
+          display: { xs: 'block', md: 'none' },
         }}
       >
         <MenuIcon />
