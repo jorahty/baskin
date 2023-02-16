@@ -9,7 +9,7 @@ import '../matchMedia';
 import Signup from '../../../pages/signup'
 
 const handlers = [
-  graphql.mutation('signUp', async (req, res, ctx) => {
+  graphql.mutation('addUser', async (req, res, ctx) => {
     const json = await req.json()
     if (json.query.indexOf('john@doe.com') >= 0) {
       return res(

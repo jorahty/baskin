@@ -13,7 +13,7 @@ export class UserResolver {
   
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Mutation(returns => SignUpPayload)
-  async signup(
+  async addUser(
     @Arg("input") input: NewUser,
   ): Promise<SignUpPayload> {
     return new UserService().add(input);

@@ -58,7 +58,7 @@ test("Fetch User by Username", async () => {
 
 test('Sign up', async () => {
   await request.post('/api/graphql')
-    .send({query: `mutation {signup (input: {
+    .send({query: `mutation {addUser (input: {
         username: "johndoes1"
         name: "John Doe"
         email: "jd@books.com"
@@ -72,8 +72,8 @@ test('Sign up', async () => {
       expect(data).toBeDefined();
       expect(data.body).toBeDefined();
       expect(data.body.data).toBeDefined();
-      expect(data.body.data.signup.name).toEqual('John Doe');
-      expect(data.body.data.signup.email).toEqual('jd@books.com');
-      expect(data.body.data.signup.username).toEqual('johndoes1');
+      expect(data.body.data.addUser.name).toEqual('John Doe');
+      expect(data.body.data.addUser.email).toEqual('jd@books.com');
+      expect(data.body.data.addUser.username).toEqual('johndoes1');
     });
 });

@@ -30,7 +30,8 @@ export default function Signup() {
   }, []);
 
   const handleSubmit = (email:string, password:string, first:string, last:string, username:string) => {
-    const query = {query: `mutation signUp {signUp (input: {username: "${username}" email: "${email}" password: "${password}", name: "${first +' '+ last}"}) { name, email }}`}
+    const query = {query: `mutation addUser {addUser (input: {username: "${username}" email: "${email}" password: "${password}", name: "${first +' '+ last}"}) { name, email }}`}
+
     fetch('/api/graphql', {
       method: 'POST',
       body: JSON.stringify(query),
@@ -46,7 +47,7 @@ export default function Signup() {
           alert('Error signing up, please try again');
         } else {
           Router.push({
-            pathname: '/login'
+            pathname: '/signin'
           })
         }
       })
@@ -138,7 +139,7 @@ export default function Signup() {
                   email: formElements.email.value,
                   password: formElements.password.value,
                 };
-                handleSubmit(data.lastname, data.firstname, data.username, data.email, data.password)
+                handleSubmit(data.email, data.password, data.lastname, data.firstname, data.username)
               }}
             >
               <FormControl required>
