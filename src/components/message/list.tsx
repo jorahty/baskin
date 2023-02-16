@@ -5,7 +5,6 @@ import {  List, ListItem } from "@mui/joy";
 
 
 export default function MessageList({ messages }:{ messages: Message[] }){
-  console.log(messages,"inlist m")
   return(
     <List>
       {messages.map((message,i)=> (

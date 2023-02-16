@@ -44,7 +44,6 @@ export default function MessagesPage() {
         Authorization: `Bearer ${bearerToken}`,
       },
     })
-    console.log(curConvo.id);
     const query = `query message { message(id: "${curConvo.id}" ) { content } }`;
     graphQLClient.request(query).then(data => {
       setMessages(data.message);
