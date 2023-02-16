@@ -46,6 +46,7 @@ interface FormElements extends HTMLFormControlsCollection {
   quantity: HTMLInputElement;
   price: HTMLInputElement;
 }
+
 interface ProductFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
@@ -190,8 +191,8 @@ export default function Create({categories}: Props) {
               >
                 <Grid sx={{height: '75px'}}>
                   <FormControl required>
-                    <FormLabel>Name</FormLabel>
-                    <Input placeholder="Enter name" type="name" name="name"/>
+                    <FormLabel>Product Name</FormLabel>
+                    <Input placeholder="Vintage Hoodie Sweatshirt" type="name" name="name"/>
                   </FormControl>
                 </Grid>
                 <Grid sx={{height: '75px'}}>
@@ -207,11 +208,14 @@ export default function Create({categories}: Props) {
                 <Grid sx={{height: '75px'}}>
                   <FormControl required>
                     <FormLabel>Price</FormLabel>
-                    <Input placeholder="Enter price" type="number" name="price"
-                      defaultValue={1.00}
+                    <Input
+                      type="number"
+                      name="price"
+                      placeholder="Amount"
+                      startDecorator="$"
                       slotProps={{
                         input: {
-                          min: 0.01,
+                          min: 0,
                           step: .01,
                         },
                       }}
@@ -221,7 +225,9 @@ export default function Create({categories}: Props) {
                 <Grid sx={{height: '75px'}}>
                   <FormControl required>
                     <FormLabel>Quantity</FormLabel>
-                    <Input placeholder="Enter quantity"  name="quantity"
+                    <Input
+                      placeholder="1"
+                      name="quantity"
                       type="number"
                       defaultValue={1}
                       slotProps={{
@@ -250,7 +256,7 @@ export default function Create({categories}: Props) {
                     <FormLabel>Description</FormLabel>
                     <Textarea
                       name='description'
-                      placeholder="Enter description"
+                      placeholder="Product description"
                       minRows={8}
                       maxRows={8}
                     />

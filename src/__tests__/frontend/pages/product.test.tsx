@@ -1,5 +1,5 @@
 import ProductPage, { getServerSideProps } from "../../../pages/product/[id]";
-import {act, render, screen, cleanup} from "@testing-library/react";
+import {render, screen, cleanup} from "@testing-library/react";
 import { CssVarsProvider } from "@mui/joy/styles";
 import * as db from '../../graphql/db';
 import "../matchMedia";
@@ -109,39 +109,39 @@ test("Renders (Discount Item)", async () => {
   await screen.findByText(`${discountProduct.user}`);
 });
 
-test("Added to Cart - In LocalStorage", async () => {
-  await renderView("038b7e70-a5c0-47e6-80f3-5b1772bb4a0d");
-  const addToCartButton = await screen.findByText('Add to Cart');
+// test("Added to Cart - In LocalStorage", async () => {
+//   await renderView("038b7e70-a5c0-47e6-80f3-5b1772bb4a0d");
+//   const addToCartButton = await screen.findByText('Add to Cart');
 
-  await act(async () => {
-    await addToCartButton.click();
-  });
+//   await act(async () => {
+//     await addToCartButton.click();
+//   });
 
-  expect(localStorage.getItem('cart'))
-    .toBe('[{"id":"038b7e70-a5c0-47e6-80f3-5b1772bb4a0d","quantity":1}]');
-});
+//   expect(localStorage.getItem('cart'))
+//     .toBe('[{"id":"038b7e70-a5c0-47e6-80f3-5b1772bb4a0d","quantity":1}]');
+// });
 
-test("Added to Cart - In LocalStorage - Two Products", async () => {
-  await renderView("2759559e-84f2-4c41-9512-932589163f4f");
-  let addToCartButton = await screen.findByText('Add to Cart');
+// test("Added to Cart - In LocalStorage - Two Products", async () => {
+//   await renderView("2759559e-84f2-4c41-9512-932589163f4f");
+//   let addToCartButton = await screen.findByText('Add to Cart');
 
-  await act(async () => {
-    await addToCartButton.click();
-  });
+//   await act(async () => {
+//     await addToCartButton.click();
+//   });
 
-  expect(localStorage.getItem('cart'))
-    .toBe('[{"id":"2759559e-84f2-4c41-9512-932589163f4f","quantity":1}]');
+//   expect(localStorage.getItem('cart'))
+//     .toBe('[{"id":"2759559e-84f2-4c41-9512-932589163f4f","quantity":1}]');
 
-  // Removes render
-  cleanup();
+//   // Removes render
+//   cleanup();
 
-  await renderView("038b7e70-a5c0-47e6-80f3-5b1772bb4a0d");
-  addToCartButton = await screen.findByText('Add to Cart');
+//   await renderView("038b7e70-a5c0-47e6-80f3-5b1772bb4a0d");
+//   addToCartButton = await screen.findByText('Add to Cart');
 
-  await act(async () => {
-    await addToCartButton.click();
-  });
+//   await act(async () => {
+//     await addToCartButton.click();
+//   });
 
-  expect(localStorage.getItem('cart'))
-    .toBe('[{"id":"2759559e-84f2-4c41-9512-932589163f4f","quantity":1},{"id":"038b7e70-a5c0-47e6-80f3-5b1772bb4a0d","quantity":1}]');
-});
+//   expect(localStorage.getItem('cart'))
+//     .toBe('[{"id":"2759559e-84f2-4c41-9512-932589163f4f","quantity":1},{"id":"038b7e70-a5c0-47e6-80f3-5b1772bb4a0d","quantity":1}]');
+// });

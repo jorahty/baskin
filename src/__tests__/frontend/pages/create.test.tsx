@@ -81,13 +81,13 @@ test('Click create', async () => {
   await userEvent.click(await findByRole((await screen.findByTestId("category")), "combobox"));
   // fireEvent.mouseDown(screen.getByLabelText('slug'));
   userEvent.click(await screen.getByLabelText('Electronics'))
-  const name = screen.getByPlaceholderText('Enter name');
+  const name = screen.getByPlaceholderText('Vintage Hoodie Sweatshirt');
   await userEvent.type(name, 'new')
-  const price = screen.getByPlaceholderText('Enter price');
+  const price = screen.getByPlaceholderText('Amount');
   await userEvent.type(price, '1.50')
-  const quantity = screen.getByPlaceholderText('Enter quantity');
+  const quantity = screen.getByPlaceholderText('1');
   await userEvent.type(quantity, '1')
-  const description = screen.getByPlaceholderText('Enter description');
+  const description = screen.getByPlaceholderText('Product description');
   await userEvent.type(description, 'great product')
   await userEvent.click((await screen.findByLabelText("add")));
   const url = await screen.getByLabelText('picture');
@@ -108,13 +108,13 @@ test('Click create invalid', async () => {
     alerted = true
   }
   await screen.findByText('Create New Product');
-  const name = screen.getByPlaceholderText('Enter name');
+  const name = screen.getByPlaceholderText('Vintage Hoodie Sweatshirt');
   await userEvent.type(name, 'new')
-  const price = screen.getByPlaceholderText('Enter price');
+  const price = screen.getByPlaceholderText('Amount');
   await userEvent.type(price, '1.50')
-  const quantity = screen.getByPlaceholderText('Enter quantity');
+  const quantity = screen.getByPlaceholderText('1');
   await userEvent.type(quantity, '1')
-  const description = screen.getByPlaceholderText('Enter description');
+  const description = screen.getByPlaceholderText('Product description');
   await userEvent.type(description, 'great product')
   await userEvent.click(screen.getByLabelText('category'));
   fireEvent.click(screen.getByLabelText('create'));

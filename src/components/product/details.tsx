@@ -4,73 +4,52 @@ import {
   Avatar,
   Box,
   Button,
+  Card,
+  CardOverflow,
   Chip,
+  Divider,
+  Input,
   Stack,
   Typography,
 } from "@mui/joy";
-// import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
-import {useState} from "react";
-
-interface CartItem {
-  id: string,
-  quantity: number
-}
 
 export default function ProductDetails({ product }: { product: Product }) {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const cartButtonHandler = () => {
-    setIsLoading(true);
-
-    // Adds to the cart
-    const currentStorage = localStorage.getItem('cart');
-    let items : CartItem[] = [];
-    if (currentStorage === null) {
-      items = [{
-        id: product.id,
-        quantity: 1
-      }];
-    } else {
-      items = JSON.parse(currentStorage);
-
-      // Check to see if the item exists to update
-      const itemIndex = items.findIndex(item => item.id === product.id);
-      // If the item exists, update its quantity
-      if (itemIndex !== -1) {
-        items[itemIndex].quantity = 1;  // Bound to change later
-      } else {
-        // If the item doesn't exist, add it to the cart
-        items.push({
-          id: product.id,
-          quantity: 1
-        });
-      }
-    }
-
-    localStorage.setItem('cart', JSON.stringify(items));
-
-    // Mock it's adding to cart
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }
+  const randomImage = 720 + Math.round((product.quantity * product.price) / 20);
 
   return (
     <Box maxWidth="lg" margin="auto" p={6}>
-      <Typography pb={2} level="h1">
+      <Typography pb={2} level="h2">
         {product.name}
       </Typography>
-      <Stack direction="row" gap={5}>
-        <AspectRatio ratio="1/1" sx={{ borderRadius: "xl", flexGrow: 1 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element*/}  
-          <img
-            alt={product.name}
-            src={product.pictures[0]}
-            // fill
-          />
-        </AspectRatio>
-        <Stack width={512} gap={2}>
+      <Card
+        variant="outlined"
+        sx={{
+          borderRadius: 'xl',
+          gap: 4,
+          pb: 0,
+          flexDirection: {
+            md: "row",
+            sm: "column",
+          },
+        }}
+      >
+        <CardOverflow sx={{ flexGrow: 1 }}>
+          <AspectRatio ratio="1" sx={{ borderRadius: 'xl' }}>
+            <Image
+              alt={product.name}
+              src={`https://picsum.photos/${randomImage}`}
+              fill
+            />
+          </AspectRatio>
+        </CardOverflow>
+        <Stack gap={2} pb={2} sx={{
+          width: {
+            md: "min(500px, 30vw)",
+            sm: "100%",
+          },
+        }}>
           {product.discount > 0 ? (
             <Box>
               <Typography level="h2">
@@ -99,23 +78,26 @@ export default function ProductDetails({ product }: { product: Product }) {
           </Link>
           <Stack direction="row" alignItems="center" gap={1}>
             <Link href={`/category/${product.category}`}>
-              <Chip>{product.category}</Chip>
+              <Chip variant="soft">{product.category}</Chip>
             </Link>
             <Typography level="body2">
               {new Date(product.date).toLocaleDateString("en-US")}
             </Typography>
           </Stack>
-          <Typography>{product.description}</Typography>
-          <Button
-            size="lg"
-            sx={{ mt: "auto", borderRadius: "lg" }}
-            loading={isLoading}
-            onClick={cartButtonHandler}
-          >
-            Add to Cart
+          <Divider />
+          <Typography>
+            {product.description.slice(0, 280)}
+          </Typography>
+          <Input
+            sx={{ mt: 'auto', bgcolor: 'background.body' }}
+            placeholder="Hi, is this available?"
+            defaultValue="Hi, is this available?"
+          />
+          <Button size="lg">
+            Send
           </Button>
         </Stack>
-      </Stack>
+      </Card>
     </Box>
   );
 }
