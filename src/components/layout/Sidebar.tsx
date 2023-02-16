@@ -7,9 +7,9 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
   const { query } = router;
 
   return (
-    <List sx={{ gap: 0.5, p: 2, '--List-item-radius': 'var(--joy-radius-sm)' }}>
+    <List sx={{ gap: 0.5, p: 2, "--List-item-radius": "var(--joy-radius-sm)" }}>
       <ListItem>
-        <ListItemButton onClick={() => Router.push('/')}>
+        <ListItemButton onClick={() => Router.push("/")}>
           <Typography fontWeight="xl" level="h6">
             All Categories
           </Typography>

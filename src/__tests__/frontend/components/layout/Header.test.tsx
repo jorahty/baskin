@@ -3,10 +3,12 @@ import Header from "../../../../components/layout/Header";
 import { CssVarsProvider } from "@mui/joy";
 import "../../matchMedia";
 
+let handleSidebarOpen: () => void;
+
 const renderView = async () => {
   render(
     <CssVarsProvider>
-      <Header />
+      <Header handleSidebarOpen={handleSidebarOpen} />
     </CssVarsProvider>
   );
 };

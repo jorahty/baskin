@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Box, Button, Stack } from "@mui/joy";
+import { Box, Button, IconButton, Stack } from "@mui/joy";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import ModeToggle from "./ModeToggle";
 import Logo from "./Logo";
@@ -9,7 +10,11 @@ import UserMenu from "./UserMenu";
 
 export const headerHeight = "80px";
 
-export default function Header() {
+export default function Header({
+  handleSidebarOpen,
+}: {
+  handleSidebarOpen: () => void;
+}) {
   const [user, setUser] = useState<SignInPayload | undefined>(undefined);
   const [signedIn, setSignedIn] = useState(false);
 
@@ -34,6 +39,15 @@ export default function Header() {
       px={3}
       gap={3}
     >
+      <IconButton
+        aria-label="menu-icon"
+        onClick={handleSidebarOpen}
+        sx={{
+          display: { xs: "block", md: "none" },
+        }}
+      >
+        <MenuIcon />
+      </IconButton>
       <Link href="/">
         <Logo />
       </Link>

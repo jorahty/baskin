@@ -2,9 +2,11 @@ import { render, screen } from "@testing-library/react";
 import UserMenu from "../../../../components/layout/UserMenu";
 import { CssVarsProvider } from "@mui/joy";
 import "../../matchMedia";
+import { SignInPayload } from "@/graphql/auth/schema";
 
-const user = {
+const user: SignInPayload = {
   username: "nobby_nobody",
+  name: "Nobby Nobody",
   accessToken: "blergh",
 };
 
