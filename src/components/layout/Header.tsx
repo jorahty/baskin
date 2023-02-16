@@ -32,9 +32,11 @@ export default function Header({
       >
         <MenuIcon />
       </IconButton>
-      <Link href="/">
-        <Logo />
-      </Link>
+      <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <Link href="/">
+          <Logo />
+        </Link>
+      </Box>
       <Box ml="auto" />
       {signedInUser ? <UserMenu /> :
         <>
