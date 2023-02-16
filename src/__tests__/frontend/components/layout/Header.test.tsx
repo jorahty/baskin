@@ -2,13 +2,16 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import Header from "../../../../components/layout/Header";
 import { CssVarsProvider } from "@mui/joy";
 import "../../matchMedia";
+import { AppContextProvider } from "../../../../context";
 
 let handleSidebarOpen: () => void;
 
 const renderView = async () => {
   render(
     <CssVarsProvider>
-      <Header handleSidebarOpen={handleSidebarOpen} />
+      <AppContextProvider>
+        <Header handleSidebarOpen={handleSidebarOpen} />
+      </AppContextProvider>
     </CssVarsProvider>
   );
 };

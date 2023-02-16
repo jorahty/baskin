@@ -50,9 +50,9 @@ export default function Layout({ children, sidebar }: Props) {
               {sidebar}
             </Box>
             {sidebarOpen && <BackDrop handleClick={handleSidebarOpen} />}
+            <Divider orientation="vertical" />
           </>
         )}
-        <Divider orientation="vertical" />
         <Box
           sx={{
             ...(sidebarOpen && { zIndex: -1 }),

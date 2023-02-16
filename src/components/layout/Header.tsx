@@ -1,12 +1,10 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { Box, Button, IconButton, Stack } from "@mui/joy";
 import MenuIcon from "@mui/icons-material/Menu";
-
 import ModeToggle from "./ModeToggle";
 import Logo from "./Logo";
-import { SignInPayload } from "@/graphql/auth/schema";
 import UserMenu from "./UserMenu";
+import { useAppContext } from "../../context";
 
 export const headerHeight = "80px";
 
@@ -15,21 +13,7 @@ export default function Header({
 }: {
   handleSidebarOpen: () => void;
 }) {
-  const [user, setUser] = useState<SignInPayload | undefined>(undefined);
-  const [signedIn, setSignedIn] = useState(false);
-
-  const handleSignOut = () => {
-    localStorage.removeItem("user");
-    setSignedIn(false);
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem("user");
-    if (token) {
-      setUser(JSON.parse(token));
-      setSignedIn(true);
-    }
-  }, []);
+  const { signedInUser } = useAppContext();
 
   return (
     <Stack
@@ -52,9 +36,7 @@ export default function Header({
         <Logo />
       </Link>
       <Box ml="auto" />
-      {signedIn && user ? (
-        <UserMenu user={user} handleSignOut={handleSignOut} />
-      ) : (
+      {signedInUser ? <UserMenu /> :
         <>
           <Link href="/signin">
             <Button variant="soft">Sign in</Button>
@@ -63,7 +45,7 @@ export default function Header({
             <Button>Sign up</Button>
           </Link>
         </>
-      )}
+      }
       <ModeToggle />
     </Stack>
   );

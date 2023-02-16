@@ -9,20 +9,24 @@ import FormControl from "@mui/joy/FormControl";
 import FormLabel, { formLabelClasses } from "@mui/joy/FormLabel";
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
+import { useAppContext } from "../context";
 
 interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
   password: HTMLInputElement;
   persistent: HTMLInputElement;
 }
+
 interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
 export default function Signin() {
+  const { signIn, signOut } = useAppContext();
+
   React.useEffect(() => {
-    localStorage.removeItem("user");
-  }, []);
+    signOut();
+  }, [signOut]);
 
   const handleSubmit = (username: string, password: string) => {
     const query = {
@@ -42,7 +46,8 @@ export default function Signin() {
         if (json.errors) {
           alert("Error signing in, please try again");
         } else {
-          localStorage.setItem("user", JSON.stringify(json.data.signin));
+          const user = json.data.signin;
+          signIn(user);
           Router.push({
             pathname: "/",
           });

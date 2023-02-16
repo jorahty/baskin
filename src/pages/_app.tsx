@@ -5,6 +5,7 @@ import CssBaseline from '@mui/joy/CssBaseline';
 import { GlobalStyles } from '@mui/joy';
 import theme from '../theme';
 import Favicon from '../components/Favicon';
+import { AppContextProvider } from '../context';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -16,7 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <Favicon />
-      <Component {...pageProps} />
+      <AppContextProvider>
+        <Component {...pageProps} />
+      </AppContextProvider>
     </CssVarsProvider>
   );
 }

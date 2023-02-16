@@ -15,9 +15,6 @@ const customJestConfig = {
   coveragePathIgnorePatterns: [
     "src/pages/_document.tsx",
     "src/pages/_app.tsx",
-    "src/theme.ts",
-    "src/components/Favicon.tsx",
-    "src/__tests__/common.ts",
   ],
   testMatch: ["**/?(*.)+(spec|test).[jt]s?(x)"],
 };

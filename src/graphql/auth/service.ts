@@ -1,8 +1,9 @@
 import * as jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
 
-import {Credentials, SignInPayload, UserCheck} from './schema';
+import {Credentials, SignInPayload } from './schema';
 import {pool} from '../db';
+import { SessionUser } from "@/types/custom";
 
 
 export interface User {
@@ -53,7 +54,7 @@ export class AuthService {
     });
   }
 
-  public async check(authHeader?: string, roles?: string[]): Promise<UserCheck>  {
+  public async check(authHeader?: string, roles?: string[]): Promise<SessionUser>  {
     return new Promise((resolve, reject) => {
       if (!authHeader) {
         reject(new Error("Unauthorised"));

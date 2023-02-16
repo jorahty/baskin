@@ -7,6 +7,7 @@ import "whatwg-fetch";
 import "../matchMedia";
 
 import Signin from "../../../pages/signin";
+import { AppContextProvider } from "../../../context";
 
 const handlers = [
   graphql.query("signin", async (req, res, ctx) => {
@@ -43,12 +44,14 @@ jest.mock("next/router", () => ({ push: jest.fn() }));
 const renderView = async () => {
   render(
     <CssVarsProvider>
-      <Signin />
+      <AppContextProvider>
+        <Signin />
+      </AppContextProvider>
     </CssVarsProvider>
   );
 };
 
-test("Sucess", async () => {
+test("Success", async () => {
   renderView();
   // // eslint-disable-next-line @typescript-eslint/no-empty-function
   const username = screen.getByPlaceholderText("Enter your username");
@@ -57,7 +60,7 @@ test("Sucess", async () => {
   await userEvent.type(passwd, "mollymember");
   fireEvent.click(screen.getByLabelText("signin"));
   await waitFor(() => {
-    expect(localStorage.getItem("user")).not.toBe(null);
+    expect(localStorage.getItem('user')).not.toBe(null);
   });
 });
 
@@ -76,4 +79,21 @@ test("Fail", async () => {
     expect(alerted).toBe(true);
   });
   expect(localStorage.getItem("user")).toBe(null);
+});
+
+test("User initially in localStorage", async () => {
+  const user = {
+    name: 'Molly Member',
+    username: 'molly_member',
+    accessToken: 'whatever',
+  };
+  localStorage.setItem('user', JSON.stringify(user));
+  render(
+    <AppContextProvider>
+      <div>a child component</div>
+    </AppContextProvider>
+  );
+  await waitFor(() => {
+    expect(localStorage.getItem('user')).not.toBe(null);
+  });
 });

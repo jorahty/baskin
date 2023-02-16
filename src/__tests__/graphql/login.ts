@@ -10,7 +10,7 @@ export const molly = {
   password: 'mollymember',
 };
 
-export const nobby = {
+const nobby = {
   username: 'nobby_nobody',
   password: 'nobbynobody',
 };

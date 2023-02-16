@@ -5,7 +5,7 @@ import { render, screen } from "@testing-library/react";
 import { CssVarsProvider } from "@mui/joy/styles";
 import * as db from "../../graphql/db";
 import "../matchMedia";
-import * as common from "../../common";
+import { act } from "react-dom/test-utils";
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -34,9 +34,16 @@ test("Renders", async () => {
   await screen.findByText("All Categories");
 });
 
+function setWidth(width: number) {
+  global.innerWidth = width;
+  act(() => {
+    global.dispatchEvent(new Event("resize"));
+  });
+}
+
 test("Resize Layout and Open Mobile Menu", async () => {
   renderView();
   await screen.findByLabelText(/menu-icon/i);
-  common.setNarrow();
+  setWidth(550);
   fireEvent.click(screen.getByRole("button", { name: /menu-icon/i }));
 });

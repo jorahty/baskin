@@ -2,20 +2,21 @@ import { render, screen } from "@testing-library/react";
 import UserMenu from "../../../../components/layout/UserMenu";
 import { CssVarsProvider } from "@mui/joy";
 import "../../matchMedia";
-import { SignInPayload } from "@/graphql/auth/schema";
+import { AppContextProvider } from "../../../../context";
 
-const user: SignInPayload = {
-  username: "nobby_nobody",
-  name: "Nobby Nobody",
-  accessToken: "blergh",
+const user = {
+  username: 'nobby_nobody',
+  name: 'Nobby Nobody',
+  accessToken: 'whatever',
 };
 
-let handleSignOut: () => void;
-
 const renderView = async () => {
+  localStorage.setItem('user', JSON.stringify(user));
   render(
     <CssVarsProvider>
-      <UserMenu user={user} handleSignOut={handleSignOut} />
+      <AppContextProvider>
+        <UserMenu />
+      </AppContextProvider>
     </CssVarsProvider>
   );
 };

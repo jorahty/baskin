@@ -7,16 +7,11 @@ import { Box, Divider, ListItemDecorator, Stack, Typography } from "@mui/joy";
 import SignOutIcon from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
 import ForumIcon from '@mui/icons-material/Forum';
+import { useAppContext } from "../../context";
 
-import { SignInPayload } from "@/graphql/auth/schema";
+export default function UserMenu() {
+  const { signedInUser, signOut } = useAppContext();
 
-export default function UserMenu({
-  user,
-  handleSignOut,
-}: {
-  user: SignInPayload;
-  handleSignOut: () => void;
-}) {
   const [anchor, setAnchor] = useState<(EventTarget & HTMLDivElement) | null>(
     null
   );
@@ -32,11 +27,13 @@ export default function UserMenu({
     setAnchor(null);
   };
 
+  if (!signedInUser) return <></>;
+
   return (
     <>
       <Avatar
         aria-label="user-avatar"
-        src={`https://robohash.org/${user.username}`}
+        src={`https://robohash.org/${signedInUser.username}`}
         onClick={handleClick}
         sx={{ cursor: "pointer" }}
       />
@@ -48,14 +45,14 @@ export default function UserMenu({
         sx={{ p: 0 }}
       >
         <Stack direction="row" gap={1.5} p={1.5}>
-          <Avatar size="lg" src={`https://robohash.org/${user.username}`} />
+          <Avatar size="lg" src={`https://robohash.org/${signedInUser.username}`} />
           <Box>
-            <Typography level="h6">{user.name}</Typography>
-            <Typography level="body2">{user.username}</Typography>
+            <Typography level="h6">{signedInUser.name}</Typography>
+            <Typography level="body2">{signedInUser.username}</Typography>
           </Box>
         </Stack>
         <Divider />
-        <Link href={`/user/${user.username}`}>
+        <Link href={`/user/${signedInUser.username}`}>
           <MenuItem onClick={handleClose}>
             <ListItemDecorator>
               <PersonIcon />
@@ -71,7 +68,7 @@ export default function UserMenu({
             Messages
           </MenuItem>
         </Link>
-        <MenuItem onClick={handleSignOut} color="danger">
+        <MenuItem onClick={() => signOut()} color="danger">
           <ListItemDecorator sx={{ color: "inherit" }}>
             <SignOutIcon />
           </ListItemDecorator>
