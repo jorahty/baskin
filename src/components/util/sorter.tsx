@@ -1,7 +1,7 @@
 import { Product } from '@/graphql/product/schema';
 import { Box, Option, Select } from '@mui/joy';
 
-const sorts: Record<string, (a: Product, b: Product) => number> = {
+const sortings: Record<string, (a: Product, b: Product) => number> = {
   'Newest': (a: Product, b: Product) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   'Oldest': (a: Product, b: Product) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   'Price High': (a: Product, b: Product) => b.price - a.price,
@@ -21,10 +21,10 @@ export default function Sorter({
     setSortedProducts([...products].sort(sort));
   };
 
-  const handleChange = (e: unknown, newValue: any) => {
-    const sort = sorts[newValue];
-    handleSort(sort);
-  };
+  function handleChange(e: unknown, newValue: any) {
+    const ord = sortings[newValue];
+    handleSort(ord);
+  }
 
   return (
     <Box>
