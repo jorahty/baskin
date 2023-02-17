@@ -19,3 +19,12 @@
 - To run tests and examine code coverage: `npm run test`
 - To run the linter: `npm run lint`
 - To stop the database: `docker-compose down`
+
+
+## Team Members
+- Nout reusken
+- James Tennant
+- Eric Hernandez
+- Cody Lambert
+- Ash Yaw
+- José Chavez
