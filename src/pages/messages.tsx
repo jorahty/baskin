@@ -49,7 +49,7 @@ export default function MessagesPage() {
     graphQLClient.request(query).then(data => {
       setMessages(data.message);
     });
-  },[curConvo])
+  },[curConvo, signedInUser])
 
 
   return (

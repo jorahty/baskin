@@ -1,4 +1,4 @@
-import { findByRole, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { findByRole, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ProductList from "../../../../components/product/list";
 

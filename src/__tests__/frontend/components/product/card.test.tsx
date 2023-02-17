@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import ProductCard from "../../../../components/product/card";
 import { AppContextProvider } from "../../../../context";
 import { graphql } from "msw";
