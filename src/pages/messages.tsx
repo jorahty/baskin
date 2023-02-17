@@ -19,7 +19,6 @@ export default function MessagesPage() {
     const bearerToken = signedInUser?.accessToken
     const userId = signedInUser?.username;
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-    // const graphQLClient = new GraphQLClient('/api/graphql', {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },
@@ -35,18 +34,22 @@ export default function MessagesPage() {
 
   // Updates messages
   useEffect(()=>{
-    const bearerToken = signedInUser.accessToken
+    if (!curConvo)
+      return;
+
+    const bearerToken = signedInUser?.accessToken;
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-    // const graphQLClient = new GraphQLClient('/api/graphql', {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },
-    })
+    });
+
+    console.log(curConvo?.id);
     const query = `query message { message(id: "${curConvo?.id}" ) { content } }`;
     graphQLClient.request(query).then(data => {
       setMessages(data.message);
     });
-  },[curConvo, signedInUser])
+  },[curConvo])
 
 
   return (
