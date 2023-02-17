@@ -11,22 +11,25 @@ export default function Search({ setSortedProducts, products }: SearchProps) {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    setSortedProducts(products.filter((product) =>
-      product.name.toLowerCase().includes(search) || product.description.toLowerCase().includes(search)
-    ));
+    setSortedProducts(
+      products.filter(
+        product => product.name.toLowerCase().includes(search) ||
+          product.description.toLowerCase().includes(search)
+      )
+    );
   }, [products, search, setSortedProducts]);
-    
 
   return (
     <Box
       sx={{
-        display: "flex",
+        display: 'flex',
       }}
     >
       <Input
         placeholder="Search Products"
-        sx={{ width: { md: '34vw', sm: '30vw'} }}
-        onChange={(e) => setSearch(e.target.value)} />
+        sx={{ width: { md: '34vw', sm: '30vw' } }}
+        onChange={e => setSearch(e.target.value)}
+      />
     </Box>
   );
 }

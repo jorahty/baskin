@@ -1,6 +1,6 @@
 import { CssVarsProvider } from '@mui/joy';
-import { fireEvent, render, screen } from '@testing-library/react'
-import ModeToggle from "../../../../components/layout/ModeToggle";
+import { fireEvent, render, screen } from '@testing-library/react';
+import ModeToggle from '../../../../components/layout/ModeToggle';
 import '../../matchMedia';
 
 const renderView = async () => {

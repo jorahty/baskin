@@ -1,28 +1,18 @@
-import Link from "next/link";
-import { Box, Button, IconButton, Stack } from "@mui/joy";
-import MenuIcon from "@mui/icons-material/Menu";
-import ModeToggle from "./ModeToggle";
-import Logo from "./Logo";
-import UserMenu from "./UserMenu";
-import { useAppContext } from "../../context";
+import Link from 'next/link';
+import { Box, Button, IconButton, Stack } from '@mui/joy';
+import MenuIcon from '@mui/icons-material/Menu';
+import ModeToggle from './ModeToggle';
+import Logo from './Logo';
+import UserMenu from './UserMenu';
+import { useAppContext } from '../../context';
 
-export const headerHeight = "80px";
+export const headerHeight = '80px';
 
-export default function Header({
-  handleSidebarOpen,
-}: {
-  handleSidebarOpen: () => void;
-}) {
+export default function Header({ handleSidebarOpen }: { handleSidebarOpen: () => void }) {
   const { signedInUser } = useAppContext();
 
   return (
-    <Stack
-      height={headerHeight}
-      direction="row"
-      alignItems="center"
-      px={3}
-      gap={3}
-    >
+    <Stack height={headerHeight} direction="row" alignItems="center" px={3} gap={3}>
       <IconButton
         aria-label="menu-icon"
         onClick={handleSidebarOpen}
@@ -38,7 +28,9 @@ export default function Header({
         </Link>
       </Box>
       <Box ml="auto" />
-      {signedInUser ? <UserMenu /> :
+      {signedInUser ? (
+        <UserMenu />
+      ) : (
         <>
           <Link href="/signin">
             <Button variant="soft">Sign in</Button>
@@ -47,7 +39,7 @@ export default function Header({
             <Button>Sign up</Button>
           </Link>
         </>
-      }
+      )}
       <ModeToggle />
     </Stack>
   );

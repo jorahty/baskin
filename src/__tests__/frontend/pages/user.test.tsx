@@ -1,15 +1,15 @@
 import UserPage from '../../../pages/user/[username]';
 import { getServerSideProps } from '../../../pages/user/[username]';
-import { render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import * as db from '../../graphql/db';
 import '../matchMedia';
 
 jest.mock('next/router', () => ({
   useRouter() {
-    return ({
+    return {
       query: { id: '123' },
-    });
+    };
   },
 }));
 

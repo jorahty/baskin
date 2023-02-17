@@ -1,14 +1,11 @@
-import http from "http";
-import supertest from "supertest";
-import "whatwg-fetch";
+import http from 'http';
+import supertest from 'supertest';
+import 'whatwg-fetch';
 
-import * as db from "./db";
-import requestHandler from "./requestHandler";
+import * as db from './db';
+import requestHandler from './requestHandler';
 
-let server: http.Server<
-  typeof http.IncomingMessage,
-  typeof http.ServerResponse
->;
+let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
 beforeAll(async () => {
@@ -16,58 +13,58 @@ beforeAll(async () => {
   server.listen();
   request = supertest(server);
   db.reset();
-  return new Promise((resolve) => setTimeout(resolve, 500));
+  return new Promise(resolve => setTimeout(resolve, 500));
 });
 
-afterAll((done) => {
+afterAll(done => {
   server.close(done);
   db.shutdown();
 });
 
-test("Fetch conversations molly", async () => {
+test('Fetch conversations molly', async () => {
   await request
-    .post("/api/graphql")
+    .post('/api/graphql')
     .send({
       query: `{conversation(username: "molly_member"){id}}`,
     })
     .expect(200)
-    .then((res) => {
+    .then(res => {
       expect(res).toBeDefined();
     });
 });
 
-test("Fetch conversations anna", async () => {
+test('Fetch conversations anna', async () => {
   await request
-    .post("/api/graphql")
+    .post('/api/graphql')
     .send({
       query: `{conversation(username: "anna_admin"){id}}`,
     })
     .expect(200)
-    .then((res) => {
+    .then(res => {
       expect(res).toBeDefined();
     });
 });
 
-test("Fetch conversations nobby", async () => {
+test('Fetch conversations nobby', async () => {
   await request
-    .post("/api/graphql")
+    .post('/api/graphql')
     .send({
       query: `{conversation(username: "nobby_nobody"){id}}`,
     })
     .expect(200)
-    .then((res) => {
+    .then(res => {
       expect(res).toBeDefined();
     });
 });
 
-test("Fetch conversations mia", async () => {
+test('Fetch conversations mia', async () => {
   await request
-    .post("/api/graphql")
+    .post('/api/graphql')
     .send({
       query: `{conversation(username: "mia_moderator"){id}}`,
     })
     .expect(200)
-    .then((res) => {
+    .then(res => {
       expect(res).toBeDefined();
     });
 });

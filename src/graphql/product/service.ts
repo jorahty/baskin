@@ -1,7 +1,6 @@
-import { NewProductArgs, Product, ProductArgs, FavoriteProduct } from "./schema";
-import { pool } from "../db";
-import { Request } from "next"
-
+import { NewProductArgs, Product, ProductArgs, FavoriteProduct } from './schema';
+import { pool } from '../db';
+import { Request } from 'next';
 
 export class ProductService {
   public async list({ id, user, category }: ProductArgs): Promise<Product[]> {
@@ -31,12 +30,28 @@ export class ProductService {
     return rows.map(row => row.product);
   }
 
-  public async create({name, category, price, quantity, description, pictures}:NewProductArgs, request: Request): Promise<Product> {
-    const insert = 'INSERT INTO product(member_username, category_slug, data) VALUES ($1, $2, $3) RETURNING *';
+  public async create(
+    { name, category, price, quantity, description, pictures }: NewProductArgs,
+    request: Request
+  ): Promise<Product> {
+    const insert =
+      'INSERT INTO product(member_username, category_slug, data) VALUES ($1, $2, $3) RETURNING *';
     const query = {
       text: insert,
-      values: [request.user.username, category,{"name": name, "quantity": quantity, "price": price, "discount": 0, "description": description, "pictures": pictures, "date": (new Date())}]
-    }
+      values: [
+        request.user.username,
+        category,
+        {
+          name: name,
+          quantity: quantity,
+          price: price,
+          discount: 0,
+          description: description,
+          pictures: pictures,
+          date: new Date(),
+        },
+      ],
+    };
 
     const { rows } = await pool.query(query);
 
@@ -48,42 +63,44 @@ export class ProductService {
     return product;
   }
 
-  public async get(product:string, request: Request): Promise<FavoriteProduct[]> {
+  public async get(product: string, request: Request): Promise<FavoriteProduct[]> {
     const insert = 'SELECT * FROM favorite WHERE member_username = $1 AND product_id = $2';
     const query = {
       text: insert,
-      values: [request.user.username, product]
-    }
+      values: [request.user.username, product],
+    };
 
     const { rows } = await pool.query(query);
 
-    return rows.map(row => {return {"user": row.member_username, "product": row.product_id}});
+    return rows.map(row => {
+      return { user: row.member_username, product: row.product_id };
+    });
   }
 
-  public async favorite(product:string, request: Request): Promise<FavoriteProduct> {
+  public async favorite(product: string, request: Request): Promise<FavoriteProduct> {
     const insert = 'INSERT INTO favorite(member_username, product_id) VALUES ($1, $2) RETURNING *';
     const query = {
       text: insert,
-      values: [request.user.username, product]
-    }
+      values: [request.user.username, product],
+    };
 
     const { rows } = await pool.query(query);
 
-    const favorite = {user: rows[0].member_username, product: rows[0].product_id,};
+    const favorite = { user: rows[0].member_username, product: rows[0].product_id };
 
     return favorite;
   }
 
-  public async unfavorite(product:string, request: Request): Promise<FavoriteProduct> {
+  public async unfavorite(product: string, request: Request): Promise<FavoriteProduct> {
     const insert = 'Delete From favorite Where member_username = $1 And product_id = $2 Returning *';
     const query = {
       text: insert,
-      values: [request.user.username, product]
-    }
+      values: [request.user.username, product],
+    };
 
     const { rows } = await pool.query(query);
 
-    const favorite = {user: rows[0].member_username, product: rows[0].product_id,};
+    const favorite = { user: rows[0].member_username, product: rows[0].product_id };
 
     return favorite;
   }

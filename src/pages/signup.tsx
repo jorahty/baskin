@@ -9,7 +9,7 @@ import FormControl from '@mui/joy/FormControl';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
-import {useAppContext} from "../context";
+import { useAppContext } from '../context';
 
 interface FormElements extends HTMLFormControlsCollection {
   firstname: HTMLInputElement;
@@ -32,8 +32,25 @@ export default function Signup() {
     signOut();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleSubmit = (email:string, password:string, first:string, last:string, username:string) => {
-    const query = {query: `mutation addUser {addUser (input: {username: "${username}" email: "${email}" password: "${password}", name: "${first +' '+ last}"}) { name, email }}`}
+  const handleSubmit = (
+    email: string,
+    password: string,
+    first: string,
+    last: string,
+    username: string
+  ) => {
+    const query = {
+      query: `
+        mutation addUser {
+          addUser (input: {
+            username: "${username}",
+            email: "${email}",
+            password: "${password}",
+            name: "${first + ' ' + last}"
+          }) 
+          { name, email }
+        }`,
+    };
 
     fetch('/api/graphql', {
       method: 'POST',
@@ -42,25 +59,22 @@ export default function Signup() {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => {
+      .then(res => {
         return res.json();
       })
-      .then((json) => {
+      .then(json => {
         if (json.errors) {
           alert('Error signing up, please try again');
         } else {
           Router.push({
-            pathname: '/signin'
-          })
+            pathname: '/signin',
+          });
         }
-      })
-  }; 
+      });
+  };
 
   return (
-    <CssVarsProvider
-      defaultMode="dark"
-      disableTransitionOnChange
-    >
+    <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />
       <GlobalStyles
         styles={{
@@ -73,9 +87,8 @@ export default function Signup() {
         }}
       />
       <Box
-        sx={(theme) => ({
-          width:
-            'clamp(100vw - var(--Cover-width), (var(--Collapsed-breakpoint) - 100vw) * 999, 100vw)',
+        sx={theme => ({
+          width: 'clamp(100vw - var(--Cover-width), (var(--Collapsed-breakpoint) - 100vw) * 999, 100vw)',
           transition: 'width var(--Transition-duration)',
           transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',
           position: 'relative',
@@ -94,8 +107,7 @@ export default function Signup() {
             display: 'flex',
             flexDirection: 'column',
             minHeight: '100dvh',
-            width:
-              'clamp(var(--Form-maxWidth), (var(--Collapsed-breakpoint) - 100vw) * 999, 100%)',
+            width: 'clamp(var(--Form-maxWidth), (var(--Collapsed-breakpoint) - 100vw) * 999, 100%)',
             maxWidth: '100%',
             px: 2,
           }}
@@ -142,7 +154,7 @@ export default function Signup() {
                   email: formElements.email.value,
                   password: formElements.password.value,
                 };
-                handleSubmit(data.email, data.password, data.lastname, data.firstname, data.username)
+                handleSubmit(data.email, data.password, data.lastname, data.firstname, data.username);
               }}
             >
               <FormControl required>
@@ -171,9 +183,8 @@ export default function Signup() {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                 }}
-              >
-              </Box>
-              <Button type="submit" fullWidth aria-label='signup'>
+              ></Box>
+              <Button type="submit" fullWidth aria-label="signup">
                 Sign in
               </Button>
             </form>
@@ -181,7 +192,7 @@ export default function Signup() {
         </Box>
       </Box>
       <Box
-        sx={(theme) => ({
+        sx={theme => ({
           height: '100%',
           position: 'fixed',
           right: 0,
@@ -195,11 +206,9 @@ export default function Signup() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundImage:
-            'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8)',
+          backgroundImage: 'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8)',
           [theme.getColorSchemeSelector('dark')]: {
-            backgroundImage:
-              'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831)',
           },
         })}
       />

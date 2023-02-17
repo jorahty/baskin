@@ -1,18 +1,18 @@
-import { render } from '@testing-library/react'
-import ProductDetails from "../../../../components/product/details";
-import {Product} from "../../../../graphql/product/schema";
+import { render } from '@testing-library/react';
+import ProductDetails from '../../../../components/product/details';
+import { Product } from '../../../../graphql/product/schema';
 
-const product : Product = {
-  user: "string",
-  id: "string",
-  category: "string",
-  name: "string",
+const product: Product = {
+  user: 'string',
+  id: 'string',
+  category: 'string',
+  name: 'string',
   price: 0,
   quantity: 90,
-  description: "string",
-  date: "string",
+  description: 'string',
+  date: 'string',
   discount: 20,
-  pictures: ["https://images.pexels.com/photos/11108129/pexels-photo-11108129.jpeg"]
+  pictures: ['https://images.pexels.com/photos/11108129/pexels-photo-11108129.jpeg'],
 };
 
 const renderView = async () => {

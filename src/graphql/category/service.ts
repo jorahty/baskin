@@ -1,6 +1,6 @@
-import { Category, CategoryArgs } from "./schema";
+import { Category, CategoryArgs } from './schema';
 
-import { pool } from "../db";
+import { pool } from '../db';
 
 export class CategoryService {
   public async list({ slug }: CategoryArgs): Promise<Category[]> {
@@ -13,6 +13,6 @@ export class CategoryService {
       values: slug ? [slug] : [],
     };
     const { rows } = await pool.query(query);
-    return rows.map((row) => row.category);
+    return rows.map(row => row.category);
   }
 }

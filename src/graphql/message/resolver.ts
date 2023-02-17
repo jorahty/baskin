@@ -1,7 +1,6 @@
-import { Args, Resolver, Query} from "type-graphql";
-import {  Message, MessageArgs } from "./schema";
-import { MessageService } from "./service";
-
+import { Args, Resolver, Query } from 'type-graphql';
+import { Message, MessageArgs } from './schema';
+import { MessageService } from './service';
 
 @Resolver()
 export class MessageResolver {

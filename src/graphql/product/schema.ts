@@ -1,6 +1,6 @@
-import { ArgsType, Field, ObjectType } from "type-graphql";
-import {Matches, Length, MinLength} from "class-validator";
-import { regexISODate, regexSlug, regexUsername, regexUUID } from "../regex";
+import { ArgsType, Field, ObjectType } from 'type-graphql';
+import { Matches, Length, MinLength } from 'class-validator';
+import { regexISODate, regexSlug, regexUsername, regexUUID } from '../regex';
 
 @ObjectType()
 export class Product {
@@ -28,7 +28,7 @@ export class Product {
   @Field()
   @Matches(regexISODate)
     date!: string;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars  
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Field(type => [String])
   @MinLength(1)
     pictures!: string[];
@@ -77,7 +77,7 @@ export class NewProductArgs {
   @Field()
   @Length(1, 1024)
     description!: string;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars  
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Field(type => [String])
     pictures!: string[];
 }

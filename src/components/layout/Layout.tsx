@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Box, Divider, GlobalStyles, Stack } from "@mui/joy";
-import React from "react";
-import Header, { headerHeight } from "./Header";
-import BackDrop from "./BackDrop";
+import { useState } from 'react';
+import { Box, Divider, GlobalStyles, Stack } from '@mui/joy';
+import React from 'react';
+import Header, { headerHeight } from './Header';
+import BackDrop from './BackDrop';
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const sx = {
-  overflowY: "scroll",
+  overflowY: 'scroll',
   height: `calc(100vh - ${headerHeight})`,
   flexGrow: 1,
 };
@@ -24,7 +24,7 @@ export default function Layout({ children, sidebar }: Props) {
 
   return (
     <>
-      <GlobalStyles styles={{ body: { overflow: "hidden" } }} />
+      <GlobalStyles styles={{ body: { overflow: 'hidden' } }} />
       <Box bgcolor="background.surface" sx={{ zIndex: 3 }}>
         <Header handleSidebarOpen={handleSidebarOpen} />
       </Box>
@@ -38,11 +38,11 @@ export default function Layout({ children, sidebar }: Props) {
                 zIndex: 3,
                 minWidth: 240,
                 maxWidth: 240,
-                position: { xs: "fixed", md: "relative" },
+                position: { xs: 'fixed', md: 'relative' },
                 display: {
-                  xs: sidebarOpen ? "flex" : "none",
+                  xs: sidebarOpen ? 'flex' : 'none',
                   // xs: (sidebarOpen && "flex") || "none",
-                  md: "flex",
+                  md: 'flex',
                 },
                 ...sx,
               }}

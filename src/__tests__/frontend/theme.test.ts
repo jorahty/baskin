@@ -1,5 +1,5 @@
 import theme from '../../theme';
 
-test("Renders", async () => {
+test('Renders', async () => {
   expect(theme.colorSchemes).toBeDefined();
 });

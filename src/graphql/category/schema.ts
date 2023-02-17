@@ -1,4 +1,4 @@
-import { ArgsType, Field, ObjectType } from "type-graphql";
+import { ArgsType, Field, ObjectType } from 'type-graphql';
 
 @ObjectType()
 export class Category {

@@ -1,7 +1,7 @@
 import { Pool } from 'pg';
 import * as fs from 'fs';
 
-process.env.POSTGRES_DB='test';
+process.env.POSTGRES_DB = 'test';
 
 const pool = new Pool({
   host: 'localhost',
@@ -32,4 +32,4 @@ const shutdown = () => {
   });
 };
 
-export {reset, shutdown};
+export { reset, shutdown };

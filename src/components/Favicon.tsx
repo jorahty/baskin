@@ -21,7 +21,6 @@ export default function Favicon() {
       modeStorageKey="favicon_identify-system-mode"
       disableNestedContext
     >
-      
       <SetFavicon />
     </CssVarsProvider>
   );

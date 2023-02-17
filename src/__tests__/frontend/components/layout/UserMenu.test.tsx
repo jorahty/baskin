@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
-import UserMenu from "../../../../components/layout/UserMenu";
-import { CssVarsProvider } from "@mui/joy";
-import "../../matchMedia";
-import { AppContextProvider } from "../../../../context";
+import { render, screen } from '@testing-library/react';
+import UserMenu from '../../../../components/layout/UserMenu';
+import { CssVarsProvider } from '@mui/joy';
+import '../../matchMedia';
+import { AppContextProvider } from '../../../../context';
 
 const user = {
   username: 'nobby_nobody',
@@ -21,7 +21,7 @@ const renderView = async () => {
   );
 };
 
-test("Renders", async () => {
+test('Renders', async () => {
   renderView();
   await screen.findByLabelText(/user-avatar/i);
 });

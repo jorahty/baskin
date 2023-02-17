@@ -1,15 +1,12 @@
-import http from "http";
-import supertest from "supertest";
-import "whatwg-fetch";
+import http from 'http';
+import supertest from 'supertest';
+import 'whatwg-fetch';
 
-import * as db from "./db";
+import * as db from './db';
 import * as login from './login';
-import requestHandler from "./requestHandler";
+import requestHandler from './requestHandler';
 
-let server: http.Server<
-  typeof http.IncomingMessage,
-  typeof http.ServerResponse
->;
+let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
 beforeAll(async () => {
@@ -17,17 +14,19 @@ beforeAll(async () => {
   server.listen();
   request = supertest(server);
   await db.reset();
-  return new Promise((resolve) => setTimeout(resolve, 500));
+  return new Promise(resolve => setTimeout(resolve, 500));
 });
 
-afterAll((done) => {
+afterAll(done => {
   server.close(done);
   db.shutdown();
 });
 
 test('Create new product without header', async () => {
-  await request.post('/api/graphql')
-    .send({query: `mutation {create (
+  await request
+    .post('/api/graphql')
+    .send({
+      query: `mutation {create (
         name:"Toy robot"
         description: "brand new"
         category:"toys"
@@ -36,16 +35,19 @@ test('Create new product without header', async () => {
         pictures: ["temp"]
       ) {
         name, description, category, price, quantity, user
-      }}`})
-    .then((data) => {
+      }}`,
+    })
+    .then(data => {
       expect(data.body.errors.length).toEqual(1);
     });
 });
 
 test('Create new product corrupt header', async () => {
-  await request.post('/api/graphql')
+  await request
+    .post('/api/graphql')
     .set('Authorization', 'Bearer ' + 'garbage')
-    .send({query: `mutation {create (
+    .send({
+      query: `mutation {create (
         name:"Toy robot"
         description: "brand new"
         category:"toys"
@@ -54,17 +56,20 @@ test('Create new product corrupt header', async () => {
         pictures: ["temp"]
       ) {
         name, description, category, price, quantity, user
-      }}`})
-    .then((data) => {
+      }}`,
+    })
+    .then(data => {
       expect(data.body.errors.length).toEqual(1);
     });
 });
 
 test('Create new product without member roles', async () => {
   const accessToken = await login.asNobby(request);
-  await request.post('/api/graphql')
+  await request
+    .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
-    .send({query: `mutation {create (
+    .send({
+      query: `mutation {create (
         name:"Toy robot"
         description: "brand new"
         category:"toys"
@@ -73,17 +78,20 @@ test('Create new product without member roles', async () => {
         pictures: ["temp"]
       ) {
         name, description, category, price, quantity, user
-      }}`})
-    .then((data) => {
+      }}`,
+    })
+    .then(data => {
       expect(data.body.errors.length).toEqual(1);
     });
 });
 
 test('Create new message', async () => {
   const accessToken = await login.asMolly(request);
-  await request.post('/api/graphql')
+  await request
+    .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
-    .send({query: `mutation {create (
+    .send({
+      query: `mutation {create (
         name:"Toy robot"
         description: "brand new"
         category:"toys"
@@ -92,10 +100,11 @@ test('Create new message', async () => {
         pictures: ["temp"]
       ) {
         name, description, category, price, quantity, user
-      }}`})
+      }}`,
+    })
     .expect(200)
     .expect('Content-Type', /json/)
-    .then((data) => {
+    .then(data => {
       expect(data).toBeDefined();
       expect(data.body).toBeDefined();
       expect(data.body.data).toBeDefined();

@@ -1,7 +1,7 @@
-import {render, screen} from "@testing-library/react";
-import {CssVarsProvider} from "@mui/joy/styles";
-import Dashboard from "../../../pages/dashboard";
-import "../matchMedia";
+import { render, screen } from '@testing-library/react';
+import { CssVarsProvider } from '@mui/joy/styles';
+import Dashboard from '../../../pages/dashboard';
+import '../matchMedia';
 
 const renderView = async () => {
   render(

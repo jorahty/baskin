@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Product } from "@/graphql/product/schema";
-import AspectRatio from "@mui/joy/AspectRatio";
-import Avatar from "@mui/joy/Avatar";
-import Box from "@mui/joy/Box";
-import Card from "@mui/joy/Card";
-import Chip from "@mui/joy/Chip";
+import { Product } from '@/graphql/product/schema';
+import AspectRatio from '@mui/joy/AspectRatio';
+import Avatar from '@mui/joy/Avatar';
+import Box from '@mui/joy/Box';
+import Card from '@mui/joy/Card';
+import Chip from '@mui/joy/Chip';
 // import Image from "next/image";
-import Link from "next/link";
-import SellIcon from "@mui/icons-material/Sell";
-import Typography from "@mui/joy/Typography";
-import { CardOverflow, Stack, Tooltip } from "@mui/joy";
+import Link from 'next/link';
+import SellIcon from '@mui/icons-material/Sell';
+import Typography from '@mui/joy/Typography';
+import { CardOverflow, Stack, Tooltip } from '@mui/joy';
 import IconButton from '@mui/joy/IconButton';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -24,44 +24,43 @@ export default function ProductCard({ product }: { product: Product }) {
   React.useEffect(() => {
     const fetchData = async () => {
       if (!signedInUser) {
-        setHide(true)
-        return
+        setHide(true);
+        return;
       } else {
-        const bearerToken = signedInUser.accessToken
+        const bearerToken = signedInUser.accessToken;
         const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
           headers: {
             Authorization: `Bearer ${bearerToken}`,
           },
-        })
-  
-        const query = gql`query getFavorites {getFavorites (product: "${product.id}") { product }}`
+        });
+
+        const query = gql`query getFavorites {getFavorites (product: "${product.id}") { product }}`;
         const data = await graphQLClient.request(query);
-  
-        if (data.getFavorites.length != 0){
+
+        if (data.getFavorites.length != 0) {
           setSelected(true);
         }
-        setHide(false)
+        setHide(false);
       }
     };
-    fetchData()
+    fetchData();
   }, [signedInUser, product.id]);
 
   const setFavorite = async () => {
-    const bearerToken = signedInUser?.accessToken
+    const bearerToken = signedInUser?.accessToken;
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },
-    })
+    });
     if (!selected) {
-      setSelected(!selected)
-      const query = gql`mutation favorite {favorite (product: "${product.id}") { product }}`
-      await graphQLClient.request(query)
-
+      setSelected(!selected);
+      const query = gql`mutation favorite {favorite (product: "${product.id}") { product }}`;
+      await graphQLClient.request(query);
     } else {
-      setSelected(!selected)
-      const query = gql`mutation unfavorite {unfavorite (product: "${product.id}") { product }}`
-      await graphQLClient.request(query)
+      setSelected(!selected);
+      const query = gql`mutation unfavorite {unfavorite (product: "${product.id}") { product }}`;
+      await graphQLClient.request(query);
     }
   };
 
@@ -81,10 +80,10 @@ export default function ProductCard({ product }: { product: Product }) {
         {product.discount > 0 && (
           <Box
             sx={{
-              position: "absolute",
+              position: 'absolute',
               zIndex: 2,
-              left: "5px",
-              top: "5px",
+              left: '5px',
+              top: '5px',
             }}
           >
             <Chip variant="solid" color="danger" startDecorator={<SellIcon />}>
@@ -92,7 +91,9 @@ export default function ProductCard({ product }: { product: Product }) {
             </Chip>
           </Box>
         )}
-        {hide ? <></> :  
+        {hide ? (
+          <></>
+        ) : (
           <IconButton
             aria-label="favorite"
             size="md"
@@ -108,22 +109,20 @@ export default function ProductCard({ product }: { product: Product }) {
               transform: 'translateY(40%)',
             }}
           >
-            {selected ? <FavoriteIcon aria-label='favorited'/> : <FavoriteBorderIcon aria-label='notfavorited'/>}
+            {selected ? (
+              <FavoriteIcon aria-label="favorited" />
+            ) : (
+              <FavoriteBorderIcon aria-label="notfavorited" />
+            )}
           </IconButton>
-        }
+        )}
       </CardOverflow>
       <Stack direction="row" pt={1} alignItems="flex-end">
         <Box flexGrow={1}>
           {product.discount ? (
             <Typography fontSize="lg" fontWeight="lg" color="danger">
-              {`$${(product.price - product.price * product.discount).toFixed(
-                2
-              )} `}
-              <Typography
-                fontWeight="md"
-                color="neutral"
-                sx={{ textDecoration: "line-through" }}
-              >
+              {`$${(product.price - product.price * product.discount).toFixed(2)} `}
+              <Typography fontWeight="md" color="neutral" sx={{ textDecoration: 'line-through' }}>
                 ${product.price.toFixed(2)}
               </Typography>
             </Typography>

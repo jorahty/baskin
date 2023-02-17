@@ -1,5 +1,5 @@
-import { IconButton, useColorScheme } from "@mui/joy";
-import { useEffect, useState } from "react";
+import { IconButton, useColorScheme } from '@mui/joy';
+import { useEffect, useState } from 'react';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 
@@ -11,12 +11,12 @@ export default function ModeToggle() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <IconButton disabled/>;
+  if (!mounted) return <IconButton disabled />;
 
   return (
     <IconButton
-      aria-label='mode-toggle'
-      onClick={() => mode === 'light' ? setMode('dark') : setMode('light')}
+      aria-label="mode-toggle"
+      onClick={() => (mode === 'light' ? setMode('dark') : setMode('light'))}
     >
       {mode === 'light' ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
     </IconButton>

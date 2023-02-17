@@ -9,7 +9,7 @@
 #######################################################################
 */
 
-import { SessionUser } from "../custom";
+import { SessionUser } from '../custom';
 
 declare module 'next' {
   export interface Request {
@@ -17,5 +17,4 @@ declare module 'next' {
   }
 }
 
-export {}
-
+export {};

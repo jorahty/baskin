@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { SignInPayload } from "./graphql/auth/schema";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { SignInPayload } from './graphql/auth/schema';
 
 // Enable `useAppContext` throught the entire application. Example:
 // const { signIn, signOut, signedInUser } = useAppContext();
@@ -13,15 +13,15 @@ interface AppContextType {
 const AppContext = createContext<AppContextType>({} as AppContextType);
 
 export function AppContextProvider({ children }: { children: React.ReactNode }) {
-  const [signedInUser, setSignedInUser] = useState<SignInPayload|null>(null);
+  const [signedInUser, setSignedInUser] = useState<SignInPayload | null>(null);
 
   useEffect(() => {
-    const item = localStorage.getItem('user')
+    const item = localStorage.getItem('user');
     if (item) {
       const user = JSON.parse(item);
       setSignedInUser(user);
     }
-  }, [])
+  }, []);
 
   function signIn(user: SignInPayload) {
     localStorage.setItem('user', JSON.stringify(user));
@@ -33,11 +33,7 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
     setSignedInUser(null);
   }
 
-  return (
-    <AppContext.Provider value={{ signIn, signOut, signedInUser }}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={{ signIn, signOut, signedInUser }}>{children}</AppContext.Provider>;
 }
 
 export function useAppContext() {
