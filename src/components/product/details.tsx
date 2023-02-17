@@ -39,7 +39,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           <AspectRatio ratio="1" sx={{ borderRadius: 'xl' }}>
             <Image
               alt={product.name}
-              src={`https://picsum.photos/${randomImage}`}
+              src={product.pictures[0]}
               fill
             />
           </AspectRatio>
