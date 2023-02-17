@@ -12,7 +12,7 @@ const product : Product = {
   description: "string",
   date: "string",
   discount: 20,
-  pictures: ["string"]
+  pictures: ["https://images.pexels.com/photos/11108129/pexels-photo-11108129.jpeg"]
 };
 
 const renderView = async () => {

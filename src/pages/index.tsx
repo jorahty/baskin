@@ -28,7 +28,11 @@ export default function Index({ products, categories }: Props) {
         <Sidebar categories={categories}/>
       }
     >
-      <ProductList products={products} showSorter={true}/>
+      <ProductList
+        products={products}
+        showSearch={true}
+        showSorter={true}
+      />
     </Layout>
   )
 }

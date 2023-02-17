@@ -4,22 +4,21 @@ import Layout from "../components/layout/Layout";
 import { useEffect, useState } from "react";
 import { GraphQLClient } from "graphql-request";
 import MessageList from "../components/message/list";
+import {useAppContext} from "../context";
 
 export default function MessagesPage() {
+  const { signedInUser } = useAppContext();
 
- 
   const [conversations, setConversations] = useState([]);
   const [messages,setMessages] = useState([]);
-  const [curConvo, setCurConvo] = useState({});
+  const [curConvo, setCurConvo] = useState<{id: string}|undefined>();
+
   // get the real array
   useEffect(() => {
     // fetch them from the database using the user's id
-    const item = localStorage.getItem('user')
-    const user = JSON.parse(item)
-    const bearerToken = user.accessToken
-    const userId = user.username;
+    const bearerToken = signedInUser?.accessToken
+    const userId = signedInUser?.username;
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-    // const graphQLClient = new GraphQLClient('/api/graphql', {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },
@@ -29,22 +28,24 @@ export default function MessagesPage() {
       setConversations(data.conversation);
       setCurConvo(data.conversation[0]);
     });
-    
 
-  }, [])
-  
+
+  }, [signedInUser]);
+
+  // Updates messages
   useEffect(()=>{
-    if(!curConvo.id){return;}
-    const item = localStorage.getItem('user')
-    const user = JSON.parse(item)
-    const bearerToken = user.accessToken
+    if (!curConvo)
+      return;
+
+    const bearerToken = signedInUser?.accessToken;
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-    // const graphQLClient = new GraphQLClient('/api/graphql', {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },
-    })
-    const query = `query message { message(id: "${curConvo.id}" ) { content } }`;
+    });
+
+    console.log(curConvo?.id);
+    const query = `query message { message(id: "${curConvo?.id}" ) { content } }`;
     graphQLClient.request(query).then(data => {
       setMessages(data.message);
     });

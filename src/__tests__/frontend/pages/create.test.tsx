@@ -8,8 +8,7 @@ import "../matchMedia";
 
 import Create from "../../../pages/product/create"
 import { getServerSideProps } from "../../../pages/product/create"
-
-
+import {AppContextProvider} from "../../../context";
 
 const handlers = [
   graphql.mutation('create', async (req, res, ctx) => {
@@ -53,26 +52,29 @@ const renderView = async () => {
   });
   render(
     <CssVarsProvider>
-      <Create categories={props.categories} />
+      <AppContextProvider>
+        <Create categories={props.categories} />
+      </AppContextProvider>
     </CssVarsProvider>
   );
 };
 
 test('Renders', async () => {
-  renderView();
+  localStorage.setItem('user', '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}')
+  await renderView();
   await screen.findByText('Create New Product');
 });
 
 test('Click Cancel', async () => {
-  renderView();
+  localStorage.setItem('user', '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}')
+  await renderView();
   await screen.findByText('Create New Product');
   fireEvent.click(screen.getByLabelText('cancel'));
 });
 
 test('Click create', async () => {
-  localStorage.setItem('user', `{"username":"molly_member","accessToken":"whatever"}`)
-
-  renderView();
+  localStorage.setItem('user', '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}')
+  await renderView();
   let alerted = false
   window.alert = () => {
     alerted = true
@@ -100,9 +102,8 @@ test('Click create', async () => {
 });
 
 test('Click create invalid', async () => {
-  localStorage.setItem('user', `{"username":"molly_member","accessToken":"whatever"}`)
-  
-  renderView();
+  localStorage.setItem('user', '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}')
+  await renderView();
   let alerted = false
   window.alert = () => {
     alerted = true
@@ -124,9 +125,8 @@ test('Click create invalid', async () => {
 });
 
 test('Add image and remove', async () => {
-  localStorage.setItem('user', `{"username":"molly_member","accessToken":"whatever"}`)
-
-  renderView();
+  localStorage.setItem('user', '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}')
+  await renderView();
   let alerted = false
   window.alert = () => {
     alerted = true
@@ -144,9 +144,8 @@ test('Add image and remove', async () => {
 
 
 test('Add image and cancel', async () => {
-  localStorage.setItem('user', `{"username":"molly_member","accessToken":"whatever"}`)
-
-  renderView();
+  localStorage.setItem('user', '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}')
+  await renderView();
   let alerted = false
   window.alert = () => {
     alerted = true
