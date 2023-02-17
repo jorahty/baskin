@@ -47,3 +47,27 @@ test("Fetch conversations anna", async () => {
       expect(res).toBeDefined();
     });
 });
+
+test("Fetch conversations nobby", async () => {
+  await request
+    .post("/api/graphql")
+    .send({
+      query: `{conversation(username: "nobby_nobody"){id}}`,
+    })
+    .expect(200)
+    .then((res) => {
+      expect(res).toBeDefined();
+    });
+});
+
+test("Fetch conversations mia", async () => {
+  await request
+    .post("/api/graphql")
+    .send({
+      query: `{conversation(username: "mia_moderator"){id}}`,
+    })
+    .expect(200)
+    .then((res) => {
+      expect(res).toBeDefined();
+    });
+});
