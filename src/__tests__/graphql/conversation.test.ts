@@ -35,3 +35,15 @@ test("Fetch conversations molly", async () => {
       expect(res).toBeDefined();
     });
 });
+
+test("Fetch conversations anna", async () => {
+  await request
+    .post("/api/graphql")
+    .send({
+      query: `{conversation(username: "anna_admin"){id}}`,
+    })
+    .expect(200)
+    .then((res) => {
+      expect(res).toBeDefined();
+    });
+});
