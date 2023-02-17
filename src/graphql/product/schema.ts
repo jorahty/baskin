@@ -44,6 +44,22 @@ export class ProductArgs {
     category?: string;
 }
 
+@ArgsType()
+export class FavoriteProductArgs {
+  @Field()
+  @Matches(regexUUID)
+    product!: string;
+}
+
+@ObjectType()
+export class FavoriteProduct {
+  @Field()
+  @Matches(regexUUID)
+    product!: string;
+  @Field()
+  @Matches(regexUsername)
+    user!: string;
+}
 
 @ArgsType()
 export class NewProductArgs {

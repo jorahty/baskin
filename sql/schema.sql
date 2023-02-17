@@ -12,3 +12,5 @@ CREATE TABLE conversation (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data j
 CREATE TABLE message (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), conversation_id UUID REFERENCES conversation(id), data jsonb);
 
 CREATE TABLE conversation_user(member_username VARCHAR(32) REFERENCES member(username), conversation_id UUID REFERENCES conversation(id));
+
+CREATE TABLE favorite (member_username VARCHAR(32) REFERENCES member(username), product_id UUID REFERENCES product(id), UNIQUE (member_username, product_id));

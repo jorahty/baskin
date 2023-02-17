@@ -42,3 +42,9 @@ INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a
 INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "molly_member", "content": "My order number is 12345"}');
 INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Thank you, let me check on that for you."}');
 INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Your order has been shipped and should arrive in 2-3 business days."}');
+
+
+INSERT INTO favorite (member_username, product_id) VALUES ('molly_member', '72c33826-a3c3-4d1f-8e9a-3e7887d05832');
+INSERT INTO favorite (member_username, product_id) VALUES ('molly_member', '035f4c91-b755-4c4e-994f-1c5338960b7b');
+INSERT INTO favorite (member_username, product_id) VALUES ('anna_admin', '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d');
+INSERT INTO favorite (member_username, product_id) VALUES ('anna_admin', '5c55a266-a631-4598-9bd5-52bd5ee2d9aa');
