@@ -19,7 +19,7 @@ export default function ProductDetails({ product }: { product: Product }) {
   const randomImage = 720 + Math.round((product.quantity * product.price) / 20);
 
   return (
-    <Box maxWidth="lg" margin="auto" p={6}>
+    <Box maxWidth="lg" margin="auto" p={4}>
       <Typography pb={2} level="h2">
         {product.name}
       </Typography>

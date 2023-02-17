@@ -1,5 +1,5 @@
 import { Product } from '@/graphql/product/schema';
-import { Option, Select, Stack } from '@mui/joy';
+import { Box, Option, Select } from '@mui/joy';
 
 const sorts: Record<string, (a: Product, b: Product) => number> = {
   'Newest': (a: Product, b: Product) => new Date(b.date).getTime() - new Date(a.date).getTime(),
@@ -27,13 +27,18 @@ export default function Sorter({
   };
 
   return (
-    <Stack p={2} pb={0}>
-      <Select sx={{alignSelf: 'end'}} placeholder="Sort by" data-testid="sort" onChange={handleChange}>
+    <Box>
+      <Select
+        placeholder="Sort Products"
+        data-testid="sort"
+        onChange={handleChange}
+        sx={{ width: { md: '34vw', sm: '30vw'} }}
+      >
         <Option aria-label="newest" value="Newest">Newest</Option>
         <Option aria-label="oldest" value="Oldest">Oldest</Option>
         <Option aria-label="price-high" value="Price High">Price High</Option>
         <Option aria-label="price-low" value="Price Low">Price Low</Option>
       </Select>
-    </Stack>
+    </Box>
   );
 }

@@ -1,4 +1,4 @@
-import { findByRole, fireEvent, render, screen } from "@testing-library/react";
+import { findByRole, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ProductList from "../../../../components/product/list";
 
@@ -29,11 +29,17 @@ const products = [
   }];
 
 const renderView = async () => {
-  render(<ProductList products={products} showSorter={true}/>);
+  render(<ProductList products={products} showSearch={true} showSorter={true}/>);
 };
 
 test('Renders', async () => {
   renderView();
+});
+
+test('Searching', async () => {
+  renderView();
+  const search = screen.getByPlaceholderText("Search Products");
+  fireEvent.change(search, { target: { value: "Air" } });
 });
 
 test('Sorting', async () => {
@@ -47,3 +53,5 @@ test('Sorting', async () => {
   await userEvent.click(await findByRole((await screen.findByTestId("sort")), "combobox"));
   fireEvent.click(screen.getByLabelText("price-low"));
 });
+
+

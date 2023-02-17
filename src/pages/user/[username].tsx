@@ -33,7 +33,11 @@ export default function UserPage(
         flexWrap="wrap"
       >
         <UserDetails user={user}/>
-        <ProductList products={products}/>
+        <ProductList
+          products={products}
+          showSearch={false}
+          showSorter={false}
+        />
       </Stack>
     </Layout>
   )
