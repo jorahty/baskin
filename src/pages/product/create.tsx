@@ -11,7 +11,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/joy/Box';
 import Textarea from '@mui/joy/Textarea';
 import { GraphQLClient, gql } from 'graphql-request';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import { Category } from '@/graphql/category/schema';
 import { CategoryService } from '../../graphql/category/service';
 import Select from '@mui/joy/Select';
@@ -33,7 +33,7 @@ interface Props {
   categories: Category[];
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       categories: await new CategoryService().list({}),
@@ -158,7 +158,7 @@ export default function Create({ categories }: Props) {
                   {pictures.map((picture, index) => (
                     <Card variant="outlined" key={index}>
                       <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
-                        <Image src={picture} alt="Picture not availabe" fill/>
+                        <Image src={picture} alt="Picture not availabe" fill />
                       </AspectRatio>
                       <CardCover>
                         <Box>

@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 export default function UserPage({ user, products }: { user: User; products: Product[] }) {
   return (
     <Layout>
-      <Container style={{margin: "10px auto"}}>
+      <Container style={{ margin: '10px auto' }}>
         <UserDetails user={user} />
         <ProductList products={products} showSearch={false} showSorter={false} />
       </Container>

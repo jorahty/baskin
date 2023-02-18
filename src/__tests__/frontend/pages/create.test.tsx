@@ -7,7 +7,7 @@ import 'whatwg-fetch';
 import '../matchMedia';
 
 import Create from '../../../pages/product/create';
-import { getServerSideProps } from '../../../pages/product/create';
+import { getStaticProps } from '../../../pages/product/create';
 import { AppContextProvider } from '../../../context';
 
 const handlers = [
@@ -49,9 +49,7 @@ jest.mock('next/router', () => ({
 }));
 
 const renderView = async () => {
-  const { props } = await getServerSideProps({
-    req: { headers: { host: 'localhost:3000' } },
-  });
+  const { props } = await getStaticProps({});
   render(
     <CssVarsProvider>
       <AppContextProvider>
@@ -104,7 +102,8 @@ test('Click create', async () => {
   await userEvent.type(description, 'great product');
   await userEvent.click(await screen.findByLabelText('add'));
   const url = await screen.getByLabelText('picture');
-  await userEvent.type(url,
+  await userEvent.type(
+    url,
     'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
   );
   await fireEvent.click(screen.getByLabelText('submit'));
@@ -153,7 +152,8 @@ test('Add image and remove', async () => {
   await screen.findByText('Create New Product');
   await userEvent.click(await screen.findByLabelText('add'));
   const url = await screen.getByLabelText('picture');
-  await userEvent.type(url,
+  await userEvent.type(
+    url,
     'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
   );
   await fireEvent.click(screen.getByLabelText('submit'));
@@ -176,7 +176,8 @@ test('Add image and cancel', async () => {
   await screen.findByText('Create New Product');
   await userEvent.click(await screen.findByLabelText('add'));
   const url = await screen.getByLabelText('picture');
-  await userEvent.type(url,
+  await userEvent.type(
+    url,
     'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
   );
   fireEvent.keyDown(screen.getByText('Submit'), {
