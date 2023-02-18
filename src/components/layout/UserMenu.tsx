@@ -6,6 +6,7 @@ import MenuItem from '@mui/joy/MenuItem';
 import { Box, Divider, ListItemDecorator, Stack, Typography } from '@mui/joy';
 import SignOutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
+import DashboardCustomize from '@mui/icons-material/DashboardCustomize';
 import ForumIcon from '@mui/icons-material/Forum';
 import { useAppContext } from '../../context';
 
@@ -48,6 +49,14 @@ export default function UserMenu() {
               <PersonIcon />
             </ListItemDecorator>
             Profile
+          </MenuItem>
+        </Link>
+        <Link href={`/dashboard`}>
+          <MenuItem onClick={handleClose}>
+            <ListItemDecorator>
+              <DashboardCustomize />
+            </ListItemDecorator>
+            Dashboard
           </MenuItem>
         </Link>
         <Link href={`/messages`}>
