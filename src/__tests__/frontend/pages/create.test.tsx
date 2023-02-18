@@ -104,7 +104,9 @@ test('Click create', async () => {
   await userEvent.type(description, 'great product');
   await userEvent.click(await screen.findByLabelText('add'));
   const url = await screen.getByLabelText('picture');
-  await userEvent.type(url, 'temp');
+  await userEvent.type(url,
+    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  );
   await fireEvent.click(screen.getByLabelText('submit'));
   await fireEvent.click(screen.getByLabelText('create'));
   await waitFor(() => {
@@ -151,7 +153,9 @@ test('Add image and remove', async () => {
   await screen.findByText('Create New Product');
   await userEvent.click(await screen.findByLabelText('add'));
   const url = await screen.getByLabelText('picture');
-  await userEvent.type(url, 'temp');
+  await userEvent.type(url,
+    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  );
   await fireEvent.click(screen.getByLabelText('submit'));
   await fireEvent.click(screen.getByLabelText('remove0'));
   await waitFor(() => {
@@ -172,7 +176,9 @@ test('Add image and cancel', async () => {
   await screen.findByText('Create New Product');
   await userEvent.click(await screen.findByLabelText('add'));
   const url = await screen.getByLabelText('picture');
-  await userEvent.type(url, 'temp');
+  await userEvent.type(url,
+    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  );
   fireEvent.keyDown(screen.getByText('Submit'), {
     key: 'Escape',
     code: 'Escape',

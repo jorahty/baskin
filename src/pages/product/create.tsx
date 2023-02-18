@@ -27,6 +27,7 @@ import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
 import Stack from '@mui/joy/Stack';
 import { useAppContext } from '../../context';
+import Image from 'next/image';
 
 interface Props {
   categories: Category[];
@@ -157,8 +158,7 @@ export default function Create({ categories }: Props) {
                   {pictures.map((picture, index) => (
                     <Card variant="outlined" key={index}>
                       <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
-                        {/* eslint-disable-next-line @next/next/no-img-element*/}
-                        <img srcSet={picture} alt="Picture not availabe" />
+                        <Image src={picture} alt="Picture not availabe" fill/>
                       </AspectRatio>
                       <CardCover>
                         <Box>

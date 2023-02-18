@@ -5,7 +5,7 @@ import Avatar from '@mui/joy/Avatar';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Chip from '@mui/joy/Chip';
-// import Image from "next/image";
+import Image from 'next/image';
 import Link from 'next/link';
 import SellIcon from '@mui/icons-material/Sell';
 import Typography from '@mui/joy/Typography';
@@ -69,11 +69,10 @@ export default function ProductCard({ product }: { product: Product }) {
       <CardOverflow>
         <Link href={`/product/${product.id}`}>
           <AspectRatio minHeight="269px">
-            {/* eslint-disable-next-line @next/next/no-img-element*/}
-            <img
+            <Image
               alt={product.name}
               src={product.pictures[0]}
-              // fill
+              fill
             />
           </AspectRatio>
         </Link>
