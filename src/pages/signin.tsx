@@ -10,6 +10,8 @@ import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
 import { useAppContext } from '../context';
+import { IconButton } from '@mui/joy';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
@@ -61,6 +63,9 @@ export default function Signin() {
 
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
+      <IconButton onClick={()=> { Router.push('/');} } style={{ position: 'absolute', zIndex: 23, top: 15, left: 15 }}>
+        <ArrowBackIcon />
+      </IconButton>
       <CssBaseline />
       <GlobalStyles
         styles={{
