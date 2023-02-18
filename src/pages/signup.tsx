@@ -48,7 +48,7 @@ export default function Signup() {
             username: "${username}",
             email: "${email}",
             password: "${password}",
-            name: "${first + ' ' + last}"
+            name: "${first + ' ' + last}",
           }) 
           { name, email }
         }`,

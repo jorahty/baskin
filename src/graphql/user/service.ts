@@ -32,6 +32,7 @@ export class UserService {
           name: newMember.name,
           roles: ['member'],
           password: hashSync(newMember.password, 10),
+          avatar: `https://robohash.org/${newMember.username}`,
         },
       ],
     };
