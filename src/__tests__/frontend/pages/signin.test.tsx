@@ -97,3 +97,9 @@ test('User initially in localStorage', async () => {
     expect(localStorage.getItem('user')).not.toBe(null);
   });
 });
+
+test('Success', async () => {
+  await renderView();
+  const backButton = screen.getByLabelText('back');
+  await backButton.click();
+});

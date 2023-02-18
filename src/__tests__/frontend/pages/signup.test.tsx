@@ -94,3 +94,9 @@ test('Fail', async () => {
     expect(alerted).toBe(true);
   });
 });
+
+test('Sucess', async () => {
+  renderView();
+  const backButton = screen.getByLabelText('back');
+  await backButton.click();
+});

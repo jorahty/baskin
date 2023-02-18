@@ -77,7 +77,11 @@ export default function Signup() {
 
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
-      <IconButton onClick={() => { Router.push('/'); } } style={{ position: 'absolute', zIndex: 23, top: 15, left: 15 }}>
+      <IconButton
+        aria-label={'back'}
+        onClick={() => { Router.push('/'); } }
+        style={{ position: 'absolute', zIndex: 23, top: 15, left: 15 }}
+      >
         <ArrowBackIcon />
       </IconButton>
       <CssBaseline />
