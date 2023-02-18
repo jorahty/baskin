@@ -2,7 +2,7 @@ import Layout from '../../components/layout/Layout';
 import { GetServerSideProps } from 'next';
 import { Product } from '@/graphql/product/schema';
 import { ProductService } from '../../graphql/product/service';
-import { Stack } from '@mui/joy';
+import { Container } from '@mui/joy';
 import ProductList from '../../components/product/list';
 import { UserService } from '../../graphql/user/service';
 import { User } from '@/graphql/user/schema';
@@ -22,10 +22,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 export default function UserPage({ user, products }: { user: User; products: Product[] }) {
   return (
     <Layout>
-      <Stack maxWidth="lg" margin="auto" alignItems="center" pt={6} gap={4} flexWrap="wrap">
+      <Container style={{margin: "10px auto"}}>
         <UserDetails user={user} />
         <ProductList products={products} showSearch={false} showSorter={false} />
-      </Stack>
+      </Container>
     </Layout>
   );
 }

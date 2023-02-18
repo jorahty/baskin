@@ -33,9 +33,9 @@ export default function ProductList({
         {showSearch && <Search setSortedProducts={setSortedProducts} products={products} />}
         {showSorter && <Sorter setSortedProducts={setSortedProducts} products={sortedProducts} />}
       </Box>
-      <Grid container spacing={2} p={1} m={0}>
+      <Grid container spacing={2} p={1} m={0} columns={{ xl: 4, lg: 3, md: 2, sm: 2, xs: 1 }} >
         {sortedProducts.map((product, index) => (
-          <Grid xl={3} lg={4} md={6} sm={6} xs={12} key={index}>
+          <Grid xs={1} key={index}>
             <ProductCard product={product} />
           </Grid>
         ))}
