@@ -236,9 +236,7 @@ export default function Create({ categories }: Props) {
                       data-testid="category"
                       aria-label="category"
                       name="category"
-                      onChange={(_, v) => {
-                        setCategory(v);
-                      }}
+                      onChange={(_, value) => setCategory(value as string)}
                     >
                       {categories?.map(({ name, slug }) => (
                         <Option value={slug} key={slug} aria-label={name}>
