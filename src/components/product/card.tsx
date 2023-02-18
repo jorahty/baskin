@@ -19,7 +19,7 @@ import { useAppContext } from '../../context';
 export default function ProductCard({ product }: { product: Product }) {
   const [selected, setSelected] = React.useState(false);
   const [hide, setHide] = React.useState(true);
-  const { signedInUser } = useAppContext();
+  const { signOut, signedInUser } = useAppContext();
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -43,8 +43,9 @@ export default function ProductCard({ product }: { product: Product }) {
         setHide(false);
       }
     };
-    fetchData();
-  }, [signedInUser, product.id]);
+    fetchData()
+      .catch(signOut);
+  }, [signedInUser, product.id, signOut]);
 
   const setFavorite = async () => {
     const bearerToken = signedInUser?.accessToken;
