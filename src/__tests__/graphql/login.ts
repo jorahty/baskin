@@ -15,7 +15,9 @@ const nobby = {
   password: 'nobbynobody',
 };
 
-async function login(request: supertest.SuperTest<supertest.Test>, member: Member): Promise<string> {
+export async function login(
+  request: supertest.SuperTest<supertest.Test>, member: Member
+): Promise<string> {
   let accessToken = '';
   await request
     .post('/api/graphql')
@@ -41,3 +43,4 @@ export async function asNobby(
 ): Promise<string | undefined> {
   return login(request, nobby);
 }
+

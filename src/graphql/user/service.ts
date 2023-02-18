@@ -1,6 +1,7 @@
 import { User, NewUser, SignUpPayload } from './schema';
 import { pool } from '../db';
 import { hashSync } from 'bcrypt';
+import { Request } from 'next';
 
 export class UserService {
   public async list(username: string): Promise<User[]> {
@@ -43,6 +44,21 @@ export class UserService {
       username: rows[0].username,
     };
 
+    return user;
+  }
+
+  public async updateUsername(request: Request, newName: string): Promise<User> {
+    const update = 'UPDATE member SET username = $1 WHERE username = $2 RETURNING *';
+    const query = {
+      text: update,
+      values: [newName, request.user.username],
+    };
+    const { rows } = await pool.query(query);
+    const user: User = {
+      username: rows[0].username,
+      name: rows[0].data.name,
+      email: rows[0].data.email,
+    };
     return user;
   }
 }

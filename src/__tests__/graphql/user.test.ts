@@ -1,5 +1,6 @@
 import http from 'http';
 import supertest from 'supertest';
+import * as login from './login';
 import 'whatwg-fetch';
 
 import * as db from './db';
@@ -75,5 +76,50 @@ test('Sign up', async () => {
       expect(data.body.data.addUser.name).toEqual('John Doe');
       expect(data.body.data.addUser.email).toEqual('jd@books.com');
       expect(data.body.data.addUser.username).toEqual('johndoes1');
+    });
+});
+
+test('Change Username', async () => {
+  const john = {
+    username: 'johndoes1',
+    password: 'johndoes',
+  };
+  const accessToken = await login.login(request, john);
+  await request
+    .post('/api/graphql')
+    .set('Authorization', 'Bearer ' + accessToken)
+    .send({
+      query: `mutation {updateUsername (
+        newName: "johnny_boy1"
+      ) {
+        name, username
+      }}`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      console.log(data.body);
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.updateUsername.name).toEqual('John Doe');
+      expect(data.body.data.updateUsername.username).toEqual('johnny_boy1');
+    });
+});
+
+test('Change Username Unauthorized', async () => {
+  const accessToken = await login.asNobby(request);
+  await request
+    .post('/api/graphql')
+    .set('Authorization', 'Bearer ' + accessToken)
+    .send({
+      query: `mutation {updateUsername (
+        newName: "molly_new"
+      ) {
+        name, username
+      }}`,
+    })
+    .then(data => {
+      expect(data.body.errors.length).toEqual(1);
     });
 });
