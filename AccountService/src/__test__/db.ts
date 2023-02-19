@@ -29,7 +29,7 @@ const reset = async () => {
 };
 
 const shutdown = async () => {
-  await pool.end()
+  await pool.end();
 };
 
-export {reset, shutdown};
+export { reset, shutdown };

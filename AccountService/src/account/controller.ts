@@ -19,9 +19,9 @@ export class AccountController extends Controller {
     return new AccountService().get(credentials)
       .then(async (account: Account|undefined): Promise<|Account|undefined> => {
         if (!account) {
-          this.setStatus(404)
+          this.setStatus(404);
         }
-        return account
+        return account;
       });
   }
 }
