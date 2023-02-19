@@ -1,18 +1,7 @@
-/*
-#######################################################################
-#
-# Copyright (C) 2022-2023 David C. Harrison. All right reserved.
-#
-# You may not use, distribute, publish, or modify this code without
-# the express written permission of the copyright holder.
-#
-#######################################################################
-*/
-
 import supertest from 'supertest'
 import * as http from 'http'
 
-// Must be ths way round 
+// must be this way round 
 import * as db from './db'
 import app from '../app'
 
@@ -32,12 +21,12 @@ afterAll(async () => {
 })
 
 const bad = {
-  account: 'molly',
+  username: 'molly',
   password: 'notmollyspassword',
 }
 
 const molly = {
-  "account": "molly",
+  "username": "molly",
   "password": "mollymember"
 }
 
@@ -49,7 +38,7 @@ test('Good Credentials', async () => {
       expect(res).toBeDefined()
       expect(res.body).toBeDefined()
       expect(res.body.id).toBeDefined()
-      expect(res.body.account).toEqual('molly')
+      expect(res.body.username).toEqual('molly')
       expect(res.body.email).toEqual('molly@books.com')
       expect(res.body.name).toEqual('Molly Member')
       expect(res.body.role).toEqual('member')

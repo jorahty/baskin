@@ -27,13 +27,13 @@ export type EMAIL = string;
 
 export interface Account {
   id: UUID,
-  account: string,
+  username: string,
   email: EMAIL,
   name: string,
   role: string
 }
 
 export interface Credentials {
-  account: string,
+  username: string,
   password: string
 }
