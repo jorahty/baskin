@@ -1,4 +1,4 @@
-# ![Baskin](public/logo.svg)
+# ![Baskin](UserApp/public/logo.svg)
 
 - A social marketplace
 - Full stack web application
