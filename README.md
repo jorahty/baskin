@@ -13,6 +13,6 @@
 
 ## Usage
 
-- To install all node packages (note plural "installs"): `npm run installs`
-- To start all databases: `npm run docker`
-- To start all development servers: `npm run dev`
+- To install __all__ node packages (note plural "installs"): `npm run installs`
+- To start __all__ databases: `npm run docker`
+- To start __all__ development servers: `npm run dev`
