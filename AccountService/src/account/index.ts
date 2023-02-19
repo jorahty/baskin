@@ -1,14 +1,3 @@
-/*
-#######################################################################
-#
-# Copyright (C) 2022-2023 David C. Harrison. All right reserved.
-#
-# You may not use, distribute, publish, or modify this code without 
-# the express written permission of the copyright holder.
-#
-#######################################################################
-*/
-
 /**
  * Stringified UUIDv4.
  * See [RFC 4112](https://tools.ietf.org/html/rfc4122)
