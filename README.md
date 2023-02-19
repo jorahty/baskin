@@ -13,18 +13,6 @@
 
 ## Usage
 
-- To install node packages: `npm install`
-- To start the database: `docker-compose up -d`
-- To run the dev server: `npm run dev`
-- To run tests and examine code coverage: `npm run test`
-- To run the linter: `npm run lint`
-- To stop the database: `docker-compose down`
-
-
-## Team Members
-- Nout reusken
-- James Tennant
-- Eric Hernandez
-- Cody Lambert
-- Ash Yaw
-- José Chavez
+- To install all node packages (note plural "installs"): `npm run installs`
+- To start all databases: `npm run docker`
+- To start all development servers: `npm run dev`
