@@ -47,8 +47,9 @@ INSERT INTO message (chat_id, data) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a402
 INSERT INTO message (chat_id, data) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "date": "2023-01-21T15:21:08.000Z", "content": "Hi Molly!"}');
 
 -- Put Molly, Anna, and Mia into a "group" chat together
-INSERT INTO chat_member(member_username,chat_id) VALUES('mia_moderator', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
-INSERT INTO chat_member(member_username,chat_id) VALUES('nobby_nobody', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
+INSERT INTO chat_member(member_username, chat_id) VALUES('molly_member', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
+INSERT INTO chat_member(member_username, chat_id) VALUES('anna_admin', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
+INSERT INTO chat_member(member_username, chat_id) VALUES('mia_moderator', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
 
 INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "mia_moderator", "date": "2023-01-21T15:24:08.000Z", "content": "Hi"}');
 INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "anna_admin", "date": "2023-01-21T15:25:08.000Z", "content": "Hey"}');
@@ -56,7 +57,7 @@ INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b
 
 -- Put Molly and Mia into a chat about "Samsung TV"
 INSERT INTO chat_member(member_username,chat_id) VALUES('molly_member', '3f37a49c-7d13-4764-9568-8c5e13050b68');
-INSERT INTO chat_member(member_username,chat_id) VALUES('anna_admin', '3f37a49c-7d13-4764-9568-8c5e13050b68');
+INSERT INTO chat_member(member_username,chat_id) VALUES('mia_moderator', '3f37a49c-7d13-4764-9568-8c5e13050b68');
 
 INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "Hi, is this available?"}');
 INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "Yes!"}');
