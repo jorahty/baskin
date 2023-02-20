@@ -1,11 +1,11 @@
--- Users
+-- member
 INSERT INTO member (username, data) VALUES ('molly_member', '{"name":"Molly Member","roles":["member"],"email":"molly@books.com","password":"$2b$10$Y00XOZD/f5gBSpDusPUgU.iJufk6Nxx6gAoHRG8t2eHyGgoP2bK4y", "avatar":"https://robohash.org/molly_member"}');
 INSERT INTO member (username, data) VALUES ('anna_admin', '{"name":"Anna Admin","roles":["member","moderator","admin"],"email":"anna@books.com","password":"$2b$10$Y00XOZD/f5gBSpDusPUgU.G1ohpR3oQbbBHK4KzX7dU219Pv/lzze","avatar":"https://robohash.org/anna_admin"}');
 INSERT INTO member (username, data) VALUES ('nobby_nobody', '{"name":"Nobby Nobody","roles":[],"email":"nobby@books.com","password":"$2a$12$ZnrvkMk9jn56NlyJGOyTE.biz5xvJUr1iKIFsWyFWPFF/x3j5fUhm","avatar":"https://robohash.org/nobby_nobby"}');
 INSERT INTO member (username, data) VALUES ('mia_moderator', '{"name":"Mia Moderator","roles":["member","moderator"],"email":"mia@books.com","password":"$2a$10$WlW22iG6lADY6EBgHAmhLumx1VadJXuGWIEwgAH/A07EvHBqZtDcO","avatar":"https://robohash.org/mia_moderator"}');
 INSERT INTO member (username, data) VALUES ('jchavez7', '{"name":"Jose Chavez","roles":["member","moderator"],"email":"jchave72@ucsc.edu","password":"$2a$06$QiyS5xVTxy4QjzWxKnLA5.vp2jVYzx2tdn40QDB7CTFC1hWljym2K","avatar":"https://robohash.org/jchavez"}');
 
--- Catergories
+-- category
 INSERT INTO category (slug, data) VALUES ('electronics', '{"name": "Electronics"}');
 INSERT INTO category (slug, data) VALUES ('clothing', '{"name": "Clothing"}');
 INSERT INTO category (slug, data) VALUES ('sports-equipment', '{"name": "Sports Equipment"}');
@@ -15,7 +15,7 @@ INSERT INTO category (slug, data) VALUES ('instruments', '{"name": "Instruments"
 INSERT INTO category (slug, data) VALUES ('office', '{"name": "Office"}');
 INSERT INTO category (slug, data) VALUES ('free', '{"name": "Free"}');
 
--- Products
+-- product
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('038b7e70-a5c0-47e6-80f3-5b1772bb4a0d', 'molly_member', 'clothing', '{"name": "Air Jordan 11", "quantity": 1,"price": 250, "discount": 0, "description": "Never worn. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2023-02-09T06:43:08.000Z", "pictures": ["https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=300"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('5c55a266-a631-4598-9bd5-52bd5ee2d9aa', 'molly_member', 'toys', '{"name": "Honda Civic Toy Car", "quantity": 1,"price": 25, "discount": 0, "description": "Great toy car for kids, barely used. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2023-01-21T15:43:08.000Z", "pictures": ["https://images.pexels.com/photos/772393/pexels-photo-772393.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('2759559e-84f2-4c41-9512-932589163f4f', 'molly_member', 'toys', '{"name": "Baseballs", "quantity": 40,"price": 2, "discount": 0.20, "description": "Used baseball, need to get rid off them. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2022-01-21T15:43:08.000Z", "pictures": ["https://images.pexels.com/photos/11901415/pexels-photo-11901415.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"]}');
@@ -28,34 +28,40 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('4951a289
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('19b2a9dc-b085-41d1-970a-69a2b1cbd8e1', 'anna_admin', 'electronics', '{"name": "Canon EOS R6", "quantity": 1,"price": 1000, "discount": 0, "description": "Used but no damage, has about 20,000 shutter count. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2022-01-19T02:43:08.000Z", "pictures": ["https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('0ce2da04-d05d-46cf-8602-ae58ab7ec215', 'anna_admin', 'sports-equipment', '{"name": "Surfboard", "quantity": 4,"price": 400, "discount": 0, "description": "Brand new custom made surf boards, different size. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2022-02-09T00:15:08.000Z", "pictures": ["https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600"]}');
 
--- Conversations
-INSERT INTO conversation (id) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a4028');
-INSERT INTO conversation (id) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
-INSERT INTO conversation (id) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68');
-
--- Put Molly and Anna into a conversation together
-INSERT INTO conversation_member(member_username,conversation_id) VALUES('molly_member', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
-INSERT INTO conversation_member(member_username,conversation_id) VALUES('anna_admin', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
-
--- Put mia and nobby in a conversation together 
-INSERT INTO conversation_member(member_username,conversation_id) VALUES('mia_moderator', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
-INSERT INTO conversation_member(member_username,conversation_id) VALUES('nobby_nobody', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
-
--- Add some messages to one of their conversations
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "molly_member", "content": "Hello, can you tell me the status of my order?"}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Sure, please provide me with your order number"}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "molly_member", "content": "My order number is 12345"}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Thank you, let me check on that for you."}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "content": "Your order has been shipped and should arrive in 2-3 business days."}');
-
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "mia_moderator", "content": "Hello, can you tell me the status of my order?"}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "nobby_nobody", "content": "Sure, please provide me with your order number"}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "mia_moderator", "content": "My order number is 12345"}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "nobby_nobody", "content": "Thank you, let me check on that for you."}');
-INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "nobby_nobody", "content": "Your order has been shipped and should arrive in 2-3 business days."}');
-
-
+-- favorite
 INSERT INTO favorite (member_username, product_id) VALUES ('molly_member', '72c33826-a3c3-4d1f-8e9a-3e7887d05832');
 INSERT INTO favorite (member_username, product_id) VALUES ('molly_member', '035f4c91-b755-4c4e-994f-1c5338960b7b');
 INSERT INTO favorite (member_username, product_id) VALUES ('anna_admin', '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d');
 INSERT INTO favorite (member_username, product_id) VALUES ('anna_admin', '5c55a266-a631-4598-9bd5-52bd5ee2d9aa');
+
+-- chat
+INSERT INTO chat (id, data) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"name": "null"}');
+INSERT INTO chat (id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"name": "Hiking"}');
+INSERT INTO chat (id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"name": "Samsung TV"}');
+
+-- Put Molly and Anna into a chat together
+INSERT INTO chat_member(member_username,chat_id) VALUES('molly_member', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
+INSERT INTO chat_member(member_username,chat_id) VALUES('anna_admin', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
+
+INSERT INTO message (chat_id, data) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "molly_member", "date": "2023-01-21T15:20:08.000Z", "content": "Hey Anna, this is Molly"}');
+INSERT INTO message (chat_id, data) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "anna_admin", "date": "2023-01-21T15:21:08.000Z", "content": "Hi Molly!"}');
+
+-- Put Molly, Anna, and Mia into a "group" chat together
+INSERT INTO chat_member(member_username,chat_id) VALUES('mia_moderator', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
+INSERT INTO chat_member(member_username,chat_id) VALUES('nobby_nobody', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
+
+INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "mia_moderator", "date": "2023-01-21T15:24:08.000Z", "content": "Hi"}');
+INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "anna_admin", "date": "2023-01-21T15:25:08.000Z", "content": "Hey"}');
+INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "molly_member", "date": "2023-01-21T15:26:08.000Z", "content": "Hello"}');
+
+-- Put Molly and Mia into a chat about "Samsung TV"
+INSERT INTO chat_member(member_username,chat_id) VALUES('molly_member', '3f37a49c-7d13-4764-9568-8c5e13050b68');
+INSERT INTO chat_member(member_username,chat_id) VALUES('anna_admin', '3f37a49c-7d13-4764-9568-8c5e13050b68');
+
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "Hi, is this available?"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "Yes!"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "How much?"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "I cannot pay more than $300"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "This is a one-of-a-kind Samsung TV, worth at least $500"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "How about $350?"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "Deal."}');

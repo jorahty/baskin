@@ -7,7 +7,7 @@ export class MessageService {
       SELECT data || jsonb_build_object('id', id) 
       AS message 
       FROM message 
-      WHERE conversation_id = $1
+      WHERE chat_id = $1
     `;
 
     const query = {

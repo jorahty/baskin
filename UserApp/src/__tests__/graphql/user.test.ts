@@ -98,7 +98,6 @@ test('Change Username', async () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then(data => {
-      console.log(data.body);
       expect(data).toBeDefined();
       expect(data.body).toBeDefined();
       expect(data.body.data).toBeDefined();

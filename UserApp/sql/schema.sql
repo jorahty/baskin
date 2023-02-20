@@ -9,8 +9,8 @@ CREATE TABLE product (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), member_user
 
 CREATE TABLE favorite (member_username VARCHAR(32) REFERENCES member(username) ON UPDATE CASCADE, product_id UUID REFERENCES product(id), UNIQUE (member_username, product_id));
 
-CREATE TABLE conversation (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data jsonb);
+CREATE TABLE chat (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data jsonb);
 
-CREATE TABLE message (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), conversation_id UUID REFERENCES conversation(id), data jsonb);
+CREATE TABLE message (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), chat_id UUID REFERENCES chat(id), data jsonb);
 
-CREATE TABLE conversation_member (member_username VARCHAR(32) REFERENCES member(username) ON UPDATE CASCADE, conversation_id UUID REFERENCES conversation(id), PRIMARY KEY (member_username, conversation_id));
+CREATE TABLE chat_member (member_username VARCHAR(32) REFERENCES member(username) ON UPDATE CASCADE, chat_id UUID REFERENCES chat(id), PRIMARY KEY (member_username, chat_id));

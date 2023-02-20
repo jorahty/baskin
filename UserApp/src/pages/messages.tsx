@@ -1,4 +1,4 @@
-import ConversationList from '../components/conversation/list';
+import ChatList from '../components/chat/list';
 import Layout from '../components/layout/Layout';
 
 import { useEffect, useState } from 'react';
@@ -9,7 +9,7 @@ import { useAppContext } from '../context';
 export default function MessagesPage() {
   const { signedInUser } = useAppContext();
 
-  const [conversations, setConversations] = useState([]);
+  const [chats, setchats] = useState([]);
   const [messages, setMessages] = useState([]);
   const [curConvo, setCurConvo] = useState<{ id: string } | undefined>();
 
@@ -23,10 +23,10 @@ export default function MessagesPage() {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
-    const query = `query conversation { conversation(username: "${userId}" ) { id } }`;
+    const query = `query chat { chat(username: "${userId}" ) { id } }`;
     graphQLClient.request(query).then(data => {
-      setConversations(data.conversation);
-      setCurConvo(data.conversation[0]);
+      setchats(data.chat);
+      setCurConvo(data.chat[0]);
     });
   }, [signedInUser]);
 
@@ -47,7 +47,7 @@ export default function MessagesPage() {
   }, [curConvo, signedInUser]);
 
   return (
-    <Layout sidebar={<ConversationList conversations={conversations} />}>
+    <Layout sidebar={<ChatList chats={chats} />}>
       <MessageList messages={messages} />
     </Layout>
   );

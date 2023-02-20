@@ -9,7 +9,7 @@ export class Message {
     id!: string;
   @Field()
   @Matches(regexUUID)
-    conversation_id!: string;
+    chat_id!: string;
   @Field()
     sender!: string;
   @Field()

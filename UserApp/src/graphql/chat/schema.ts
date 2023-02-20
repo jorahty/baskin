@@ -3,14 +3,14 @@ import { regexUsername, regexUUID } from '../regex';
 import { Matches } from 'class-validator';
 
 @ObjectType()
-export class Conversation {
+export class Chat {
   @Field()
   @Matches(regexUUID)
     id!: string;
 }
 
 @ArgsType()
-export class ConversationArgs {
+export class ChatArgs {
   @Field({ nullable: true })
   @Matches(regexUsername)
     username!: string;

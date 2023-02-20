@@ -21,11 +21,11 @@ afterAll(done => {
   db.shutdown();
 });
 
-test('Fetch conversations molly', async () => {
+test('Fetch chats molly', async () => {
   await request
     .post('/api/graphql')
     .send({
-      query: `{conversation(username: "molly_member"){id}}`,
+      query: `{chat(username: "molly_member"){id}}`,
     })
     .expect(200)
     .then(res => {
@@ -33,11 +33,11 @@ test('Fetch conversations molly', async () => {
     });
 });
 
-test('Fetch conversations anna', async () => {
+test('Fetch chats anna', async () => {
   await request
     .post('/api/graphql')
     .send({
-      query: `{conversation(username: "anna_admin"){id}}`,
+      query: `{chat(username: "anna_admin"){id}}`,
     })
     .expect(200)
     .then(res => {
@@ -45,11 +45,11 @@ test('Fetch conversations anna', async () => {
     });
 });
 
-test('Fetch conversations nobby', async () => {
+test('Fetch chats nobby', async () => {
   await request
     .post('/api/graphql')
     .send({
-      query: `{conversation(username: "nobby_nobody"){id}}`,
+      query: `{chat(username: "nobby_nobody"){id}}`,
     })
     .expect(200)
     .then(res => {
@@ -57,11 +57,11 @@ test('Fetch conversations nobby', async () => {
     });
 });
 
-test('Fetch conversations mia', async () => {
+test('Fetch chats mia', async () => {
   await request
     .post('/api/graphql')
     .send({
-      query: `{conversation(username: "mia_moderator"){id}}`,
+      query: `{chat(username: "mia_moderator"){id}}`,
     })
     .expect(200)
     .then(res => {

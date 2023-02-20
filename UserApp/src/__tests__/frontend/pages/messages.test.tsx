@@ -21,10 +21,10 @@ jest.mock('../../../context', () => ({
 }));
 
 const handlers = [
-  graphql.query('conversation', async (req, res, ctx) => {
+  graphql.query('chat', async (req, res, ctx) => {
     return res(
       ctx.data({
-        conversation: [
+        chat: [
           {
             id: 'f94a1252-7d5e-4b87-ae41-7a03f58a4028',
           },
@@ -37,7 +37,7 @@ const handlers = [
       ctx.data({
         message: [
           {
-            content: 'Hello, can you tell me the status of my order?',
+            content: 'Hey Anna, this is Molly',
           },
         ],
       })
@@ -71,5 +71,5 @@ const renderView = async () => {
 test('Renders', async () => {
   await renderView();
   await screen.findByText('f94a1252-7d5e-4b87-ae41-7a03f58a4028');
-  await screen.findByText('Hello, can you tell me the status of my order?');
+  await screen.findByText('Hey Anna, this is Molly');
 });
