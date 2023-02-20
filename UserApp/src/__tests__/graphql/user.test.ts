@@ -17,8 +17,9 @@ beforeAll(async () => {
   return new Promise(resolve => setTimeout(resolve, 500));
 });
 
-afterAll(done => {
-  server.close(done);
+afterAll(async () => {
+  server.close();
+  await new Promise(resolve => setTimeout(resolve, 500));
   db.shutdown();
 });
 

@@ -47,7 +47,7 @@ const handlers = [
         ctx.data({
           user: [],
         })
-      )
+      );
     }
   }),
 ];
@@ -73,7 +73,7 @@ test('Renders', async () => {
 
 test('Changes Username', async () => {
   await renderView();
-  let input = await screen.findByPlaceholderText('Username');
+  const input = await screen.findByPlaceholderText('Username');
   await userEvent.type(input, 'nob');
   expect(await screen.findByText('Invalid Username...')).toBeTruthy();
   fireEvent.change(input, { target: { value: 'nobby_nobody' } });

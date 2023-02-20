@@ -8,7 +8,7 @@ import { regexUsername } from '../../graphql/regex';
 
 export default function ProfileEdit() {
   const [username, setUsername] = useState('');
-  const [valid , setValid] = useState(false);
+  const [valid, setValid] = useState(false);
 
   const { signedInUser, setSignedInUser } = useAppContext();
 
@@ -56,9 +56,9 @@ export default function ProfileEdit() {
           setValid(false);
         }
       }
-    }
+    };
     fetchData();
-  }, [username]);
+  }, [username]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box
@@ -115,12 +115,12 @@ export default function ProfileEdit() {
         </Box>
         {username.length > 0 &&
           <Typography 
-          color={valid ? 'success' : 'danger'}
-          sx={{
-            fontSize: '0.8rem',
-            color: valid ? 'success' : 'error',
-            mt: 1,
-          }}>
+            color={valid ? 'success' : 'danger'}
+            sx={{
+              fontSize: '0.8rem',
+              color: valid ? 'success' : 'error',
+              mt: 1,
+            }}>
             {valid ? 'Valid Username' : 'Invalid Username...'}
           </Typography>
         }

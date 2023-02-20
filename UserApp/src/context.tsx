@@ -34,7 +34,11 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
     setSignedInUser(null);
   }
 
-  return <AppContext.Provider value={{ signIn, signOut, signedInUser, setSignedInUser }}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={{ signIn, signOut, signedInUser, setSignedInUser }}>
+      {children}
+    </AppContext.Provider>
+  );
 }
 
 export function useAppContext() {
