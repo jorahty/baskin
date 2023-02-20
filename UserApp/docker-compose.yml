@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   postgres:
-    container_name: baskin-bargain
+    container_name: baskin-webapp-user
     image: postgres
     environment:
       POSTGRES_DB: ${POSTGRES_DB}

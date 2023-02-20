@@ -34,12 +34,12 @@ INSERT INTO conversation (id) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
 INSERT INTO conversation (id) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68');
 
 -- Put Molly and Anna into a conversation together
-INSERT INTO conversation_user(member_username,conversation_id) VALUES('molly_member', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
-INSERT INTO conversation_user(member_username,conversation_id) VALUES('anna_admin', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
+INSERT INTO conversation_member(member_username,conversation_id) VALUES('molly_member', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
+INSERT INTO conversation_member(member_username,conversation_id) VALUES('anna_admin', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
 
 -- Put mia and nobby in a conversation together 
-INSERT INTO conversation_user(member_username,conversation_id) VALUES('mia_moderator', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
-INSERT INTO conversation_user(member_username,conversation_id) VALUES('nobby_nobody', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
+INSERT INTO conversation_member(member_username,conversation_id) VALUES('mia_moderator', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
+INSERT INTO conversation_member(member_username,conversation_id) VALUES('nobby_nobody', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
 
 -- Add some messages to one of their conversations
 INSERT INTO message (id, conversation_id, data) VALUES (gen_random_uuid(), 'f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"sender": "molly_member", "content": "Hello, can you tell me the status of my order?"}');

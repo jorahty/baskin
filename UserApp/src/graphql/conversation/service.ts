@@ -4,7 +4,7 @@ import { Conversation } from './schema';
 export class ConversationService {
   public async list(username: string): Promise<Conversation[]> {
     const select = `SELECT * FROM conversation where id IN(
-                SELECT conversation_id FROM conversation_user where 
+                SELECT conversation_id FROM conversation_member where 
                 member_username = $1
             )`;
 
