@@ -13,4 +13,4 @@ CREATE TABLE conversation (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data j
 
 CREATE TABLE message (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), conversation_id UUID REFERENCES conversation(id), data jsonb);
 
-CREATE TABLE conversation_member(member_username VARCHAR(32) REFERENCES member(username) ON UPDATE CASCADE, conversation_id UUID REFERENCES conversation(id));
+CREATE TABLE conversation_member (member_username VARCHAR(32) REFERENCES member(username) ON UPDATE CASCADE, conversation_id UUID REFERENCES conversation(id), PRIMARY KEY (member_username, conversation_id));
