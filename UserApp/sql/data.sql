@@ -37,6 +37,7 @@ INSERT INTO favorite (member_username, product_id) VALUES ('anna_admin', '5c55a2
 -- chat
 INSERT INTO chat (id, data) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"name": "null"}');
 INSERT INTO chat (id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"name": "Hiking"}');
+INSERT INTO chat (id, data) VALUES ('28a7f960-c779-4b27-b487-fa55264d79d3', '{"name": null}');
 INSERT INTO chat (id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"name": "Samsung TV"}');
 
 -- Put Molly and Anna into a chat together
@@ -51,9 +52,18 @@ INSERT INTO chat_member(member_username, chat_id) VALUES('molly_member', '52d3f9
 INSERT INTO chat_member(member_username, chat_id) VALUES('anna_admin', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
 INSERT INTO chat_member(member_username, chat_id) VALUES('mia_moderator', '52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4');
 
-INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "mia_moderator", "date": "2023-01-21T15:24:08.000Z", "content": "Hi"}');
-INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "anna_admin", "date": "2023-01-21T15:25:08.000Z", "content": "Hey"}');
-INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "molly_member", "date": "2023-01-21T15:26:08.000Z", "content": "Hello"}');
+INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "mia_moderator", "date": "2023-01-21T15:24:08.000Z", "content": "Meet at the base of the Redwood Grove tomorrow at dawn"}');
+INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "anna_admin", "date": "2023-01-21T15:25:08.000Z", "content": "The thermos is with me"}');
+INSERT INTO message (chat_id, data) VALUES ('52d3f9fd-1c08-41cc-973e-2d2c0d75f4b4', '{"sender": "molly_member", "date": "2023-01-21T15:26:08.000Z", "content": "Hope we cross paths with the coyotes again"}');
+
+-- Put Molly, Anna, and Mia into an unnamed "group" chat together
+INSERT INTO chat_member(member_username, chat_id) VALUES('molly_member', '28a7f960-c779-4b27-b487-fa55264d79d3');
+INSERT INTO chat_member(member_username, chat_id) VALUES('anna_admin', '28a7f960-c779-4b27-b487-fa55264d79d3');
+INSERT INTO chat_member(member_username, chat_id) VALUES('mia_moderator', '28a7f960-c779-4b27-b487-fa55264d79d3');
+
+INSERT INTO message (chat_id, data) VALUES ('28a7f960-c779-4b27-b487-fa55264d79d3', '{"sender": "mia_moderator", "date": "2023-01-21T15:14:08.000Z", "content": "Hi"}');
+INSERT INTO message (chat_id, data) VALUES ('28a7f960-c779-4b27-b487-fa55264d79d3', '{"sender": "anna_admin", "date": "2023-01-21T15:15:08.000Z", "content": "Hey"}');
+INSERT INTO message (chat_id, data) VALUES ('28a7f960-c779-4b27-b487-fa55264d79d3', '{"sender": "molly_member", "date": "2023-01-21T15:16:08.000Z", "content": "Hello"}');
 
 -- Put Molly and Mia into a chat about "Samsung TV"
 INSERT INTO chat_member(member_username,chat_id) VALUES('molly_member', '3f37a49c-7d13-4764-9568-8c5e13050b68');
@@ -65,4 +75,4 @@ INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b6
 INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "I cannot pay more than $300"}');
 INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "This is a one-of-a-kind Samsung TV, worth at least $500"}');
 INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "How about $350?"}');
-INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "Deal."}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "Deal"}');
