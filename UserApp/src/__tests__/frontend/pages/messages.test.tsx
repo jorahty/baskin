@@ -1,5 +1,5 @@
 import { CssVarsProvider } from '@mui/joy/styles';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import { graphql } from 'msw';
 import { setupServer } from 'msw/node';
@@ -77,5 +77,7 @@ test('Renders', async () => {
   await renderView();
   await screen.findByText('Samsung TV');
   await screen.findByText('Anna Admin');
+  await screen.findByText('Hey Anna, this is Molly');
+  fireEvent.click(screen.getByText('Samsung TV'));
   await screen.findByText('Hey Anna, this is Molly');
 });

@@ -11,7 +11,7 @@ export default function MessagesPage() {
 
   const [chats, setChats] = useState([]);
   const [messages, setMessages] = useState([]);
-  const [curConvo, setCurConvo] = useState<{ id: string } | undefined>();
+  const [selectedChatId, setSelectedChatId] = useState<{ id: string } | undefined>();
 
   // fetch chats
   useEffect(() => {
@@ -36,13 +36,13 @@ export default function MessagesPage() {
     `;
     graphQLClient.request(query).then(data => {
       setChats(data.chat);
-      setCurConvo(data.chat[0]);
+      setSelectedChatId(data.chat[0]);
     });
   }, [signedInUser]);
 
-  // Updates messages
+  // fetch messages
   useEffect(() => {
-    if (!curConvo) return;
+    if (!selectedChatId) return;
 
     const bearerToken = signedInUser?.accessToken;
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
@@ -50,14 +50,14 @@ export default function MessagesPage() {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
-    const query = `query message { message(id: "${curConvo?.id}" ) { content } }`;
+    const query = `query message { message(id: "${selectedChatId?.id}" ) { content } }`;
     graphQLClient.request(query).then(data => {
       setMessages(data.message);
     });
-  }, [curConvo, signedInUser]);
+  }, [selectedChatId, signedInUser]);
 
   return (
-    <Layout sidebar={<ChatList chats={chats} />}>
+    <Layout sidebar={<ChatList setSelectedChatId={setSelectedChatId} chats={chats} />}>
       <MessageList messages={messages} />
     </Layout>
   );

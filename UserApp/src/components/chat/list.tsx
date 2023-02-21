@@ -2,14 +2,21 @@ import { useAppContext } from '../../context';
 import { Chat } from '@/graphql/chat/schema';
 import { List, ListItem, ListItemButton } from '@mui/joy';
 
-export default function ChatList({ chats }: { chats: Chat[] }) {
+interface Props {
+  chats: Chat[];
+  setSelectedChatId: (selectedChatId: { id: string }) => void;
+}
+
+export default function ChatList({ chats, setSelectedChatId }: Props) {
   const { signedInUser } = useAppContext();
 
   return (
     <List sx ={{ p: 0 }}>
       {chats.map((chat, i) => (
         <ListItem key={i}>
-          <ListItemButton>
+          <ListItemButton
+            onClick={() => setSelectedChatId({ id: chat.id })}
+          >
             {
               chat.name ||
               chat.members
