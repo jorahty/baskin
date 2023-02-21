@@ -13,8 +13,17 @@ export class Chat {
     name?: string;
 
   // eslint-disable-line @typescript-eslint/no-unused-vars
-  @Field(type => [String])
-    members!: string[];
+  @Field(type => [ChatMember])
+    members!: ChatMember[];
+}
+
+@ObjectType()
+class ChatMember {
+  @Field()
+  name!: string;
+  
+  @Field()
+  username!: string;
 }
 
 @ArgsType()

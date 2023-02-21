@@ -35,7 +35,7 @@ INSERT INTO favorite (member_username, product_id) VALUES ('anna_admin', '038b7e
 INSERT INTO favorite (member_username, product_id) VALUES ('anna_admin', '5c55a266-a631-4598-9bd5-52bd5ee2d9aa');
 
 -- Put Molly and Anna into a chat together ("direct message")
-INSERT INTO chat (id, data) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"name": "null"}');
+INSERT INTO chat (id, data) VALUES ('f94a1252-7d5e-4b87-ae41-7a03f58a4028', '{"name": null}');
 
 INSERT INTO chat_member(member_username,chat_id) VALUES('molly_member', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
 INSERT INTO chat_member(member_username,chat_id) VALUES('anna_admin', 'f94a1252-7d5e-4b87-ae41-7a03f58a4028');
