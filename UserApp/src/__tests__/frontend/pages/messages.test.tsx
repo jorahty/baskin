@@ -26,7 +26,12 @@ const handlers = [
       ctx.data({
         chat: [
           {
-            id: 'f94a1252-7d5e-4b87-ae41-7a03f58a4028',
+            name: 'Samsung TV',
+          },
+          {
+            members: [
+              { name: 'Anna Admin' },
+            ],
           },
         ],
       })
@@ -70,6 +75,7 @@ const renderView = async () => {
 
 test('Renders', async () => {
   await renderView();
-  await screen.findByText('f94a1252-7d5e-4b87-ae41-7a03f58a4028');
+  await screen.findByText('Samsung TV');
+  await screen.findByText('Anna Admin');
   await screen.findByText('Hey Anna, this is Molly');
 });

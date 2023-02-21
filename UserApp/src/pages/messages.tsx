@@ -9,13 +9,12 @@ import { useAppContext } from '../context';
 export default function MessagesPage() {
   const { signedInUser } = useAppContext();
 
-  const [chats, setchats] = useState([]);
+  const [chats, setChats] = useState([]);
   const [messages, setMessages] = useState([]);
   const [curConvo, setCurConvo] = useState<{ id: string } | undefined>();
 
-  // get the real array
+  // fetch chats
   useEffect(() => {
-    // fetch them from the database using the user's id
     const bearerToken = signedInUser?.accessToken;
     const userId = signedInUser?.username;
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
@@ -23,9 +22,20 @@ export default function MessagesPage() {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
-    const query = `query chat { chat(username: "${userId}" ) { id } }`;
+    const query = `
+      query chat {
+        chat(username: "${userId}") {
+          id
+          name
+          members {
+            name
+            username
+          }
+        }
+      }
+    `;
     graphQLClient.request(query).then(data => {
-      setchats(data.chat);
+      setChats(data.chat);
       setCurConvo(data.chat[0]);
     });
   }, [signedInUser]);
