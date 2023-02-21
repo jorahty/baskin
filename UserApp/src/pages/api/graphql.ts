@@ -7,7 +7,7 @@ import { nextAuthChecker } from '../../graphql/auth/checker';
 import { ProductResolver } from '../../graphql/product/resolver';
 import { CategoryResolver } from '../../graphql/category/resolver';
 import { UserResolver } from '../../graphql/user/resolver';
-import { chatResolver } from '../../graphql/chat/resolver';
+import { ChatResolver } from '../../graphql/chat/resolver';
 import { MessageResolver } from '../../graphql/message/resolver';
 
 const schema = buildSchemaSync({
@@ -16,7 +16,7 @@ const schema = buildSchemaSync({
     ProductResolver,
     CategoryResolver,
     UserResolver,
-    chatResolver,
+    ChatResolver,
     MessageResolver,
   ],
   validate: { forbidUnknownValues: false },
