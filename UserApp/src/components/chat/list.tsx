@@ -10,20 +10,27 @@ interface Props {
 export default function ChatList({ chats, setSelectedChatId }: Props) {
   const { signedInUser } = useAppContext();
 
+  function renderChatName(chat: Chat) {
+    if (chat.name) return chat.name; // chat already has a name
+
+    // get array of other members (remove the signed-in user from chat members array)
+    const otherMembers = chat.members.filter(member => member.username !== signedInUser?.username);
+
+    // if there is only one other chat member, render their full name
+    if (otherMembers.length === 1) return otherMembers[0].name;
+
+    // else, render comma-seprated list of first names
+    return otherMembers.map(member => member.name.split(' ')[0]).join(', ');
+  }
+
   return (
     <List sx ={{ p: 0 }}>
-      {chats.map((chat, i) => (
-        <ListItem key={i}>
+      {chats.map(chat => (
+        <ListItem key={chat.id}>
           <ListItemButton
             onClick={() => setSelectedChatId({ id: chat.id })}
           >
-            {
-              chat.name ||
-              chat.members
-                .map(member => member.name)
-                .filter(name => name !== signedInUser?.name)
-                .join(', ')
-            }
+            {renderChatName(chat)}
           </ListItemButton>
         </ListItem>
       ))}

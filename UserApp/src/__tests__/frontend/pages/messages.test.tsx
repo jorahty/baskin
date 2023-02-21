@@ -26,11 +26,20 @@ const handlers = [
       ctx.data({
         chat: [
           {
+            id: '1',
             name: 'Samsung TV',
           },
           {
+            id: '2',
             members: [
               { name: 'Anna Admin' },
+            ],
+          },
+          {
+            id: '3',
+            members: [
+              { name: 'Anna Admin' },
+              { name: 'Molly Member' },
             ],
           },
         ],
