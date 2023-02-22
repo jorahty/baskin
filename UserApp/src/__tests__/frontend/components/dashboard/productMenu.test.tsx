@@ -4,10 +4,13 @@ import { graphql } from 'msw';
 import { AppContextProvider } from '../../../../context';
 import { CssVarsProvider } from '@mui/joy';
 import '../../matchMedia';
+import { setupServer } from 'msw/node';
 
 const handlers = [
   graphql.query('getAllProducts', async (req, res, ctx) => {
     const { username } = req.variables;
+
+    console.log(req.variables);
 
     if (username === 'molly_member') {
       return res(
@@ -34,6 +37,12 @@ const handlers = [
     }
   }),
 ];
+
+const server = setupServer(...handlers);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 const renderView = async () => {
   localStorage.setItem('user', `{"username": "molly_member", "accessToken": "blergh"}`);

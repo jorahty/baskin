@@ -20,19 +20,19 @@ export default function ProductMenu() {
       });
 
       const query = gql`
-        query getAllProducts($username: String!) {
-          product(user: $username) {
-            price
-            pictures
-            date
-            description
-            name
-            category
-            quantity
-            discount
-            id
+          query getAllProducts($username: String!) {
+              product(user: $username) {
+                  price
+                  pictures
+                  date
+                  description
+                  name
+                  category
+                  quantity
+                  discount
+                  id
+              }
           }
-        }
       `;
 
       console.log('signedInUser', signedInUser?.username);
@@ -40,6 +40,8 @@ export default function ProductMenu() {
       const data = await graphQLClient.request(query, {
         username: `${signedInUser?.username}`,
       });
+
+      console.log('products', data.product);
       setProducts(data.product);
     };
 
