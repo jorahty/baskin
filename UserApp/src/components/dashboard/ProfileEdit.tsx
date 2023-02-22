@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
-import { Box, Button, Input, Typography } from '@mui/joy';
+import { Box, Typography } from '@mui/joy';
 import { useState } from 'react';
 import { useAppContext } from '../../context';
 import { GraphQLClient } from 'graphql-request';
 import { regexUsername } from '../../graphql/regex';
+import UsernameUpdate from './UsernameUpdate';
+import Router from 'next/router';
 
 
 export default function ProfileEdit() {
   const [username, setUsername] = useState('');
   const [valid, setValid] = useState(false);
 
-  const { signedInUser, setSignedInUser } = useAppContext();
+  const { signedInUser, signOut } = useAppContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -26,9 +28,14 @@ export default function ProfileEdit() {
     const query = `mutation updateUsername { updateUsername(newName: "${username}") { username } }`;
     const data = await graphQLClient.request(query);
     if (signedInUser) {
-      signedInUser.username = data.updateUsername.username;
+      const temp = signedInUser;
+      temp.username = data.updateUsername.username;
+      signOut();
+      Router.push({
+        pathname: '/signin',
+      });
     }
-    setSignedInUser(signedInUser);
+    setUsername('');
   };
 
 
@@ -80,51 +87,12 @@ export default function ProfileEdit() {
       >
         Profile Settings
       </Typography>
-      <Box
-        component="form"
-        noValidate 
-        autoComplete="off"
-      >
-        <Box sx={{
-          display: 'flex',
-          alignItems: 'left',
-        }}>
-          <Input
-            placeholder="Username"
-            onChange={handleChange}
-            sx={{
-              mr: 2,
-              width: { md: '35vw', sm: '45vw', xs: '70vw' },        
-            }}
-            value={username}
-          />
-          <Button
-            variant="solid"
-            sx={{
-              backgroundColor: 'primary',
-              color: 'white',
-              '&:hover': {
-                backgroundColor: 'primary',
-                color: 'white',
-              },
-            }}
-            onClick={changeUsername}
-          >
-            Update
-          </Button>
-        </Box>
-        {username.length > 0 &&
-          <Typography 
-            color={valid ? 'success' : 'danger'}
-            sx={{
-              fontSize: '0.8rem',
-              color: valid ? 'success' : 'error',
-              mt: 1,
-            }}>
-            {valid ? 'Valid Username' : 'Invalid Username...'}
-          </Typography>
-        }
-      </Box>
+      <UsernameUpdate
+        username={username}
+        valid={valid}
+        handleChange={handleChange}
+        changeUsername={changeUsername}
+      />
     </Box>
   );
 }

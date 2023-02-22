@@ -24,6 +24,14 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
     }
   }, []);
 
+  // When the signed in user changes, update the local storage
+  useEffect(() => {
+    if (signedInUser) {
+      signIn(signedInUser);
+    }
+  }, [signedInUser]);
+
+
   function signIn(user: SignInPayload) {
     localStorage.setItem('user', JSON.stringify(user));
     setSignedInUser(user);

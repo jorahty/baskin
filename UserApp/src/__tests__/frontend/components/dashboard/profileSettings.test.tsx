@@ -2,13 +2,12 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import { graphql } from 'msw';
 import { setupServer } from 'msw/node';
-// import Dashboard from '../../../pages/dashboard';
 import 'whatwg-fetch';
-import '../matchMedia';
-import ProfileEdit from '../../../components/dashboard/ProfileEdit';
+import '../../matchMedia';
+import ProfileEdit from '../../../../components/dashboard/ProfileEdit';
 import userEvent from '@testing-library/user-event';
 
-jest.mock('../../../context', () => ({
+jest.mock('../../../../context', () => ({
   useAppContext: () => ({
     signIn: jest.fn(),
     signOut: jest.fn(),
@@ -66,22 +65,45 @@ const renderView = async () => {
   );
 };
 
+jest.mock('next/router', () => ({ push: jest.fn() }));
+
 test('Renders', async () => {
   await renderView();
   await screen.findByText('Profile Settings');
 });
 
-test('Changes Username', async () => {
+test('Invalid username', async () => {
   await renderView();
   const input = await screen.findByPlaceholderText('Username');
   await userEvent.type(input, 'nob');
   expect(await screen.findByText('Invalid Username...')).toBeTruthy();
+  await waitFor(() => {
+    fireEvent.click(screen.getByText('Update'));
+    expect(screen.findByText('Invalid Username...')).toBeTruthy();
+  });
   fireEvent.change(input, { target: { value: 'nobby_nobody' } });
   expect(await screen.findByText('Invalid Username...')).toBeTruthy();
   fireEvent.change(input, { target: { value: 'nobby_bread1' } });
-  await waitFor(() => expect(screen.queryByText('Invalid Username...')).toBeTruthy());
-  const button = await screen.findByText('Update');
-  fireEvent.click(button);
-  fireEvent.change(input, { target: { value: '' } });
-  await waitFor(() => expect(screen.queryByText('Valid Username')).toBeNull());
+  await waitFor(() => {
+    userEvent.click(screen.getByText('Update'));
+    expect(screen.queryByText('Are you sure?')).toBeTruthy();
+  });
+  await waitFor(() => {
+    fireEvent.click(screen.getByText('Update and Sign Out'));
+    expect(screen.queryByText('Are you sure?')).toBeFalsy();
+  });
+  await waitFor(() => {
+    expect(localStorage.getItem('user')).toBe(null);
+  });
+});
+
+test('Invalid username', async () => {
+  await renderView();
+  const input = await screen.findByPlaceholderText('Username');
+  fireEvent.change(input, { target: { value: 'nobby_bread1' } });
+  await waitFor(() => {
+    userEvent.click(screen.getByText('Update'));
+    expect(screen.queryByText('Are you sure?')).toBeTruthy();
+  });
+  userEvent.click(screen.getByText('Cancel'));
 });
