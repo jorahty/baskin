@@ -15,11 +15,12 @@ const handlers = [
     if (json.query.indexOf('molly_member') >= 0) {
       return res(
         ctx.data({
-          login: {
+          signin: {
             username: 'molly_member',
             accessToken: 'whatever',
+            name: 'Molly Member',
           },
-        })
+        }),
       );
     } else {
       return res(
@@ -27,7 +28,7 @@ const handlers = [
           {
             message: 'Unexpected error.',
           },
-        ])
+        ]),
       );
     }
   }),
@@ -47,16 +48,15 @@ const renderView = async () => {
       <AppContextProvider>
         <Signin />
       </AppContextProvider>
-    </CssVarsProvider>
+    </CssVarsProvider>,
   );
 };
 
 test('Success', async () => {
-  renderView();
-  // // eslint-disable-next-line @typescript-eslint/no-empty-function
+  await renderView();
   const username = screen.getByPlaceholderText('Enter your username');
   await userEvent.type(username, 'molly_member');
-  const passwd = screen.getByPlaceholderText('•••••••');
+  const passwd = screen.getByLabelText('password');
   await userEvent.type(passwd, 'mollymember');
   fireEvent.click(screen.getByLabelText('signin'));
   await waitFor(() => {
@@ -91,7 +91,7 @@ test('User initially in localStorage', async () => {
   render(
     <AppContextProvider>
       <div>a child component</div>
-    </AppContextProvider>
+    </AppContextProvider>,
   );
   await waitFor(() => {
     expect(localStorage.getItem('user')).not.toBe(null);

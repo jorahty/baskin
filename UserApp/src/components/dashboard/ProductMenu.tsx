@@ -12,6 +12,7 @@ export default function ProductMenu() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    if (!signedInUser) return;
     const fetchData = async () => {
       const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
         headers: {
@@ -20,28 +21,25 @@ export default function ProductMenu() {
       });
 
       const query = gql`
-          query getAllProducts($username: String!) {
-              product(user: $username) {
-                  price
-                  pictures
-                  date
-                  description
-                  name
-                  category
-                  quantity
-                  discount
-                  id
-              }
+        query getAllProducts($username: String!) {
+          product(user: $username) {
+            price
+            pictures
+            date
+            description
+            name
+            category
+            quantity
+            discount
+            id
           }
+        }
       `;
 
-      console.log('signedInUser', signedInUser?.username);
-
       const data = await graphQLClient.request(query, {
-        username: `${signedInUser?.username}`,
+        username: `${signedInUser.username}`,
       });
 
-      console.log('products', data.product);
       setProducts(data.product);
     };
 

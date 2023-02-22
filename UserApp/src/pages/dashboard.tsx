@@ -3,6 +3,7 @@ import DashSidebar from '../components/layout/DashSidebar';
 import { Box } from '@mui/joy';
 import { useEffect, useState } from 'react';
 import ProfileEdit from '../components/dashboard/ProfileEdit';
+import ProductMenu from '../components/dashboard/ProductMenu';
 // import { useAppContext } from '../context';
 
 export default function Dashboard() {
@@ -13,30 +14,22 @@ export default function Dashboard() {
 
   const comps: Record<string, JSX.Element> = {
     'Profile Settings': <ProfileEdit />,
-    'Poduct Listings': <Box>Poduct Listings</Box>,
-    'Favorites': <Box>Favorites</Box>,
-    'Messages': <Box>Messages</Box>,
+    'Poduct Listings': <ProductMenu />,
+    Favorites: <Box>Favorites</Box>,
+    Messages: <Box>Messages</Box>,
   };
 
-  const tabs = [
-    'Profile Settings',
-    'Poduct Listings',
-    'Favorites',
-    'Messages',
-  ];
+  const tabs = ['Profile Settings', 'Poduct Listings', 'Favorites', 'Messages'];
 
   useEffect(() => {
     setItems(tabs);
     setCurrent(tabs[0]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <Layout sidebar={<DashSidebar
-        items={items}
-        current={current}
-        setCurrent={setCurrent} />}>
+      <Layout sidebar={<DashSidebar items={items} current={current} setCurrent={setCurrent} />}>
         {comps[current]}
       </Layout>
     </>

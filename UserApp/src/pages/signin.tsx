@@ -76,8 +76,7 @@ export default function Signin() {
       />
       <Box
         sx={theme => ({
-          width:
-            'clamp(100vw - var(--Cover-width), (var(--Collapsed-breakpoint) - 100vw) * 999, 100vw)',
+          width: 'clamp(100vw - var(--Cover-width), (var(--Collapsed-breakpoint) - 100vw) * 999, 100vw)',
           transition: 'width var(--Transition-duration)',
           transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',
           position: 'relative',
@@ -96,8 +95,7 @@ export default function Signin() {
             display: 'flex',
             flexDirection: 'column',
             minHeight: '100dvh',
-            width:
-              'clamp(var(--Form-maxWidth), (var(--Collapsed-breakpoint) - 100vw) * 999, 100%)',
+            width: 'clamp(var(--Form-maxWidth), (var(--Collapsed-breakpoint) - 100vw) * 999, 100%)',
             maxWidth: '100%',
             px: 2,
           }}
@@ -146,15 +144,11 @@ export default function Signin() {
             >
               <FormControl required>
                 <FormLabel>Username</FormLabel>
-                <Input
-                  placeholder="Enter your username"
-                  type="username"
-                  name="username"
-                />
+                <Input placeholder="Enter your username" type="username" name="username" />
               </FormControl>
               <FormControl required>
                 <FormLabel>Password</FormLabel>
-                <Input placeholder="•••••••" type="password" name="password" />
+                <Input placeholder="•••••••" type="password" name="password" aria-label={'password'} />
               </FormControl>
               <Box
                 sx={{
@@ -185,11 +179,9 @@ export default function Signin() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundImage:
-            'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8)',
+          backgroundImage: 'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8)',
           [theme.getColorSchemeSelector('dark')]: {
-            backgroundImage:
-              'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831)',
           },
         })}
       />

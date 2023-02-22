@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import ProductMenu from '../../../../components/dashboard/ProductMenu';
 import { graphql } from 'msw';
-import { AppContextProvider } from '../../../../context';
+import { AppContextProvider, useAppContext } from '../../../../context';
 import { CssVarsProvider } from '@mui/joy';
 import '../../matchMedia';
 import { setupServer } from 'msw/node';
@@ -9,8 +9,6 @@ import { setupServer } from 'msw/node';
 const handlers = [
   graphql.query('getAllProducts', async (req, res, ctx) => {
     const { username } = req.variables;
-
-    console.log(req.variables);
 
     if (username === 'molly_member') {
       return res(
@@ -40,12 +38,14 @@ const handlers = [
 
 const server = setupServer(...handlers);
 
-beforeAll(() => server.listen());
+beforeAll(() => {
+  server.listen();
+});
+
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 const renderView = async () => {
-  localStorage.setItem('user', `{"username": "molly_member", "accessToken": "blergh"}`);
   render(
     <CssVarsProvider>
       <AppContextProvider>
@@ -56,11 +56,21 @@ const renderView = async () => {
 };
 
 test('Renders Product Menu', async () => {
+  localStorage.setItem(
+    'user',
+    `{"username":"molly_member","accessToken":"blergh","name":"Molly Member"}`,
+  );
+
   await renderView();
   await screen.getByText('Products');
 });
 
 test('Click new button', async () => {
+  localStorage.setItem(
+    'user',
+    `{"username":"molly_member","accessToken":"blergh","name":"Molly Member"}`,
+  );
+
   await renderView();
   fireEvent.click(screen.getByText('Add Product'));
 });
