@@ -50,7 +50,7 @@ export default function MessagesPage() {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
-    const query = `query message { message(id: "${selectedChatId?.id}" ) { content } }`;
+    const query = `query message { message(id: "${selectedChatId?.id}" ) { content, sender } }`;
     graphQLClient.request(query).then(data => {
       setMessages(data.message);
     });

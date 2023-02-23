@@ -31,16 +31,11 @@ const handlers = [
           },
           {
             id: '2',
-            members: [
-              { name: 'Anna Admin' },
-            ],
+            members: [{ name: 'Anna Admin' }],
           },
           {
             id: '3',
-            members: [
-              { name: 'Anna Admin' },
-              { name: 'Molly Member' },
-            ],
+            members: [{ name: 'Anna Admin' }, { name: 'Molly Member' }],
           },
         ],
       })
@@ -51,7 +46,20 @@ const handlers = [
       ctx.data({
         message: [
           {
+            sender: 'molly_member',
             content: 'Hey Anna, this is Molly',
+          },
+          {
+            sender: 'anna_admin',
+            content: 'Hey Molly, this is Anna',
+          },
+          {
+            sender: 'molly_member',
+            content: 'Cool',
+          },
+          {
+            sender: 'molly_member',
+            content: 'How\'s your day been?',
           },
         ],
       })
