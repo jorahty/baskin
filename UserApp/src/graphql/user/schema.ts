@@ -19,6 +19,9 @@ export class UserArgs {
   @Field({ nullable: true })
   @Matches(regexUsername)
     username!: string;
+  @Field({ nullable: true })
+  @Matches(regexEmail)
+    email!: string;
 }
 
 @ObjectType()

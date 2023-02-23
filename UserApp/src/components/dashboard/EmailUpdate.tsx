@@ -3,39 +3,43 @@ import { Box, Button, Input, Typography } from '@mui/joy';
 import ConfirmModal from './ConfirmModal';
 
 interface Props {
-  username: string;
+  email: string;
   valid: boolean;
   handleChange: (
     func: React.Dispatch<React.SetStateAction<string>>,
     event: React.ChangeEvent<HTMLInputElement>
-  ) => void
+  ) => void;
   func: React.Dispatch<React.SetStateAction<string>>;
-  changeUsername: () => void;
+  changeEmail: () => void;
+
 }
 
-export default function UsernameUpdate(
-  { username, valid, handleChange, func, changeUsername }: Props
+export default function EmailUpdate(
+  { email, valid, handleChange, func, changeEmail }: Props
 ) {
   const [open, setOpen] = React.useState(false);
 
   return (
     <Box
       component="form"
-      noValidate
+      noValidate 
       autoComplete="off"
+      sx={{
+        mt: 5,
+      }}
     >
       <Box sx={{
         display: 'flex',
         alignItems: 'left',
       }}>
         <Input
-          placeholder="Username"
+          placeholder="Email"
           onChange={e => handleChange(func, e)}
           sx={{
             mr: 2,
-            width: { md: '35vw', sm: '45vw', xs: '70vw' },
+            width: { md: '35vw', sm: '45vw', xs: '70vw' },        
           }}
-          value={username}
+          value={email}
         />
         <Button
           variant="solid"
@@ -48,16 +52,16 @@ export default function UsernameUpdate(
             },
           }}
           onClick={() => {
-            if (username.length === 0 || !valid) {
+            if (email.length === 0 || !valid) {
               return;
             }
             setOpen(true);
           }}
         >
-          Update Username
+          Update Email
         </Button>
       </Box>
-      {username.length > 0 &&
+      {email.length > 0 &&
         <Typography
           color={valid ? 'success' : 'danger'}
           sx={{
@@ -65,10 +69,10 @@ export default function UsernameUpdate(
             color: valid ? 'success' : 'error',
             mt: 1,
           }}>
-          {valid ? 'Valid Username' : 'Invalid Username...'}
+          {valid ? 'Valid Email' : 'Invalid Email...'}
         </Typography>
       }
-      <ConfirmModal input="username" open={open} setOpen={setOpen} changeFunc={changeUsername} />
+      <ConfirmModal input="email" open={open} setOpen={setOpen} changeFunc={changeEmail} />
     </Box>
   );
 }

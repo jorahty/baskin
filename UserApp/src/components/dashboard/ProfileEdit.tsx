@@ -3,19 +3,25 @@ import { Box, Typography } from '@mui/joy';
 import { useState } from 'react';
 import { useAppContext } from '../../context';
 import { GraphQLClient } from 'graphql-request';
-import { regexUsername } from '../../graphql/regex';
+import { regexUsername, regexEmail } from '../../graphql/regex';
 import UsernameUpdate from './UsernameUpdate';
 import Router from 'next/router';
+import EmailUpdate from './EmailUpdate';
 
 
 export default function ProfileEdit() {
   const [username, setUsername] = useState('');
-  const [valid, setValid] = useState(false);
+  const [email, setEmail] = useState('');
+  const [validUsername, setValidUsername] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
 
   const { signedInUser, signOut } = useAppContext();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
+  const handleChange = (
+    func: React.Dispatch<React.SetStateAction<string>>,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    func(event.target.value);
   };
 
   const changeUsername = async () => {
@@ -38,6 +44,24 @@ export default function ProfileEdit() {
     setUsername('');
   };
 
+  const changeEmail = async () => {
+    const accessToken = signedInUser?.accessToken;
+    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const query = `mutation updateEmail { updateEmail(newEmail: "${email}") { email } }`;
+    await graphQLClient.request(query);
+    if (signedInUser) {
+      signOut();
+      Router.push({
+        pathname: '/signin',
+      });
+    }
+    setEmail('');
+  };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,17 +79,45 @@ export default function ProfileEdit() {
           const query = `query user { user(username: "${username}") { username } }`;
           data = await graphQLClient.request(query);
           if (data?.user?.length === 0) {
-            setValid(true);
+            setValidUsername(true);
           } else {
-            setValid(false);
+            setValidUsername(false);
           }
         } else {
-          setValid(false);
+          setValidUsername(false);
         }
       }
     };
     fetchData();
   }, [username]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!signedInUser) {
+        return;
+      } else {
+        let data;
+        if (regexEmail.test(email)) {
+          const accessToken = signedInUser?.accessToken;
+          const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+          const query = `query user { user(email: "${email}") { username } }`;
+          data = await graphQLClient.request(query);
+          if (data?.user?.length === 0) {
+            setValidEmail(true);
+          } else {
+            setValidEmail(false);
+          }
+        } else {
+          setValidEmail(false);
+        }
+      }
+    };
+    fetchData();
+  }, [email]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box
@@ -87,12 +139,28 @@ export default function ProfileEdit() {
       >
         Profile Settings
       </Typography>
-      <UsernameUpdate
-        username={username}
-        valid={valid}
-        handleChange={handleChange}
-        changeUsername={changeUsername}
-      />
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        m: 2,
+      }}>
+        <UsernameUpdate
+          username={username}
+          valid={validUsername}
+          handleChange={handleChange}
+          func={setUsername}
+          changeUsername={changeUsername}
+        />
+        <EmailUpdate
+          email={email}
+          valid={validEmail}
+          handleChange={handleChange}
+          func={setEmail}
+          changeEmail={changeEmail}
+        />
+      </Box>
     </Box>
   );
 }

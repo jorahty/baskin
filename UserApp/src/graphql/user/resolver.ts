@@ -7,8 +7,8 @@ import type { Request } from 'next';
 export class UserResolver {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Query(returns => [User])
-  async user(@Args() { username }: UserArgs): Promise<User[]> {
-    return new UserService().list(username);
+  async user(@Args() { username, email }: UserArgs): Promise<User[]> {
+    return new UserService().list(username, email);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -27,5 +27,15 @@ export class UserResolver {
     // check if username is already taken
     // check if caller is the
     return new UserService().updateUsername(request, newName);
+  }
+
+  @Authorized('member')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @Mutation(returns => User)
+  async updateEmail(
+    @Arg('newEmail') newEmail: string,
+    @Ctx() request: Request
+  ): Promise<User> {
+    return new UserService().updateEmail(request, newEmail);
   }
 }

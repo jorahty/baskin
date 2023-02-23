@@ -123,3 +123,47 @@ test('Change Username Unauthorized', async () => {
       expect(data.body.errors.length).toEqual(1);
     });
 });
+
+test('Change Email', async () => {
+  const john = {
+    username: 'johnny_boy1',
+    password: 'johndoes',
+  };
+  const accessToken = await login.login(request, john);
+  await request
+    .post('/api/graphql')
+    .set('Authorization', 'Bearer ' + accessToken)
+    .send({
+      query: `mutation {updateEmail (
+        newEmail: "john@gmail.com"
+      ) {
+        name, email
+      }}`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.updateEmail.name).toEqual('John Doe');
+      expect(data.body.data.updateEmail.email).toEqual('john@gmail.com');
+    });
+});
+
+test('Change Email Unauthorized', async () => {
+  const accessToken = await login.asNobby(request);
+  await request
+    .post('/api/graphql')
+    .set('Authorization', 'Bearer ' + accessToken)
+    .send({
+      query: `mutation {updateEmail (
+        newEmail: "nobby@gmail.com"
+      ) {
+        name, email
+      }}`,
+    })
+    .then(data => {
+      expect(data.body.errors.length).toEqual(1);
+    });
+});

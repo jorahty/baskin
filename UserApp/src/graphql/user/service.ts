@@ -4,7 +4,7 @@ import { hashSync } from 'bcrypt';
 import { Request } from 'next';
 
 export class UserService {
-  public async list(username: string): Promise<User[]> {
+  public async list(username: string, email: string): Promise<User[]> {
     let select = `
       SELECT jsonb_build_object(
         'username', username,
@@ -13,9 +13,10 @@ export class UserService {
       ) as member FROM member
     `;
     select += username ? ` WHERE username = $1` : ``;
+    select += email ? ` WHERE data->>'email' = $1` : ``;
     const query = {
       text: select,
-      values: username ? [username] : [],
+      values: username ? [username] : email ? [email] : [],
     };
     const { rows } = await pool.query(query);
     return rows.map(row => row.member);
@@ -53,6 +54,21 @@ export class UserService {
     const query = {
       text: update,
       values: [newName, request.user.username],
+    };
+    const { rows } = await pool.query(query);
+    const user: User = {
+      username: rows[0].username,
+      name: rows[0].data.name,
+      email: rows[0].data.email,
+    };
+    return user;
+  }
+
+  public async updateEmail(request: Request, newEmail: string): Promise<User> {
+    const update = 'UPDATE member SET data = jsonb_set(data, $1, $2) WHERE username = $3 RETURNING *';
+    const query = {
+      text: update,
+      values: ['{email}', `"${newEmail}"`, request.user.username],
     };
     const { rows } = await pool.query(query);
     const user: User = {

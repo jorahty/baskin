@@ -2,12 +2,13 @@ import React from 'react';
 import { Box, Button, Modal, Typography } from '@mui/joy';
 
 interface Props {
+  input: string;
   open: boolean;
   setOpen: (open: boolean) => void;
-  changeUsername: () => void;
+  changeFunc: () => void;
 }
 
-export default function ConfirmModal({ open, setOpen, changeUsername }: Props) {
+export default function ConfirmModal({ input, open, setOpen, changeFunc }: Props) {
 
   return (
     <Modal
@@ -33,7 +34,7 @@ export default function ConfirmModal({ open, setOpen, changeUsername }: Props) {
             fontSize: '1.2rem',
             mb: 2,
           }}>
-          Changing your username requires you to sign in again.
+          Changing your {input} requires you to sign in again.
         </Typography>
         <Button
           sx={{
@@ -41,7 +42,7 @@ export default function ConfirmModal({ open, setOpen, changeUsername }: Props) {
           }}
           onClick={() => {
             setOpen(false);
-            changeUsername();
+            changeFunc();
           }}
         >
           Update and Sign Out
