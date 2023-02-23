@@ -32,4 +32,4 @@ POSTGRES_PASSWORD=some-password
 - Start all development servers: `npm run dev`
 - Stop all databases: `npm run docker-down`
 
-[^1]: [.eslintrc](.eslintrc) is a single source of truth for the entire monolith
+[^1]: [.eslintrc](https://github.com/jorahty/baskin/blob/main/.eslintrc) is a single source of truth for the entire monolith
