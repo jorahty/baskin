@@ -55,6 +55,22 @@ test('Fetch User by Username', async () => {
     });
 });
 
+test('Fetch User by Email', async () => {
+  await request
+    .post('/api/graphql')
+    .send({
+      query: `{ user (email: "molly@books.com") { username, name } }`,
+    })
+    .expect(200)
+    .then(res => {
+      expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      expect(res.body.data).toBeDefined();
+      expect(res.body.data.user).toBeDefined();
+      expect(res.body.data.user).toHaveLength(1);
+    });
+});
+
 test('Sign up', async () => {
   await request
     .post('/api/graphql')
