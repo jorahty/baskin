@@ -3,7 +3,7 @@ import DashSidebar from '../components/layout/DashSidebar';
 import { Box } from '@mui/joy';
 import { useEffect, useState } from 'react';
 import ProfileEdit from '../components/dashboard/ProfileEdit';
-import ProductMenu from '../components/dashboard/ProductMenu';
+import ProductMenu from '../components/dashboard/product/ProductMenu';
 // import { useAppContext } from '../context';
 
 export default function Dashboard() {

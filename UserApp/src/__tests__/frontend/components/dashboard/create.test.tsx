@@ -4,11 +4,10 @@ import userEvent from '@testing-library/user-event';
 import { graphql } from 'msw';
 import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
-import '../matchMedia';
+import '../../matchMedia';
 
-import Create from '../../../pages/product/create';
-import { getStaticProps } from '../../../pages/product/create';
-import { AppContextProvider } from '../../../context';
+import Create from '../../../../components/dashboard/product/Create';
+import { AppContextProvider } from '../../../../context';
 
 const handlers = [
   graphql.mutation('create', async (req, res, ctx) => {
@@ -19,7 +18,7 @@ const handlers = [
           create: {
             id: '11111',
           },
-        })
+        }),
       );
     } else {
       return res(
@@ -27,9 +26,25 @@ const handlers = [
           {
             message: 'Unexpected error.',
           },
-        ])
+        ]),
       );
     }
+  }),
+  graphql.query('getAllCategories', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        category: [
+          {
+            name: 'Electronics',
+            slug: 'electronics',
+          },
+          {
+            name: 'Toys',
+            slug: 'toys',
+          },
+        ],
+      }),
+    );
   }),
 ];
 
@@ -49,20 +64,19 @@ jest.mock('next/router', () => ({
 }));
 
 const renderView = async () => {
-  const { props } = await getStaticProps({});
   render(
     <CssVarsProvider>
       <AppContextProvider>
-        <Create categories={props.categories} />
+        <Create />
       </AppContextProvider>
-    </CssVarsProvider>
+    </CssVarsProvider>,
   );
 };
 
 test('Renders', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
   await screen.findByText('Create New Product');
@@ -71,7 +85,7 @@ test('Renders', async () => {
 test('Click Cancel', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
   await screen.findByText('Create New Product');
@@ -81,7 +95,7 @@ test('Click Cancel', async () => {
 test('Click create', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
   let alerted = false;
@@ -89,25 +103,34 @@ test('Click create', async () => {
     alerted = true;
   };
   await screen.findByText('Create New Product');
-  await userEvent.click(await findByRole(await screen.findByTestId('category'), 'combobox'));
-  // fireEvent.mouseDown(screen.getByLabelText('slug'));
-  userEvent.click(await screen.getByLabelText('Electronics'));
-  const name = screen.getByPlaceholderText('Vintage Hoodie Sweatshirt');
+
+  const button = await screen.findByLabelText('category');
+  await userEvent.click(button);
+
+  const electronics = await screen.findByText('Electronics');
+  await userEvent.click(electronics);
+
+  const name = await screen.getByPlaceholderText('Vintage Hoodie Sweatshirt');
   await userEvent.type(name, 'new');
+
   const price = screen.getByPlaceholderText('Amount');
   await userEvent.type(price, '1.50');
+
   const quantity = screen.getByPlaceholderText('1');
   await userEvent.type(quantity, '1');
+
   const description = screen.getByPlaceholderText('Product description');
   await userEvent.type(description, 'great product');
+
   await userEvent.click(await screen.findByLabelText('add'));
   const url = await screen.getByLabelText('picture');
   await userEvent.type(
     url,
-    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
+    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
   );
-  await fireEvent.click(screen.getByLabelText('submit'));
-  await fireEvent.click(screen.getByLabelText('create'));
+  fireEvent.click(screen.getByLabelText('submit'));
+  fireEvent.click(screen.getByLabelText('create'));
+
   await waitFor(() => {
     expect(alerted).toBe(false);
   });
@@ -116,7 +139,7 @@ test('Click create', async () => {
 test('Click create invalid', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
   let alerted = false;
@@ -142,7 +165,7 @@ test('Click create invalid', async () => {
 test('Add image and remove', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
   let alerted = false;
@@ -154,7 +177,7 @@ test('Add image and remove', async () => {
   const url = await screen.getByLabelText('picture');
   await userEvent.type(
     url,
-    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
+    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
   );
   await fireEvent.click(screen.getByLabelText('submit'));
   await fireEvent.click(screen.getByLabelText('remove0'));
@@ -166,7 +189,7 @@ test('Add image and remove', async () => {
 test('Add image and cancel', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
   let alerted = false;
@@ -178,7 +201,7 @@ test('Add image and cancel', async () => {
   const url = await screen.getByLabelText('picture');
   await userEvent.type(
     url,
-    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
+    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
   );
   fireEvent.keyDown(screen.getByText('Submit'), {
     key: 'Escape',

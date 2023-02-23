@@ -1,5 +1,5 @@
 import { Button, Sheet, Table, Typography } from '@mui/joy';
-import { Product } from '../../graphql/product/schema';
+import { Product } from '../../../graphql/product/schema';
 import Image from 'next/image';
 
 // Reference: https://codesandbox.io/s/6bmeke?file=/components/OrderTable.tsx:7018-12425

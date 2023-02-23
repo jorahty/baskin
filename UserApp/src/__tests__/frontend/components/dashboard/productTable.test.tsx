@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { CssVarsProvider } from '@mui/joy';
 import { AppContextProvider } from '../../../../context';
-import ProductTable from '../../../../components/dashboard/ProductTable';
+import ProductTable from '../../../../components/dashboard/product/ProductTable';
 import { Product } from '../../../../graphql/product/schema';
 import '../../matchMedia';
 

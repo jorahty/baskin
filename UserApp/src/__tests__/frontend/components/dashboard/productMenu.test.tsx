@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import ProductMenu from '../../../../components/dashboard/ProductMenu';
+import ProductMenu from '../../../../components/dashboard/product/ProductMenu';
 import { graphql } from 'msw';
-import { AppContextProvider, useAppContext } from '../../../../context';
+import { AppContextProvider } from '../../../../context';
 import { CssVarsProvider } from '@mui/joy';
 import '../../matchMedia';
 import { setupServer } from 'msw/node';
