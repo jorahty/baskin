@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  POSTGRES_DB: ${{ vars.POSTGRES_DB }}
+  POSTGRES_USER: $({ vars.POSTGRES_USER }}
+  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm run cis
+    - run: npm run lints
+    - run: npm run docker-up
+    - name: Sleep for 20 seconds
+      run: sleep 20s
+      shell: bash
+    - run: npm run tests
+    - run: npm run docker-down

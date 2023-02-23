@@ -1,20 +1,27 @@
 {
   "name": "baskin",
   "scripts": {
-    "docker": "npm run docker-user && npm run docker-account",
-    "docker-user": "cd UserApp && docker-compose up -d",
-    "docker-account": "cd AccountService && docker-compose up -d",
-    "docker-stop-user": "cd UserApp && docker-compose down",
-    "docker-stop-account": "cd AccountService && docker-compose down",
-    "docker-stop": "npm run docker-stop-user && npm run docker-stop-account",
-    "installs": "npm install && npm run install-user && npm run install-account",
-    "install-user": "cd UserApp && npm install",
-    "install-account": "cd AccountService && npm install",
-    "dev": "concurrently --kill-others \"npm run user\" \"npm run account\"",
-    "user": "cd UserApp && npm run dev",
-    "account": "cd AccountService && npm run dev"
+    "docker-up": "npm run docker-up-account && npm run docker-up-userapp",
+    "docker-up-account": "cd AccountService && docker-compose up -d",
+    "docker-up-userapp": "cd UserApp && docker-compose up -d",
+    "docker-down": "npm run docker-down-account && npm run docker-down-userapp",
+    "docker-down-account": "cd AccountService && docker-compose down", 
+    "docker-down-userapp": "cd UserApp && docker-compose down", 
+    "cis": "npm ci && npm run ci-account && npm run ci-userapp",
+    "ci-account": "cd AccountService && npm ci",
+    "ci-userapp": "cd UserApp && npm ci",
+    "lints": "npm run lint-account && npm run lint-userapp",
+    "lint-account": "cd AccountService && npm run lint",
+    "lint-userapp": "cd UserApp && npm run lint",
+    "tests": "npm run test-account && npm run test-userapp",
+    "test-account": "cd AccountService && npm test",
+    "test-userapp": "cd UserApp && npm test",
+    "dev": "concurrently --kill-others \"npm run account\" \"npm run userapp\"",
+    "account": "cd AccountService && npm run dev",
+    "userapp": "cd UserApp && npm run dev"
   },
   "devDependencies": {
+    "eslint-config-typescript": "*",
     "concurrently": "*"
   },
   "repository": {

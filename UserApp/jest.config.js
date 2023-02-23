@@ -16,6 +16,14 @@ const customJestConfig = {
     "src/pages/_document.tsx",
     "src/pages/_app.tsx",
   ],
+  coverageThreshold: {
+    global: {
+      statements: -2,
+      branches: -18,
+      lines: -2,
+      functions: -1,
+    }
+  },
   testMatch: ["**/?(*.)+(spec|test).[jt]s?(x)"],
 };
 

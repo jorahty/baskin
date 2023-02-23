@@ -10,7 +10,6 @@
     "@types/swagger-ui-express": "*",
     "concurrently": "*",
     "eslint": "*",
-    "eslint-config-typescript": "^3.0.0",
     "jest": "*",
     "nodemon": "*",
     "supertest": "*",
@@ -56,6 +55,14 @@
     "coveragePathIgnorePatterns": [
       "src/server.[jt]s"
     ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
     "testMatch": [
       "**/?(*.)+(spec|test).[jt]s?(x)"
     ],
@@ -65,16 +72,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "typescript"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 13
-    },
-    "rules": {
-      "indent": [
-        "warn",
-        2
-      ]
-    }
+      "../.eslintrc"
+    ]
   }
 }

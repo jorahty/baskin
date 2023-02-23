@@ -13,6 +13,23 @@
 
 ## Usage
 
-- To install __all__ node packages (note plural "installs"): `npm run installs`
-- To start __all__ databases: `npm run docker`
-- To start __all__ development servers: `npm run dev`
+Set a JWT Master Secret:
+```
+export ACCESS_TOKEN=some-long-secret-more-complex-than-this
+```
+
+Set environment variables in `AccountService/.env` and `UserApp/.env`:
+```
+POSTGRES_DB=dev
+POSTGRES_USER=some-user
+POSTGRES_PASSWORD=some-password
+```
+
+- Install all node packages: `npm run cis`
+- Lint all code: `npm run lints`[^1]
+- Start all databases: `npm run docker-up`
+- Run all tests: `npm run tests`
+- Start all development servers: `npm run dev`
+- Stop all databases: `npm run docker-down`
+
+[^1]: [.eslintrc](.eslintrc) is a single source of truth for the entire monolith

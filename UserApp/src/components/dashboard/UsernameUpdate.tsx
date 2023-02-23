@@ -17,7 +17,7 @@ export default function UsernameUpdate(
   return (
     <Box
       component="form"
-      noValidate 
+      noValidate
       autoComplete="off"
     >
       <Box sx={{
@@ -29,7 +29,7 @@ export default function UsernameUpdate(
           onChange={handleChange}
           sx={{
             mr: 2,
-            width: { md: '35vw', sm: '45vw', xs: '70vw' },        
+            width: { md: '35vw', sm: '45vw', xs: '70vw' },
           }}
           value={username}
         />

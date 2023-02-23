@@ -1,0 +1,27 @@
+{
+  "extends": ["eslint:recommended", "typescript"],
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "max-len": ["error", { "code": 105, "ignoreComments": true }],
+    "no-multiple-empty-lines": ["error", { "max": 2 }],
+    "indent": ["error", 2],
+    "jsx-quotes": ["error", "prefer-double"],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "arrow-parens": ["error", "as-needed"],
+    "implicit-arrow-linebreak": ["error", "beside"],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "block-spacing": ["error", "always"],
+    "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+    "comma-dangle": ["error", "always-multiline"],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "semi": ["error", "always"],
+    "object-curly-spacing": ["error", "always"],
+    "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+    "no-trailing-spaces": "error"
+  },
+  "env": {
+    "jest": true
+  },
+  "ignorePatterns": ["/src/components/layout/Logo.tsx"]
+}

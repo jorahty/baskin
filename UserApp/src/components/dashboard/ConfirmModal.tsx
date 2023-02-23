@@ -18,7 +18,7 @@ export default function ConfirmModal({ open, setOpen, changeUsername }: Props) {
         justifyContent: 'center',
       }}
     >
-      <Box  
+      <Box
         sx={{
           backgroundColor: 'white',
           border: '2px solid #000',
@@ -28,8 +28,8 @@ export default function ConfirmModal({ open, setOpen, changeUsername }: Props) {
         }}
       >
         <h2>Are you sure?</h2>
-        <Typography 
-          sx={{ 
+        <Typography
+          sx={{
             fontSize: '1.2rem',
             mb: 2,
           }}>

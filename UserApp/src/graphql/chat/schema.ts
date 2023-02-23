@@ -21,7 +21,7 @@ export class Chat {
 class ChatMember {
   @Field()
     name!: string;
-  
+
   @Field()
     username!: string;
 }

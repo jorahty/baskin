@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 import * as http from 'http';
 
-// must be this way round 
+// must be this way round
 import * as db from './db';
 import app from '../app';
 
@@ -17,7 +17,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   server.close();
-  await db.shutdown(); 
+  await db.shutdown();
 });
 
 const bad = {

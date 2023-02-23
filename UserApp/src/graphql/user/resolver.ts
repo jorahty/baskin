@@ -25,7 +25,7 @@ export class UserResolver {
     @Ctx() request: Request
   ): Promise<User> {
     // check if username is already taken
-    // check if caller is the 
+    // check if caller is the
     return new UserService().updateUsername(request, newName);
   }
 }

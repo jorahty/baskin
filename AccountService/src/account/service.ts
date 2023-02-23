@@ -3,7 +3,7 @@ import { pool } from '../db';
 
 export class AccountService {
   public async get(creds: Credentials): Promise<Account|undefined> {
-    const select = 
+    const select =
       ` SELECT data - 'pwhash' || jsonb_build_object('id', id)` +
       ` AS account FROM account` +
       ` WHERE data->>'username' = $1` +

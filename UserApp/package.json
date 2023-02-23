@@ -24,7 +24,6 @@
     "@types/testing-library__jest-dom": "*",
     "eslint": "*",
     "eslint-config-next": "*",
-    "eslint-config-typescript": "*",
     "jest": "*",
     "jest-environment-jsdom": "*",
     "msw": "*",
@@ -55,17 +54,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "next/core-web-vitals",
-      "typescript"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 13
-    },
-    "rules": {
-      "indent": [
-        "warn",
-        2
-      ]
-    }
+      "../.eslintrc",
+      "next"
+    ]
   }
 }

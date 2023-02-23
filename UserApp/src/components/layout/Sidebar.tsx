@@ -1,4 +1,4 @@
-import { Box, Divider, Link, List, ListItem, ListItemButton, Typography } from '@mui/joy';
+import { Box, Link, List, ListItem, ListItemButton, Typography } from '@mui/joy';
 import Router, { useRouter } from 'next/router';
 import { Category } from '../../graphql/category/schema';
 import Logo from './Logo';
@@ -19,12 +19,11 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
       >
         <ListItem>
           <ListItemButton onClick={() => Router.push('/')}>
-            <Typography fontWeight="lg" component="h4">
+            <Typography fontWeight="800" component="h4">
               All Categories
             </Typography>
           </ListItemButton>
         </ListItem>
-        <Divider />
         {categories?.map(({ name, slug }) => (
           <ListItem key={slug}>
             <ListItemButton

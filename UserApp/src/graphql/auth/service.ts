@@ -36,7 +36,7 @@ export class AuthService {
         if (user && bcrypt.compareSync(credentials.password, user.password)) {
           const accessToken = jwt.sign(
             { email: user.email, name: user.name, roles: user.roles, username: user.username },
-            process.env.SECRET,
+            process.env.ACCESS_TOKEN,
             {
               expiresIn: '30m',
               algorithm: 'HS256',
@@ -60,7 +60,7 @@ export class AuthService {
         reject(new Error('Unauthorised'));
       } else {
         const token = authHeader.split(' ')[1];
-        jwt.verify(token, process.env.SECRET, (err, user) => {
+        jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
           const newUser: User = user as User;
           if (err) {
             reject(err);
