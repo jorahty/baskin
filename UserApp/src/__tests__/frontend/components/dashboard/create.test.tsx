@@ -1,5 +1,5 @@
 import { CssVarsProvider } from '@mui/joy/styles';
-import { render, screen, waitFor, fireEvent, findByRole } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { graphql } from 'msw';
 import { setupServer } from 'msw/node';

@@ -64,7 +64,7 @@ export class ProductService {
   }
 
   public async delete(id:string, request: Request): Promise<Product> {
-    const products = await this.list({id:id})
+    const products = await this.list({ id: id });
     if (products.length == 0) {
       throw new Error('Product does not exist');
     } else if (products[0].user != request.user.username) {

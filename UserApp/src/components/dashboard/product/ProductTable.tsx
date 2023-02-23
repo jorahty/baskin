@@ -17,17 +17,17 @@ import { GraphQLClient, gql } from 'graphql-request';
 export default function ProductTable({ products }: { products: Product[] }) {
   const { signedInUser } = useAppContext();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [product, setProduct] = React.useState("");
+  const [product, setProduct] = React.useState('');
   const [productList, setProductList] = React.useState<Product[]>([]);
   const open = Boolean(anchorEl);
 
   React.useEffect(() => {
-    setProductList(products)
-  }, [products])
+    setProductList(products);
+  }, [products]);
 
 
   const handleClick = (event, product:string) => {
-    setProduct(product)
+    setProduct(product);
     setAnchorEl(event.currentTarget);
   };
 
@@ -44,9 +44,9 @@ export default function ProductTable({ products }: { products: Product[] }) {
       },
     });
     const query = gql`mutation delete {delete (product: "${product}") { id }}`;
-    await graphQLClient.request(query)
+    await graphQLClient.request(query);
     setProductList(productList.filter(row => row.id != product));
-  }
+  };
 
   return (
     <Sheet
@@ -88,7 +88,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
                   src={row.pictures[0]}
                   srcSet={row.pictures[0]}
                   alt={`Product image of ${row.name}`}
-                  sx={{ borderRadius: "sm", height: '100px', width: '100px'}}
+                  sx={{ borderRadius: 'sm', height: '100px', width: '100px' }}
                 />
               </td>
               <td>
@@ -97,9 +97,9 @@ export default function ProductTable({ products }: { products: Product[] }) {
               <td>{row.category}</td>
               <td>{row.price}</td>
               <td>
-                <Button variant='plain' color='neutral'
-                  aria-label='menu'
-                  onClick={(event) => handleClick(event, row.id)}
+                <Button variant="plain" color="neutral"
+                  aria-label="menu"
+                  onClick={event => handleClick(event, row.id)}
                 ><MoreVertIcon /></Button>
               </td>
             </tr>
@@ -115,7 +115,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
         placement="bottom-end"
       >
         <MenuItem onClick={handleClose}
-          aria-label='edit'
+          aria-label="edit"
         >
           <ListItemDecorator>
             <Edit />
@@ -124,7 +124,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
         </MenuItem>
         <ListDivider />
         <MenuItem onClick={handleDelete} variant="soft" color="danger"
-          aria-label='delete'
+          aria-label="delete"
         >
           <ListItemDecorator sx={{ color: 'inherit' }}>
             <DeleteForever />
