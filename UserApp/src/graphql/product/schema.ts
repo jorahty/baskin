@@ -46,7 +46,7 @@ export class ProductArgs {
 }
 
 @ArgsType()
-export class FavoriteProductArgs {
+export class SingleProductArgs {
   @Field()
   @Matches(regexUUID)
     product!: string;

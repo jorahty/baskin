@@ -63,6 +63,30 @@ export class ProductService {
     return product;
   }
 
+  public async delete(id:string, request: Request): Promise<Product> {
+    const products = await this.list({id:id})
+    if (products.length == 0) {
+      throw new Error('Product does not exist');
+    } else if (products[0].user != request.user.username) {
+      throw new Error('Not owner of product');
+    }
+    const insert =
+      'Delete From product WHERE id = $1 RETURNING *';
+    const query = {
+      text: insert,
+      values: [ id ],
+    };
+
+    const { rows } = await pool.query(query);
+
+    const product = rows[0].data;
+    product['user'] = rows[0].member_username;
+    product['category'] = rows[0].category_slug;
+    product['id'] = rows[0].id;
+
+    return product;
+  }
+
   public async get(product: string, request: Request): Promise<FavoriteProduct[]> {
     const insert = 'SELECT * FROM favorite WHERE member_username = $1 AND product_id = $2';
     const query = {
