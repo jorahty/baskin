@@ -4,7 +4,6 @@ import { useAppContext } from '../../context';
 import { MessageGroup } from './list';
 
 function SenderMessage({ group }: { group: MessageGroup }) {
-  console.log(group);
   return (
     <ListItemContent>
       <Box display="flex" justifyContent="flex-end" alignItems="end">
