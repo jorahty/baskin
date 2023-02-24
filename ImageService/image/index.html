@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ImageService Testing UI</title>
+</head>
+<body style="font-family: system-ui">
+  <h1>ImageService Testing UI</h1>
+  <p>
+    1. You can load the files that are in the <code>image</code> directory:
+  </p>
+  <code>
+    <div>
+      <a href="kitten.jpg">http://localhost:3012/image/kitten.jpg</a>
+    </div>
+    <div>
+      <a href="earth.png">http://localhost:3012/image/earth.png</a>
+    </div>
+  </code>
+  <p>2. You can add images:</p>
+  <label for="avatar">Choose an image:</label>
+  <input type="file" accept="image/png, image/jpeg" id="input">
+  <p>
+    <button id="add">Add image</button>
+  </p>
+</body>
+<script>
+add.onclick = async () => {
+  const [file] = input.files;
+  if (!file) return;
+  const buffer = await file.arrayBuffer();
+  const imageData = arrayBufferToBase64(buffer);
+
+  fetch('/image', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      fileName: file.name,
+      imageData: imageData,
+    }),
+  });
+}
+
+// https://stackoverflow.com/a/9458996
+function arrayBufferToBase64(buffer) {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return window.btoa(binary);
+}
+</script>
+<style>
+  * { color-scheme: light dark }
+</style>
+</html>

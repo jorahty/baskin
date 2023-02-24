@@ -5,7 +5,6 @@
     "@types/jest": "*",
     "@types/node": "*",
     "@types/supertest": "*",
-    "@types/swagger-ui-express": "*",
     "eslint": "*",
     "jest": "*",
     "nodemon": "*",
@@ -15,8 +14,7 @@
     "typescript": "*"
   },
   "dependencies": {
-    "express": "*",
-    "swagger-ui-express": "*"
+    "express": "*"
   },
   "scripts": {
     "dev": "nodemon",
@@ -26,8 +24,7 @@
   "nodemonConfig": {
     "watch": [
       "src",
-      "image",
-      "swagger.json"
+      "image"
     ],
     "ext": "*",
     "exec": "ts-node src/server.ts"

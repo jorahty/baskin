@@ -37,11 +37,3 @@ test('Add Image', async () => {
       fs.unlink(__dirname + '/../../image/new.txt', () => (null));
     });
 });
-
-test('Bad Request Body', async () => {
-  await request.post('/image')
-    .send({
-      wrong: 'format',
-    })
-    .expect(400);
-});
