@@ -64,10 +64,12 @@ jest.mock('next/router', () => ({
 }));
 
 const renderView = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const setModal = () => {};
   render(
     <CssVarsProvider>
       <AppContextProvider>
-        <Create />
+        <Create setModal={setModal}/>
       </AppContextProvider>
     </CssVarsProvider>,
   );

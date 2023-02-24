@@ -22,7 +22,7 @@ export default function EmailUpdate(
   return (
     <Box
       component="form"
-      noValidate 
+      noValidate
       autoComplete="off"
       sx={{
         mt: 5,
@@ -37,7 +37,7 @@ export default function EmailUpdate(
           onChange={e => handleChange(func, e)}
           sx={{
             mr: 2,
-            width: { md: '35vw', sm: '45vw', xs: '70vw' },        
+            width: { md: '35vw', sm: '45vw', xs: '70vw' },
           }}
           value={email}
         />

@@ -46,7 +46,7 @@ export default function ProductMenu() {
     };
 
     fetchData();
-  }, [signedInUser]);
+  }, [signedInUser, open]);
 
   return (
     <Container sx={{ margin: '16px auto' }}>
@@ -87,7 +87,7 @@ export default function ProductMenu() {
           }}
         >
           <ModalClose />
-          <Create />
+          <Create setModal={setOpen}/>
         </ModalDialog>
       </Modal>
     </Container>

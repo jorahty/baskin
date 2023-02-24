@@ -5,7 +5,6 @@ import Button from '@mui/joy/Button';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
-import Router from 'next/router';
 import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/joy/Box';
 import Textarea from '@mui/joy/Textarea';
@@ -46,7 +45,11 @@ interface PictureFormElement extends HTMLFormElement {
   readonly elements: PictureFormElements;
 }
 
-export default function Create() {
+interface Props {
+  setModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function Create({ setModal }: Props) {
   const { signedInUser } = useAppContext();
   const [categories, setCategories] = React.useState<Category[]>([]);
   const [category, setCategory] = React.useState('Choose Category');
@@ -55,9 +58,7 @@ export default function Create() {
   const [open, setOpen] = React.useState(false);
 
   const handleCancel = () => {
-    Router.push({
-      pathname: '/',
-    });
+    setModal(false);
   };
 
   useEffect(() => {
@@ -124,7 +125,7 @@ export default function Create() {
 
     await graphQLClient
       .request(query)
-      .then(() => Router.push({ pathname: '/' }))
+      .then(() => setModal(false))
       .catch(() => alert('Error creating product, Try again'));
   };
 
