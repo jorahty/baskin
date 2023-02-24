@@ -1,3 +1,4 @@
+import fs from 'fs';
 import supertest from 'supertest';
 import * as http from 'http';
 
@@ -30,5 +31,17 @@ test('Add Image', async () => {
     .expect(200)
     .then(res => {
       expect(res).toBeDefined();
+
+      // Remove the image we just added
+      // (We don't want an image to be added every time this test runs)
+      fs.unlink(__dirname + '/../../image/new.txt', () => {});
     });
+});
+
+test('Bad Request Body', async () => {
+  await request.post('/image')
+    .send({
+      wrong: 'format',
+    })
+    .expect(400)
 });
