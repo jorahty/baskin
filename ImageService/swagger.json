@@ -1,5 +1,8 @@
 {
   "swagger": "2.0",
+  "info": {
+    "title": "ImageService"
+  },
   "paths": {
     "/image/{fileName}": {
       "get": {
