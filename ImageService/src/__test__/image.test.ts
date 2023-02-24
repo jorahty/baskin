@@ -34,7 +34,7 @@ test('Add Image', async () => {
 
       // Remove the image we just added
       // (We don't want an image to be added every time this test runs)
-      fs.unlink(__dirname + '/../../image/new.txt', () => {});
+      fs.unlink(__dirname + '/../../image/new.txt', () => (null));
     });
 });
 
@@ -43,5 +43,5 @@ test('Bad Request Body', async () => {
     .send({
       wrong: 'format',
     })
-    .expect(400)
+    .expect(400);
 });
