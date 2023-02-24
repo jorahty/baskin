@@ -17,6 +17,8 @@ app.use('/image', express.static('image'));
 app.post('/image', (req: Request, res: Response) => {
   const { fileName, imageData } = req.body;
 
+  if (!fileName || !imageData) return res.status(400).end();
+
   const filePath = path.join(__dirname, '../image', fileName);
 
   fs.writeFile(filePath, imageData, () => res.send(fileName));
