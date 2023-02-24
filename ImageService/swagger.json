@@ -1,0 +1,52 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/image/{fileName}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "fileName",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+          }
+        }
+      }
+    },
+    "/image": {
+      "post": {
+        "parameters": [
+          {
+            "name": "image",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fileName": {
+                  "type": "string",
+                  "example": "kitten.jpg"
+                },
+                "imageData": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "fileName",
+            "schema": {
+              "type": "string",
+              "example": "kitten.jpg"
+            }
+          }
+        }
+      }
+    }
+  }
+}
