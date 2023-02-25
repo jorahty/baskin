@@ -5,7 +5,7 @@ import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 import '../matchMedia';
 
-import Index from '../../../pages/index';
+import IndexPage from '../../../pages/index';
 import { getServerSideProps } from '../../../pages/index';
 
 const handlers = [
@@ -43,7 +43,7 @@ const renderView = async () => {
     { req: { headers: { host: 'localhost:3000' } } });
   render(
     <CssVarsProvider>
-      <Index
+      <IndexPage
         categories={props.categories}
         products={props.products}
       />
