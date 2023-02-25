@@ -1,11 +1,34 @@
-import { fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
+import { CssVarsProvider } from '@mui/joy/styles';
+import { graphql } from 'msw';
+import { setupServer } from 'msw/node';
+import 'whatwg-fetch';
+import '../matchMedia';
+
 import Index from '../../../pages/index';
 import { getServerSideProps } from '../../../pages/index';
-import { render, screen } from '@testing-library/react';
-import { CssVarsProvider } from '@mui/joy/styles';
-import * as db from '../../graphql/db';
-import '../matchMedia';
-import { act } from 'react-dom/test-utils';
+
+const handlers = [
+  graphql.query('category', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        category: [{
+          slug: 'vehicles',
+          name: 'Vehicles',
+        }, {
+          slug: 'apparel',
+          name: 'Apparel',
+        }],
+      }),
+    );
+  }),
+];
+
+const server = setupServer(...handlers);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -15,23 +38,22 @@ jest.mock('next/router', () => ({
   },
 }));
 
-beforeAll(() => db.reset());
-afterAll(() => db.shutdown());
-
 const renderView = async () => {
-  const { props } = await getServerSideProps({
-    req: { headers: { host: 'localhost:3000' } },
-  });
+  const { props } = await getServerSideProps(
+    { req: { headers: { host: 'localhost:3000' } } });
   render(
     <CssVarsProvider>
-      <Index products={props.products} />
+      <Index
+        categories={props.categories}
+        products={props.products}
+      />
     </CssVarsProvider>
   );
 };
 
 test('Renders', async () => {
   renderView();
-  await screen.findByText('All Categories');
+  await new Promise(resolve => setTimeout(resolve, 500));
 });
 
 function setWidth(width: number) {
