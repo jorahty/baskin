@@ -1,0 +1,62 @@
+{
+  "name": "baskin-microservice-category",
+  "devDependencies": {
+    "@types/express": "*",
+    "@types/jest": "*",
+    "@types/node": "*",
+    "@types/pg": "*",
+    "@types/supertest": "*",
+    "eslint": "*",
+    "jest": "*",
+    "nodemon": "*",
+    "supertest": "*",
+    "ts-jest": "*",
+    "ts-node": "*",
+    "ts-postgres": "*",
+    "typescript": "*"
+  },
+  "dependencies": {
+    "dotenv": "*",
+    "express": "*",
+    "express-graphql": "*",
+    "graphql": "*",
+    "graphql-playground-middleware-express": "*",
+    "pg": "*",
+    "reflect-metadata": "*",
+    "type-graphql": "*"
+  },
+  "scripts": {
+    "dev": "nodemon",
+    "test": "jest --runInBand --coverage --verbose --forceExit",
+    "lint": "eslint ./src/* --fix"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "exec": "ts-node src/server.ts"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testTimeout": 1000,
+    "collectCoverageFrom": [
+      "src/**/*.[jt]s"
+    ],
+    "coveragePathIgnorePatterns": [
+      "src/server.[jt]s"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "testMatch": [
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ]
+  }
+}
