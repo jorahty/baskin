@@ -5,16 +5,6 @@ INSERT INTO member (username, data) VALUES ('nobby_nobody', '{"name":"Nobby Nobo
 INSERT INTO member (username, data) VALUES ('mia_moderator', '{"name":"Mia Moderator","roles":["member","moderator"],"email":"mia@books.com","password":"$2a$10$WlW22iG6lADY6EBgHAmhLumx1VadJXuGWIEwgAH/A07EvHBqZtDcO","avatar":"https://robohash.org/mia_moderator"}');
 INSERT INTO member (username, data) VALUES ('jchavez7', '{"name":"Jose Chavez","roles":["member","moderator"],"email":"jchave72@ucsc.edu","password":"$2a$06$QiyS5xVTxy4QjzWxKnLA5.vp2jVYzx2tdn40QDB7CTFC1hWljym2K","avatar":"https://robohash.org/jchavez"}');
 
--- category
-INSERT INTO category (slug, data) VALUES ('electronics', '{"name": "Electronics"}');
-INSERT INTO category (slug, data) VALUES ('clothing', '{"name": "Clothing"}');
-INSERT INTO category (slug, data) VALUES ('sports-equipment', '{"name": "Sports Equipment"}');
-INSERT INTO category (slug, data) VALUES ('toys', '{"name": "Toys"}');
-INSERT INTO category (slug, data) VALUES ('furniture', '{"name": "Furniture"}');
-INSERT INTO category (slug, data) VALUES ('instruments', '{"name": "Instruments"}');
-INSERT INTO category (slug, data) VALUES ('office', '{"name": "Office"}');
-INSERT INTO category (slug, data) VALUES ('free', '{"name": "Free"}');
-
 -- product
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('038b7e70-a5c0-47e6-80f3-5b1772bb4a0d', 'molly_member', 'clothing', '{"name": "Air Jordan 11", "quantity": 1,"price": 250, "discount": 0, "description": "Never worn. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2023-02-09T06:43:08.000Z", "pictures": ["https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=300"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('5c55a266-a631-4598-9bd5-52bd5ee2d9aa', 'molly_member', 'toys', '{"name": "Honda Civic Toy Car", "quantity": 1,"price": 25, "discount": 0, "description": "Great toy car for kids, barely used. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2023-01-21T15:43:08.000Z", "pictures": ["https://images.pexels.com/photos/772393/pexels-photo-772393.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"]}');
