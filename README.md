@@ -11,6 +11,15 @@
 - [Communication](https://app.slack.com/client/T04HECRSELF/C04KPBEV1U5)
 - [Issue Tracking](https://github.com/users/jorahty/projects/2)
 
+## Ports
+
+<table>
+<tr><th>Micro Service</th><th>Port</th></tr>
+<tr><td>AccountService</td><td>3011</td></tr>
+<tr><td>ImageService</td><td>3012</td></tr>
+<tr><td>CategoryService</td><td>3013</td></tr>
+</table>
+
 ## Usage
 
 Set a JWT Master Secret:
@@ -35,12 +44,3 @@ POSTGRES_PASSWORD=some-password
 - Stop all databases: `npm run docker-down`
 
 [^1]: [.eslintrc](https://github.com/jorahty/baskin/blob/main/.eslintrc) is a single source of truth for the entire monolith
-
-## Ports
-
-<table>
-<tr><th>Micro Service</th><th>Port</th></tr>
-<tr><td>AccountService</td><td>3011</td></tr>
-<tr><td>ImageService</td><td>3012</td></tr>
-<tr><td>CategoryService</td><td>3013</td></tr>
-</table>
