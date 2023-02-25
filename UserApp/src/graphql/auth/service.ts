@@ -3,7 +3,6 @@ import * as bcrypt from 'bcrypt';
 
 import { Credentials, SignInPayload } from './schema';
 import { pool } from '../db';
-import { SessionUser } from '@/types/custom';
 
 export interface User {
   username: string;
@@ -11,6 +10,12 @@ export interface User {
   email: string;
   roles: string[];
   password: string;
+}
+
+interface SessionUser {
+  email: string;
+  name: string;
+  username: string;
 }
 
 export class AuthService {
