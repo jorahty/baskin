@@ -8,7 +8,6 @@ interface AppContextType {
   signIn: (user: SignInPayload) => void;
   signOut: () => void;
   signedInUser: SignInPayload | null;
-  setSignedInUser: (user: SignInPayload | null) => void;
 }
 
 const AppContext = createContext<AppContextType>({} as AppContextType);
@@ -42,7 +41,7 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
   }
 
   return (
-    <AppContext.Provider value={{ signIn, signOut, signedInUser, setSignedInUser }}>
+    <AppContext.Provider value={{ signIn, signOut, signedInUser }}>
       {children}
     </AppContext.Provider>
   );

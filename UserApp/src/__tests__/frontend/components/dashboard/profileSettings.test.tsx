@@ -16,7 +16,6 @@ jest.mock('../../../../context', () => ({
       username: 'nobby_nobody',
       accessToken: 'whatever',
     },
-    setSignedInUser: jest.fn(),
   }),
 }));
 
