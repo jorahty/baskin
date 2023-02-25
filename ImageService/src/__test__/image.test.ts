@@ -1,8 +1,9 @@
 import fs from 'fs';
-import supertest from 'supertest';
+import supertest, { Response } from 'supertest';
 import * as http from 'http';
 
 import app from '../app';
+import path from 'path';
 
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
@@ -17,23 +18,26 @@ afterAll(async () => {
   server.close();
 });
 
-test('Load Image', async () => {
-  await request.get('/image/kitten.jpg')
-    .expect(200);
+test('Load Image from API docs', async () => {
+  await request.get('/api/kitten.jpg').expect(200);
 });
 
 test('Add Image', async () => {
-  await request.post('/image')
-    .send({
-      fileName: 'new.txt',
-      imageData: '1234',
-    })
-    .expect(200)
-    .then(res => {
-      expect(res).toBeDefined();
+  const fileContents = fs.readFileSync(__dirname + '/images/medium.jpeg');
 
+  await request
+    .post('/images')
+    .set('Content-Type', 'multipart/form-data')
+    .attach('file', fileContents, { filename: 'medium.jpeg', contentType: 'image/jpeg' })
+    .expect(200)
+    .then((res: Response) => {
+      expect(res).toBeDefined();
       // Remove the image we just added
       // (We don't want an image to be added every time this test runs)
-      fs.unlink(__dirname + '/../../image/new.txt', () => (null));
+      fs.unlink(path.resolve(__dirname + '../../../images/web/medium.jpeg'), () => null);
     });
+});
+
+test('Add No Image', async () => {
+  await request.post('/images').set('Content-Type', 'multipart/form-data').expect(400);
 });
