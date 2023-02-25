@@ -40,4 +40,5 @@ POSTGRES_PASSWORD=some-password
 <tr><th>Micro Service</th><th>Port</th></tr>
 <tr><td>AccountService</td><td>3011</td></tr>
 <tr><td>ImageService</td><td>3012</td></tr>
+<tr><td>CategoryService</td><td>3013</td></tr>
 </table>
