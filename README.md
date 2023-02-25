@@ -18,7 +18,9 @@ Set a JWT Master Secret:
 export ACCESS_TOKEN=some-long-secret-more-complex-than-this
 ```
 
-Set environment variables in `AccountService/.env` and `UserApp/.env`:
+For all micro services that use Postgres
+(AccountService, CategoryService)
+set environment variables:
 ```
 POSTGRES_DB=dev
 POSTGRES_USER=some-user
