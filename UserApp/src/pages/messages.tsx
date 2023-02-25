@@ -5,36 +5,26 @@ import { useEffect, useState } from 'react';
 import { GraphQLClient } from 'graphql-request';
 import MessageList from '../components/message/list';
 import { useAppContext } from '../context';
+import queryGQL from '../queryQGL';
 
 export default function MessagesPage() {
   const { signedInUser } = useAppContext();
 
   const [chats, setChats] = useState([]);
   const [messages, setMessages] = useState([]);
-  const [selectedChatId, setSelectedChatId] = useState<{ id: string } | undefined>();
+  const [selectedChatId, setSelectedChatId] = useState<{ id: string }|undefined>();
 
   // fetch chats
   useEffect(() => {
-    const bearerToken = signedInUser?.accessToken;
-    const userId = signedInUser?.username;
-    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-      headers: {
-        Authorization: `Bearer ${bearerToken}`,
-      },
-    });
-    const query = `
-      query chat {
-        chat(username: "${userId}") {
-          id
-          name
-          members {
-            name
-            username
-          }
+    queryGQL(
+      'http://localhost:3000/api/graphql',
+      `query chat {
+        chat(username: "${signedInUser?.username}") {
+          id, name, members { name, username }
         }
-      }
-    `;
-    graphQLClient.request(query).then(data => {
+      }`,
+      signedInUser?.accessToken,
+    ).then(data => {
       setChats(data.chat);
       setSelectedChatId(data.chat[0]);
     });
@@ -43,15 +33,11 @@ export default function MessagesPage() {
   // fetch messages
   useEffect(() => {
     if (!selectedChatId) return;
-
-    const bearerToken = signedInUser?.accessToken;
-    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-      headers: {
-        Authorization: `Bearer ${bearerToken}`,
-      },
-    });
-    const query = `query message { message(id: "${selectedChatId?.id}" ) { content, sender } }`;
-    graphQLClient.request(query).then(data => {
+    queryGQL(
+      'http://localhost:3000/api/graphql',
+      `query message { message(id: "${selectedChatId?.id}" ) { content, sender } }`,
+      signedInUser?.accessToken,
+    ).then(data => {
       setMessages(data.message);
     });
   }, [selectedChatId, signedInUser]);
