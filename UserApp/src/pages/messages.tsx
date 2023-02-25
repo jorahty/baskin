@@ -2,7 +2,6 @@ import ChatList from '../components/chat/list';
 import Layout from '../components/layout/Layout';
 
 import { useEffect, useState } from 'react';
-import { GraphQLClient } from 'graphql-request';
 import MessageList from '../components/message/list';
 import { useAppContext } from '../context';
 import queryGQL from '../queryQGL';
