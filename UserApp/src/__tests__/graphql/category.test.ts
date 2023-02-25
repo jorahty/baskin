@@ -1,31 +1,56 @@
 import http from 'http';
 import supertest from 'supertest';
 import 'whatwg-fetch';
-
-import * as db from './db';
 import requestHandler from './requestHandler';
 
+// we need to test the app graphql api, by fetching then examining the response
+
+// but the api will make fetch requests to the microservice, which we need to mock
+
+// Test UserApp API at http://localhost:3000/api/graphql
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
+// Mock CategoryService at http://localhost:3013/graphql
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+const handlers = [
+  rest.post('http://localhost:3013/graphql', (req, res, ctx) => {
+    return res(ctx.json({
+      data: {
+        category: [{
+          slug: 'vehicles',
+          name: 'Vehicles',
+        }, {
+          slug: 'apparel',
+          name: 'Apparel',
+        }],
+      },
+    }));
+  }),
+];
+const microServiceServer = setupServer(...handlers);
+
 beforeAll(async () => {
+  microServiceServer.listen();
   server = http.createServer(requestHandler);
   server.listen();
   request = supertest(server);
-  db.reset();
   return new Promise(resolve => setTimeout(resolve, 500));
 });
 
+afterEach(() => microServiceServer.resetHandlers());
+
 afterAll(done => {
   server.close(done);
-  db.shutdown();
+  microServiceServer.close();
 });
 
-test('Fetch All Categories', async () => {
+test('List All', async () => {
   await request
     .post('/api/graphql')
     .send({
-      query: `{category { name }}`,
+      query: `query category{category { name }}`,
     })
     .expect(200)
     .then(res => {
@@ -33,21 +58,5 @@ test('Fetch All Categories', async () => {
       expect(res.body).toBeDefined();
       expect(res.body.data).toBeDefined();
       expect(res.body.data.category).toBeDefined();
-    });
-});
-
-test('Fetch Category By ID', async () => {
-  await request
-    .post('/api/graphql')
-    .send({
-      query: `{category (slug: "clothing") { name, slug }}`,
-    })
-    .expect(200)
-    .then(res => {
-      expect(res).toBeDefined();
-      expect(res.body).toBeDefined();
-      expect(res.body.data).toBeDefined();
-      expect(res.body.data.category).toBeDefined();
-      expect(res.body.data.category).toHaveLength(1);
     });
 });

@@ -1,4 +1,4 @@
-import { ArgsType, Field, ObjectType } from 'type-graphql';
+import { Field, ObjectType } from 'type-graphql';
 
 @ObjectType()
 export class Category {
@@ -6,10 +6,4 @@ export class Category {
     slug!: string;
   @Field()
     name!: string;
-}
-
-@ArgsType()
-export class CategoryArgs {
-  @Field({ nullable: true })
-    slug?: string;
 }

@@ -1,18 +1,13 @@
-import { Category, CategoryArgs } from './schema';
+import { Category } from './schema';
 
-import { pool } from '../db';
+import queryGQL from '../../queryQGL';
 
 export class CategoryService {
-  public async list({ slug }: CategoryArgs): Promise<Category[]> {
-    let select = `SELECT data || jsonb_build_object('slug', slug) AS category FROM category`;
-    if (slug) {
-      select += ` WHERE slug = $1`;
-    }
-    const query = {
-      text: select,
-      values: slug ? [slug] : [],
-    };
-    const { rows } = await pool.query(query);
-    return rows.map(row => row.category);
+  public async list(): Promise<Category[]> {
+    const data = await queryGQL(
+      'http://localhost:3013/graphql',
+      'query category { category { slug, name } }',
+    );
+    return data.category;
   }
 }
