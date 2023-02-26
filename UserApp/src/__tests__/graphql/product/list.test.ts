@@ -2,8 +2,8 @@ import http from 'http';
 import supertest from 'supertest';
 import 'whatwg-fetch';
 
-import * as db from './db';
-import requestHandler from './requestHandler';
+import * as db from '../db';
+import requestHandler from '../requestHandler';
 
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
