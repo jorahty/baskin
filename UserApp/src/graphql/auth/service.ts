@@ -3,6 +3,7 @@ import * as bcrypt from 'bcrypt';
 
 import { Credentials, SignInPayload } from './schema';
 import { pool } from '../db';
+import { SessionUser } from '../../types/custom';
 
 export interface User {
   username: string;
@@ -10,12 +11,6 @@ export interface User {
   email: string;
   roles: string[];
   password: string;
-}
-
-interface SessionUser {
-  email: string;
-  name: string;
-  username: string;
 }
 
 export class AuthService {
@@ -41,7 +36,7 @@ export class AuthService {
         if (user && bcrypt.compareSync(credentials.password, user.password)) {
           const accessToken = jwt.sign(
             { email: user.email, name: user.name, roles: user.roles, username: user.username },
-            process.env.ACCESS_TOKEN,
+            process.env.ACCESS_TOKEN as string,
             {
               expiresIn: '30m',
               algorithm: 'HS256',
@@ -65,7 +60,7 @@ export class AuthService {
         reject(new Error('Unauthorised'));
       } else {
         const token = authHeader.split(' ')[1];
-        jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
+        jwt.verify(token, process.env.ACCESS_TOKEN as string, (err, user) => {
           const newUser: User = user as User;
           if (err) {
             reject(err);

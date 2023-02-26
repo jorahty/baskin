@@ -1,5 +1,5 @@
 import { Args, Resolver, Query, Authorized, Ctx, Mutation } from 'type-graphql';
-import { NewProductArgs, Product, ProductArgs, SingleProductArgs, FavoriteProduct } from './schema';
+import { NewProductArgs, Product, ProductArgs, SingleProductArgs } from './schema';
 import { ProductService } from './service';
 import type { Request } from 'next';
 
@@ -23,36 +23,5 @@ export class ProductResolver {
   @Mutation(returns => Product)
   async delete(@Args() { product }: SingleProductArgs, @Ctx() request: Request): Promise<Product> {
     return new ProductService().delete(product, request);
-  }
-
-
-  @Authorized('member')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @Query(returns => [FavoriteProduct])
-  async getFavorites(
-    @Args() { product }: SingleProductArgs,
-    @Ctx() request: Request
-  ): Promise<FavoriteProduct[]> {
-    return new ProductService().get(product, request);
-  }
-
-  @Authorized('member')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @Mutation(returns => FavoriteProduct)
-  async favorite(
-    @Args() { product }: SingleProductArgs,
-    @Ctx() request: Request
-  ): Promise<FavoriteProduct> {
-    return new ProductService().favorite(product, request);
-  }
-
-  @Authorized('member')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @Mutation(returns => FavoriteProduct)
-  async unfavorite(
-    @Args() { product }: SingleProductArgs,
-    @Ctx() request: Request
-  ): Promise<FavoriteProduct> {
-    return new ProductService().unfavorite(product, request);
   }
 }

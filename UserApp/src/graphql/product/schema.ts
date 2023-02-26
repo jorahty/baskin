@@ -52,16 +52,6 @@ export class SingleProductArgs {
     product!: string;
 }
 
-@ObjectType()
-export class FavoriteProduct {
-  @Field()
-  @Matches(regexUUID)
-    product!: string;
-  @Field()
-  @Matches(regexUsername)
-    user!: string;
-}
-
 @ArgsType()
 export class NewProductArgs {
   @Field()
