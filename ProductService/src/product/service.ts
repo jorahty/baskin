@@ -1,4 +1,4 @@
-import { NewProduct, Product, ProductArgs } from './schema';
+import { NewProduct, Product } from './schema';
 import { pool } from '../db';
 
 export class ProductService {
@@ -59,14 +59,14 @@ export class ProductService {
       values: [id],
     };
     const { rows } = await pool.query(query);
-    
+
     if (!rows[0]) throw new Error('Product not found');
 
     const product = rows[0].data;
     product.user = rows[0].member_username;
     product.category = rows[0].category_slug;
     product.id = rows[0].id;
-    
+
     return product;
   }
 }
