@@ -25,7 +25,6 @@ app.post('/images', (req: Request, res: Response) => {
   }
 
   const file: fileUpload.UploadedFile | fileUpload.UploadedFile[] = req.files.file;
-  console.log(file);
 
   if (isSingleFile(file)) {
     const uploadPath = path.resolve(__dirname, '../') + '/images/web/' + file.name;
