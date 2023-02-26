@@ -20,7 +20,7 @@ afterAll(done => {
   db.shutdown();
 });
 
-test('Fetch All Categories', async () => {
+test('List All', async () => {
   await request
     .post('/graphql')
     .send({
@@ -28,14 +28,11 @@ test('Fetch All Categories', async () => {
     })
     .expect(200)
     .then(res => {
-      expect(res).toBeDefined();
-      expect(res.body).toBeDefined();
-      expect(res.body.data).toBeDefined();
       expect(res.body.data.category).toBeDefined();
     });
 });
 
-test('Fetch Category By ID', async () => {
+test('List by ID', async () => {
   await request
     .post('/graphql')
     .send({
@@ -43,10 +40,6 @@ test('Fetch Category By ID', async () => {
     })
     .expect(200)
     .then(res => {
-      expect(res).toBeDefined();
-      expect(res.body).toBeDefined();
-      expect(res.body.data).toBeDefined();
-      expect(res.body.data.category).toBeDefined();
       expect(res.body.data.category).toHaveLength(1);
     });
 });
