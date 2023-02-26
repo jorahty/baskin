@@ -15,7 +15,6 @@ export default function Dashboard() {
   const comps: Record<string, JSX.Element> = {
     'Profile Settings': <ProfileEdit />,
     'Poduct Listings': <ProductMenu />,
-    Favorites: <Box>Favorites</Box>,
     Messages: <Box>Messages</Box>,
   };
 

@@ -18,6 +18,6 @@ test('Renders', async () => {
 
 test('Clicks on sidebar', async () => {
   renderView();
-  const sidebar = await screen.findByText('Favorites');
+  const sidebar = await screen.findByText('Messages');
   fireEvent.click(sidebar);
 });
