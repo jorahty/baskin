@@ -23,13 +23,13 @@ afterAll(done => {
 });
 
 
-test('Delete product', async () => {
+test('Remove Product', async () => {
   const accessToken = await login.asMolly(request);
   await request
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
-      query: `mutation {delete (
+      query: `mutation {removeProduct (
         product: "038b7e70-a5c0-47e6-80f3-5b1772bb4a0d"
       ) {
         name, description, category, price, quantity, user
@@ -41,17 +41,17 @@ test('Delete product', async () => {
       expect(data).toBeDefined();
       expect(data.body).toBeDefined();
       expect(data.body.data).toBeDefined();
-      expect(data.body.data.delete.user).toEqual('molly_member');
+      expect(data.body.data.removeProduct.user).toEqual('molly_member');
     });
 });
 
-test('Delete product not as owner', async () => {
+test('Remove Product not as Owner', async () => {
   const accessToken = await login.asMolly(request);
   await request
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
-      query: `mutation {delete (
+      query: `mutation {removeProduct (
         product: "0ce2da04-d05d-46cf-8602-ae58ab7ec215"
       ) {
         name, description, category, price, quantity, user
@@ -62,13 +62,13 @@ test('Delete product not as owner', async () => {
     });
 });
 
-test('Delete nonexistent product', async () => {
+test('Remove Missing Product', async () => {
   const accessToken = await login.asMolly(request);
   await request
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
-      query: `mutation {delete (
+      query: `mutation {removeProduct (
         product: "0ce2da04-d05d-46cf-8602-ae58ab7ec000"
       ) {
         name, description, category, price, quantity, user

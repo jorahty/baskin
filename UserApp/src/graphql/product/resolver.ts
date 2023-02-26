@@ -14,7 +14,7 @@ export class ProductResolver {
 
   @Authorized('member')
   @Mutation(() => Product)
-  async create(
+  async addProduct(
     @Args() args: NewProductArgs,
     @Ctx() request: Request,
   ): Promise<Product> {
@@ -23,7 +23,7 @@ export class ProductResolver {
 
   @Authorized('member')
   @Mutation(() => Product)
-  async delete(
+  async removeProduct(
     @Args() { product }: SingleProductArgs,
     @Ctx() request: Request,
   ): Promise<Product> {

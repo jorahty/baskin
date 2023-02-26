@@ -26,7 +26,7 @@ test('Create new product without header', async () => {
   await request
     .post('/api/graphql')
     .send({
-      query: `mutation {create (
+      query: `mutation {addProduct (
         name:"Toy robot"
         description: "brand new"
         category:"toys"
@@ -47,7 +47,7 @@ test('Create new product corrupt header', async () => {
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + 'garbage')
     .send({
-      query: `mutation {create (
+      query: `mutation {addProduct (
         name:"Toy robot"
         description: "brand new"
         category:"toys"
@@ -69,7 +69,7 @@ test('Create new product without member roles', async () => {
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
-      query: `mutation {create (
+      query: `mutation {addProduct (
         name:"Toy robot"
         description: "brand new"
         category:"toys"
@@ -91,7 +91,7 @@ test('Create new message', async () => {
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
-      query: `mutation {create (
+      query: `mutation {addProduct (
         name:"Toy robot"
         description: "brand new"
         category:"toys"
@@ -108,8 +108,8 @@ test('Create new message', async () => {
       expect(data).toBeDefined();
       expect(data.body).toBeDefined();
       expect(data.body.data).toBeDefined();
-      expect(data.body.data.create.name).toEqual('Toy robot');
-      expect(data.body.data.create.description).toEqual('brand new');
-      expect(data.body.data.create.user).toEqual('molly_member');
+      expect(data.body.data.addProduct.name).toEqual('Toy robot');
+      expect(data.body.data.addProduct.description).toEqual('brand new');
+      expect(data.body.data.addProduct.user).toEqual('molly_member');
     });
 });
