@@ -1,8 +1,8 @@
 import http from 'http';
 import supertest from 'supertest';
 
-import * as db from './db';
-import app from '../app';
+import * as db from '../db';
+import app from '../../app';
 
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;

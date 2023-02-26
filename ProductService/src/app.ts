@@ -5,6 +5,7 @@ import { buildSchemaSync } from 'type-graphql';
 import expressPlayground from 'graphql-playground-middleware-express';
 
 import { CategoryResolver } from './category/resolver';
+import { ProductResolver } from './product/resolver';
 
 const app = express();
 app.use(express.json());
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 const schema = buildSchemaSync({
   resolvers: [
     CategoryResolver,
+    ProductResolver,
   ],
 });
 
