@@ -4,7 +4,7 @@ import { hashSync } from 'bcrypt';
 import { Request } from 'next';
 
 export class UserService {
-  public async list(username: string, email: string): Promise<User[]> {
+  public async list(username?: string, email?: string): Promise<User[]> {
     let select = `
       SELECT jsonb_build_object(
         'username', username,
