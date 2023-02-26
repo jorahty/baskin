@@ -18,7 +18,7 @@ export class ProductResolver {
     @Args() args: NewProductArgs,
     @Ctx() request: Request,
   ): Promise<Product> {
-    return new ProductService().create(args, request);
+    return new ProductService().add(args, request);
   }
 
   @Authorized('member')
@@ -27,6 +27,6 @@ export class ProductResolver {
     @Args() { product }: SingleProductArgs,
     @Ctx() request: Request,
   ): Promise<Product> {
-    return new ProductService().delete(product, request);
+    return new ProductService().remove(product, request);
   }
 }

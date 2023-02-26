@@ -30,7 +30,7 @@ export class ProductService {
     return rows.map(row => row.product);
   }
 
-  public async create(
+  public async add(
     { name, category, price, quantity, description, pictures }: NewProductArgs,
     request: Request
   ): Promise<Product> {
@@ -63,7 +63,7 @@ export class ProductService {
     return product;
   }
 
-  public async delete(id:string, request: Request): Promise<Product> {
+  public async remove(id:string, request: Request): Promise<Product> {
     const products = await this.list({ id: id });
     if (products.length == 0) {
       throw new Error('Product does not exist');
