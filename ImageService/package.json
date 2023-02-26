@@ -1,11 +1,14 @@
 {
   "name": "baskin-microservice-image",
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express": "*",
     "@types/express-fileupload": "^1.4.1",
     "@types/jest": "*",
     "@types/node": "*",
+    "@types/pg": "^8.6.6",
     "@types/supertest": "*",
+    "@types/swagger-ui-express": "^4.1.3",
     "eslint": "*",
     "jest": "*",
     "nodemon": "*",
@@ -15,14 +18,20 @@
     "typescript": "*"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "*",
+    "dotenv": "*",
     "express-fileupload": "^1.4.0",
-    "swagger-ui-express": "^4.6.1"
+    "pg": "^8.9.0",
+    "swagger-ui-express": "^4.6.1",
+    "tsoa": "^5.1.1"
   },
   "scripts": {
-    "dev": "nodemon",
+    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "test": "jest --coverage",
-    "lint": "eslint ./src/**.[jt]s --fix"
+    "prebuild": "npm run swagger",
+    "lint": "eslint ./src/**.[jt]s --fix",
+    "swagger": "tsoa spec-and-routes"
   },
   "nodemonConfig": {
     "watch": [

@@ -23,7 +23,7 @@ test('Load Image from API docs', async () => {
 });
 
 test('Add Image', async () => {
-  const fileContents = fs.readFileSync(__dirname + '/images/medium.jpeg');
+  const fileContents = fs.readFileSync(__dirname + '/image/medium.jpeg');
 
   await request
     .post('/images')
@@ -34,7 +34,7 @@ test('Add Image', async () => {
       expect(res).toBeDefined();
       // Remove the image we just added
       // (We don't want an image to be added every time this test runs)
-      fs.unlink(path.resolve(__dirname + '../../../images/web/medium.jpeg'), () => null);
+      fs.unlink(path.resolve(__dirname + '../../../image/web/medium.jpeg'), () => null);
     });
 });
 
