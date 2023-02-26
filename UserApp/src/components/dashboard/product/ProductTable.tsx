@@ -16,7 +16,7 @@ import { GraphQLClient, gql } from 'graphql-request';
 
 export default function ProductTable({ products }: { products: Product[] }) {
   const { signedInUser } = useAppContext();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [product, setProduct] = React.useState('');
   const [productList, setProductList] = React.useState<Product[]>([]);
   const open = Boolean(anchorEl);
@@ -25,8 +25,10 @@ export default function ProductTable({ products }: { products: Product[] }) {
     setProductList(products);
   }, [products]);
 
-
-  const handleClick = (event, product:string) => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    product: string,
+  ) => {
     setProduct(product);
     setAnchorEl(event.currentTarget);
   };
@@ -43,7 +45,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
-    const query = gql`mutation delete {delete (product: "${product}") { id }}`;
+    const query = gql`mutation removeProduct {removeProduct (product: "${product}") { id }}`;
     await graphQLClient.request(query);
     setProductList(productList.filter(row => row.id != product));
   };

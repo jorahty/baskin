@@ -9,10 +9,10 @@ import 'whatwg-fetch';
 import '../../matchMedia';
 
 const handlers = [
-  graphql.mutation('delete', async (req, res, ctx) => {
+  graphql.mutation('removeProduct', async (req, res, ctx) => {
     return res(
       ctx.data({
-        delete: [
+        removeProduct: [
           {
             id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
           },
