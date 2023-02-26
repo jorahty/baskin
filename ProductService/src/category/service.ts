@@ -1,4 +1,4 @@
-import { Category, CategoryArgs } from './schema';
+import { Category } from './schema';
 
 import { pool } from '../db';
 
