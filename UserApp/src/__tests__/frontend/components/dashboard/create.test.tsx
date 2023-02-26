@@ -10,12 +10,12 @@ import Create from '../../../../components/dashboard/product/Create';
 import { AppContextProvider } from '../../../../context';
 
 const handlers = [
-  graphql.mutation('create', async (req, res, ctx) => {
+  graphql.mutation('addProduct', async (req, res, ctx) => {
     const json = await req.json();
     if (json.query.indexOf('electronics') >= 0) {
       return res(
         ctx.data({
-          create: {
+          addProduct: {
             id: '11111',
           },
         }),

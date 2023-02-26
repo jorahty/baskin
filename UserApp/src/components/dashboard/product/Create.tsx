@@ -111,8 +111,8 @@ export default function Create({ setModal }: Props) {
       },
     });
     const query = gql`
-        mutation create {
-            create (
+        mutation addProduct {
+            addProduct (
                 name: "${name}",
                 description: "${description}",
                 price: ${price},
