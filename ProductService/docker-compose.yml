@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   postgres:
-    container_name: baskin-micorservice-category
+    container_name: baskin-micorservice-product
     image: postgres
     environment:
       POSTGRES_DB: ${POSTGRES_DB}

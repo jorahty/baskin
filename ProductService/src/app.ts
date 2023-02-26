@@ -11,7 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const schema = buildSchemaSync({
-  resolvers: [CategoryResolver],
+  resolvers: [
+    CategoryResolver,
+  ],
 });
 
 app.use('/graphql', graphqlHTTP({ schema }));
