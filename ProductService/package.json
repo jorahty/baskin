@@ -1,5 +1,5 @@
 {
-  "name": "baskin-microservice-category",
+  "name": "baskin-microservice-product",
   "devDependencies": {
     "@types/express": "*",
     "@types/jest": "*",
