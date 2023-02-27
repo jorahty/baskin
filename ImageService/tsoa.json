@@ -11,15 +11,38 @@
       "http"
     ],
     "basePath": "/api/v0",
-    "securityDefinitions": {
-      "jwt": {
-        "type": "http",
-        "scheme": "bearer"
+    "specMerging": "recursive",
+    "spec": {
+      "paths": {
+        "/images": {
+          "post": {
+            "consumes": [
+              "multipart/form-data"
+            ],
+            "requestBody": {
+              "content": {
+                "multipart/form-data": {
+                  "schema": {
+                    "properties": {
+                      "file": {
+                        "type": "string",
+                        "format": "binary"
+                      }
+                    },
+                    "required": [
+                      "file"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
   "routes": {
-    "routesDir": "build",
-    "authenticationModule": "./src/auth/expressAuth.ts"
+    "routesDir": "build"
   }
 }
