@@ -6,12 +6,51 @@ import * as db from '../db';
 import * as login from '../login';
 import requestHandler from '../requestHandler';
 
+import { setupServer } from 'msw/node';
+import { graphql } from 'msw';
+
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
-import { setupServer } from 'msw/node';
+const handlers = [
+  login.loginHandlers,
+  graphql.query('ListProducts', async (req, res, ctx) => {
+    const { id } = req.variables
 
-const handlers = [login.loginHandlers];
+    if (id === "5555a266-a631-4598-9bd5-52bd5ee2d9aa") return res(
+      ctx.data({
+        product: [],
+      }),
+    );
+    
+    if (id === "7777a266-a631-4598-9bd5-52bd5ee2d9aa") return res(
+      ctx.data({
+        product: [{
+          user: 'not_molly_member',
+        }],
+      }),
+    );
+
+    return res(
+      ctx.data({
+        product: [{
+          id: '123',
+          user: 'molly_member',
+          category: 'clothing',
+          name: 'HOODIE',
+          price: 250,
+          date: '2023-02-09T06:43:08.000Z',
+          discount: 0,
+          quantity: 1,
+          description: 'Never worn',
+          pictures: [
+            'https://images.pexels.com/whatever',
+          ],
+        }],
+      }),
+    );
+  }),
+];
 
 const microServiceServer = setupServer(...handlers);
 
@@ -30,9 +69,10 @@ afterAll(done => {
   db.shutdown();
 });
 
+let accessToken: string|undefined;
 
 test('Remove Product', async () => {
-  const accessToken = await login.asMolly(request);
+  accessToken = await login.asMolly(request);
   await request
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
@@ -53,35 +93,35 @@ test('Remove Product', async () => {
     });
 });
 
-test('Remove Product not as Owner', async () => {
-  const accessToken = await login.asMolly(request);
+test('Remove Missing Product', async () => {
   await request
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
       query: `mutation {removeProduct (
-        product: "0ce2da04-d05d-46cf-8602-ae58ab7ec215"
+        product: "5555a266-a631-4598-9bd5-52bd5ee2d9aa"
       ) {
         name, description, category, price, quantity, user
       }}`,
     })
+    .expect('Content-Type', /json/)
     .then(data => {
       expect(data.body.errors.length).toEqual(1);
     });
 });
 
-test('Remove Missing Product', async () => {
-  const accessToken = await login.asMolly(request);
+test('Remove Product as not Owner', async () => {
   await request
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
       query: `mutation {removeProduct (
-        product: "0ce2da04-d05d-46cf-8602-ae58ab7ec000"
+        product: "7777a266-a631-4598-9bd5-52bd5ee2d9aa"
       ) {
         name, description, category, price, quantity, user
       }}`,
     })
+    .expect('Content-Type', /json/)
     .then(data => {
       expect(data.body.errors.length).toEqual(1);
     });
