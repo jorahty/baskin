@@ -29,7 +29,7 @@
     "predev": "npm run swagger",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "pretest": "npm run swagger",
-    "test": "jest --runInBand --coverage --verbose --no-cache --forceExit",
+    "test": "jest --coverage",
     "lint": "eslint ./src/* --fix"
   },
   "nodemonConfig": {
