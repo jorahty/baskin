@@ -35,8 +35,6 @@ export class ProductService {
   }
 
   public async add(newProduct: NewProduct): Promise<Product> {
-    console.log('newProduct service', newProduct);
-
     const mutation = gql`
       mutation AddProduct($input: ProductInput!) {
         addProduct(input: $input) {
