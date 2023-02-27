@@ -84,9 +84,8 @@ afterAll(() => server.close());
 
 const renderView = async (id: string) => {
   const { props } = await getServerSideProps({
-    req: { headers: { host: 'localhost:3000' } },
     query: { id },
-  });
+  } as any) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
   render(
     <CssVarsProvider>
@@ -97,9 +96,8 @@ const renderView = async (id: string) => {
 
 const renderDiscountView = async () => {
   const { props } = await getServerSideProps({
-    req: { headers: { host: 'localhost:3000' } },
     query: { id: '2759559e-84f2-4c41-9512-932589163f4f' },
-  });
+  } as any) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
   render(
     <CssVarsProvider>
