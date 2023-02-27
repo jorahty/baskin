@@ -1,7 +1,18 @@
-import { NewProductArgs, Product, ProductArgs } from './schema';
+import { Product, ProductArgs } from './schema';
 import { pool } from '../db';
 import { Request } from 'next';
 import request, { gql } from 'graphql-request';
+
+interface NewProduct {
+  user: string;
+  category: string;
+  name: string;
+  price: number;
+  discount: number;
+  quantity: number;
+  description: string;
+  pictures: string[];
+}
 
 export class ProductService {
   public async list({ id, user, category }: ProductArgs): Promise<Product[]> {
@@ -23,43 +34,29 @@ export class ProductService {
     return data.product;
   }
 
-  public async add(
-    { name, category, price, quantity, description, pictures }: NewProductArgs,
-    request: Request
-  ): Promise<Product> {
-    const insert =
-      'INSERT INTO product(member_username, category_slug, data) VALUES ($1, $2, $3) RETURNING *';
-    const query = {
-      text: insert,
-      values: [
-        request.user.username,
-        category,
-        {
-          name: name,
-          quantity: quantity,
-          price: price,
-          discount: 0,
-          description: description,
-          pictures: pictures,
-          date: new Date(),
-        },
-      ],
-    };
+  public async add(newProduct: NewProduct): Promise<Product> {
+    console.log('newProduct service', newProduct);
 
-    const { rows } = await pool.query(query);
+    const mutation = gql`
+      mutation AddProduct($input: ProductInput!) {
+        addProduct(input: $input) {
+          id, user, category, name, price, discount,
+          quantity, description, date, pictures
+        }
+      }
+    `;
 
-    const product = rows[0].data;
-    product['user'] = rows[0].member_username;
-    product['category'] = rows[0].category_slug;
-    product['id'] = rows[0].id;
+    const data = await request(
+      'http://localhost:3013/graphql',
+      mutation,
+      { input: newProduct },
+    );
 
-    return product;
+    return data.addProduct;
   }
 
   public async remove(id:string, request: Request): Promise<Product> {
-    console.log(id);
     const products = await this.list({ id: id });
-    console.log(products);
     if (products.length == 0) {
       throw new Error('Product does not exist');
     } else if (products[0].user != request.user.username) {

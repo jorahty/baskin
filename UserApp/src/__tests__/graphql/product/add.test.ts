@@ -2,7 +2,6 @@ import http from 'http';
 import supertest from 'supertest';
 import 'whatwg-fetch';
 
-import * as db from '../db';
 import * as login from '../login';
 import requestHandler from '../requestHandler';
 
@@ -10,8 +9,31 @@ let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>
 let request: supertest.SuperTest<supertest.Test>;
 
 import { setupServer } from 'msw/node';
+import { graphql } from 'msw';
 
-const handlers = [login.loginHandlers];
+const handlers = [
+  login.loginHandlers,
+  graphql.mutation('AddProduct', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        addProduct: {
+          id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+          user: 'molly_member',
+          category: 'clothing',
+          name: 'Toy robot',
+          price: 250,
+          date: '2023-02-09T06:43:08.000Z',
+          discount: 0,
+          quantity: 1,
+          description: 'brand new',
+          pictures: [
+            'https://images.pexels.com/whatever',
+          ],
+        },
+      }),
+    );
+  }),
+];
 
 const microServiceServer = setupServer(...handlers);
 
@@ -20,14 +42,12 @@ beforeAll(async () => {
   server.listen();
   microServiceServer.listen();
   request = supertest(server);
-  await db.reset();
   return new Promise(resolve => setTimeout(resolve, 500));
 });
 
 afterAll(done => {
   server.close(done);
   microServiceServer.close();
-  db.shutdown();
 });
 
 test('Create new product without header', async () => {
@@ -93,7 +113,7 @@ test('Create new product without member roles', async () => {
     });
 });
 
-test('Create new message', async () => {
+test('Create new product', async () => {
   const accessToken = await login.asMolly(request);
   await request
     .post('/api/graphql')

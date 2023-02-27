@@ -16,9 +16,10 @@ export class ProductResolver {
   @Mutation(() => Product)
   async addProduct(
     @Args() args: NewProductArgs,
-    @Ctx() request: Request,
+    @Ctx() { user: { username } }: Request,
   ): Promise<Product> {
-    return new ProductService().add(args, request);
+    const input = { user: username, discount: 0, ...args };
+    return new ProductService().add(input);
   }
 
   @Authorized('member')
