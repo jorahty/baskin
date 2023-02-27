@@ -38,8 +38,8 @@ export class ProductService {
       INSERT INTO product(member_username, category_slug, data)
       VALUES ($1, $2, $3) RETURNING *
     `;
-    let { user, category, ...data } = newProduct;
-    data = Object.assign(data, { date: new Date().toISOString() })
+    const { user, category, ...other } = newProduct;
+    const data = Object.assign(other, { date: new Date().toISOString() });
     const query = {
       text: insert,
       values: [user, category, data],

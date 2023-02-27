@@ -27,7 +27,7 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "test": "jest --runInBand --coverage --verbose --forceExit",
+    "test": "jest --runInBand --coverage --forceExit",
     "lint": "eslint ./src/* --fix"
   },
   "nodemonConfig": {

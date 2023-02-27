@@ -54,6 +54,5 @@ test('Add Product', async () => {
       expect(data.body.data.addProduct.name).toEqual('Toy robot');
       expect(data.body.data.addProduct.description).toEqual('brand new');
       expect(data.body.data.addProduct.user).toEqual('molly_member');
-      console.log(data.body.data.addProduct);
     });
 });
