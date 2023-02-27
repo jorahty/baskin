@@ -1,6 +1,6 @@
-import express, { ErrorRequestHandler, Express, Request, Response, Router } from 'express';
+import express, { Express, Request, Response, Router } from 'express';
 import cors from 'cors';
-import swaggerUi, { SwaggerUiOptions } from 'swagger-ui-express';
+import swaggerUi from 'swagger-ui-express';
 
 import { RegisterRoutes } from '../build/routes';
 import fileUpload from 'express-fileupload';
