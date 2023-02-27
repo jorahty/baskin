@@ -8,7 +8,7 @@ import UserDetails from '../../components/user/details';
 import { UserService } from '../../graphql/user/service';
 import { ProductService } from '../../graphql/product/service';
 
-// Within `getServerSideProps`, we can (and should) query
+// Within `getServerSideProps` we can (and should) query
 // micro services directly. https://tinyurl.com/ysfwst5r
 export const getServerSideProps: GetServerSideProps = async ({ query: { username } }) => {
   const [user] = await new UserService().list(username as string);
