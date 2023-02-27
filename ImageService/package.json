@@ -7,7 +7,7 @@
     "@types/node": "*",
     "@types/supertest": "*",
     "@types/swagger-ui-express": "*",
-    "@types/uuid": "^9.0.1",
+    "@types/uuid": "*",
     "concurrently": "*",
     "eslint": "*",
     "jest": "*",
