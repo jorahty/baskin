@@ -9,16 +9,9 @@ import CategoryPage from '../../../pages/category/[slug]';
 import { getServerSideProps } from '../../../pages/category/[slug]';
 
 const handlers = [
-  graphql.query('CategoryPage', async (req, res, ctx) => {
+  graphql.query('ListProducts', async (req, res, ctx) => {
     return res(
       ctx.data({
-        category: [{
-          slug: 'vehicles',
-          name: 'Vehicles',
-        }, {
-          slug: 'apparel',
-          name: 'Apparel',
-        }],
         product: [{
           id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
           user: 'molly_member',
@@ -32,6 +25,16 @@ const handlers = [
           pictures: [
             'https://images.pexels.com/whatever',
           ],
+        }],
+      }),
+    );
+  }),
+  graphql.query('ListCategories', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        category: [{
+          slug: 'cars',
+          name: 'Cars',
         }],
       }),
     );
