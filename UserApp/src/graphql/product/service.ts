@@ -1,33 +1,26 @@
 import { NewProductArgs, Product, ProductArgs } from './schema';
 import { pool } from '../db';
 import { Request } from 'next';
+import request, { gql } from 'graphql-request';
 
 export class ProductService {
   public async list({ id, user, category }: ProductArgs): Promise<Product[]> {
-    let select = `
-      SELECT data || jsonb_build_object(
-        'id', id,
-        'user', member_username,
-        'category', category_slug
-      ) AS product FROM product
+    const query = gql`
+      query ListProducts($id: String, $user: String, $category: String) {
+        product(id: $id, user: $user, category: $category) {
+          id, user, category, name, price, discount,
+          quantity, description, date, pictures
+        }
+      }
     `;
-    let values: string[] = [];
-    if (id) {
-      select += ` WHERE id = $1`;
-      values = [id];
-    } else if (user) {
-      select += ` WHERE member_username = $1`;
-      values = [user];
-    } else if (category) {
-      select += ` WHERE category_slug = $1`;
-      values = [category];
-    }
-    const query = {
-      text: select,
-      values: values,
-    };
-    const { rows } = await pool.query(query);
-    return rows.map(row => row.product);
+
+    const data = await request(
+      'http://localhost:3013/graphql',
+      query,
+      { user, id, category },
+    );
+
+    return data.product;
   }
 
   public async add(
@@ -64,7 +57,9 @@ export class ProductService {
   }
 
   public async remove(id:string, request: Request): Promise<Product> {
+    console.log(id);
     const products = await this.list({ id: id });
+    console.log(products);
     if (products.length == 0) {
       throw new Error('Product does not exist');
     } else if (products[0].user != request.user.username) {

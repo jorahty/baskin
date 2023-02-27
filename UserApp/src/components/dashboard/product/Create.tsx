@@ -243,7 +243,7 @@ export default function Create({ setModal }: Props) {
               <Grid sx={{ height: '75px' }}>
                 <FormControl required>
                   <FormLabel>Product Name</FormLabel>
-                  <Input placeholder="Vintage Hoodie Sweatshirt" type="name" name="name" />
+                  <Input placeholder="Enter Name" type="name" name="name" />
                 </FormControl>
               </Grid>
               <Grid sx={{ height: '75px' }}>
@@ -271,7 +271,7 @@ export default function Create({ setModal }: Props) {
                   <Input
                     type="number"
                     name="price"
-                    placeholder="Amount"
+                    placeholder="Enter amount"
                     startDecorator="$"
                     slotProps={{
                       input: {
@@ -322,7 +322,7 @@ export default function Create({ setModal }: Props) {
                   <FormLabel>Description</FormLabel>
                   <Textarea
                     name="description"
-                    placeholder="Product description"
+                    placeholder="Enter product description"
                     minRows={8}
                     maxRows={8}
                   />

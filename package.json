@@ -23,7 +23,7 @@
     "test-account": "cd AccountService && npm test",
     "test-image": "cd ImageService && npm test",
     "test-product": "cd ProductService && npm test",
-    "test-userapp": "cd UserApp && npm run test:silent",
+    "test-userapp": "cd UserApp && npm run test:backend && npm run test:frontend",
     "dev": "concurrently --kill-others \"npm run account\" \"npm run image\" \"npm run product\" \"npm run userapp\"",
     "account": "cd AccountService && npm run dev",
     "image": "cd ImageService && npm run dev",

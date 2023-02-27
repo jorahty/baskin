@@ -1,5 +1,4 @@
-import fs from 'fs';
-import supertest, { Response } from 'supertest';
+import supertest from 'supertest';
 
 import * as http from 'http';
 
@@ -19,7 +18,7 @@ afterAll(async () => {
   server.close();
 });
 
-test('Load docs', async () => {
+test('GET API Docs', async () => {
   await request
     .get('/api/v0/docs/')
     .expect(200)
@@ -28,26 +27,46 @@ test('Load docs', async () => {
     });
 });
 
-test('Load Image', async () => {
-  await request.get('/images/p_0d0d395a267945ac8befa09c392d3c6d_a.jpg');
-});
-
-test('Add Image', async () => {
-  const fileContents = fs.readFileSync(__dirname + '/images/medium.jpeg');
-
-  await request
-    .post('/api/v0/images')
-    .set('Content-Type', 'multipart/form-data')
-    .attach('file', fileContents, { filename: 'medium.jpeg', contentType: 'image/jpeg' })
-    .expect(201)
-    .then((res: Response) => {
-      expect(res).toBeDefined();
-      // Remove the image we just added
-      // (We don't want an image to be added every time this test runs)
-      fs.unlink(path.resolve(__dirname + '../../../images/web/medium.jpeg'), () => null);
+test('GET One By URL', async () => {
+  await request.get('/97285551-6eea-40e6-8f6a-3b7b39c64d39.jpeg')
+    .expect(200)
+    .then(res => {
+      expect(res.body).toBeDefined();
     });
 });
 
-test('Add No Image', async () => {
-  await request.post('/api/v0/images').set('Content-Type', 'multipart/form-data').expect(400);
+test('POST Bad Media Type', async () => {
+  await request
+    .post('/api/v0/image')
+    .set('accept', 'application/json')
+    .set('Content-Type', 'multipart/form-data')
+    .attach('files', path.join(__dirname, 'assets/bad.txt'))
+    .expect(415);
+});
+
+let newImageUrls: string[];
+
+test('POST New', async () => {
+  await request
+    .post('/api/v0/image')
+    .set('accept', 'application/json')
+    .set('Content-Type', 'multipart/form-data')
+    .attach('files', path.join(__dirname, 'assets/good.jpg'))
+    .attach('files', path.join(__dirname, 'assets/good.png'))
+    .expect(201)
+    .then(res => {
+      expect(res.body).toBeDefined();
+      expect(res.body).toHaveLength(2);
+      newImageUrls = res.body;
+    });
+});
+
+test('DELETE New', async () => {
+  for (const url of newImageUrls) {
+    const filename = url.split('/')[url.split('/').length - 1];
+    const id = filename.split('.')[0];
+    await request
+      .delete('/api/v0/image/' + id)
+      .expect(204);
+  }
 });

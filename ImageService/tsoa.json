@@ -10,37 +10,7 @@
     "schemes": [
       "http"
     ],
-    "basePath": "/api/v0",
-    "specMerging": "recursive",
-    "spec": {
-      "paths": {
-        "/images": {
-          "post": {
-            "consumes": [
-              "multipart/form-data"
-            ],
-            "requestBody": {
-              "content": {
-                "multipart/form-data": {
-                  "schema": {
-                    "properties": {
-                      "file": {
-                        "type": "string",
-                        "format": "binary"
-                      }
-                    },
-                    "required": [
-                      "file"
-                    ],
-                    "type": "object"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+    "basePath": "/api/v0"
   },
   "routes": {
     "routesDir": "build"

@@ -1,38 +1,39 @@
-import fileUpload, { UploadedFile } from 'express-fileupload';
+import fs from 'fs';
 import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
 
-interface Images {
-  file: fileUpload.UploadedFile | fileUpload.UploadedFile[];
-}
 
 export class ImageService {
-  public async postImage(req: Express.Request): Promise<string | undefined> {
-    if (!req.files || Object.keys(req.files).length === 0) {
-      return undefined;
-    }
+  public async create(
+    files: Express.Multer.File[]
+  ): Promise<string[]> {
+    return files.map(file => {
+      // Generate new id
+      const id = uuidv4();
 
-    const files: Images = req.files as unknown as Images;
+      // Derive file extention from `file.mimetype`
+      const fileExtention = file.mimetype.split('/')[1];
 
-    const file: fileUpload.UploadedFile | fileUpload.UploadedFile[] = files.file;
+      // Define file name
+      const fileName = id + '.' + fileExtention;
 
-    let uploadPath;
-    let ending;
+      // Determine file path
+      const filePath = path.join(__dirname, '../../public', fileName);
 
-    if (isSingleFile(file)) {
-      ending = '/images/web/' + file.name;
-      uploadPath = path.resolve(__dirname, '../../') + ending;
-      await file.mv(uploadPath);
-    }
+      // Write to disk (into the directory named `public`)
+      fs.writeFileSync(filePath, file.buffer);
 
-    return ending;
+      // Return full URL
+      return 'http://localhost:3012/' + fileName;
+    });
+  }
+
+  public async delete(id: string): Promise<void> {
+    const directory = path.join(__dirname, '../../public');
+    fs.readdir(directory, (_, files) => {
+      files.forEach(file => {
+        if (file.split('.')[0] === id) fs.unlinkSync(path.join(directory, file));
+      });
+    });
   }
 }
-
-// Cite: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/express-fileupload/express-fileupload-tests.ts
-function isSingleFile(file: UploadedFile | UploadedFile[]): file is UploadedFile {
-  return typeof file === 'object' && (file as UploadedFile).name !== undefined;
-}
-
-// function isFileArray(file: UploadedFile | UploadedFile[]): file is UploadedFile[] {
-//   return Array.isArray(file);
-// }
