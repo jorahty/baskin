@@ -1,81 +1,56 @@
 import { User, NewUser, SignUpPayload } from './schema';
-import { pool } from '../db';
-import { hashSync } from 'bcrypt';
+import queryGQL from '../../queryQGL';
 import { Request } from 'next';
 
 export class UserService {
   public async list(username?: string, email?: string): Promise<User[]> {
-    let select = `
-      SELECT jsonb_build_object(
-        'username', username,
-        'name', data->>'name',
-        'email', data->>'email'
-      ) as member FROM member
-    `;
-    select += username ? ` WHERE username = $1` : ``;
-    select += email ? ` WHERE data->>'email' = $1` : ``;
-    const query = {
-      text: select,
-      values: username ? [username] : email ? [email] : [],
-    };
-    const { rows } = await pool.query(query);
-    return rows.map(row => row.member);
+    let query = `query listUser { user`;
+    if (username || email){
+      query += `(`;
+      query += username ? ` username: "${username}"` : ``;
+      query += email ? ` email: "${email}"` : ``;
+      query += `)`;
+    }
+    query += `{email, username, name}}`;
+    console.log(query);
+    const data = await queryGQL(
+      'http://localhost:3011/graphql',
+      query,
+    );
+    return data.user;
   }
 
   public async add(newMember: NewUser): Promise<SignUpPayload> {
-    const insert = 'INSERT INTO member(username, data) VALUES ($1, $2) RETURNING *';
-    const query = {
-      text: insert,
-      values: [
-        `${newMember.username}`,
-        {
-          email: newMember.email,
-          name: newMember.name,
-          roles: ['member'],
-          password: hashSync(newMember.password, 10),
-          avatar: `https://robohash.org/${newMember.username}`,
-        },
-      ],
-    };
-
-    const { rows } = await pool.query(query);
-
-    const user: SignUpPayload = {
-      email: rows[0].data.email,
-      name: rows[0].data.name,
-      username: rows[0].username,
-    };
-
-    return user;
+    const data = await queryGQL(
+      'http://localhost:3011/graphql',
+      `mutation addNewUser { addUser (input: {
+        username: "${newMember.username}",
+        email: "${newMember.email}",
+        password: "${newMember.password}"}
+        ) { name, email, username } }`,
+    );
+    return data.addUser;
   }
 
   public async updateUsername(request: Request, newName: string): Promise<User> {
-    const update = 'UPDATE member SET username = $1 WHERE username = $2 RETURNING *';
-    const query = {
-      text: update,
-      values: [newName, request.user.username],
-    };
-    const { rows } = await pool.query(query);
-    const user: User = {
-      username: rows[0].username,
-      name: rows[0].data.name,
-      email: rows[0].data.email,
-    };
-    return user;
+    const data = await queryGQL(
+      'http://localhost:3011/graphql',
+      `mutation changeUsername { updateUsername (
+        username: "${request.user.username}"
+        newName: "${newName}"
+        ) { name, username, email } }`,
+    );
+    return data.updateUsername;
   }
 
   public async updateEmail(request: Request, newEmail: string): Promise<User> {
-    const update = 'UPDATE member SET data = jsonb_set(data, $1, $2) WHERE username = $3 RETURNING *';
-    const query = {
-      text: update,
-      values: ['{email}', `"${newEmail}"`, request.user.username],
-    };
-    const { rows } = await pool.query(query);
-    const user: User = {
-      username: rows[0].username,
-      name: rows[0].data.name,
-      email: rows[0].data.email,
-    };
-    return user;
+    const data = await queryGQL(
+      'http://localhost:3011/graphql',
+      `mutation changeEmail { updateEmail (
+        username: "${request.user.username}"
+        newEmail: "${newEmail}"
+        ) { name, username, email } }`,
+    );
+    return data.updateUsername;
   }
 }

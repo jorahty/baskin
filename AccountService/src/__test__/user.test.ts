@@ -1,45 +1,15 @@
 import http from 'http';
 import supertest from 'supertest';
-import 'whatwg-fetch';
 
 import * as db from './db';
-import requestHandler from './requestHandler';
+import app from '../app';
 
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
-import { graphql } from 'msw';
-import { setupServer } from 'msw/node';
-
-const handlers = [
-  graphql.mutation('addNewUser', async (req, res, ctx) => {
-    return res(ctx.data({
-      addUser: {
-        username: 'johndoes1',
-        name: 'John Doe',
-        email: 'jd@books.com',
-      },
-    },
-    ));
-  }),
-  graphql.query('listUser', async (req, res, ctx) => {
-    return res(ctx.data({
-      user: [{
-        username: 'johndoes1',
-        name: 'John Doe',
-        email: 'jd@books.com',
-      }],
-    },
-    ));
-  }),
-];
-
-const microServiceServer = setupServer(...handlers);
-
 beforeAll(async () => {
-  server = http.createServer(requestHandler);
+  server = http.createServer(app);
   server.listen();
-  microServiceServer.listen();
   request = supertest(server);
   await db.reset();
   return new Promise(resolve => setTimeout(resolve, 500));
@@ -47,16 +17,15 @@ beforeAll(async () => {
 
 afterAll(async () => {
   server.close();
-  microServiceServer.close();
   await new Promise(resolve => setTimeout(resolve, 500));
   db.shutdown();
 });
 
 test('Fetch All Users', async () => {
   await request
-    .post('/api/graphql')
+    .post('/graphql')
     .send({
-      query: `query user { user { username, email, name } }`,
+      query: `{ user { username, email, name } }`,
     })
     .expect(200)
     .then(res => {
@@ -70,9 +39,9 @@ test('Fetch All Users', async () => {
 
 test('Fetch User by Username', async () => {
   await request
-    .post('/api/graphql')
+    .post('/graphql')
     .send({
-      query: `query user { user (username: "nobby_nobody") { email, name } }`,
+      query: `{ user (username: "nobby_nobody") { email, name } }`,
     })
     .expect(200)
     .then(res => {
@@ -86,9 +55,9 @@ test('Fetch User by Username', async () => {
 
 test('Fetch User by Email', async () => {
   await request
-    .post('/api/graphql')
+    .post('/graphql')
     .send({
-      query: `query user { user (email: "molly@books.com") { username, name } }`,
+      query: `{ user (email: "molly@books.com") { username, name } }`,
     })
     .expect(200)
     .then(res => {
@@ -102,7 +71,7 @@ test('Fetch User by Email', async () => {
 
 test('Sign up', async () => {
   await request
-    .post('/api/graphql')
+    .post('/graphql')
     .send({
       query: `mutation {addUser (input: {
         username: "johndoes1"
@@ -125,3 +94,46 @@ test('Sign up', async () => {
     });
 });
 
+test('Change Username', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `mutation {updateUsername (
+        username: "johndoes1"
+        newName: "johnny_boy1"
+      ) {
+        name, username, email
+      }}`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.updateUsername.name).toEqual('John Doe');
+      expect(data.body.data.updateUsername.username).toEqual('johnny_boy1');
+    });
+});
+
+test('Change Email', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `mutation {updateEmail (
+        username: "johnny_boy1"
+        newEmail: "john@gmail.com"
+      ) {
+        name, username, email
+      }}`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.updateEmail.name).toEqual('John Doe');
+      expect(data.body.data.updateEmail.email).toEqual('john@gmail.com');
+    });
+});

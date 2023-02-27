@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 
 import { Credentials, SignInPayload } from './schema';
-import { pool } from '../db';
+import request, { gql } from 'graphql-request';
 import { SessionUser } from '../../types/custom';
 
 export interface User {
@@ -15,19 +15,15 @@ export interface User {
 
 export class AuthService {
   async getUser(username: string): Promise<User | undefined> {
-    const select = 'Select * FROM member WHERE username = $1';
-    const query = {
-      text: select,
-      values: [`${username}`],
-    };
-    const { rows } = await pool.query(query);
-    if (rows[0]) {
-      const user: User = rows[0]['data'];
-      user['username'] = rows[0]['username'];
-      return user;
-    } else {
-      return undefined;
-    }
+    const query = gql`query GetUser { 
+      user (username: "${username}") 
+      { email, name, username, password, roles } 
+    }`;
+    const data = await request(
+      'http://localhost:3011/graphql',
+      query,
+    );
+    return data.user[0];
   }
 
   public async signin(credentials: Credentials): Promise<SignInPayload> {

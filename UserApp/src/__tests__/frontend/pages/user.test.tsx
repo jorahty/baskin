@@ -36,6 +36,16 @@ const handlers = [
       }),
     );
   }),
+  graphql.query('UserProfile', async (req, res, ctx) => {
+    return res(ctx.data({
+      user: [{
+        username: 'molly_member',
+        name: 'Molly Member',
+        email: 'molly@books.com',
+      }],
+    },
+    ));
+  }),
 ];
 
 const server = setupServer(...handlers);

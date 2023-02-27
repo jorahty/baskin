@@ -4,11 +4,10 @@
     "@types/bcrypt": "*",
     "@types/express": "*",
     "@types/jest": "*",
+    "@types/jsonwebtoken": "*",
     "@types/node": "*",
     "@types/pg": "*",
     "@types/supertest": "*",
-    "@types/swagger-ui-express": "*",
-    "concurrently": "*",
     "eslint": "*",
     "jest": "*",
     "nodemon": "*",
@@ -19,24 +18,23 @@
     "typescript": "*"
   },
   "dependencies": {
+    "@types/bcrypt": "*",
+    "@types/jsonwebtoken": "*",
+    "@types/node": "*",
     "bcrypt": "*",
     "dotenv": "*",
     "express": "*",
+    "express-graphql": "*",
+    "graphql": "*",
+    "graphql-playground-middleware-express": "*",
     "pg": "*",
-    "swagger-ui-express": "*",
-    "tsoa": "*"
+    "reflect-metadata": "*",
+    "type-graphql": "*"
   },
   "scripts": {
-    "prestart": "npm run build",
-    "start": "node build/src/server.js",
-    "prebuild": "npm run swagger",
-    "build": "tsc",
-    "predev": "npm run swagger",
-    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
-    "swagger": "tsoa spec-and-routes",
-    "pretest": "npm run swagger",
-    "test": "jest --runInBand --coverage --verbose --no-cache --forceExit",
-    "lint": "eslint ./src/**/*.[jt]s --fix"
+    "dev": "nodemon",
+    "test": "jest --runInBand --coverage --verbose --forceExit",
+    "lint": "eslint ./src/* --fix"
   },
   "nodemonConfig": {
     "watch": [
@@ -48,7 +46,7 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "testTimeout": 500,
+    "testTimeout": 1000,
     "collectCoverageFrom": [
       "src/**/*.[jt]s"
     ],
@@ -65,14 +63,6 @@
     },
     "testMatch": [
       "**/?(*.)+(spec|test).[jt]s?(x)"
-    ],
-    "testPathIgnorePatterns": [
-      "build"
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "../.eslintrc"
     ]
   }
 }
