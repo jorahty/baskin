@@ -5,7 +5,7 @@ import * as db from '../../graphql/db';
 import '../matchMedia';
 
 const product = {
-  name: 'Air Jordan 15',
+  name: 'Air Jordan 11',
   date: '2023-02-09T06:43:08.000Z',
   id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
   price: 250,

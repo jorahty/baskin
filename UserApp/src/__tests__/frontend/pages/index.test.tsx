@@ -9,7 +9,7 @@ import IndexPage from '../../../pages/index';
 import { getServerSideProps } from '../../../pages/index';
 
 const handlers = [
-  graphql.query('category', async (req, res, ctx) => {
+  graphql.query('IndexPage', async (req, res, ctx) => {
     return res(
       ctx.data({
         category: [{
@@ -18,6 +18,20 @@ const handlers = [
         }, {
           slug: 'apparel',
           name: 'Apparel',
+        }],
+        product: [{
+          id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+          user: 'molly_member',
+          category: 'clothing',
+          name: 'Air Jordan 15',
+          price: 250,
+          date: '2023-02-09T06:43:08.000Z',
+          discount: 0,
+          quantity: 1,
+          description: 'Never worn',
+          pictures: [
+            'https://images.pexels.com/whatever',
+          ],
         }],
       }),
     );
