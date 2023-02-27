@@ -61,6 +61,8 @@ export class NewProduct {
   @Field()
     quantity!: number;
   @Field()
+    discount!: number;
+  @Field()
   @Length(1, 1024)
     description!: string;
   @Field(() => [String])

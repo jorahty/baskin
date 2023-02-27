@@ -32,12 +32,14 @@ test('Add Product', async () => {
               category: "clothing"
               name: "Toy robot"
               price: 40.99
+              discount: 0
               quantity: 1
               description: "brand new"
               pictures: ["123"]
             }
           ) {
-            id, name, description, user
+            id, user, category, name, price, discount,
+            quantity, description, pictures, date
           }
         }
       `,
@@ -52,5 +54,6 @@ test('Add Product', async () => {
       expect(data.body.data.addProduct.name).toEqual('Toy robot');
       expect(data.body.data.addProduct.description).toEqual('brand new');
       expect(data.body.data.addProduct.user).toEqual('molly_member');
+      console.log(data.body.data.addProduct);
     });
 });
