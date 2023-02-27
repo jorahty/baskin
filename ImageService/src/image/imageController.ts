@@ -5,7 +5,6 @@ import { ImageService } from './imageService';
 export class ImageController extends Controller {
   @Post()
   @SuccessResponse('201', 'Image created')
-  @Response('400', 'No Images Provided')
   @Response('415', 'Unsupported Media Type')
   public async createImages(
     @UploadedFiles() files: Express.Multer.File[],
