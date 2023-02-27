@@ -7,7 +7,7 @@
     "test:silent": "jest --runInBand --forceExit --silent",
     "test:watch": "jest --runInBand --forceExit --watchAll",
     "test:backend": "jest --runInBand --forceExit --silent --collectCoverageFrom=src/graphql/**/*.* src/__tests__/graphql",
-    "test:frontend": "jest --runInBand --forceExit --silent --collectCoverageFrom=src/{pages,components}/**/*.tsx src/__tests__/frontend"
+    "test:frontend": "jest --silent --collectCoverageFrom=src/{pages,components}/**/*.tsx src/__tests__/frontend"
   },
   "devDependencies": {
     "@jest/globals": "*",

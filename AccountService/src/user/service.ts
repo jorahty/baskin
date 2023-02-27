@@ -11,7 +11,7 @@ export class UserService {
     `;
     select += username ? ` WHERE username = $1` : ``;
     select += email ? ` WHERE data->>'email' = $1` : ``;
-    
+
     const query = {
       text: select,
       values: username ? [username] : email ? [email] : [],
