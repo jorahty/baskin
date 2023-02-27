@@ -6,7 +6,7 @@ export class CategoryService {
   public async list(): Promise<Category[]> {
     const data = await queryGQL(
       'http://localhost:3013/graphql',
-      'query category { category { slug, name } }',
+      'query ListCategories { category { slug, name } }',
     );
     return data.category;
   }
