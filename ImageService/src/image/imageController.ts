@@ -1,29 +1,29 @@
-import {
-  Controller,
-  Post,
-  Route,
-  Response,
-  Request,
-  UploadedFile,
-  UploadedFiles,
-  FormField,
-  SuccessResponse,
-} from 'tsoa';
+import { Response, Controller, Post, Route, UploadedFiles } from 'tsoa';
 import { ImageService } from './imageService';
-import express from 'express';
-import multer from 'multer';
 
-import fileUpload from 'express-fileupload';
-
-@Route('images')
+@Route('image')
 export class ImageController extends Controller {
   @Post()
-  @SuccessResponse(201)
-  public async postImage(@Request() request: Express.Request): Promise<string | undefined> {
-    return new ImageService().postImage(request).then((res: string | undefined) => {
-      console.log(res);
-      if (!res) this.setStatus(400);
-      return res;
-    });
+  @Response('400', 'Unsupported file type')
+  public async createImages(
+    @UploadedFiles() files: Express.Multer.File[],
+  ): Promise<void|string[]> {
+    // Define supported file types
+    const supported = [
+      'image/png',
+      'image/jpeg',
+      'image/gif',
+      'image/webp',
+    ];
+
+    // Check if any of the files are unsupported
+    for (const file of files) {
+      if (supported.includes(file.mimetype) === false) {
+        return this.setStatus(400);
+      }
+    }
+
+    // Write files to disk and return corresponding array of URLs
+    return new ImageService().create(files);
   }
 }

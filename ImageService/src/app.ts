@@ -1,34 +1,22 @@
-import express, { Express, Request, Response, Router } from 'express';
-import cors from 'cors';
+import express, { Router } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
+import swaggerDocument from '../build/swagger.json';
 import { RegisterRoutes } from '../build/routes';
-import fileUpload from 'express-fileupload';
 
-const app: Express = express();
-app.use(cors());
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(fileUpload());
 
-app.use('/api/v0/docs', swaggerUi.serve, async (_req: Request, res: Response) => {
-  return res.send(swaggerUi.generateHTML(await import('../build/swagger.json')));
-});
-
-// Serve all image in /image
-app.use('/images', express.static('images'));
-
+// Generate tsoa routes
 const router = Router();
 RegisterRoutes(router);
 app.use('/api/v0', router);
 
-// const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
-//   res.status(err.status).json({
-//     message: err.message,
-//     errors: err.errors,
-//     status: err.status,
-//   });
-// };
-// app.use(errorHandler);
+// Serve all image files in the directory named `public`
+app.use(express.static('public'));
+
+// Serve swagger UI
+app.use('/api/v0/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;

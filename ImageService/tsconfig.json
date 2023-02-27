@@ -19,9 +19,6 @@
 
     "baseUrl": "./",
     "resolveJsonModule": true,
-    "removeComments": true,
-
-    // Extra Settings
-    "typeRoots": ["./node_modules/@types"]
+    "removeComments": true,        
   },
 }
