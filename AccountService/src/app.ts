@@ -1,26 +1,21 @@
-import express, {
-  Express,
-  Router,
-  Response as ExResponse,
-  Request as ExRequest,
-} from 'express';
+import express from 'express';
+import { graphqlHTTP } from 'express-graphql';
+import 'reflect-metadata'; // must come before buildSchemaSync
+import { buildSchemaSync } from 'type-graphql';
+import expressPlayground from 'graphql-playground-middleware-express';
 
-import swaggerUi from 'swagger-ui-express';
+import { UserResolver } from './user/resolver';
 
-import { RegisterRoutes } from '../build/routes';
-
-const app: Express = express();
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/api/v0/docs', swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
-  return res.send(
-    swaggerUi.generateHTML(await import('../build/swagger.json'))
-  );
+const schema = buildSchemaSync({
+  resolvers: [UserResolver],
 });
 
-const router = Router();
-RegisterRoutes(router);
-app.use('/api/v0', router);
+app.use('/graphql', graphqlHTTP({ schema }));
+
+app.get('/playground', expressPlayground({ endpoint: '/graphql' }));
 
 export default app;

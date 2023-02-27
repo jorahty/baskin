@@ -1,5 +1,7 @@
 import http from 'http';
 import supertest from 'supertest';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 
 import * as db from './db';
@@ -9,16 +11,38 @@ import * as login from './login';
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
+const URL = 'http://localhost:3011/graphql';
+
+let password = '$2b$10$Y00XOZD/f5gBSpDusPUgU.iJufk6Nxx6gAoHRG8t2eHyGgoP2bK4y';
+const handlers = [
+  rest.post(URL, (req, res, ctx) => {
+    return res(
+      ctx.json({ data: {
+        user: [{
+          username: 'molly_member',
+          name: 'Molly Member',
+          password: password,
+        }],
+      } }),
+    );
+  }),
+];
+const accountservice = setupServer(...handlers);
+
 beforeAll(async () => {
   server = http.createServer(requestHandler);
   server.listen();
   request = supertest(server);
+  accountservice.listen();
   db.reset();
   return new Promise(resolve => setTimeout(resolve, 500));
 });
 
+afterEach(() => accountservice.resetHandlers());
+
 afterAll(done => {
   server.close(done);
+  accountservice.close();
   db.shutdown();
 });
 
@@ -78,6 +102,7 @@ test('Non-existent user', async () => {
 });
 
 test('Bad Format', async () => {
+  password = '$2b$10$Y00XOZD/f5gBSpDusPUgU.iJufk6Nxx6gAoHRG8t2eHyGgoP2bK';
   const member = bad;
   await request
     .post('/api/graphql')

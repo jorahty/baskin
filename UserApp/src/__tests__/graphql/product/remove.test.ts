@@ -9,9 +9,16 @@ import requestHandler from '../requestHandler';
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
+import { setupServer } from 'msw/node';
+
+const handlers = [login.loginHandlers];
+
+const microServiceServer = setupServer(...handlers);
+
 beforeAll(async () => {
   server = http.createServer(requestHandler);
   server.listen();
+  microServiceServer.listen();
   request = supertest(server);
   await db.reset();
   return new Promise(resolve => setTimeout(resolve, 500));
@@ -19,6 +26,7 @@ beforeAll(async () => {
 
 afterAll(done => {
   server.close(done);
+  microServiceServer.close();
   db.shutdown();
 });
 

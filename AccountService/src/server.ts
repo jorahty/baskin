@@ -6,6 +6,6 @@ import app from './app';
 const port = 3011;
 
 app.listen(port, () => {
-  console.log(`Server Running on port ${port}`);
-  console.log(`API Testing UI: http://localhost:${port}/api/v0/docs/`);
+  console.log(`Running a GraphQL API server at http://localhost:${port}/graphql`);
+  console.log(`Running a GraphQL Playground at http://localhost:${port}/playground`);
 });

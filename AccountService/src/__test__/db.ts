@@ -28,8 +28,10 @@ const reset = async () => {
   await run('sql/data.sql');
 };
 
-const shutdown = async () => {
-  await pool.end();
+const shutdown = () => {
+  pool.end(() => {
+    // console.log('pool has ended');
+  });
 };
 
 export { reset, shutdown };
