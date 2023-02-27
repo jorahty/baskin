@@ -16,7 +16,17 @@ jest.mock('next/router', () => ({
 }));
 
 const handlers = [
-  graphql.query('UserPage', async (req, res, ctx) => {
+  graphql.query('listUser', async (req, res, ctx) => {
+    return res(ctx.data({
+      user: [{
+        username: 'johndoes1',
+        name: 'Molly Member',
+        email: 'jd@books.com',
+      }],
+    },
+    ));
+  }),
+  graphql.query('ListProducts', async (req, res, ctx) => {
     return res(
       ctx.data({
         product: [{
@@ -36,16 +46,6 @@ const handlers = [
       }),
     );
   }),
-  graphql.query('UserProfile', async (req, res, ctx) => {
-    return res(ctx.data({
-      user: [{
-        username: 'molly_member',
-        name: 'Molly Member',
-        email: 'molly@books.com',
-      }],
-    },
-    ));
-  }),
 ];
 
 const server = setupServer(...handlers);
@@ -56,9 +56,8 @@ afterAll(() => server.close());
 
 const renderView = async () => {
   const { props } = await getServerSideProps({
-    req: { headers: { host: 'localhost:3000' } },
     query: { username: 'molly_member' },
-  });
+  } as any) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
   render(
     <CssVarsProvider>
       <UserPage user={props.user} products={props.products} />

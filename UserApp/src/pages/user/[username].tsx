@@ -5,37 +5,17 @@ import { Container } from '@mui/joy';
 import ProductList from '../../components/product/list';
 import { User } from '@/graphql/user/schema';
 import UserDetails from '../../components/user/details';
-import request, { gql } from 'graphql-request';
+import { UserService } from '../../graphql/user/service';
+import { ProductService } from '../../graphql/product/service';
 
-// Within `getServerSideProps`, we can (and should) query micro services directly
+// Within `getServerSideProps`, we can (and should) query
+// micro services directly. https://tinyurl.com/ysfwst5r
 export const getServerSideProps: GetServerSideProps = async ({ query: { username } }) => {
-  let query = gql`
-    query UserPage($user: String!) {
-      product(user: $user) {
-        id, user, category, name, price, discount,
-        quantity, description, date, pictures
-      }
-    }
-  `;
-  const productData = await request(
-    'http://localhost:3013/graphql',
-    query,
-    { user: username },
-  );
-  query = gql`query UserProfile($user: String!) {
-    user(username: $user) {
-      name, email, username
-    }
-  }`;
-  const userData = await request(
-    'http://localhost:3011/graphql',
-    query,
-    { user: username },
-  );
+  const [user] = await new UserService().list(username as string);
   return {
     props: {
-      user: userData.user[0],
-      products: productData.product,
+      user: user,
+      products: await new ProductService().list({ user: username as string }),
     },
   };
 };
