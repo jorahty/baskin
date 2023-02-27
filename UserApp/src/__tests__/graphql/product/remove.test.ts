@@ -15,15 +15,15 @@ let request: supertest.SuperTest<supertest.Test>;
 const handlers = [
   login.loginHandlers,
   graphql.query('ListProducts', async (req, res, ctx) => {
-    const { id } = req.variables
+    const { id } = req.variables;
 
-    if (id === "5555a266-a631-4598-9bd5-52bd5ee2d9aa") return res(
+    if (id === '5555a266-a631-4598-9bd5-52bd5ee2d9aa') return res(
       ctx.data({
         product: [],
       }),
     );
-    
-    if (id === "7777a266-a631-4598-9bd5-52bd5ee2d9aa") return res(
+
+    if (id === '7777a266-a631-4598-9bd5-52bd5ee2d9aa') return res(
       ctx.data({
         product: [{
           user: 'not_molly_member',
