@@ -4,27 +4,16 @@ import { Product } from '@/graphql/product/schema';
 import { Category } from '../graphql/category/schema';
 import Layout from '../components/layout/Layout';
 import Sidebar from '../components/layout/Sidebar';
-import request, { gql } from 'graphql-request';
+import { ProductService } from '../graphql/product/service';
+import { CategoryService } from '../graphql/category/service';
 
-// Within `getServerSideProps`, we can (and should) query micro services directly
+// Within `getServerSideProps`, we can (and should) query
+// micro services directly. https://tinyurl.com/ysfwst5r
 export const getServerSideProps: GetServerSideProps = async () => {
-  const query = gql`
-    query IndexPage {
-      product {
-        id, user, category, name, price, discount,
-        quantity, description, date, pictures
-      }
-      category { slug, name }
-    }
-  `;
-  const data = await request(
-    'http://localhost:3013/graphql',
-    query,
-  );
   return {
     props: {
-      products: data.product,
-      categories: data.category,
+      products: await new ProductService().list({}),
+      categories: await new CategoryService().list(),
     },
   };
 };

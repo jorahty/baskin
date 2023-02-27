@@ -9,16 +9,9 @@ import IndexPage from '../../../pages/index';
 import { getServerSideProps } from '../../../pages/index';
 
 const handlers = [
-  graphql.query('IndexPage', async (req, res, ctx) => {
+  graphql.query('ListProducts', async (req, res, ctx) => {
     return res(
       ctx.data({
-        category: [{
-          slug: 'vehicles',
-          name: 'Vehicles',
-        }, {
-          slug: 'apparel',
-          name: 'Apparel',
-        }],
         product: [{
           id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
           user: 'molly_member',
@@ -36,12 +29,21 @@ const handlers = [
       }),
     );
   }),
+  graphql.query('ListCategories', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        category: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
 ];
 
 const server = setupServer(...handlers);
 
 beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 jest.mock('next/router', () => ({
@@ -53,8 +55,8 @@ jest.mock('next/router', () => ({
 }));
 
 const renderView = async () => {
-  const { props } = await getServerSideProps(
-    { req: { headers: { host: 'localhost:3000' } } });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { props } = await getServerSideProps({} as any) as any;
   render(
     <CssVarsProvider>
       <IndexPage
