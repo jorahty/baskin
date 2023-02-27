@@ -50,6 +50,26 @@ const handlers = [
       }),
     );
   }),
+  graphql.mutation('RemoveProduct', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        removeProduct: {
+          id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+          user: 'molly_member',
+          category: 'clothing',
+          name: 'Toy robot',
+          price: 250,
+          date: '2023-02-09T06:43:08.000Z',
+          discount: 0,
+          quantity: 1,
+          description: 'brand new',
+          pictures: [
+            'https://images.pexels.com/whatever',
+          ],
+        },
+      }),
+    );
+  }),
 ];
 
 const microServiceServer = setupServer(...handlers);

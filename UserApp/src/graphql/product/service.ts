@@ -53,27 +53,29 @@ export class ProductService {
     return data.addProduct;
   }
 
-  public async remove(id:string, request: Request): Promise<Product> {
+  public async remove(id: string, { user }: Request): Promise<Product> {
     const products = await this.list({ id: id });
     if (products.length == 0) {
       throw new Error('Product does not exist');
-    } else if (products[0].user != request.user.username) {
+    } else if (products[0].user != user.username) {
       throw new Error('Not owner of product');
     }
-    const insert =
-      'Delete From product WHERE id = $1 RETURNING *';
-    const query = {
-      text: insert,
-      values: [ id ],
-    };
+    
+    const mutation = gql`
+      mutation RemoveProduct($id: String!) {
+        removeProduct(id: $id) {
+          id, user, category, name, price, discount,
+          quantity, description, date, pictures
+        }
+      }
+    `;
 
-    const { rows } = await pool.query(query);
+    const data = await request(
+      'http://localhost:3013/graphql',
+      mutation,
+      { id: id },
+    );
 
-    const product = rows[0].data;
-    product['user'] = rows[0].member_username;
-    product['category'] = rows[0].category_slug;
-    product['id'] = rows[0].id;
-
-    return product;
+    return data.removeProduct;
   }
 }
