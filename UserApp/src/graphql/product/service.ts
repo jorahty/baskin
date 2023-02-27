@@ -1,5 +1,4 @@
 import { Product, ProductArgs } from './schema';
-import { pool } from '../db';
 import { Request } from 'next';
 import request, { gql } from 'graphql-request';
 
@@ -60,7 +59,7 @@ export class ProductService {
     } else if (products[0].user != user.username) {
       throw new Error('Not owner of product');
     }
-    
+
     const mutation = gql`
       mutation RemoveProduct($id: String!) {
         removeProduct(id: $id) {
