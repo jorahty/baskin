@@ -1,5 +1,4 @@
-import fs from 'fs';
-import supertest, { Response } from 'supertest';
+import supertest from 'supertest';
 
 import * as http from 'http';
 
@@ -42,10 +41,10 @@ test('POST Bad Media Type', async () => {
     .set('accept', 'application/json')
     .set('Content-Type', 'multipart/form-data')
     .attach('files', path.join(__dirname, 'assets/bad.txt'))
-    .expect(415)
+    .expect(415);
 });
 
-let newImageIds;
+let newImageUrls: string[];
 
 test('POST New', async () => {
   await request
@@ -58,21 +57,16 @@ test('POST New', async () => {
     .then(res => {
       expect(res.body).toBeDefined();
       expect(res.body).toHaveLength(2);
-      newImageIds = res.body;
+      newImageUrls = res.body;
     });
 });
 
-// test('DELETE New', async () => {
-//   for (id of newImageIds) {
-//     await request
-//       .post('/api/v0/image')
-//       .set('accept', 'application/json')
-//       .set('Content-Type', 'multipart/form-data')
-//       .attach('files', path.join(__dirname, 'assets/good.jpg'))
-//       .expect(201)
-//       .then(res => {
-//         expect(res.body).toBeDefined();
-//         console.log(res.body);
-//       });
-//   }
-// });
+test('DELETE New', async () => {
+  for (const url of newImageUrls) {
+    const filename = url.split('/')[url.split('/').length - 1];
+    const id = filename.split('.')[0];
+    await request
+      .delete('/api/v0/image/' + id)
+      .expect(204);
+  }
+});

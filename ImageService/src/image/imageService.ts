@@ -16,10 +16,10 @@ export class ImageService {
 
       // Define file name
       const fileName = id + '.' + fileExtention;
-      
+
       // Determine file path
       const filePath = path.join(__dirname, '../../public', fileName);
-      
+
       // Write to disk (into the directory named `public`)
       fs.writeFileSync(filePath, file.buffer);
 
@@ -32,7 +32,7 @@ export class ImageService {
     const directory = path.join(__dirname, '../../public');
     fs.readdir(directory, (_, files) => {
       files.forEach(file => {
-        if (file.split('.')[0] === 'myfile') fs.unlinkSync(directory + file);
+        if (file.split('.')[0] === id) fs.unlinkSync(path.join(directory, file));
       });
     });
   }
