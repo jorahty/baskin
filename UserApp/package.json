@@ -3,10 +3,10 @@
   "scripts": {
     "dev": "next dev",
     "lint": "next lint --fix",
-    "test": "jest --runInBand --forceExit",
-    "test:silent": "jest --runInBand --forceExit --silent",
-    "test:watch": "jest --runInBand --forceExit --watchAll",
-    "test:backend": "jest --runInBand --forceExit --silent --collectCoverageFrom=src/graphql/**/*.* src/__tests__/graphql",
+    "test": "jest",
+    "test:silent": "jest --silent",
+    "test:watch": "jest --watchAll",
+    "test:backend": "jest --silent --collectCoverageFrom=src/graphql/**/*.* src/__tests__/graphql",
     "test:frontend": "jest --silent --collectCoverageFrom=src/{pages,components}/**/*.tsx src/__tests__/frontend"
   },
   "devDependencies": {
@@ -17,7 +17,6 @@
     "@types/bcrypt": "*",
     "@types/jsonwebtoken": "*",
     "@types/node": "*",
-    "@types/pg": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
     "@types/supertest": "*",
@@ -30,7 +29,6 @@
     "supertest": "*",
     "ts-jest": "*",
     "ts-node": "*",
-    "ts-postgres": "*",
     "typescript": "*",
     "whatwg-fetch": "*"
   },
@@ -46,7 +44,6 @@
     "graphql-yoga": "*",
     "jsonwebtoken": "*",
     "next": "*",
-    "pg": "*",
     "react": "*",
     "react-dom": "*",
     "reflect-metadata": "*",
