@@ -1,20 +1,18 @@
-import { pool } from '../db';
 import { Message } from './schema';
+import request, { gql } from 'graphql-request';
 
 export class MessageService {
   public async list(id: string): Promise<Message[]> {
-    const select = `
-      SELECT data || jsonb_build_object('id', id) 
-      AS message 
-      FROM message 
-      WHERE chat_id = $1
+    const query = gql`
+      query listMessages($id: String!) {
+        message(id: $id) {
+          content
+          sender
+        }
+      }
     `;
 
-    const query = {
-      text: select,
-      values: [id],
-    };
-    const { rows } = await pool.query(query);
-    return rows.map(row => row.message);
+    const { message: messages } = await request('http://localhost:3014/graphql', query, { id });
+    return messages;
   }
 }

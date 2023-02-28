@@ -1,15 +1,14 @@
 import http from 'http';
 import supertest from 'supertest';
-import 'whatwg-fetch';
 
-import * as db from './db';
-import requestHandler from './requestHandler';
+import * as db from '../db';
+import app from '../../app';
 
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
 beforeAll(async () => {
-  server = http.createServer(requestHandler);
+  server = http.createServer(app);
   server.listen();
   request = supertest(server);
   db.reset();
@@ -21,50 +20,62 @@ afterAll(done => {
   db.shutdown();
 });
 
-test('Fetch chats molly', async () => {
+test('List Molly\'s Chats', async () => {
   await request
-    .post('/api/graphql')
+    .post('/graphql')
     .send({
       query: `{chat(username: "molly_member"){id}}`,
     })
     .expect(200)
     .then(res => {
       expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      expect(res.body.data).toBeDefined();
+      expect(res.body.data.chat).toBeDefined();
     });
 });
 
-test('Fetch chats anna', async () => {
+test('List Anna\'s Chats', async () => {
   await request
-    .post('/api/graphql')
+    .post('/graphql')
     .send({
       query: `{chat(username: "anna_admin"){id}}`,
     })
     .expect(200)
     .then(res => {
       expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      expect(res.body.data).toBeDefined();
+      expect(res.body.data.chat).toBeDefined();
     });
 });
 
-test('Fetch chats nobby', async () => {
+test('List Nobby\'s Chats', async () => {
   await request
-    .post('/api/graphql')
+    .post('/graphql')
     .send({
-      query: `{chat(username: "nobby_nobody"){id}}`,
+      query: `{ chat(username: "nobby_nobody"){id} }`,
     })
     .expect(200)
     .then(res => {
       expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      expect(res.body.data).toBeDefined();
+      expect(res.body.data.chat).toBeDefined();
     });
 });
 
-test('Fetch chats mia', async () => {
+test('List Mia\'s Chats', async () => {
   await request
-    .post('/api/graphql')
+    .post('/graphql')
     .send({
-      query: `{chat(username: "mia_moderator"){id}}`,
+      query: `{ chat(username: "mia_moderator"){id} }`,
     })
     .expect(200)
     .then(res => {
       expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      expect(res.body.data).toBeDefined();
+      expect(res.body.data.chat).toBeDefined();
     });
 });

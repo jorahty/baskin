@@ -2,7 +2,6 @@ import http from 'http';
 import supertest from 'supertest';
 import 'whatwg-fetch';
 
-import * as db from '../db';
 import * as login from '../login';
 import requestHandler from '../requestHandler';
 
@@ -17,37 +16,41 @@ const handlers = [
   graphql.query('ListProducts', async (req, res, ctx) => {
     const { id } = req.variables;
 
-    if (id === '5555a266-a631-4598-9bd5-52bd5ee2d9aa') return res(
-      ctx.data({
-        product: [],
-      }),
-    );
+    if (id === '5555a266-a631-4598-9bd5-52bd5ee2d9aa')
+      return res(
+        ctx.data({
+          product: [],
+        })
+      );
 
-    if (id === '7777a266-a631-4598-9bd5-52bd5ee2d9aa') return res(
-      ctx.data({
-        product: [{
-          user: 'not_molly_member',
-        }],
-      }),
-    );
+    if (id === '7777a266-a631-4598-9bd5-52bd5ee2d9aa')
+      return res(
+        ctx.data({
+          product: [
+            {
+              user: 'not_molly_member',
+            },
+          ],
+        })
+      );
 
     return res(
       ctx.data({
-        product: [{
-          id: '123',
-          user: 'molly_member',
-          category: 'clothing',
-          name: 'HOODIE',
-          price: 250,
-          date: '2023-02-09T06:43:08.000Z',
-          discount: 0,
-          quantity: 1,
-          description: 'Never worn',
-          pictures: [
-            'https://images.pexels.com/whatever',
-          ],
-        }],
-      }),
+        product: [
+          {
+            id: '123',
+            user: 'molly_member',
+            category: 'clothing',
+            name: 'HOODIE',
+            price: 250,
+            date: '2023-02-09T06:43:08.000Z',
+            discount: 0,
+            quantity: 1,
+            description: 'Never worn',
+            pictures: ['https://images.pexels.com/whatever'],
+          },
+        ],
+      })
     );
   }),
   graphql.mutation('RemoveProduct', async (req, res, ctx) => {
@@ -63,11 +66,9 @@ const handlers = [
           discount: 0,
           quantity: 1,
           description: 'brand new',
-          pictures: [
-            'https://images.pexels.com/whatever',
-          ],
+          pictures: ['https://images.pexels.com/whatever'],
         },
-      }),
+      })
     );
   }),
 ];
@@ -79,17 +80,15 @@ beforeAll(async () => {
   server.listen();
   microServiceServer.listen();
   request = supertest(server);
-  await db.reset();
   return new Promise(resolve => setTimeout(resolve, 500));
 });
 
 afterAll(done => {
   server.close(done);
   microServiceServer.close();
-  db.shutdown();
 });
 
-let accessToken: string|undefined;
+let accessToken: string | undefined;
 
 test('Remove Product', async () => {
   accessToken = await login.asMolly(request);

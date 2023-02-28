@@ -3,7 +3,6 @@ import supertest from 'supertest';
 import * as login from './login';
 import 'whatwg-fetch';
 
-import * as db from './db';
 import requestHandler from './requestHandler';
 
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
@@ -14,24 +13,26 @@ import { setupServer } from 'msw/node';
 
 const handlers = [
   graphql.mutation('changeUsername', async (req, res, ctx) => {
-    return res(ctx.data({
-      updateUsername: {
-        username: 'molly_member',
-        name: 'Molly Member',
-        email: 'molly@books.com',
-      },
-    },
-    ));
+    return res(
+      ctx.data({
+        updateUsername: {
+          username: 'molly_member',
+          name: 'Molly Member',
+          email: 'molly@books.com',
+        },
+      })
+    );
   }),
   graphql.mutation('changeEmail', async (req, res, ctx) => {
-    return res(ctx.data({
-      updateUsername: {
-        username: 'molly_member',
-        name: 'Molly Member',
-        email: 'john@gmail.com',
-      },
-    },
-    ));
+    return res(
+      ctx.data({
+        updateUsername: {
+          username: 'molly_member',
+          name: 'Molly Member',
+          email: 'john@gmail.com',
+        },
+      })
+    );
   }),
   login.loginHandlers,
 ];
@@ -43,7 +44,6 @@ beforeAll(async () => {
   server.listen();
   microServiceServer.listen();
   request = supertest(server);
-  await db.reset();
   return new Promise(resolve => setTimeout(resolve, 500));
 });
 
@@ -51,7 +51,6 @@ afterAll(async () => {
   server.close();
   microServiceServer.close();
   await new Promise(resolve => setTimeout(resolve, 500));
-  db.shutdown();
 });
 
 test('Change Username', async () => {
@@ -99,4 +98,3 @@ test('Change Email', async () => {
       expect(data.body.data.updateEmail.email).toEqual('john@gmail.com');
     });
 });
-

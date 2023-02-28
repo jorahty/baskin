@@ -4,7 +4,6 @@ import { setupServer } from 'msw/node';
 import supertest from 'supertest';
 import 'whatwg-fetch';
 
-import * as db from '../db';
 import requestHandler from '../requestHandler';
 
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
@@ -14,21 +13,21 @@ const handlers = [
   graphql.query('ListProducts', async (req, res, ctx) => {
     return res(
       ctx.data({
-        product: [{
-          id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
-          user: 'molly_member',
-          category: 'clothing',
-          name: 'Air Jordan 15',
-          price: 250,
-          date: '2023-02-09T06:43:08.000Z',
-          discount: 0,
-          quantity: 1,
-          description: 'Never worn',
-          pictures: [
-            'https://images.pexels.com/whatever',
-          ],
-        }],
-      }),
+        product: [
+          {
+            id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+            user: 'molly_member',
+            category: 'clothing',
+            name: 'Air Jordan 15',
+            price: 250,
+            date: '2023-02-09T06:43:08.000Z',
+            discount: 0,
+            quantity: 1,
+            description: 'Never worn',
+            pictures: ['https://images.pexels.com/whatever'],
+          },
+        ],
+      })
     );
   }),
 ];
@@ -40,7 +39,6 @@ beforeAll(async () => {
   server.listen();
   microServiceServer.listen();
   request = supertest(server);
-  await db.reset();
   return new Promise(resolve => setTimeout(resolve, 500));
 });
 
@@ -49,7 +47,6 @@ afterEach(() => microServiceServer.resetHandlers());
 afterAll(done => {
   server.close(done);
   microServiceServer.close();
-  db.shutdown();
 });
 
 test('Fetch All Products', async () => {

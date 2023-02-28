@@ -54,6 +54,7 @@ export default function Layout({ children, sidebar }: Props) {
           </>
         )}
         <Box
+          width="calc(100vw - 240)"
           sx={{
             ...(sidebarOpen && { zIndex: -1 }),
             ...sx,

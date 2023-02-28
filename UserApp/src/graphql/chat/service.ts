@@ -1,29 +1,39 @@
-import { pool } from '../db';
 import { Chat } from './schema';
+import request, { gql } from 'graphql-request';
 
 export class ChatService {
   public async list(username: string): Promise<Chat[]> {
-    const select = `
-      SELECT 
-        chat.id,
-        chat.data->>'name' as name,
-        jsonb_agg(
-          jsonb_build_object(
-            'username', chat_member.member_username
-          ) ORDER BY chat_member.member_username
-        ) as members
-      FROM chat
-      JOIN chat_member ON chat_member.chat_id = chat.id
-      WHERE chat.id IN (
-        SELECT chat_id FROM chat_member WHERE member_username = $1
-      )
-      GROUP BY chat.id, chat.data->>'name'
+    const chatQuery = gql`
+      query ListChats($username: String) {
+        chat(username: $username) {
+          id
+          name
+          members {
+            username
+          }
+        }
+      }
     `;
-    const query = {
-      text: select,
-      values: [username],
-    };
-    const { rows } = await pool.query(query);
-    return rows;
+
+    const { chat: chats } = await request('http://localhost:3014/graphql', chatQuery, { username });
+
+    for await (const chat of chats) {
+      const accountQuery = gql`
+        query getAccountName($username: String) {
+          user(username: $username) {
+            name
+          }
+        }
+      `;
+
+      for await (const member of chat.members) {
+        const { user } = await request('http://localhost:3011/graphql', accountQuery, {
+          username: member.username,
+        });
+        member.name = user[0].name;
+      }
+    }
+
+    return chats;
   }
 }

@@ -18,11 +18,13 @@
 <tr><td>AccountService</td><td>3011</td></tr>
 <tr><td>ImageService</td><td>3012</td></tr>
 <tr><td>ProductService</td><td>3013</td></tr>
+<tr><td>ProductService</td><td>3014</td></tr>
 </table>
 
 ## Usage
 
 Set a JWT Master Secret:
+
 ```
 export ACCESS_TOKEN=some-long-secret-more-complex-than-this
 ```
@@ -30,6 +32,7 @@ export ACCESS_TOKEN=some-long-secret-more-complex-than-this
 For all micro services that use Postgres
 (AccountService, ProductService)
 set environment variables:
+
 ```
 POSTGRES_DB=dev
 POSTGRES_USER=some-user

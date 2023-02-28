@@ -1,5 +1,6 @@
-DROP SCHEMA public cascade;
-CREATE SCHEMA public;
+DROP TABLE IF EXISTS chat_member;
+DROP TABLE IF EXISTS message;
+DROP TABLE IF EXISTS chat;
 
 CREATE TABLE chat (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data jsonb);
 

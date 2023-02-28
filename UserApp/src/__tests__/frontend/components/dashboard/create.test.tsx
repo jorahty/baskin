@@ -18,7 +18,7 @@ const handlers = [
           addProduct: {
             id: '11111',
           },
-        }),
+        })
       );
     } else {
       return res(
@@ -26,7 +26,7 @@ const handlers = [
           {
             message: 'Unexpected error.',
           },
-        ]),
+        ])
       );
     }
   }),
@@ -43,7 +43,7 @@ const handlers = [
             slug: 'toys',
           },
         ],
-      }),
+      })
     );
   }),
 ];
@@ -69,16 +69,16 @@ const renderView = async () => {
   render(
     <CssVarsProvider>
       <AppContextProvider>
-        <Create setModal={setModal}/>
+        <Create setModal={setModal} />
       </AppContextProvider>
-    </CssVarsProvider>,
+    </CssVarsProvider>
   );
 };
 
 test('Renders', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
   );
   await renderView();
   await screen.findByText('Create New Product');
@@ -87,7 +87,7 @@ test('Renders', async () => {
 test('Click Cancel', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
   );
   await renderView();
   await screen.findByText('Create New Product');
@@ -97,7 +97,7 @@ test('Click Cancel', async () => {
 test('Click create', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
   );
   await renderView();
   let alerted = false;
@@ -128,7 +128,7 @@ test('Click create', async () => {
   const url = await screen.getByLabelText('picture');
   await userEvent.type(
     url,
-    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
   );
   fireEvent.click(screen.getByLabelText('submit'));
   fireEvent.click(screen.getByLabelText('create'));
@@ -141,7 +141,7 @@ test('Click create', async () => {
 test('Click create invalid', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
   );
   await renderView();
   let alerted = false;
@@ -167,7 +167,7 @@ test('Click create invalid', async () => {
 test('Add image and remove', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
   );
   await renderView();
   let alerted = false;
@@ -179,7 +179,7 @@ test('Add image and remove', async () => {
   const url = await screen.getByLabelText('picture');
   await userEvent.type(
     url,
-    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
   );
   await fireEvent.click(screen.getByLabelText('submit'));
   await fireEvent.click(screen.getByLabelText('remove0'));
@@ -191,7 +191,7 @@ test('Add image and remove', async () => {
 test('Add image and cancel', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
   );
   await renderView();
   let alerted = false;
@@ -203,7 +203,7 @@ test('Add image and cancel', async () => {
   const url = await screen.getByLabelText('picture');
   await userEvent.type(
     url,
-    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
   );
   fireEvent.keyDown(screen.getByText('Submit'), {
     key: 'Escape',

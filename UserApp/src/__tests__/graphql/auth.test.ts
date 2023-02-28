@@ -4,7 +4,6 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 
-import * as db from './db';
 import requestHandler from './requestHandler';
 import * as login from './login';
 
@@ -17,13 +16,17 @@ let password = '$2b$10$Y00XOZD/f5gBSpDusPUgU.iJufk6Nxx6gAoHRG8t2eHyGgoP2bK4y';
 const handlers = [
   rest.post(URL, (req, res, ctx) => {
     return res(
-      ctx.json({ data: {
-        user: [{
-          username: 'molly_member',
-          name: 'Molly Member',
-          password: password,
-        }],
-      } }),
+      ctx.json({
+        data: {
+          user: [
+            {
+              username: 'molly_member',
+              name: 'Molly Member',
+              password: password,
+            },
+          ],
+        },
+      })
     );
   }),
 ];
@@ -34,7 +37,6 @@ beforeAll(async () => {
   server.listen();
   request = supertest(server);
   accountservice.listen();
-  db.reset();
   return new Promise(resolve => setTimeout(resolve, 500));
 });
 
@@ -43,7 +45,6 @@ afterEach(() => accountservice.resetHandlers());
 afterAll(done => {
   server.close(done);
   accountservice.close();
-  db.shutdown();
 });
 
 const bad = {
