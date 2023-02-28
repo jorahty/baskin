@@ -25,10 +25,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
     setProductList(products);
   }, [products]);
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    product: string,
-  ) => {
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, product: string) => {
     setProduct(product);
     setAnchorEl(event.currentTarget);
   };
@@ -47,7 +44,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
     });
     const query = gql`mutation removeProduct {removeProduct (product: "${product}") { id }}`;
     await graphQLClient.request(query);
-    setProductList(productList.filter(row => row.id != product));
+    setProductList(productList.filter((row) => row.id != product));
   };
 
   return (
@@ -68,9 +65,9 @@ export default function ProductTable({ products }: { products: Product[] }) {
         stickyHeader
         hoverRow
         sx={{
-          '--TableCell-headBackground': theme => theme.vars.palette.background.level1,
+          '--TableCell-headBackground': (theme) => theme.vars.palette.background.level1,
           '--Table-headerUnderlineThickness': '1px',
-          '--TableRow-hoverBackground': theme => theme.vars.palette.background.level1,
+          '--TableRow-hoverBackground': (theme) => theme.vars.palette.background.level1,
         }}
       >
         <thead>
@@ -87,8 +84,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
             <tr key={row.id}>
               <td>
                 <Avatar
-                  src={row.pictures[0]}
-                  srcSet={row.pictures[0]}
+                  src={`http://localhost:3012/${row.pictures[0]}.jpeg`}
                   alt={`Product image of ${row.name}`}
                   sx={{ borderRadius: 'sm', height: '100px', width: '100px' }}
                 />
@@ -99,10 +95,14 @@ export default function ProductTable({ products }: { products: Product[] }) {
               <td>{row.category}</td>
               <td>{row.price}</td>
               <td>
-                <Button variant="plain" color="neutral"
+                <Button
+                  variant="plain"
+                  color="neutral"
                   aria-label="menu"
-                  onClick={event => handleClick(event, row.id)}
-                ><MoreVertIcon /></Button>
+                  onClick={(event) => handleClick(event, row.id)}
+                >
+                  <MoreVertIcon />
+                </Button>
               </td>
             </tr>
           ))}
@@ -116,18 +116,14 @@ export default function ProductTable({ products }: { products: Product[] }) {
         aria-labelledby="positioned-demo-button"
         placement="bottom-end"
       >
-        <MenuItem onClick={handleClose}
-          aria-label="edit"
-        >
+        <MenuItem onClick={handleClose} aria-label="edit">
           <ListItemDecorator>
             <Edit />
           </ListItemDecorator>{' '}
           Edit product
         </MenuItem>
         <ListDivider />
-        <MenuItem onClick={handleDelete} variant="soft" color="danger"
-          aria-label="delete"
-        >
+        <MenuItem onClick={handleDelete} variant="soft" color="danger" aria-label="delete">
           <ListItemDecorator sx={{ color: 'inherit' }}>
             <DeleteForever />
           </ListItemDecorator>{' '}
