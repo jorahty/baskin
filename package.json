@@ -1,12 +1,12 @@
 {
   "name": "baskin",
   "scripts": {
-    "docker-up": "npm run docker-up-account && npm run docker-up-product && npm run docker-up-message && npm run docker-up-userapp",
+    "docker-up": "npm run docker-up-account && npm run docker-up-product && npm run docker-up-message",
     "docker-up-account": "cd AccountService && docker-compose up -d",
     "docker-up-product": "cd ProductService && docker-compose up -d",
     "docker-up-message": "cd MessageService && docker-compose up -d",
     "docker-up-userapp": "cd UserApp && docker-compose up -d",
-    "docker-down": "npm run docker-down-account && npm run docker-down-product && npm run docker-down-message && npm run docker-down-userapp",
+    "docker-down": "npm run docker-down-account && npm run docker-down-product && npm run docker-down-message",
     "docker-down-account": "cd AccountService && docker-compose down",
     "docker-down-product": "cd ProductService && docker-compose down",
     "docker-down-message": "cd MessageService && docker-compose down",
