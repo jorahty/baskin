@@ -18,7 +18,7 @@
 <tr><td>AccountService</td><td>3011</td></tr>
 <tr><td>ImageService</td><td>3012</td></tr>
 <tr><td>ProductService</td><td>3013</td></tr>
-<tr><td>ProductService</td><td>3014</td></tr>
+<tr><td>MessageService</td><td>3014</td></tr>
 </table>
 
 ## Usage
