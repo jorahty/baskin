@@ -8,7 +8,7 @@
     "docker-down": "npm run docker-down-account && npm run docker-down-product && npm run docker-down-userapp",
     "docker-down-account": "cd AccountService && docker-compose down",
     "docker-down-product": "cd ProductService && docker-compose down",
-    "docker-down-userapp": "cd UserApp && docker-compose down", 
+    "docker-down-userapp": "cd UserApp && docker-compose down",
     "cis": "npm ci && npm run ci-account && npm run ci-image && npm run ci-product && npm run ci-userapp",
     "ci-account": "cd AccountService && npm ci",
     "ci-image": "cd ImageService && npm ci",
@@ -31,8 +31,8 @@
     "userapp": "cd UserApp && npm run dev"
   },
   "devDependencies": {
-    "eslint-config-typescript": "*",
-    "concurrently": "*"
+    "concurrently": "*",
+    "eslint-config-typescript": "*"
   },
   "repository": {
     "type": "git",

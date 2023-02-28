@@ -4,6 +4,8 @@ import * as http from 'http';
 
 import app from '../app';
 import path from 'path';
+import fs from 'fs';
+import { addImage } from './image';
 
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
@@ -28,7 +30,8 @@ test('GET API Docs', async () => {
 });
 
 test('GET One By URL', async () => {
-  await request.get('/97285551-6eea-40e6-8f6a-3b7b39c64d39.jpeg')
+  await request
+    .get('/97285551-6eea-40e6-8f6a-3b7b39c64d39.jpeg')
     .expect(200)
     .then(res => {
       expect(res.body).toBeDefined();
@@ -44,8 +47,6 @@ test('POST Bad Media Type', async () => {
     .expect(415);
 });
 
-let newImageUrls: string[];
-
 test('POST New', async () => {
   await request
     .post('/api/v0/image')
@@ -57,16 +58,58 @@ test('POST New', async () => {
     .then(res => {
       expect(res.body).toBeDefined();
       expect(res.body).toHaveLength(2);
-      newImageUrls = res.body;
+      const newImageUrls: string[] = res.body;
+
+      // Delete after done
+      newImageUrls.map(id => {
+        fs.unlinkSync(path.resolve(__dirname, '../../') + `/public/${id}.jpeg`);
+      });
     });
 });
 
+test('POST New - Large Image', async () => {
+  await addImage(request, path.join(__dirname, 'assets/large.jpg'));
+});
+
 test('DELETE New', async () => {
-  for (const url of newImageUrls) {
-    const filename = url.split('/')[url.split('/').length - 1];
-    const id = filename.split('.')[0];
-    await request
-      .delete('/api/v0/image/' + id)
-      .expect(204);
-  }
+  let newId;
+
+  await request
+    .post('/api/v0/image')
+    .set('accept', 'application/json')
+    .set('Content-Type', 'multipart/form-data')
+    .attach('files', path.join(__dirname, 'assets/large.jpg'))
+    .expect(201)
+    .then(res => {
+      expect(res.body).toBeDefined();
+      expect(res.body).toHaveLength(1);
+      newId = res.body[0];
+    });
+
+  await request.del(`/api/v0/image/${newId}`).expect(200);
+});
+
+test('DELETE Non-Existing', async () => {
+  await request.del(`/api/v0/image/08f7e135-01e6-445b-97eb-884e10640289`).expect(404);
+});
+
+test('POST New - 3 Images, 1 Corrupt File', async () => {
+  await request
+    .post('/api/v0/image')
+    .set('accept', 'application/json')
+    .set('Content-Type', 'multipart/form-data')
+    .attach('files', path.join(__dirname, 'assets/corrupt.jpeg'))
+    .attach('files', path.join(__dirname, 'assets/good.jpg'))
+    .attach('files', path.join(__dirname, 'assets/good.png'))
+    .expect(201)
+    .then(res => {
+      expect(res.body).toBeDefined();
+      expect(res.body).toHaveLength(2);
+      const newImageUrls: string[] = res.body;
+
+      // Delete after done
+      newImageUrls.map(id => {
+        fs.unlinkSync(path.resolve(__dirname, '../../') + `/public/${id}.jpeg`);
+      });
+    });
 });

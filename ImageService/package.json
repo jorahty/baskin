@@ -18,8 +18,10 @@
     "typescript": "*"
   },
   "dependencies": {
+    "@types/sharp": "^0.31.1",
     "express": "*",
     "multer": "*",
+    "sharp": "^0.31.3",
     "swagger-ui-express": "*",
     "tsoa": "*",
     "uuid": "*"

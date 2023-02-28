@@ -6,16 +6,9 @@ export class ImageController extends Controller {
   @Post()
   @SuccessResponse('201', 'Image created')
   @Response('415', 'Unsupported Media Type')
-  public async createImages(
-    @UploadedFiles() files: Express.Multer.File[],
-  ): Promise<void|string[]> {
+  public async createImages(@UploadedFiles() files: Express.Multer.File[]): Promise<void | string[]> {
     // Define supported media types
-    const supported = [
-      'image/png',
-      'image/jpeg',
-      'image/gif',
-      'image/webp',
-    ];
+    const supported = ['image/png', 'image/jpeg', 'image/webp'];
 
     // Check if any of the files are unsupported
     for (const file of files) {
@@ -29,9 +22,11 @@ export class ImageController extends Controller {
   }
 
   @Delete('{id}')
-  public async deleteImage(
-    @Path() id: string,
-  ): Promise<void> {
-    new ImageService().delete(id);
+  @SuccessResponse(200, 'File deleted')
+  @Response(404, 'Image not Found')
+  public async deleteImage(@Path() id: string): Promise<void> {
+    await new ImageService().delete(id).then((result: boolean) => {
+      if (!result) this.setStatus(404);
+    });
   }
 }
