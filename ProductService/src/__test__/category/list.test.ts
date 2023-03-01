@@ -36,7 +36,7 @@ test('List by ID', async () => {
   await request
     .post('/graphql')
     .send({
-      query: `{category (slug: "clothing") { name, slug }}`,
+      query: `{category (slug: "apparel") { name, slug }}`,
     })
     .expect(200)
     .then(res => {
