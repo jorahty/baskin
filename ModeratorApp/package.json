@@ -37,7 +37,6 @@
     "@emotion/styled": "*",
     "@mui/icons-material": "*",
     "@mui/joy": "*",
-    "@next/font": "*",
     "bcrypt": "*",
     "graphql": "*",
     "graphql-request": "*",
