@@ -1,4 +1,4 @@
-import { Breadcrumbs, Link as JoyLink, Typography } from '@mui/joy';
+import { Breadcrumbs, Typography } from '@mui/joy';
 import Link from 'next/link';
 import { Category } from '@/graphql/category/schema';
 
