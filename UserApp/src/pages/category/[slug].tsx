@@ -26,6 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     products: await new ProductService().list({ category: context.query.slug as string }),
     categories: await new CategoryService().list(),
   };
+
   return {
     props: { category: verboseCategory },
   };
