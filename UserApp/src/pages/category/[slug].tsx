@@ -10,25 +10,25 @@ import { VerboseCategory } from '..';
 // micro services directly. https://tinyurl.com/ysfwst5r
 export const getServerSideProps: GetServerSideProps = async ({ query: { slug } }) => {
   const [category] = await new CategoryService().list(slug as string);
-  const categoryPayload = {
+  const verboseCategory = {
     name: category.name,
     children: await new CategoryService().children(slug as string),
     products: await new ProductService().list({ category: slug as string }),
     categories: await new CategoryService().list(),
   };
   return {
-    props: { categoryPayload },
+    props: { category: verboseCategory },
   };
 };
 
 interface Props {
-  categoryPayload: VerboseCategory
+  category: VerboseCategory;
 }
 
-export default function CategoryPage({ categoryPayload }: Props) {
+export default function CategoryPage({ category }: Props) {
   return (
-    <Layout sidebar={<Sidebar category={categoryPayload} />}>
-      <CategoryContent category={categoryPayload}/>
+    <Layout sidebar={<Sidebar category={category} />}>
+      <CategoryContent category={category}/>
     </Layout>
   );
 }

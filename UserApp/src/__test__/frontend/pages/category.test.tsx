@@ -72,7 +72,7 @@ const renderView = async () => {
   render(
     <CssVarsProvider>
       <CategoryPage
-        categoryPayload={props.categoryPayload}
+        category={props.category}
       />
     </CssVarsProvider>
   );
