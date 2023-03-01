@@ -39,6 +39,22 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
       </List>
       <Box
         sx={{
+          fontWeight: 450,
+          display: { xs: 'block' },
+          position: 'absolute',
+          bottom: 10,
+          paddingRight: 7,
+          right: 1,
+
+        }}
+      >
+        <Link href="/terms">
+          <div>Terms & Conditions</div>
+        </Link>
+      </Box>
+      <Box
+
+        sx={{
           display: { xs: 'block', sm: 'none' },
           position: 'absolute',
           bottom: 0,
