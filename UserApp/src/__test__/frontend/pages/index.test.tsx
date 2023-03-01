@@ -60,8 +60,7 @@ const renderView = async () => {
   render(
     <CssVarsProvider>
       <IndexPage
-        categories={props.categories}
-        products={props.products}
+        categoryPayload={props.categoryPayload}
       />
     </CssVarsProvider>
   );

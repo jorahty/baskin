@@ -4,7 +4,7 @@ import { Category } from './schema';
 export class CategoryService {
   public async list(slug?: string): Promise<Category[]> {
     const mutation = gql`
-      query ListCategories($slug: String!) {
+      query ListCategories($slug: String) {
         category(slug: $slug) {
           slug, name
         }
@@ -20,9 +20,9 @@ export class CategoryService {
     return data.category;
   }
 
-  public async children(slug: string): Promise<Category[]> {
+  public async children(slug?: string): Promise<Category[]> {
     const mutation = gql`
-      query CategoryChildren($slug: String!) {
+      query CategoryChildren($slug: String) {
         categoryChildren(slug: $slug) {
           slug, name
         }

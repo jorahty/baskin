@@ -19,7 +19,7 @@ export class CategoryArgs {
 
 @ArgsType()
 export class CategoryChildrenArgs {
-  @Field()
+  @Field({ nullable: true })
   @Matches(regexSlug)
     slug!: string;
 }

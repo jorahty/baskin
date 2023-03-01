@@ -1,17 +1,17 @@
-import { Product } from '@/graphql/product/schema';
+import { CategoryPayload } from '../../pages';
 import { Stack } from '@mui/joy';
 import ProductList from '../product/list';
 import CategoryNavigate from './navigate';
 
 interface Props {
-  products: Product[];
+  category: CategoryPayload;
 }
 
-export default function CategoryContent({ products }: Props) {
+export default function CategoryContent({ category }: Props) {
   return (
     <Stack p={2} gap={2}>
-      <CategoryNavigate />
-      <ProductList products={products} showSearch={true} showSorter={true} />
+      <CategoryNavigate category={category} />
+      <ProductList products={category.products} showSearch={true} showSorter={true} />
     </Stack>
   );
 }

@@ -10,23 +10,30 @@ import CategoryContent from '../../components/category/content';
 // Within `getServerSideProps` we can (and should) query
 // micro services directly. https://tinyurl.com/ysfwst5r
 export const getServerSideProps: GetServerSideProps = async ({ query: { slug } }) => {
+  const categoryPayload = {
+    children: await new CategoryService().children(slug as string),
+    products: await new ProductService().list({ category: slug as string }),
+    categories: await new CategoryService().list(),
+  };
   return {
-    props: {
-      products: await new ProductService().list({ category: slug as string }),
-      categories: await new CategoryService().list(),
-    },
+    props: { categoryPayload },
   };
 };
 
 interface Props {
+  categoryPayload: CategoryPayload
+}
+
+export interface CategoryPayload {
+  children: Category[];
   products: Product[];
   categories: Category[];
 }
 
-export default function CategoryPage({ products, categories }: Props) {
+export default function CategoryPage({ categoryPayload }: Props) {
   return (
-    <Layout sidebar={<Sidebar categories={categories} />}>
-      <CategoryContent products={products}/>
+    <Layout sidebar={<Sidebar categories={categoryPayload.categories} />}>
+      <CategoryContent category={categoryPayload}/>
     </Layout>
   );
 }

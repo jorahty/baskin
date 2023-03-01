@@ -57,14 +57,12 @@ jest.mock('next/router', () => ({
 
 const renderView = async () => {
   const { props } = await getServerSideProps({
-    req: { headers: { host: 'localhost:3000' } },
-    query: { username: 'molly_member' },
-  });
+    query: { slug: 'cars' },
+  } as any) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
   render(
     <CssVarsProvider>
       <CategoryPage
-        categories={props.categories}
-        products={props.products}
+        categoryPayload={props.categoryPayload}
       />
     </CssVarsProvider>
   );
