@@ -14,14 +14,9 @@
 ## Ports
 
 <table>
-<tr><th>Web App</th><th>Port</th></tr>
 <tr><td>UserApp</td><td>3000</td></tr>
 <tr><td>AdminApp</td><td>3001</td></tr>
 <tr><td>ModeratorApp</td><td>3002</td></tr>
-</table>
-
-<table>
-<tr><th>Micro Service</th><th>Port</th></tr>
 <tr><td>AccountService</td><td>3011</td></tr>
 <tr><td>ImageService</td><td>3012</td></tr>
 <tr><td>ProductService</td><td>3013</td></tr>
