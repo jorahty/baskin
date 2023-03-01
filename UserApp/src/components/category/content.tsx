@@ -1,10 +1,10 @@
-import { CategoryPayload } from '../../pages';
+import { VerboseCategory } from '../../pages';
 import { Stack } from '@mui/joy';
 import ProductList from '../product/list';
 import CategoryNavigate from './navigate';
 
 interface Props {
-  category: CategoryPayload;
+  category: VerboseCategory;
 }
 
 export default function CategoryContent({ category }: Props) {

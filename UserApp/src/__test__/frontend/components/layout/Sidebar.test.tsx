@@ -19,8 +19,15 @@ const categories = [
   { name: 'Instruments', slug: 'instruments' },
 ];
 
+const category =  {
+  name: 'string',
+  children: [],
+  products: [],
+  categories: categories,
+};
+
 const renderView = async () => {
-  render(<Sidebar categories={categories} />);
+  render(<Sidebar category={category} />);
 };
 
 test('Renders', async () => {

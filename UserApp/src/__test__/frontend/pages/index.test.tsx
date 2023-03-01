@@ -39,6 +39,16 @@ const handlers = [
       }),
     );
   }),
+  graphql.query('CategoryChildren', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryChildren: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
 ];
 
 const server = setupServer(...handlers);
@@ -60,15 +70,14 @@ const renderView = async () => {
   render(
     <CssVarsProvider>
       <IndexPage
-        categoryPayload={props.categoryPayload}
+        category={props.category}
       />
     </CssVarsProvider>
   );
 };
 
 test('Renders', async () => {
-  renderView();
-  await new Promise(resolve => setTimeout(resolve, 500));
+  await renderView();
 });
 
 function setWidth(width: number) {

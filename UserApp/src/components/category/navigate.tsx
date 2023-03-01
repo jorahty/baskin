@@ -1,9 +1,9 @@
-import { CategoryPayload } from '../../pages';
+import { VerboseCategory } from '../../pages';
 import { Card, Chip, Stack } from '@mui/joy';
 import Link from 'next/link';
 
 interface Props {
-  category: CategoryPayload;
+  category: VerboseCategory;
 }
 
 export default function CategoryNavigate({ category }: Props) {
@@ -12,7 +12,7 @@ export default function CategoryNavigate({ category }: Props) {
       <Stack direction="row" flexWrap="wrap" gap={1}>
         {category.children.map(child => (
           <Link key={child.slug} href={`/category/${child.slug}`}>
-            <Chip variant="solid" sx ={{ bgcolor: 'background.level1' }}>
+            <Chip sx={{ color: 'text.primary', bgcolor: 'neutral.softBg' }}>
               {child.name}
             </Chip>
           </Link>
