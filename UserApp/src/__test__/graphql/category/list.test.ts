@@ -29,6 +29,16 @@ const handlers = [
       }),
     );
   }),
+  graphql.query('CategoryAncestors', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryAncestors: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
 ];
 
 const microServiceServer = setupServer(...handlers);
@@ -79,5 +89,17 @@ test('List children', async () => {
     .expect(200)
     .then(res => {
       expect(res.body.data.categoryChildren).toBeDefined();
+    });
+});
+
+test('List ancestors', async () => {
+  await request
+    .post('/api/graphql')
+    .send({
+      query: `{categoryAncestors (slug: "vehicles") { name, slug }}`,
+    })
+    .expect(200)
+    .then(res => {
+      expect(res.body.data.categoryAncestors).toBeDefined();
     });
 });

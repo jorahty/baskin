@@ -37,4 +37,22 @@ export class CategoryService {
 
     return data.categoryChildren;
   }
+
+  public async ancestors(slug: string): Promise<Category[]> {
+    const mutation = gql`
+      query CategoryAncestors($slug: String!) {
+        categoryAncestors(slug: $slug) {
+          slug, name
+        }
+      }
+    `;
+
+    const data = await request(
+      'http://localhost:3013/graphql',
+      mutation,
+      { slug: slug },
+    );
+
+    return data.categoryAncestors;
+  }
 }

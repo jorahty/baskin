@@ -1,7 +1,11 @@
 import { Resolver, Query, Args } from 'type-graphql';
-
-import { Category, CategoryArgs, CategoryChildrenArgs } from './schema';
 import { CategoryService } from './service';
+import {
+  Category,
+  CategoryAncestorsArgs,
+  CategoryArgs,
+  CategoryChildrenArgs,
+} from './schema';
 
 @Resolver()
 export class CategoryResolver {
@@ -17,5 +21,12 @@ export class CategoryResolver {
     @Args() { slug }: CategoryChildrenArgs
   ): Promise<Category[]> {
     return new CategoryService().children(slug);
+  }
+
+  @Query(() => [Category])
+  async categoryAncestors(
+    @Args() { slug }: CategoryAncestorsArgs
+  ): Promise<Category[]> {
+    return new CategoryService().ancestors(slug);
   }
 }
