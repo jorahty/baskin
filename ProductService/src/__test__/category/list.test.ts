@@ -67,3 +67,17 @@ test('List roots', async () => {
       expect(res.body.data.categoryChildren).toBeDefined();
     });
 });
+
+
+test('List children', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `{categoryAncestors (slug: "sailboats") { name, slug }}`,
+    })
+    .expect(200)
+    .then(res => {
+      expect(res.body.data.categoryAncestors).toBeDefined();
+    });
+});
+
