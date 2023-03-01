@@ -26,14 +26,12 @@ export default function ProductList({
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          pt: 2,
-          px: 2,
         }}
       >
         {showSearch && <Search setSortedProducts={setSortedProducts} products={products} />}
         {showSorter && <Sorter setSortedProducts={setSortedProducts} products={sortedProducts} />}
       </Box>
-      <Grid container spacing={2} p={1} m={0} columns={{ xl: 4, lg: 3, md: 2, sm: 2, xs: 1 }} >
+      <Grid container spacing={2} columns={{ xl: 4, lg: 3, md: 2, sm: 2, xs: 1 }} >
         {sortedProducts.map((product, index) => (
           <Grid xs={1} key={index}>
             <ProductCard product={product} />
