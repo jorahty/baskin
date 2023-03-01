@@ -101,7 +101,8 @@ test('Main', async () => {
 });
 
 test('Bad URL', async () => {
-  const useRouter = jest.spyOn(require("next/router"), "useRouter");
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
   useRouter.mockImplementation(() => ({
     query: { id: '11' },
@@ -114,7 +115,8 @@ test('Bad URL', async () => {
 });
 
 test('Not signed in', async () => {
-  const useAppContext = jest.spyOn(require("../../../context"), "useAppContext");
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const useAppContext = jest.spyOn(require('../../../context'), 'useAppContext');
 
   useAppContext.mockImplementation(() => ({
     signIn: jest.fn(),
