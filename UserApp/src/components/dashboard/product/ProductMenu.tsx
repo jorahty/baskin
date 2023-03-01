@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { Product } from '@/graphql/product/schema';
 import { gql, GraphQLClient } from 'graphql-request';
 import ProductTable from './ProductTable';
-import Create from './Create';
 
 export default function ProductMenu() {
   const { signedInUser } = useAppContext();
@@ -67,29 +66,11 @@ export default function ProductMenu() {
           sx={{
             width: { md: 'fit-content' },
           }}
-          onClick={() => setOpen(true)}
         >
           Add Product
         </Button>
         <ProductTable products={products} />
       </Stack>
-      <Modal
-        aria-labelledby="product-create"
-        aria-describedby="Create Product"
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <ModalDialog
-          sx={{
-            width: '85vw',
-            height: '90vh',
-            overflow: 'auto',
-          }}
-        >
-          <ModalClose />
-          <Create setModal={setOpen}/>
-        </ModalDialog>
-      </Modal>
     </Container>
   );
 }
