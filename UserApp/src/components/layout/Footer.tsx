@@ -18,7 +18,7 @@ export default function Footer() {
         'Guidelines',
         'About',
       ].map(page => (
-        <Typography>
+        <Typography key={page}>
           &nbsp;• <Link href={`/${page.toLowerCase()}`}>{page}</Link>
         </Typography>
       ))}

@@ -3,7 +3,6 @@ import { Box, Divider, GlobalStyles, Stack } from '@mui/joy';
 import React from 'react';
 import Header, { headerHeight } from './Header';
 import BackDrop from './BackDrop';
-import Link from 'next/link';
 import Footer, { footerHeight } from './Footer';
 
 interface Props {
