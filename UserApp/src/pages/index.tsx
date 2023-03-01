@@ -15,8 +15,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
     ancestors: null,
     children: await new CategoryService().children(),
     products: await new ProductService().list({}),
-    categories: await new CategoryService().list(),
   };
+
   return {
     props: { category: verboseCategory },
   };
@@ -31,7 +31,6 @@ export interface VerboseCategory {
   ancestors: Category[];
   children: Category[];
   products: Product[];
-  categories: Category[];
 }
 
 export default function IndexPage({ category }: Props) {

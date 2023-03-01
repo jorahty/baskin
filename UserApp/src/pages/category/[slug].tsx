@@ -23,8 +23,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query: { slug } }
     children: await new CategoryService().children(slug as string),
     ancestors: await new CategoryService().ancestors(slug as string),
     products: await new ProductService().list({ category: slug as string }),
-    categories: await new CategoryService().list(),
   };
+
   return {
     props: { category: verboseCategory },
   };
