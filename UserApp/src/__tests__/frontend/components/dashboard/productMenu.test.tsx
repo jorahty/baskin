@@ -63,6 +63,7 @@ test('Renders Product Menu', async () => {
 
   await renderView();
   await screen.getByText('Products');
+  await screen.findByText('Honda Toy Car');
 });
 
 test('Click new button', async () => {
