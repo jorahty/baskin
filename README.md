@@ -32,7 +32,7 @@ export ACCESS_TOKEN=some-long-secret-more-complex-than-this
 ```
 
 For all micro services that use Postgres
-(AccountService, ProductService)
+(AccountService, ProductService, MessageService)
 set environment variables:
 
 ```
