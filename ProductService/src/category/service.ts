@@ -15,7 +15,7 @@ export class CategoryService {
   }
 
   public async children(slug?: string): Promise<Category[]> {
-    let select = `
+    const select = `
       SELECT data || jsonb_build_object('slug', slug) AS category FROM category
       WHERE parent_slug ${slug ? '= $1' : 'IS NULL'}
     `;
