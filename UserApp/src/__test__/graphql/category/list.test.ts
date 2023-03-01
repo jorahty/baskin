@@ -19,6 +19,16 @@ const handlers = [
       }),
     );
   }),
+  graphql.query('CategoryChildren', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryChildren: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
 ];
 
 const microServiceServer = setupServer(...handlers);
@@ -40,13 +50,34 @@ test('List All', async () => {
   await request
     .post('/api/graphql')
     .send({
-      query: `query category{category { name }}`,
+      query: `{category { name }}`,
     })
     .expect(200)
     .then(res => {
-      expect(res).toBeDefined();
-      expect(res.body).toBeDefined();
-      expect(res.body.data).toBeDefined();
       expect(res.body.data.category).toBeDefined();
+    });
+});
+
+test('List by ID', async () => {
+  await request
+    .post('/api/graphql')
+    .send({
+      query: `{category (slug: "apparel") { name, slug }}`,
+    })
+    .expect(200)
+    .then(res => {
+      expect(res.body.data.category).toHaveLength(1);
+    });
+});
+
+test('List children', async () => {
+  await request
+    .post('/api/graphql')
+    .send({
+      query: `{categoryChildren (slug: "vehicles") { name, slug }}`,
+    })
+    .expect(200)
+    .then(res => {
+      expect(res.body.data.categoryChildren).toBeDefined();
     });
 });
