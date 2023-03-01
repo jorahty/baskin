@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import TermsPage from '../../../pages/terms';
 import '../matchMedia';

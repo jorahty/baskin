@@ -1,13 +1,14 @@
 import { useAppContext } from '../../context';
 import { Chat } from '@/graphql/chat/schema';
 import { List, ListItem, ListItemButton } from '@mui/joy';
+import Router from 'next/router';
 
 interface Props {
-  chats: Chat[];
-  setSelectedChatId: (selectedChatId: { id: string }) => void;
+  chats: Chat[],
+  selectedChat: undefined|Chat,
 }
 
-export default function ChatList({ chats, setSelectedChatId }: Props) {
+export default function ChatList({ chats, selectedChat }: Props) {
   const { signedInUser } = useAppContext();
 
   function renderChatName(chat: Chat) {
@@ -28,7 +29,8 @@ export default function ChatList({ chats, setSelectedChatId }: Props) {
       {chats.map(chat => (
         <ListItem key={chat.id}>
           <ListItemButton
-            onClick={() => setSelectedChatId({ id: chat.id })}
+            onClick={() => Router.push(`/messages/${chat.id}`)}
+            selected={chat.id === selectedChat?.id}
           >
             {renderChatName(chat)}
           </ListItemButton>

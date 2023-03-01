@@ -15,4 +15,13 @@ module.exports = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/messages',
+        destination: '/messages/any',
+        permanent: true,
+      },
+    ]
+  },
 }

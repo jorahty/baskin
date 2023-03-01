@@ -6,7 +6,7 @@ import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 import '../matchMedia';
 
-import MessagesPage from '../../../pages/messages';
+import MessagesPage from '../../../pages/messages/[id]';
 
 jest.mock('../../../context', () => ({
   useAppContext: () => ({
@@ -76,7 +76,8 @@ afterAll(() => server.close());
 jest.mock('next/router', () => ({
   useRouter() {
     return {
-      query: { slug: 'toys' },
+      query: { id: '1' },
+      push: () => (null),
     };
   },
   push: jest.fn(),
@@ -97,4 +98,9 @@ test('Renders', async () => {
   await screen.findByText('Hey Anna, this is Molly');
   fireEvent.click(screen.getByText('Samsung TV'));
   await screen.findByText('Hey Anna, this is Molly');
+});
+
+test('Renders', async () => {
+  await renderView();
+  await screen.findByText('Samsung TV');
 });
