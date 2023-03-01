@@ -15,11 +15,13 @@ export class CategoryService {
   }
 
   public async children(slug?: string): Promise<Category[]> {
-    let select = `SELECT data || jsonb_build_object('slug', slug) AS category FROM category`;
-    if (slug) select += ' WHERE parent_slug = $1';
+    let select = `
+      SELECT data || jsonb_build_object('slug', slug) AS category FROM category
+      WHERE parent_slug ${slug ? '= $1' : 'IS NULL'}
+    `;
     const query = {
       text: select,
-      values: [slug],
+      values: slug ? [slug] : [],
     };
     const { rows } = await pool.query(query);
     return rows.map(row => row.category);

@@ -55,3 +55,15 @@ test('List children', async () => {
       expect(res.body.data.categoryChildren).toBeDefined();
     });
 });
+
+test('List roots', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `{categoryChildren { name, slug }}`,
+    })
+    .expect(200)
+    .then(res => {
+      expect(res.body.data.categoryChildren).toBeDefined();
+    });
+});
