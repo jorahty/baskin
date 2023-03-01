@@ -28,7 +28,7 @@ export interface Props {
 
 export interface VerboseCategory {
   name: null|string;
-  ancestors: null|Category[];
+  ancestors: Category[];
   children: Category[];
   products: Product[];
   categories: Category[];
