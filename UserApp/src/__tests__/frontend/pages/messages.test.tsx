@@ -73,16 +73,6 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      query: { id: '1' },
-      push: () => (null),
-    };
-  },
-  push: jest.fn(),
-}));
-
 const renderView = async () => {
   render(
     <CssVarsProvider>
@@ -91,7 +81,17 @@ const renderView = async () => {
   );
 };
 
-test('Renders', async () => {
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      query: { id: '1' },
+      push: jest.fn(),
+    };
+  },
+  push: jest.fn(),
+}));
+
+test('Main', async () => {
   await renderView();
   await screen.findByText('Samsung TV');
   await screen.findByText('Anna Admin');
@@ -100,7 +100,27 @@ test('Renders', async () => {
   await screen.findByText('Hey Anna, this is Molly');
 });
 
-test('Renders', async () => {
+test('Bad URL', async () => {
+  const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+  useRouter.mockImplementation(() => ({
+    query: { id: '11' },
+    push: jest.fn(),
+  }));
+
   await renderView();
   await screen.findByText('Samsung TV');
+  await screen.findByText('Anna Admin');
+});
+
+test('Not signed in', async () => {
+  const useAppContext = jest.spyOn(require("../../../context"), "useAppContext");
+
+  useAppContext.mockImplementation(() => ({
+    signIn: jest.fn(),
+    signOut: jest.fn(),
+    signedInUser: null,
+  }));
+
+  await renderView();
 });
