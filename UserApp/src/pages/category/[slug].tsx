@@ -6,13 +6,15 @@ import Layout from '../../components/layout/Layout';
 import Sidebar from '../../components/layout/Sidebar';
 import { ProductService } from '../../graphql/product/service';
 import { CategoryService } from '../../graphql/category/service';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Within `getServerSideProps` we can (and should) query
 // micro services directly. https://tinyurl.com/ysfwst5r
-export const getServerSideProps: GetServerSideProps = async ({ query: { slug } }) => {
+export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
-      products: await new ProductService().list({ category: slug as string }),
+      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      products: await new ProductService().list({ category: context.query.slug as string }),
       categories: await new CategoryService().list(),
     },
   };

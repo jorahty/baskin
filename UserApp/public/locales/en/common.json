@@ -1,0 +1,99 @@
+{
+  "header": {
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "dropdown": {
+      "profile": "Profile",
+      "dashboard": "Dashboard",
+      "messages": "Messages",
+      "signout": "Sign out"
+    }
+  },
+  "home": {
+    "sidebar": {
+      "categories": "All Categories"
+    },
+    "search": {
+      "placeholder": "Search for a product"
+    },
+    "sort": {
+      "placeholder": "Sort by",
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "priceHigh": "Price High",
+      "priceLow": "Price Low"
+    }
+  },
+  "dashboard": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "profileSettings": "Profile Settings",
+      "products": "Products",
+      "favorites": "Favorites"
+    },
+    "profileSettings": {
+      "title": "Profile Settings",
+      "form": {
+        "username": "Username",
+        "updateUser": "Update Username",
+        "email": "Email",
+        "updateEmail": "Update Email"
+      }
+    },
+    "products": {
+      "title": "Products",
+      "addProduct": "Add Product",
+      "table": {
+        "image": "Image",
+        "product": "Product",
+        "category": "Category",
+        "price": "Price"
+      }
+    },
+    "favorites": {
+
+    }
+  },
+  "createNewProduct": {
+    "title": "Create New Product",
+    "form": {
+      "productName": "Product Name",
+      "productNamePlaceholder": "Enter name",
+      "category": "Category",
+      "categoryPlaceholder": "Select category",
+      "price": "Price",
+      "pricePlaceholder": "Enter price",
+      "quantity": "Quantity",
+      "image": "Add Picture",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter product description",
+      "create": "Create",
+      "cancel": "Cancel"
+    }
+  },
+  "signin": {
+    "title": "Welcome Back",
+    "message": "Let's get started! Please enter your details.",
+    "form": {
+      "username": "Username",
+      "usernamePlaceholder": "Enter your username",
+      "password": "Password",
+      "signin": "Sign in"
+    }
+  },
+  "signup": {
+    "title": "Welcome",
+    "message": "Let's get started! Please enter your details.",
+    "form": {
+      "firstName": "First Name",
+      "firstNamePlaceholder": "Enter your first name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Enter your last name",
+      "username": "Username",
+      "usernamePlaceholder": "Enter your username",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "password": "Password"
+    }
+  }
+}

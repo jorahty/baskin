@@ -5,14 +5,28 @@ import ModeToggle from './ModeToggle';
 import Logo from './Logo';
 import UserMenu from './UserMenu';
 import { useAppContext } from '../../context';
+import LanguageSwitch from '../util/LanguageSwitch';
+import { useTranslation } from 'next-i18next';
 
 export const headerHeight = '80px';
 
 export default function Header({ handleSidebarOpen }: { handleSidebarOpen: () => void }) {
   const { signedInUser } = useAppContext();
+  const { t } = useTranslation('common');
 
   return (
-    <Stack height={headerHeight} direction="row" alignItems="center" px={3} gap={3}>
+    <Stack
+      height={headerHeight}
+      direction="row"
+      alignItems="center"
+      sx={{
+        sm: {
+          px: 3,
+          gap: 3,
+        },
+        px: 3,
+        gap: 1,
+      }}>
       <IconButton
         aria-label="menu-icon"
         onClick={handleSidebarOpen}
@@ -33,13 +47,23 @@ export default function Header({ handleSidebarOpen }: { handleSidebarOpen: () =>
       ) : (
         <>
           <Link href="/signin">
-            <Button variant="soft">Sign in</Button>
+            <Button
+              variant="soft"
+              aria-label="Sign in"
+            >
+              {t('header.signin')}
+            </Button>
           </Link>
           <Link href="/signup">
-            <Button>Sign up</Button>
+            <Button
+              aria-label="Sign up"
+            >
+              {t('header.signup')}
+            </Button>
           </Link>
         </>
       )}
+      <LanguageSwitch />
       <ModeToggle />
     </Stack>
   );

@@ -6,8 +6,10 @@ import { GlobalStyles } from '@mui/joy';
 import theme from '../theme';
 import Favicon from '../components/Favicon';
 import { AppContextProvider } from '../context';
+import { appWithTranslation } from 'next-i18next';
+import nextI18nConfig from '../../next-i18next.config';
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <CssVarsProvider theme={theme} defaultMode="system">
       <CssBaseline />
@@ -23,3 +25,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </CssVarsProvider>
   );
 }
+
+export default appWithTranslation(App, nextI18nConfig);

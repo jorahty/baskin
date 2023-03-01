@@ -28,7 +28,9 @@ export default function ConfirmModal({ input, open, setOpen, changeFunc }: Props
           textAlign: 'center',
         }}
       >
-        <h2>Are you sure?</h2>
+        <h2
+          aria-label="Are you sure?"
+        >Are you sure?</h2>
         <Typography
           sx={{
             fontSize: '1.2rem',
@@ -44,6 +46,7 @@ export default function ConfirmModal({ input, open, setOpen, changeFunc }: Props
             setOpen(false);
             changeFunc();
           }}
+          aria-label="Update and Sign Out"
         >
           Update and Sign Out
         </Button>

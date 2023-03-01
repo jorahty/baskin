@@ -11,6 +11,9 @@ import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
 import { useAppContext } from '../context';
 import BackRedirect from '../components/util/BackRedirect';
+import { useTranslation } from 'next-i18next';
+import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 interface FormElements extends HTMLFormControlsCollection {
   firstname: HTMLInputElement;
@@ -23,11 +26,20 @@ interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
+export const getServerSideProps: GetServerSideProps = async context => {
+  return {
+    props: {
+      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+    },
+  };
+};
+
 /**
  * This template uses [`Inter`](https://fonts.google.com/specimen/Inter?query=inter) font.
  */
 export default function Signup() {
   const { signOut } = useAppContext();
+  const { ready, t } = useTranslation('common');
 
   React.useEffect(() => {
     signOut();
@@ -73,6 +85,11 @@ export default function Signup() {
         }
       });
   };
+
+  const firstNamePlaceholder = t('signup.form.firstNamePlaceholder');
+  const lastNamePlaceholder = t('signup.form.lastNamePlaceholder');
+  const usernamePlaceholder = t('signup.form.usernamePlaceholder');
+  const emailPlaceholder = t('signup.form.emailPlaceholder');
 
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -141,10 +158,10 @@ export default function Signup() {
           >
             <div>
               <Typography component="h2" fontSize="xl2" fontWeight="lg">
-                Welcome
+                {ready && t('signup.title')}
               </Typography>
               <Typography level="body2" sx={{ my: 1, mb: 3 }}>
-                Let&apos;s get started! Please enter your details.
+                {ready && t('signup.message')}
               </Typography>
             </div>
             <form
@@ -168,39 +185,49 @@ export default function Signup() {
               }}
             >
               <FormControl required>
-                <FormLabel>First Name</FormLabel>
+                <FormLabel
+                  aria-label="Enter your first name"
+                >{ready && t('signup.form.firstName')}</FormLabel>
                 <Input
-                  placeholder="Enter your first name"
+                  placeholder={firstNamePlaceholder}
                   type="firstname"
                   name="firstname"
                 />
               </FormControl>
               <FormControl required>
-                <FormLabel>Last Name</FormLabel>
+                <FormLabel
+                  aria-label="Enter your last name"
+                >{ready && t('signup.form.lastName')}</FormLabel>
                 <Input
-                  placeholder="Enter your last name"
+                  placeholder={lastNamePlaceholder}
                   type="lastname"
                   name="lastname"
                 />
               </FormControl>
               <FormControl required>
-                <FormLabel>Username</FormLabel>
+                <FormLabel
+                  aria-label="Enter your username"
+                >{ready && t('signup.form.username')}</FormLabel>
                 <Input
-                  placeholder="Enter your username"
+                  placeholder={usernamePlaceholder}
                   type="username"
                   name="username"
                 />
               </FormControl>
               <FormControl required>
-                <FormLabel>Email</FormLabel>
+                <FormLabel
+                  aria-label="Enter your email"
+                >{ready && t('signup.form.email')}</FormLabel>
                 <Input
-                  placeholder="Enter your email"
+                  placeholder={emailPlaceholder}
                   type="email"
                   name="email"
                 />
               </FormControl>
               <FormControl required>
-                <FormLabel>Password</FormLabel>
+                <FormLabel
+                  aria-label="Enter your password"
+                >{ready && t('signup.form.password')}</FormLabel>
                 <Input placeholder="•••••••" type="password" name="password" />
               </FormControl>
               <Box
@@ -211,7 +238,7 @@ export default function Signup() {
                 }}
               ></Box>
               <Button type="submit" fullWidth aria-label="signup">
-                Sign in
+                {ready && t('signup.form.signup')}
               </Button>
             </form>
           </Box>

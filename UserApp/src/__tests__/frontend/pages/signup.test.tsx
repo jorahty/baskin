@@ -6,7 +6,7 @@ import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 import '../matchMedia';
 
-import Signup from '../../../pages/signup';
+import Signup, { getServerSideProps } from '../../../pages/signup';
 import { AppContextProvider } from '../../../context';
 
 const handlers = [
@@ -41,7 +41,25 @@ afterAll(() => server.close());
 
 jest.mock('next/router', () => ({ push: jest.fn() }));
 
-const renderView = () => {
+jest.mock('react-i18next', () => ({
+  // this mock makes sure any components using the translate hook can use it without a warning being shown
+  useTranslation: () => {
+    return {
+      t: (str: string) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+      },
+    };
+  },
+  initReactI18next: {
+    type: '3rdParty',
+    init: () => {},
+  },
+}));
+
+const renderView = async () => {
+  const { props } = await getServerSideProps({} as any) as any;
+  console.log(props);
   render(
     <CssVarsProvider>
       <AppContextProvider>
@@ -52,18 +70,18 @@ const renderView = () => {
 };
 
 test('Sucess', async () => {
-  renderView();
+  await renderView();
   let alerted = false;
   window.alert = () => {
     alerted = true;
   };
-  const first = screen.getByPlaceholderText('Enter your first name');
+  const first = screen.getByLabelText('Enter your first name');
   await userEvent.type(first, 'john');
-  const last = screen.getByPlaceholderText('Enter your last name');
+  const last = screen.getByLabelText('Enter your last name');
   await userEvent.type(last, 'does');
-  const email = screen.getByPlaceholderText('Enter your email');
+  const email = screen.getByLabelText('Enter your email');
   await userEvent.type(email, 'john@doe.com');
-  const username = screen.getByPlaceholderText('Enter your username');
+  const username = screen.getByLabelText('Enter your username');
   await userEvent.type(username, 'john_doe');
   const passwd = screen.getByPlaceholderText('•••••••');
   await userEvent.type(passwd, 'johndoes');
@@ -74,18 +92,18 @@ test('Sucess', async () => {
 });
 
 test('Fail', async () => {
-  renderView();
+  await renderView();
   let alerted = false;
   window.alert = () => {
     alerted = true;
   };
-  const first = screen.getByPlaceholderText('Enter your first name');
+  const first = screen.getByLabelText('Enter your first name');
   await userEvent.type(first, 'molly');
-  const last = screen.getByPlaceholderText('Enter your last name');
+  const last = screen.getByLabelText('Enter your last name');
   await userEvent.type(last, 'member');
-  const email = screen.getByPlaceholderText('Enter your email');
+  const email = screen.getByLabelText('Enter your email');
   await userEvent.type(email, 'mollymember@books.com');
-  const username = screen.getByPlaceholderText('Enter your username');
+  const username = screen.getByLabelText('Enter your username');
   await userEvent.type(username, 'molly_memb');
   const passwd = screen.getByPlaceholderText('•••••••');
   await userEvent.type(passwd, 'mollymember');

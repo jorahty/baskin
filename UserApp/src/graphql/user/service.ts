@@ -32,25 +32,25 @@ export class UserService {
     return data.addUser;
   }
 
-  public async updateUsername(request: Request, newName: string): Promise<User> {
-    const data = await queryGQL(
-      'http://localhost:3011/graphql',
-      `mutation changeUsername { updateUsername (
-        username: "${request.user.username}"
-        newName: "${newName}"
-        ) { name, username, email } }`,
-    );
-    return data.updateUsername;
-  }
+  // public async updateUsername(request: Request, newName: string): Promise<User> {
+  //   const data = await queryGQL(
+  //     'http://localhost:3011/graphql',
+  //     `mutation changeUsername { updateUsername (
+  //       username: "${request.user.username}"
+  //       newName: "${newName}"
+  //       ) { name, username, email } }`,
+  //   );
+  //   return data.updateUsername;
+  // }
 
-  public async updateEmail(request: Request, newEmail: string): Promise<User> {
-    const data = await queryGQL(
-      'http://localhost:3011/graphql',
-      `mutation changeEmail { updateEmail (
-        username: "${request.user.username}"
-        newEmail: "${newEmail}"
-        ) { name, username, email } }`,
-    );
-    return data.updateUsername;
-  }
+  // public async updateEmail(request: Request, newEmail: string): Promise<User> {
+  //   const data = await queryGQL(
+  //     'http://localhost:3011/graphql',
+  //     `mutation changeEmail { updateEmail (
+  //       username: "${request.user.username}"
+  //       newEmail: "${newEmail}"
+  //       ) { name, username, email } }`,
+  //   );
+  //   return data.updateEmail;
+  // }
 }

@@ -30,5 +30,5 @@ test('Renders', async () => {
 test('Select Catagory', async () => {
   renderView();
   fireEvent.click(screen.getByText('Clothing'));
-  fireEvent.click(screen.getByText('All Categories'));
+  fireEvent.click(screen.getByLabelText('All Categories'));
 });

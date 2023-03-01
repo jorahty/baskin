@@ -10,6 +10,7 @@ import Edit from '@mui/icons-material/Edit';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import { useAppContext } from '../../../context';
 import { GraphQLClient, gql } from 'graphql-request';
+import { useTranslation } from 'next-i18next';
 
 // Reference: https://codesandbox.io/s/6bmeke?file=/components/OrderTable.tsx:7018-12425
 // Reference: https://mui.com/joy-ui/react-menu/
@@ -20,6 +21,8 @@ export default function ProductTable({ products }: { products: Product[] }) {
   const [product, setProduct] = React.useState('');
   const [productList, setProductList] = React.useState<Product[]>([]);
   const open = Boolean(anchorEl);
+
+  const { t } = useTranslation('common');
 
   React.useEffect(() => {
     setProductList(products);
@@ -44,7 +47,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
     });
     const query = gql`mutation removeProduct {removeProduct (product: "${product}") { id }}`;
     await graphQLClient.request(query);
-    setProductList(productList.filter((row) => row.id != product));
+    setProductList(productList.filter(row => row.id != product));
   };
 
   return (
@@ -65,17 +68,17 @@ export default function ProductTable({ products }: { products: Product[] }) {
         stickyHeader
         hoverRow
         sx={{
-          '--TableCell-headBackground': (theme) => theme.vars.palette.background.level1,
+          '--TableCell-headBackground': theme => theme.vars.palette.background.level1,
           '--Table-headerUnderlineThickness': '1px',
-          '--TableRow-hoverBackground': (theme) => theme.vars.palette.background.level1,
+          '--TableRow-hoverBackground': theme => theme.vars.palette.background.level1,
         }}
       >
         <thead>
           <tr>
-            <th style={{ width: 140, padding: 12 }}>Image</th>
-            <th style={{ width: 220, padding: 12 }}>Product</th>
-            <th style={{ width: 160, padding: 12 }}>Category</th>
-            <th style={{ width: 120, padding: 12 }}>Price</th>
+            <th style={{ width: 140, padding: 12 }}>{t('dashboard.products.table.image')}</th>
+            <th style={{ width: 220, padding: 12 }}>{t('dashboard.products.table.product')}</th>
+            <th style={{ width: 160, padding: 12 }}>{t('dashboard.products.table.category')}</th>
+            <th style={{ width: 120, padding: 12 }}>{t('dashboard.products.table.price')}</th>
             <th style={{ width: 100, padding: 12 }}></th>
           </tr>
         </thead>
@@ -99,7 +102,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
                   variant="plain"
                   color="neutral"
                   aria-label="menu"
-                  onClick={(event) => handleClick(event, row.id)}
+                  onClick={event => handleClick(event, row.id)}
                 >
                   <MoreVertIcon />
                 </Button>

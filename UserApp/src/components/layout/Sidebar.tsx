@@ -2,10 +2,12 @@ import { Box, Link, List, ListItem, ListItemButton, Typography } from '@mui/joy'
 import Router, { useRouter } from 'next/router';
 import { Category } from '../../graphql/category/schema';
 import Logo from './Logo';
+import { useTranslation } from 'next-i18next';
 
 export default function Sidebar({ categories }: { categories: Category[] }) {
   const router = useRouter();
   const { query } = router;
+  const { t } = useTranslation('common');
 
   return (
     <>
@@ -18,9 +20,12 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
         }}
       >
         <ListItem>
-          <ListItemButton onClick={() => Router.push('/')}>
+          <ListItemButton
+            aria-label="All Categories"
+            onClick={() => Router.push('/')}
+          >
             <Typography fontWeight="800" component="h4">
-              All Categories
+              {t('home.sidebar.categories')}
             </Typography>
           </ListItemButton>
         </ListItem>

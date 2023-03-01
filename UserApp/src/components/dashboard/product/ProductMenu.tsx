@@ -7,11 +7,14 @@ import { Product } from '@/graphql/product/schema';
 import { gql, GraphQLClient } from 'graphql-request';
 import ProductTable from './ProductTable';
 import Create from './Create';
+import { useTranslation } from 'next-i18next';
 
 export default function ProductMenu() {
   const { signedInUser } = useAppContext();
   const [products, setProducts] = useState<Product[]>([]);
   const [open, setOpen] = useState(false);
+
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     if (!signedInUser) return;
@@ -58,8 +61,9 @@ export default function ProductMenu() {
           color: 'primary',
           mb: 4,
         }}
+        aria-label="Products"
       >
-        Products
+        {t('dashboard.products.title')}
       </Typography>
       <Stack>
         <Button
@@ -68,8 +72,9 @@ export default function ProductMenu() {
             width: { md: 'fit-content' },
           }}
           onClick={() => setOpen(true)}
+          aria-label="Add Product"
         >
-          Add Product
+          {t('dashboard.products.addProduct')}
         </Button>
         <ProductTable products={products} />
       </Stack>
@@ -77,7 +82,7 @@ export default function ProductMenu() {
         aria-labelledby="product-create"
         aria-describedby="Create Product"
         open={open}
-        onClose={() => setOpen(false)}
+        // onClose={() => setOpen(false)}
       >
         <ModalDialog
           sx={{

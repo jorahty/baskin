@@ -3,6 +3,9 @@ import { Box, Divider, GlobalStyles, Stack } from '@mui/joy';
 import React from 'react';
 import Header, { headerHeight } from './Header';
 import BackDrop from './BackDrop';
+import { useTranslation } from 'react-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetServerSideProps } from 'next';
 
 interface Props {
   children: React.ReactNode;

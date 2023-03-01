@@ -6,7 +6,7 @@ import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 import '../matchMedia';
 
-import MessagesPage from '../../../pages/messages';
+import MessagesPage, { getServerSideProps } from '../../../pages/messages';
 
 jest.mock('../../../context', () => ({
   useAppContext: () => ({
@@ -18,6 +18,22 @@ jest.mock('../../../context', () => ({
       accessToken: 'whatever',
     },
   }),
+}));
+
+jest.mock('react-i18next', () => ({
+  // this mock makes sure any components using the translate hook can use it without a warning being shown
+  useTranslation: () => {
+    return {
+      t: (str: string) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+      },
+    };
+  },
+  initReactI18next: {
+    type: '3rdParty',
+    init: () => {},
+  },
 }));
 
 const handlers = [
@@ -83,6 +99,7 @@ jest.mock('next/router', () => ({
 }));
 
 const renderView = async () => {
+  await getServerSideProps({} as any);
   render(
     <CssVarsProvider>
       <MessagesPage />

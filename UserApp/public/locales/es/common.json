@@ -1,0 +1,101 @@
+{
+  "header": {
+    "signin": "Iniciar sesión",
+    "signup": "Registrarse",
+    "dropdown": {
+      "profile": "Perfil",
+      "dashboard": "Tablero",
+      "messages": "Mensajes",
+      "signout": "Desconectar"
+    }
+  },
+  "home": {
+    "sidebar": {
+      "categories": "Todas las categorías"
+    },
+    "search": {
+      "placeholder": "Buscar un producto"
+    },
+    "sort": {
+      "placeholder": "Ordenar por",
+      "newest": "Más nuevo",
+      "oldest": "Más antiguo",
+      "priceHigh": "Precio alto",
+      "priceLow": "Precio bajo"
+    }
+  },
+  "dashboard": {
+    "sidebar": {
+      "dashboard": "Tablero",
+      "profileSettings": "Configuración del perfil",
+      "products": "Productos",
+      "favorites": "Favoritos"
+    },
+    "profileSettings": {
+      "title": "Configuración del perfil",
+      "form": {
+        "username": "Nombre de usuario",
+        "updateUser": "Actualizar nombre de usuario",
+        "email": "Email",
+        "updateEmail": "Actualizar correo electrónico"
+      }
+    },
+    "products" : {
+      "title": "Productos",
+      "addProduct": "Añadir producto",
+      "table": {
+        "image": "Imagen",
+        "product": "Producto",
+        "category": "Categoría",
+        "price": "Precio"
+      }
+    },
+    "favorites": {
+
+    }
+  },
+  "createNewProduct": {
+    "title": "Crear nuevo producto",
+    "form": {
+      "productName": "Nombre del producto",
+      "productNamePlaceholder": "Ingrese el nombre del producto",
+      "category": "Categoría",
+      "categoryPlaceholder": "Seleccione una categoría",
+      "price": "Precio",
+      "pricePlaceholder": "Ingrese el precio",
+      "quantity": "Cantidad",
+      "image": "Añadir imagen",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Ingrese una descripción",
+      "create": "Crear",
+      "cancel": "Cancelar"
+    }
+  },
+  "signin": {
+    "title": "Bienvenido de nuevo",
+    "message": "¡Empecemos! Por favor ingrese sus datos.",
+    "form": {
+      "username": "Nombre de usuario",
+      "usernamePlaceholder": "Ingrese su nombre de usuario",
+      "password": "Contraseña",
+      "signin": "Iniciar sesión"
+    }
+  },
+  "signup": {
+    "title": "Bienvenido",
+    "message": "¡Empecemos! Por favor ingrese sus datos.",
+    "form": {
+      "firstName": "Nombre de pila",
+      "firstNamePlaceholder": "Ingrese su nombre",
+      "lastName": "Apellido",
+      "lastNamePlaceholder": "Ingrese su apellido",
+      "username": "Nombre de usuario",
+      "usernamePlaceholder": "Ingrese su nombre de usuario",
+      "email": "Email",
+      "emailPlaceholder": "Ingrese su correo electrónico",
+      "password": "Contraseña",
+      "signup": "Registrarse"
+    }
+  }
+}
+

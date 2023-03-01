@@ -6,7 +6,7 @@ import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 import '../matchMedia';
 
-import Signin from '../../../pages/signin';
+import Signin, { getServerSideProps } from '../../../pages/signin';
 import { AppContextProvider } from '../../../context';
 
 const handlers = [
@@ -42,7 +42,25 @@ afterAll(() => server.close());
 
 jest.mock('next/router', () => ({ push: jest.fn() }));
 
+jest.mock('react-i18next', () => ({
+  // this mock makes sure any components using the translate hook can use it without a warning being shown
+  useTranslation: () => {
+    return {
+      t: (str: string) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+      },
+    };
+  },
+  initReactI18next: {
+    type: '3rdParty',
+    init: () => {},
+  },
+}));
+
 const renderView = async () => {
+  const { props } = await getServerSideProps({} as any) as any;
+  console.log(props);
   render(
     <CssVarsProvider>
       <AppContextProvider>
@@ -54,7 +72,7 @@ const renderView = async () => {
 
 test('Success', async () => {
   await renderView();
-  const username = screen.getByPlaceholderText('Enter your username');
+  const username = screen.getByLabelText('Enter your username');
   await userEvent.type(username, 'molly_member');
   const passwd = screen.getByLabelText('password');
   await userEvent.type(passwd, 'mollymember');
@@ -65,12 +83,12 @@ test('Success', async () => {
 });
 
 test('Fail', async () => {
-  renderView();
+  await renderView();
   let alerted = false;
   window.alert = () => {
     alerted = true;
   };
-  const username = screen.getByPlaceholderText('Enter your username');
+  const username = screen.getByLabelText('Enter your username');
   await userEvent.type(username, 'molly_memb');
   const passwd = screen.getByPlaceholderText('•••••••');
   await userEvent.type(passwd, 'mollymember');

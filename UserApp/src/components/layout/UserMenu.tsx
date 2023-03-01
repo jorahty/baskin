@@ -9,9 +9,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import DashboardCustomize from '@mui/icons-material/DashboardCustomize';
 import ForumIcon from '@mui/icons-material/Forum';
 import { useAppContext } from '../../context';
+import { useTranslation } from 'next-i18next';
 
 export default function UserMenu() {
   const { signedInUser, signOut } = useAppContext();
+  const { t } = useTranslation('common');
 
   const [anchor, setAnchor] = useState<(EventTarget & HTMLDivElement) | null>(null);
   const open = Boolean(anchor);
@@ -44,34 +46,44 @@ export default function UserMenu() {
         </Stack>
         <Divider />
         <Link href={`/user/${signedInUser.username}`}>
-          <MenuItem onClick={handleClose}>
+          <MenuItem
+            aria-label="Profile"
+            onClick={handleClose}>
             <ListItemDecorator>
               <PersonIcon />
             </ListItemDecorator>
-            Profile
+            {t('header.dropdown.profile')}
           </MenuItem>
         </Link>
         <Link href={`/dashboard`}>
-          <MenuItem onClick={handleClose}>
+          <MenuItem
+            aria-label="Dashboard"
+            onClick={handleClose}>
             <ListItemDecorator>
               <DashboardCustomize />
             </ListItemDecorator>
-            Dashboard
+            {t('header.dropdown.dashboard')}
           </MenuItem>
         </Link>
         <Link href={`/messages`}>
-          <MenuItem onClick={handleClose}>
+          <MenuItem
+            aria-label="Messages"
+            onClick={handleClose}>
             <ListItemDecorator>
               <ForumIcon />
             </ListItemDecorator>
-            Messages
+            {t('header.dropdown.messages')}
           </MenuItem>
         </Link>
-        <MenuItem onClick={() => signOut()} color="danger">
+        <MenuItem
+          onClick={() => signOut()}
+          color="danger"
+          aria-label="Sign out"
+        >
           <ListItemDecorator sx={{ color: 'inherit' }}>
             <SignOutIcon />
           </ListItemDecorator>
-          Sign out
+          {t('header.dropdown.signout')}
         </MenuItem>
       </Menu>
     </>

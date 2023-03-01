@@ -1,5 +1,6 @@
 import { Product } from '@/graphql/product/schema';
 import { Box, Option, Select } from '@mui/joy';
+import { useTranslation } from 'next-i18next';
 
 const sortings: Record<string, (a: Product, b: Product) => number> = {
   Newest: (a: Product, b: Product) => new Date(b.date).getTime() - new Date(a.date).getTime(),
@@ -14,6 +15,9 @@ interface SorterProps {
 }
 
 export default function Sorter({ setSortedProducts, products }: SorterProps) {
+  const { t } = useTranslation('common');
+  const sortProducts = t('home.sort.placeholder');
+
   const handleSort = (sort: (a: Product, b: Product) => number) => {
     setSortedProducts([...products].sort(sort));
   };
@@ -27,22 +31,22 @@ export default function Sorter({ setSortedProducts, products }: SorterProps) {
   return (
     <Box>
       <Select
-        placeholder="Sort Products"
+        placeholder={sortProducts}
         data-testid="sort"
         onChange={handleChange}
         sx={{ width: { md: '34vw', sm: '30vw' } }}
       >
         <Option aria-label="newest" value="Newest">
-          Newest
+          {t('home.sort.newest')}
         </Option>
         <Option aria-label="oldest" value="Oldest">
-          Oldest
+          {t('home.sort.oldest')}
         </Option>
         <Option aria-label="price-high" value="Price High">
-          Price High
+          {t('home.sort.priceHigh')}
         </Option>
         <Option aria-label="price-low" value="Price Low">
-          Price Low
+          {t('home.sort.priceLow')}
         </Option>
       </Select>
     </Box>

@@ -1,6 +1,7 @@
 import { Product } from '@/graphql/product/schema';
 import { Box, Input } from '@mui/joy';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'next-i18next';
 
 interface SearchProps {
   setSortedProducts: React.Dispatch<React.SetStateAction<Product[]>>;
@@ -9,6 +10,9 @@ interface SearchProps {
 
 export default function Search({ setSortedProducts, products }: SearchProps) {
   const [search, setSearch] = useState('');
+
+  const { t } = useTranslation('common');
+  const searchProducts = t('home.search.placeholder');
 
   useEffect(() => {
     setSortedProducts(
@@ -26,9 +30,10 @@ export default function Search({ setSortedProducts, products }: SearchProps) {
       }}
     >
       <Input
-        placeholder="Search Products"
+        placeholder={searchProducts}
         sx={{ width: { md: '34vw', sm: '30vw' } }}
         onChange={e => setSearch(e.target.value)}
+        aria-label="Search Products"
       />
     </Box>
   );

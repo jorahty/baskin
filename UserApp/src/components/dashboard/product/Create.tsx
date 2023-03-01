@@ -25,6 +25,7 @@ import Stack from '@mui/joy/Stack';
 import { useAppContext } from '../../../context';
 import Image from 'next/image';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface FormElements extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -56,6 +57,12 @@ export default function Create({ setModal }: Props) {
   const array: string[] = [];
   const [pictures, setPictures] = React.useState(array);
   const [open, setOpen] = React.useState(false);
+
+  const { t } = useTranslation('common');
+  const productNamePlaceholder = t('createNewProduct.form.productNamePlaceholder');
+  const categoryPlaceholder = t('createNewProduct.form.categoryPlaceholder');
+  const descriptionPlaceholder = t('createNewProduct.form.descriptionPlaceholder');
+  const pricePlaceholder = t('createNewProduct.form.pricePlaceholder');
 
   const handleCancel = () => {
     setModal(false);
@@ -147,8 +154,13 @@ export default function Create({ setModal }: Props) {
       >
         <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%', paddingTop: '50px' }}>
           <Grid xs={6} sx={{ paddingLeft: '50px' }}>
-            <Typography component="h2" fontSize="xl3" fontWeight="lg">
-              Create New Product
+            <Typography
+              aria-label="Create New Product"
+              component="h2"
+              fontSize="xl3"
+              fontWeight="lg"
+            >
+              {t('createNewProduct.title')}
             </Typography>
           </Grid>
           <Grid xs={10}>
@@ -206,7 +218,7 @@ export default function Create({ setModal }: Props) {
                 ))}
 
                 <Card variant="outlined">
-                  <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
+                  <AspectRatio ratio="1" sx={{ minWidth: 175 }}>
                     <Button
                       size="lg"
                       variant="soft"
@@ -215,7 +227,7 @@ export default function Create({ setModal }: Props) {
                       onClick={() => setOpen(true)}
                       startDecorator={<PhotoCameraIcon />}
                     >
-                      Add Picture
+                      {t('createNewProduct.form.image')}
                     </Button>
                   </AspectRatio>
                 </Card>
@@ -242,16 +254,20 @@ export default function Create({ setModal }: Props) {
             >
               <Grid sx={{ height: '75px' }}>
                 <FormControl required>
-                  <FormLabel>Product Name</FormLabel>
-                  <Input placeholder="Enter Name" type="name" name="name" />
+                  <FormLabel>{t('createNewProduct.form.productName')}</FormLabel>
+                  <Input
+                    aria-label="Enter Name"
+                    placeholder={productNamePlaceholder}
+                    type="name"
+                    name="name" />
                 </FormControl>
               </Grid>
               <Grid sx={{ height: '75px' }}>
                 <FormControl required>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel>{t('createNewProduct.form.category')}</FormLabel>
                   <Select
                     id={'category'}
-                    placeholder="Choose category"
+                    placeholder={categoryPlaceholder}
                     data-testid="category"
                     aria-label="category"
                     name="category"
@@ -267,11 +283,12 @@ export default function Create({ setModal }: Props) {
               </Grid>
               <Grid sx={{ height: '75px' }}>
                 <FormControl required>
-                  <FormLabel>Price</FormLabel>
+                  <FormLabel>{t('createNewProduct.form.price')}</FormLabel>
                   <Input
+                    aria-label="Enter Price"
                     type="number"
                     name="price"
-                    placeholder="Enter amount"
+                    placeholder={pricePlaceholder}
                     startDecorator="$"
                     slotProps={{
                       input: {
@@ -284,8 +301,9 @@ export default function Create({ setModal }: Props) {
               </Grid>
               <Grid sx={{ height: '75px' }}>
                 <FormControl required>
-                  <FormLabel>Quantity</FormLabel>
+                  <FormLabel>{t('createNewProduct.form.quantity')}</FormLabel>
                   <Input
+                    aria-label="Enter Quantity"
                     placeholder="1"
                     name="quantity"
                     type="number"
@@ -319,10 +337,11 @@ export default function Create({ setModal }: Props) {
             >
               <Grid sx={{ height: '250px' }}>
                 <FormControl required>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>{t('createNewProduct.form.description')}</FormLabel>
                   <Textarea
                     name="description"
-                    placeholder="Enter product description"
+                    placeholder={descriptionPlaceholder}
+                    aria-label="Enter Description"
                     minRows={8}
                     maxRows={8}
                   />
@@ -330,11 +349,20 @@ export default function Create({ setModal }: Props) {
               </Grid>
               <Grid>
                 <Box sx={{ display: 'flex', gap: 2 }}>
-                  <Button onClick={handleCancel} fullWidth aria-label="cancel" variant="soft">
-                    Cancel
+                  <Button
+                    onClick={handleCancel}
+                    fullWidth
+                    aria-label="cancel"
+                    variant="soft"
+                  >
+                    {t('createNewProduct.form.cancel')}
                   </Button>
-                  <Button type="submit" fullWidth aria-label="create">
-                    Create
+                  <Button
+                    type="submit"
+                    fullWidth
+                    aria-label="create"
+                  >
+                    {t('createNewProduct.form.create')}
                   </Button>
                 </Box>
               </Grid>

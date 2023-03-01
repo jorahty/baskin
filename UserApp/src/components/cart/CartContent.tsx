@@ -4,8 +4,10 @@ import Image from 'next/image';
 import Typography from '@mui/joy/Typography';
 import Button from '@mui/joy/Button';
 import ClearIcon from '@mui/icons-material/Clear';
+import { useTranslation } from 'next-i18next';
 
 export default function CartContent() {
+  const { t } = useTranslation('common');
   return (
     <Sheet
       style={{

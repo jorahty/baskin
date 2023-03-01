@@ -17,25 +17,21 @@ export class UserResolver {
     return new UserService().add(input);
   }
 
-  @Authorized('member')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @Mutation(returns => User)
-  async updateUsername(
-    @Arg('newName') newName: string,
-    @Ctx() request: Request
-  ): Promise<User> {
-    // check if username is already taken
-    // check if caller is the
-    return new UserService().updateUsername(request, newName);
-  }
+  // @Mutation(returns => User)
+  // async updateUsername(
+  //   @Arg('newName') newName: string,
+  //   @Ctx() request: Request
+  // ): Promise<User> {
+  //   return new UserService().updateUsername(request, newName);
+  // }
 
-  @Authorized('member')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @Mutation(returns => User)
-  async updateEmail(
-    @Arg('newEmail') newEmail: string,
-    @Ctx() request: Request
-  ): Promise<User> {
-    return new UserService().updateEmail(request, newEmail);
-  }
+  // @Mutation(returns => User)
+  // async updateEmail(
+  //   @Arg('newEmail') newEmail: string,
+  //   @Ctx() request: Request
+  // ): Promise<User> {
+  //   return new UserService().updateEmail(request, newEmail);
+  // }
 }

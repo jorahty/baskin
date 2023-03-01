@@ -21,7 +21,11 @@ export default function Sidebar(
         }}
       >
         <ListItem>
-          <Typography fontWeight="lg" component="h4">
+          <Typography
+            aria-label="Dashboard"
+            fontWeight="lg"
+            component="h4"
+          >
             Dashboard
           </Typography>
         </ListItem>
@@ -33,6 +37,7 @@ export default function Sidebar(
               onClick={() => setCurrent(item)}
               selected={current === item}
               variant={current === item ? 'soft' : 'plain'}
+              aria-label={item}
             >
               {item}
             </ListItemButton>

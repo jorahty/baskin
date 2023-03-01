@@ -45,6 +45,22 @@ beforeAll(() => {
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
+jest.mock('react-i18next', () => ({
+  // this mock makes sure any components using the translate hook can use it without a warning being shown
+  useTranslation: () => {
+    return {
+      t: (str: string) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+      },
+    };
+  },
+  initReactI18next: {
+    type: '3rdParty',
+    init: () => {},
+  },
+}));
+
 const renderView = async () => {
   render(
     <CssVarsProvider>
@@ -62,7 +78,7 @@ test('Renders Product Menu', async () => {
   );
 
   await renderView();
-  await screen.getByText('Products');
+  await screen.getByLabelText('Products');
   await screen.findByText('Honda Toy Car');
 });
 
@@ -73,5 +89,5 @@ test('Click new button', async () => {
   );
 
   await renderView();
-  fireEvent.click(screen.getByText('Add Product'));
+  fireEvent.click(screen.getByLabelText('Add Product'));
 });

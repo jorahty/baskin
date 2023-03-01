@@ -42,17 +42,25 @@
     "graphql": "*",
     "graphql-request": "*",
     "graphql-yoga": "*",
+    "i18n": "*",
+    "i18next-chained-backend": "^4.2.0",
+    "i18next-http-backend": "^2.1.1",
+    "i18next-localstorage-backend": "^4.1.0",
     "jsonwebtoken": "*",
     "next": "*",
+    "next-i18next": "*",
     "react": "*",
     "react-dom": "*",
+    "react-i18next": "*",
     "reflect-metadata": "*",
     "type-graphql": "*"
   },
   "eslintConfig": {
     "extends": [
       "../.eslintrc",
-      "next"
+      "next",
+      "next/core-web-vitals",
+      "next/babel"
     ]
   }
 }

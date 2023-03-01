@@ -63,6 +63,22 @@ jest.mock('next/router', () => ({
   push: jest.fn(),
 }));
 
+jest.mock('react-i18next', () => ({
+  // this mock makes sure any components using the translate hook can use it without a warning being shown
+  useTranslation: () => {
+    return {
+      t: (str: string) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+      },
+    };
+  },
+  initReactI18next: {
+    type: '3rdParty',
+    init: () => {},
+  },
+}));
+
 const renderView = async () => {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const setModal = () => {};
@@ -81,7 +97,7 @@ test('Renders', async () => {
     '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
   );
   await renderView();
-  await screen.findByText('Create New Product');
+  screen.getByLabelText('Create New Product');
 });
 
 test('Click Cancel', async () => {
@@ -90,7 +106,7 @@ test('Click Cancel', async () => {
     '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
   );
   await renderView();
-  await screen.findByText('Create New Product');
+  await screen.findByLabelText('Create New Product');
   fireEvent.click(screen.getByLabelText('cancel'));
 });
 
@@ -104,24 +120,24 @@ test('Click create', async () => {
   window.alert = () => {
     alerted = true;
   };
-  await screen.findByText('Create New Product');
+  await screen.findByLabelText('Create New Product');
 
   const button = await screen.findByLabelText('category');
   await userEvent.click(button);
 
-  const electronics = await screen.findByText('Electronics');
+  const electronics = await screen.findByLabelText('Electronics');
   await userEvent.click(electronics);
 
-  const name = await screen.getByPlaceholderText('Enter Name');
+  const name = await screen.getByLabelText('Enter Name');
   await userEvent.type(name, 'new');
 
-  const price = screen.getByPlaceholderText('Enter amount');
+  const price = screen.getByLabelText('Enter Price');
   await userEvent.type(price, '1.50');
 
-  const quantity = screen.getByPlaceholderText('1');
+  const quantity = screen.getByLabelText('Enter Quantity');
   await userEvent.type(quantity, '1');
 
-  const description = screen.getByPlaceholderText('Enter product description');
+  const description = screen.getByLabelText('Enter Description');
   await userEvent.type(description, 'great product');
 
   await userEvent.click(await screen.findByLabelText('add'));
@@ -148,14 +164,14 @@ test('Click create invalid', async () => {
   window.alert = () => {
     alerted = true;
   };
-  await screen.findByText('Create New Product');
-  const name = screen.getByPlaceholderText('Enter Name');
+  screen.getByLabelText('Create New Product');
+  const name = screen.getByLabelText('Enter Name');
   await userEvent.type(name, 'new');
-  const price = screen.getByPlaceholderText('Enter amount');
+  const price = screen.getByLabelText('Enter Price');
   await userEvent.type(price, '1.50');
-  const quantity = screen.getByPlaceholderText('1');
+  const quantity = screen.getByLabelText('Enter Quantity');
   await userEvent.type(quantity, '1');
-  const description = screen.getByPlaceholderText('Enter product description');
+  const description = screen.getByLabelText('Enter Description');
   await userEvent.type(description, 'great product');
   await userEvent.click(screen.getByLabelText('category'));
   fireEvent.click(screen.getByLabelText('create'));
@@ -174,7 +190,7 @@ test('Add image and remove', async () => {
   window.alert = () => {
     alerted = true;
   };
-  await screen.findByText('Create New Product');
+  screen.getByLabelText('Create New Product');
   await userEvent.click(await screen.findByLabelText('add'));
   const url = await screen.getByLabelText('picture');
   await userEvent.type(
@@ -198,7 +214,7 @@ test('Add image and cancel', async () => {
   window.alert = () => {
     alerted = true;
   };
-  await screen.findByText('Create New Product');
+  await screen.getByLabelText('Create New Product');
   await userEvent.click(await screen.findByLabelText('add'));
   const url = await screen.getByLabelText('picture');
   await userEvent.type(

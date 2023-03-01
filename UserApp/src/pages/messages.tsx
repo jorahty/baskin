@@ -1,10 +1,20 @@
 import ChatList from '../components/chat/list';
 import Layout from '../components/layout/Layout';
-
 import { useEffect, useState } from 'react';
 import MessageList from '../components/message/list';
 import { useAppContext } from '../context';
 import queryGQL from '../queryQGL';
+import { useTranslation } from 'react-i18next';
+import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  return {
+    props: {
+      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+    },
+  };
+};
 
 export default function MessagesPage() {
   const { signedInUser } = useAppContext();
@@ -12,6 +22,8 @@ export default function MessagesPage() {
   const [chats, setChats] = useState([]);
   const [messages, setMessages] = useState([]);
   const [selectedChatId, setSelectedChatId] = useState<{ id: string }|undefined>();
+
+  const { t } = useTranslation('common');
 
   // fetch chats
   useEffect(() => {

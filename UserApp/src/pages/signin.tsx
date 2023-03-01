@@ -11,6 +11,9 @@ import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
 import { useAppContext } from '../context';
 import BackRedirect from '../components/util/BackRedirect';
+import { useTranslation } from 'next-i18next';
+import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
@@ -22,8 +25,17 @@ interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
+export const getServerSideProps: GetServerSideProps = async context => {
+  return {
+    props: {
+      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+    },
+  };
+};
+
 export default function Signin() {
   const { signIn, signOut } = useAppContext();
+  const { ready, t } = useTranslation('common');
 
   React.useEffect(() => {
     signOut();
@@ -59,6 +71,7 @@ export default function Signin() {
         }
       });
   };
+  const usernamePlaceholder = t('signin.form.usernamePlaceholder');
 
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -125,10 +138,10 @@ export default function Signin() {
           >
             <div>
               <Typography component="h2" fontSize="xl2" fontWeight="lg">
-                Welcome back
+                {ready && t('signin.title')}
               </Typography>
               <Typography level="body2" sx={{ my: 1, mb: 3 }}>
-                Let&apos;s get started! Please enter your details.
+                {ready && t('signin.message')}
               </Typography>
             </div>
             <form
@@ -143,11 +156,13 @@ export default function Signin() {
               }}
             >
               <FormControl required>
-                <FormLabel>Username</FormLabel>
-                <Input placeholder="Enter your username" type="username" name="username" />
+                <FormLabel
+                  aria-label="Enter your username"
+                >{t('signin.form.username')}</FormLabel>
+                <Input placeholder={usernamePlaceholder} type="username" name="username" />
               </FormControl>
               <FormControl required>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>{t('signin.form.password')}</FormLabel>
                 <Input placeholder="•••••••" type="password" name="password" aria-label={'password'} />
               </FormControl>
               <Box
@@ -158,7 +173,7 @@ export default function Signin() {
                 }}
               ></Box>
               <Button type="submit" fullWidth aria-label="signin">
-                Sign in
+                {ready && t('signin.form.signin')}
               </Button>
             </form>
           </Box>

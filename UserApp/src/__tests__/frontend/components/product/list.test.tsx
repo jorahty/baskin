@@ -35,6 +35,30 @@ const products = [
   },
 ];
 
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      query: { username: '123' },
+    };
+  },
+}));
+
+jest.mock('react-i18next', () => ({
+  // this mock makes sure any components using the translate hook can use it without a warning being shown
+  useTranslation: () => {
+    return {
+      t: (str: string) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+      },
+    };
+  },
+  initReactI18next: {
+    type: '3rdParty',
+    init: () => {},
+  },
+}));
+
 const renderView = async () => {
   render(<ProductList products={products} showSearch={true} showSorter={true} />);
 };
@@ -45,7 +69,7 @@ test('Renders', async () => {
 
 test('Searching', async () => {
   renderView();
-  const search = screen.getByPlaceholderText('Search Products');
+  const search = screen.getByLabelText('Search Products');
   fireEvent.change(search, { target: { value: 'Air' } });
 });
 

@@ -6,7 +6,8 @@ import { GraphQLClient } from 'graphql-request';
 import { regexUsername, regexEmail } from '../../graphql/regex';
 import UsernameUpdate from './UsernameUpdate';
 import Router from 'next/router';
-import EmailUpdate from './EmailUpdate';
+// import EmailUpdate from './EmailUpdate';
+import { useTranslation } from 'next-i18next';
 
 
 export default function ProfileEdit() {
@@ -16,6 +17,7 @@ export default function ProfileEdit() {
   const [validEmail, setValidEmail] = useState(false);
 
   const { signedInUser, signOut } = useAppContext();
+  const { t } = useTranslation('common');
 
   const handleChange = (
     func: React.Dispatch<React.SetStateAction<string>>,
@@ -43,25 +45,6 @@ export default function ProfileEdit() {
     }
     setUsername('');
   };
-
-  const changeEmail = async () => {
-    const accessToken = signedInUser?.accessToken;
-    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const query = `mutation updateEmail { updateEmail(newEmail: "${email}") { email } }`;
-    await graphQLClient.request(query);
-    if (signedInUser) {
-      signOut();
-      Router.push({
-        pathname: '/signin',
-      });
-    }
-    setEmail('');
-  };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,40 +74,12 @@ export default function ProfileEdit() {
     fetchData();
   }, [username]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!signedInUser) {
-        return;
-      } else {
-        let data;
-        if (regexEmail.test(email)) {
-          const accessToken = signedInUser?.accessToken;
-          const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          });
-          const query = `query user { user(email: "${email}") { username } }`;
-          data = await graphQLClient.request(query);
-          if (data?.user?.length === 0) {
-            setValidEmail(true);
-          } else {
-            setValidEmail(false);
-          }
-        } else {
-          setValidEmail(false);
-        }
-      }
-    };
-    fetchData();
-  }, [email]); // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'left',
         justifyContent: 'center',
         m: 2,
       }}>
@@ -136,15 +91,15 @@ export default function ProfileEdit() {
           color: 'primary',
           mb: 4,
         }}
+        aria-label="Profile Settings"
       >
-        Profile Settings
+        {t('dashboard.profileSettings.title')}
       </Typography>
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        m: 2,
+        alignItems: 'left',
+        justifyContent: 'left',
       }}>
         <UsernameUpdate
           username={username}
@@ -153,13 +108,13 @@ export default function ProfileEdit() {
           func={setUsername}
           changeUsername={changeUsername}
         />
-        <EmailUpdate
+        {/* <EmailUpdate
           email={email}
           valid={validEmail}
           handleChange={handleChange}
           func={setEmail}
           changeEmail={changeEmail}
-        />
+        /> */}
       </Box>
     </Box>
   );

@@ -1,29 +1,39 @@
 import Layout from '../components/layout/Layout';
 import DashSidebar from '../components/layout/DashSidebar';
-import { Box } from '@mui/joy';
 import { useEffect, useState } from 'react';
 import ProfileEdit from '../components/dashboard/ProfileEdit';
 import ProductMenu from '../components/dashboard/product/ProductMenu';
-// import { useAppContext } from '../context';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetServerSideProps } from 'next';
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  return {
+    props: {
+      ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
+    },
+  };
+};
 
 export default function Dashboard() {
   const [items, setItems] = useState<string[]>([]);
   const [current, setCurrent] = useState<string>('');
+  const { t } = useTranslation('common');
 
   // const { signedInUser } = useAppContext();
+  // let profileSettings = t("dashboard.sidebar.profileSettings");
+  // let products = t("dashboard.sidebar.products");
+
+  const tabs = ['Profile Settings', 'Products', 'Favorites'];
 
   const comps: Record<string, JSX.Element> = {
     'Profile Settings': <ProfileEdit />,
-    'Poduct Listings': <ProductMenu />,
-    Messages: <Box>Messages</Box>,
+    'Products': <ProductMenu />,
   };
-
-  const tabs = ['Profile Settings', 'Poduct Listings', 'Favorites', 'Messages'];
 
   useEffect(() => {
     setItems(tabs);
-    setCurrent(tabs[0]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setCurrent(tabs[0]);   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
