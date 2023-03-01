@@ -30,6 +30,12 @@ const handlers = [
     );
   }),
   graphql.query('ListCategories', async (req, res, ctx) => {
+    if (req.variables.slug === 'not-a-category') return res(
+      ctx.data({
+        category: [null],
+      }),
+    );
+
     return res(
       ctx.data({
         category: [{
@@ -75,11 +81,11 @@ jest.mock('next/router', () => ({
   },
 }));
 
-const renderView = async () => {
+const renderView = async (slug: string) => {
   const { props } = await getServerSideProps({
-    query: { slug: 'cars' },
+    query: { slug: slug },
   } as any) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
-  render(
+  props && render(
     <CssVarsProvider>
       <CategoryPage
         category={props.category}
@@ -89,6 +95,11 @@ const renderView = async () => {
 };
 
 test('Renders', async () => {
-  renderView();
+  renderView('cars');
+  await new Promise(resolve => setTimeout(resolve, 500));
+});
+
+test('Redirect', async () => {
+  renderView('not-a-category');
   await new Promise(resolve => setTimeout(resolve, 500));
 });

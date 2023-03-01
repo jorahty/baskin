@@ -10,6 +10,14 @@ import { VerboseCategory } from '..';
 // micro services directly. https://tinyurl.com/ysfwst5r
 export const getServerSideProps: GetServerSideProps = async ({ query: { slug } }) => {
   const [category] = await new CategoryService().list(slug as string);
+  
+  if (!category) return {
+    redirect: {
+      permanent: false,
+      destination: '/',
+    }
+  };
+
   const verboseCategory = {
     name: category.name,
     children: await new CategoryService().children(slug as string),

@@ -16,11 +16,9 @@ export default function CategoryAncestors({ ancestors, name }: Props) {
     <Breadcrumbs sx ={{ p: 0 }}>
       {breadcrumbs.map(({ url, name }, index) => (
         <Link key={index} href={url} passHref>
-          <JoyLink
-            color="neutral"
-          >
+          <Typography color="neutral">
             {name}
-          </JoyLink>
+          </Typography>
         </Link>
       ))}
       <Typography fontSize="inherit">{name}</Typography>
