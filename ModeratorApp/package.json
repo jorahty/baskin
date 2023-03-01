@@ -1,0 +1,58 @@
+{
+  "name": "baskin-webapp-admin",
+  "scripts": {
+    "dev": "next dev -p 3002",
+    "lint": "next lint --fix",
+    "test": "jest",
+    "test:silent": "jest --silent",
+    "test:watch": "jest --watchAll",
+    "test:backend": "jest --silent --collectCoverageFrom=src/graphql/**/*.* src/__tests__/graphql",
+    "test:frontend": "jest --silent --collectCoverageFrom=src/{pages,components}/**/*.tsx src/__tests__/frontend"
+  },
+  "devDependencies": {
+    "@jest/globals": "*",
+    "@testing-library/jest-dom": "*",
+    "@testing-library/react": "*",
+    "@testing-library/user-event": "*",
+    "@types/bcrypt": "*",
+    "@types/jsonwebtoken": "*",
+    "@types/node": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "@types/supertest": "*",
+    "@types/testing-library__jest-dom": "*",
+    "eslint": "*",
+    "eslint-config-next": "*",
+    "jest": "*",
+    "jest-environment-jsdom": "*",
+    "msw": "*",
+    "supertest": "*",
+    "ts-jest": "*",
+    "ts-node": "*",
+    "typescript": "*",
+    "whatwg-fetch": "*"
+  },
+  "dependencies": {
+    "@emotion/react": "*",
+    "@emotion/styled": "*",
+    "@mui/icons-material": "*",
+    "@mui/joy": "*",
+    "@next/font": "*",
+    "bcrypt": "*",
+    "graphql": "*",
+    "graphql-request": "*",
+    "graphql-yoga": "*",
+    "jsonwebtoken": "*",
+    "next": "*",
+    "react": "*",
+    "react-dom": "*",
+    "reflect-metadata": "*",
+    "type-graphql": "*"
+  },
+  "eslintConfig": {
+    "extends": [
+      "../.eslintrc",
+      "next"
+    ]
+  }
+}

@@ -17,6 +17,7 @@
 <tr><th>Web App</th><th>Port</th></tr>
 <tr><td>UserApp</td><td>3000</td></tr>
 <tr><td>AdminApp</td><td>3001</td></tr>
+<tr><td>ModeratorApp</td><td>3002</td></tr>
 </table>
 
 <table>
