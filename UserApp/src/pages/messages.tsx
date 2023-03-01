@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import MessageList from '../components/message/list';
 import { useAppContext } from '../context';
 import queryGQL from '../queryQGL';
+import { useRouter } from 'next/router';
 
 export default function MessagesPage() {
   const { signedInUser } = useAppContext();
@@ -13,8 +14,15 @@ export default function MessagesPage() {
   const [messages, setMessages] = useState([]);
   const [selectedChatId, setSelectedChatId] = useState<{ id: string }|undefined>();
 
+  const router = useRouter();
+
   // fetch chats
   useEffect(() => {
+
+    console.log(router.query.chat);
+    console.log(router.pathname);
+    
+
     queryGQL(
       'http://localhost:3000/api/graphql',
       `query chat {
@@ -27,7 +35,7 @@ export default function MessagesPage() {
       setChats(data.chat);
       setSelectedChatId(data.chat[0]);
     });
-  }, [signedInUser]);
+  }, [signedInUser, router.query.chat]);
 
   // fetch messages
   useEffect(() => {
