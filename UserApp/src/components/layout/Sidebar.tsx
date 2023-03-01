@@ -1,4 +1,5 @@
-import { Box, Link, List, ListItem, ListItemButton, Typography } from '@mui/joy';
+import { Box, Button, List, ListItem, ListItemButton, Stack, Typography } from '@mui/joy';
+import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { Category } from '../../graphql/category/schema';
 import Logo from './Logo';
@@ -8,11 +9,13 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
   const { query } = router;
 
   return (
-    <>
+    <Stack p={2} width="100%">
+      <Link href="/product/create">
+        <Button fullWidth>Sell new product</Button>
+      </Link>
       <List
         sx={{
           '--List-item-radius': 'var(--joy-radius-md)',
-          p: 2,
           gap: 1 / 2,
           backgroundColor: 'background.surface',
         }}
@@ -49,6 +52,6 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
           <Logo />
         </Link>
       </Box>
-    </>
+    </Stack>
   );
 }
