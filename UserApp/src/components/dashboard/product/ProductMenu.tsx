@@ -1,4 +1,4 @@
-import { Button, Container, Modal, ModalClose, ModalDialog, Stack } from '@mui/joy';
+import { Button, Container, Stack } from '@mui/joy';
 import Typography from '@mui/joy/Typography';
 import { AddCircle } from '@mui/icons-material';
 import { useAppContext } from '../../../context';
@@ -6,13 +6,12 @@ import { useEffect, useState } from 'react';
 import { Product } from '@/graphql/product/schema';
 import { gql, GraphQLClient } from 'graphql-request';
 import ProductTable from './ProductTable';
-import Create from './Create';
+// import Create from './Create';
 import { useTranslation } from 'next-i18next';
 
 export default function ProductMenu() {
   const { signedInUser } = useAppContext();
   const [products, setProducts] = useState<Product[]>([]);
-  const [open, setOpen] = useState(false);
 
   const { t } = useTranslation('common');
 
@@ -49,7 +48,7 @@ export default function ProductMenu() {
     };
 
     fetchData();
-  }, [signedInUser, open]);
+  }, [signedInUser]);
 
   return (
     <Container sx={{ margin: '16px auto' }}>
@@ -71,30 +70,11 @@ export default function ProductMenu() {
           sx={{
             width: { md: 'fit-content' },
           }}
-          onClick={() => setOpen(true)}
-          aria-label="Add Product"
         >
           {t('dashboard.products.addProduct')}
         </Button>
         <ProductTable products={products} />
       </Stack>
-      <Modal
-        aria-labelledby="product-create"
-        aria-describedby="Create Product"
-        open={open}
-        // onClose={() => setOpen(false)}
-      >
-        <ModalDialog
-          sx={{
-            width: '85vw',
-            height: '90vh',
-            overflow: 'auto',
-          }}
-        >
-          <ModalClose />
-          <Create setModal={setOpen}/>
-        </ModalDialog>
-      </Modal>
     </Container>
   );
 }

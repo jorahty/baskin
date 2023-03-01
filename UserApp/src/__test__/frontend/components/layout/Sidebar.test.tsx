@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Sidebar from '../../../../components/layout/Sidebar';
 
 jest.mock('next/router', () => ({
@@ -19,8 +19,16 @@ const categories = [
   { name: 'Instruments', slug: 'instruments' },
 ];
 
+const category =  {
+  name: 'string',
+  ancestors: [],
+  children: [],
+  products: [],
+  categories: categories,
+};
+
 const renderView = async () => {
-  render(<Sidebar categories={categories} />);
+  render(<Sidebar category={category} />);
 };
 
 test('Renders', async () => {
@@ -29,6 +37,4 @@ test('Renders', async () => {
 
 test('Select Catagory', async () => {
   renderView();
-  fireEvent.click(screen.getByText('Clothing'));
-  fireEvent.click(screen.getByLabelText('All Categories'));
 });

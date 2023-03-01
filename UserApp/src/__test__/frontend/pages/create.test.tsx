@@ -4,10 +4,10 @@ import userEvent from '@testing-library/user-event';
 import { graphql } from 'msw';
 import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
-import '../../matchMedia';
+import '../matchMedia';
 
-import Create from '../../../../components/dashboard/product/Create';
-import { AppContextProvider } from '../../../../context';
+import Create from '../../../pages/product/create';
+import { AppContextProvider } from '../../../context';
 
 const handlers = [
   graphql.mutation('addProduct', async (req, res, ctx) => {
@@ -80,12 +80,10 @@ jest.mock('react-i18next', () => ({
 }));
 
 const renderView = async () => {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const setModal = () => {};
   render(
     <CssVarsProvider>
       <AppContextProvider>
-        <Create setModal={setModal} />
+        <Create/>
       </AppContextProvider>
     </CssVarsProvider>
   );

@@ -18,3 +18,17 @@ export class CategoryArgs {
   @Matches(regexSlug)
     slug?: string;
 }
+
+@ArgsType()
+export class CategoryChildrenArgs {
+  @Field({ nullable: true })
+  @Matches(regexSlug)
+    slug?: string;
+}
+
+@ArgsType()
+export class CategoryAncestorsArgs {
+  @Field()
+  @Matches(regexSlug)
+    slug!: string;
+}

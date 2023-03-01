@@ -44,6 +44,7 @@ export default function Sidebar(
           </ListItem>
         ))}
       </List>
+
       <Box
         sx={{
           display: { xs: 'block', sm: 'none' },
@@ -56,6 +57,7 @@ export default function Sidebar(
           <Logo />
         </Link>
       </Box>
+
     </>
   );
 }

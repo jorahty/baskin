@@ -19,4 +19,13 @@ module.exports = {
     ],
   },
   i18n,
+  async redirects() {
+    return [
+      {
+        source: '/messages',
+        destination: '/messages/any',
+        permanent: true,
+      },
+    ]
+  },
 }

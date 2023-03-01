@@ -54,7 +54,7 @@ export default function MessagesPage() {
   }, [selectedChatId, signedInUser]);
 
   return (
-    <Layout sidebar={<ChatList setSelectedChatId={setSelectedChatId} chats={chats} />}>
+    <Layout sidebar={<ChatList selectedChat={selectedChatId} chats={chats} />}>
       <MessageList messages={messages} />
     </Layout>
   );

@@ -1,17 +1,16 @@
 import { render } from '@testing-library/react';
 import { CssVarsProvider } from '@mui/joy/styles';
+import TermsPage from '../../../pages/terms';
 import '../matchMedia';
-
-import Dashboard from '../../../pages/dashboard';
 
 const renderView = async () => {
   render(
     <CssVarsProvider>
-      <Dashboard />
-    </CssVarsProvider>,
+      <TermsPage />
+    </CssVarsProvider>
   );
 };
 
-test('Render page', async () => {
+test('Renders', async () => {
   await renderView();
 });

@@ -1,12 +1,12 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import { graphql } from 'msw';
 import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 import '../matchMedia';
 
-import IndexPage from '../../../pages/index';
-import { getServerSideProps } from '../../../pages/index';
+import CategoryPage from '../../../pages/category/[slug]';
+import { getServerSideProps } from '../../../pages/category/[slug]';
 
 const handlers = [
   graphql.query('ListProducts', async (req, res, ctx) => {
@@ -30,9 +30,35 @@ const handlers = [
     );
   }),
   graphql.query('ListCategories', async (req, res, ctx) => {
+    if (req.variables.slug === 'not-a-category') return res(
+      ctx.data({
+        category: [null],
+      }),
+    );
+
     return res(
       ctx.data({
         category: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
+  graphql.query('CategoryChildren', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryChildren: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
+  graphql.query('CategoryAncestors', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryAncestors: [{
           slug: 'cars',
           name: 'Cars',
         }],
@@ -44,12 +70,13 @@ const handlers = [
 const server = setupServer(...handlers);
 
 beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 jest.mock('next/router', () => ({
   useRouter() {
     return {
-      query: { id: '123' },
+      query: { slug: '123' },
     };
   },
 }));
@@ -70,34 +97,25 @@ jest.mock('react-i18next', () => ({
   },
 }));
 
-const renderView = async () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { props } = await getServerSideProps({} as any) as any;
-  render(
+const renderView = async (slug: string) => {
+  const { props } = await getServerSideProps({
+    query: { slug: slug },
+  } as any) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  props && render(
     <CssVarsProvider>
-      <IndexPage
-        categories={props.categories}
-        products={props.products}
+      <CategoryPage
+        category={props.category}
       />
     </CssVarsProvider>
   );
 };
 
 test('Renders', async () => {
-  renderView();
+  renderView('cars');
   await new Promise(resolve => setTimeout(resolve, 500));
 });
 
-function setWidth(width: number) {
-  global.innerWidth = width;
-  act(() => {
-    global.dispatchEvent(new Event('resize'));
-  });
-}
-
-test('Resize Layout and Open Mobile Menu', async () => {
-  renderView();
-  await screen.findByLabelText(/menu-icon/i);
-  setWidth(550);
-  fireEvent.click(screen.getByRole('button', { name: /menu-icon/i }));
+test('Redirect', async () => {
+  renderView('not-a-category');
+  await new Promise(resolve => setTimeout(resolve, 500));
 });

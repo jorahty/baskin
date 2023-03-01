@@ -6,7 +6,8 @@ import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 import '../matchMedia';
 
-import MessagesPage, { getServerSideProps } from '../../../pages/messages';
+import { getServerSideProps } from '../../../pages/messages';
+import MessagesPage from '../../../pages/messages/[id]';
 
 jest.mock('../../../context', () => ({
   useAppContext: () => ({
@@ -89,15 +90,6 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      query: { slug: 'toys' },
-    };
-  },
-  push: jest.fn(),
-}));
-
 const renderView = async () => {
   await getServerSideProps({} as any);
   render(
@@ -107,11 +99,48 @@ const renderView = async () => {
   );
 };
 
-test('Renders', async () => {
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      query: { id: '1' },
+      push: jest.fn(),
+    };
+  },
+  push: jest.fn(),
+}));
+
+test('Main', async () => {
   await renderView();
   await screen.findByText('Samsung TV');
   await screen.findByText('Anna Admin');
   await screen.findByText('Hey Anna, this is Molly');
   fireEvent.click(screen.getByText('Samsung TV'));
   await screen.findByText('Hey Anna, this is Molly');
+});
+
+test('Bad URL', async () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const useRouter = jest.spyOn(require('next/router'), 'useRouter');
+
+  useRouter.mockImplementation(() => ({
+    query: { id: '11' },
+    push: jest.fn(),
+  }));
+
+  await renderView();
+  await screen.findByText('Samsung TV');
+  await screen.findByText('Anna Admin');
+});
+
+test('Not signed in', async () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const useAppContext = jest.spyOn(require('../../../context'), 'useAppContext');
+
+  useAppContext.mockImplementation(() => ({
+    signIn: jest.fn(),
+    signOut: jest.fn(),
+    signedInUser: null,
+  }));
+
+  await renderView();
 });

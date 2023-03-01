@@ -1,34 +1,44 @@
-import ProductList from '../../components/product/list';
 import { GetServerSideProps } from 'next';
-import { Product } from '@/graphql/product/schema';
-import { Category } from '@/graphql/category/schema';
 import Layout from '../../components/layout/Layout';
 import Sidebar from '../../components/layout/Sidebar';
 import { ProductService } from '../../graphql/product/service';
 import { CategoryService } from '../../graphql/category/service';
+import CategoryContent from '../../components/category/content';
+import { VerboseCategory } from '..';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Within `getServerSideProps` we can (and should) query
 // micro services directly. https://tinyurl.com/ysfwst5r
-export const getServerSideProps: GetServerSideProps = async context => {
-  return {
-    props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
-      products: await new ProductService().list({ category: context.query.slug as string }),
-      categories: await new CategoryService().list(),
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const [category] = await new CategoryService().list(context.query.slug as string);
+
+  if (!category) return {
+    redirect: {
+      permanent: false,
+      destination: '/',
     },
+  };
+
+  const verboseCategory = {
+    name: category.name,
+    children: await new CategoryService().children(context.query.slug as string),
+    ancestors: await new CategoryService().ancestors(context.query.slug as string),
+    products: await new ProductService().list({ category: context.query.slug as string }),
+    categories: await new CategoryService().list(),
+  };
+  return {
+    props: { category: verboseCategory },
   };
 };
 
 interface Props {
-  products: Product[];
-  categories: Category[];
+  category: VerboseCategory;
 }
 
-export default function CategoryPage({ products, categories }: Props) {
+export default function CategoryPage({ category }: Props) {
   return (
-    <Layout sidebar={<Sidebar categories={categories} />}>
-      <ProductList products={products} showSearch={true} showSorter={true} />
+    <Layout sidebar={<Sidebar category={category} />}>
+      <CategoryContent category={category}/>
     </Layout>
   );
 }

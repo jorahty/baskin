@@ -3,9 +3,10 @@ import { Box, Divider, GlobalStyles, Stack } from '@mui/joy';
 import React from 'react';
 import Header, { headerHeight } from './Header';
 import BackDrop from './BackDrop';
-import { useTranslation } from 'react-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { GetServerSideProps } from 'next';
+// import { useTranslation } from 'react-i18next';
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+// import { GetServerSideProps } from 'next';
+import Footer, { footerHeight } from './Footer';
 
 interface Props {
   children: React.ReactNode;
@@ -14,7 +15,7 @@ interface Props {
 
 const sx = {
   overflowY: 'scroll',
-  height: `calc(100vh - ${headerHeight})`,
+  height: `calc(100vh - ${headerHeight} - ${footerHeight})`,
   flexGrow: 1,
 };
 
@@ -66,6 +67,10 @@ export default function Layout({ children, sidebar }: Props) {
           {children}
         </Box>
       </Stack>
+      <Divider />
+      <Box bgcolor="background.surface">
+        <Footer />
+      </Box>
     </>
   );
 }

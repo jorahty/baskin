@@ -7,6 +7,33 @@ export class ProductService {
     username?: string,
     category?: string,
   ): Promise<Product[]> {
+    if (category) {
+      const select = `
+        WITH RECURSIVE category_tree AS (
+          SELECT slug, parent_slug
+          FROM category
+          WHERE slug = $1
+          UNION ALL
+          SELECT c.slug, c.parent_slug
+          FROM category_tree ct
+          JOIN category c ON ct.slug = c.parent_slug
+        )
+        SELECT p.data || jsonb_build_object(
+          'id', p.id,
+          'user', p.member_username,
+          'category', p.category_slug
+        ) AS product
+        FROM product p
+        JOIN category_tree ct ON p.category_slug = ct.slug
+      `;
+      const values = [category];
+      const query = {
+        text: select,
+        values: values,
+      };
+      const { rows } = await pool.query(query);
+      return rows.map(row => row.product);
+    }
     let select = `
       SELECT data || jsonb_build_object(
         'id', id,
@@ -21,9 +48,6 @@ export class ProductService {
     } else if (username) {
       select += ` WHERE member_username = $1`;
       values = [username];
-    } else if (category) {
-      select += ` WHERE category_slug = $1`;
-      values = [category];
     }
     const query = {
       text: select,

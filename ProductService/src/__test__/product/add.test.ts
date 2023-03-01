@@ -29,7 +29,7 @@ test('Add Product', async () => {
           addProduct(
             input: {
               user: "molly_member"
-              category: "clothing"
+              category: "apparel"
               name: "Toy robot"
               price: 40.99
               discount: 0

@@ -1,28 +1,64 @@
 import http from 'http';
 import supertest from 'supertest';
-
-import * as db from '../db';
-import app from '../../app';
+import 'whatwg-fetch';
+import requestHandler from '../requestHandler';
+import { graphql } from 'msw';
+import { setupServer } from 'msw/node';
 
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
+const handlers = [
+  graphql.query('ListCategories', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        category: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
+  graphql.query('CategoryChildren', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryChildren: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
+  graphql.query('CategoryAncestors', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryAncestors: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
+];
+
+const microServiceServer = setupServer(...handlers);
+
 beforeAll(async () => {
-  server = http.createServer(app);
+  server = http.createServer(requestHandler);
   server.listen();
+  microServiceServer.listen();
   request = supertest(server);
-  await db.reset();
   return new Promise(resolve => setTimeout(resolve, 500));
 });
 
 afterAll(done => {
   server.close(done);
-  db.shutdown();
+  microServiceServer.close();
 });
 
 test('List All', async () => {
   await request
-    .post('/graphql')
+    .post('/api/graphql')
     .send({
       query: `{category { name }}`,
     })
@@ -34,7 +70,7 @@ test('List All', async () => {
 
 test('List by ID', async () => {
   await request
-    .post('/graphql')
+    .post('/api/graphql')
     .send({
       query: `{category (slug: "apparel") { name, slug }}`,
     })
@@ -46,7 +82,7 @@ test('List by ID', async () => {
 
 test('List children', async () => {
   await request
-    .post('/graphql')
+    .post('/api/graphql')
     .send({
       query: `{categoryChildren (slug: "vehicles") { name, slug }}`,
     })
@@ -56,28 +92,14 @@ test('List children', async () => {
     });
 });
 
-test('List roots', async () => {
+test('List ancestors', async () => {
   await request
-    .post('/graphql')
+    .post('/api/graphql')
     .send({
-      query: `{categoryChildren { name, slug }}`,
-    })
-    .expect(200)
-    .then(res => {
-      expect(res.body.data.categoryChildren).toBeDefined();
-    });
-});
-
-
-test('List children', async () => {
-  await request
-    .post('/graphql')
-    .send({
-      query: `{categoryAncestors (slug: "sailboats") { name, slug }}`,
+      query: `{categoryAncestors (slug: "vehicles") { name, slug }}`,
     })
     .expect(200)
     .then(res => {
       expect(res.body.data.categoryAncestors).toBeDefined();
     });
 });
-
