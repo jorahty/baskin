@@ -12,6 +12,7 @@ import CategoryContent from '../components/category/content';
 export const getServerSideProps: GetServerSideProps = async () => {
   const verboseCategory = {
     name: null,
+    ancestors: null,
     children: await new CategoryService().children(),
     products: await new ProductService().list({}),
     categories: await new CategoryService().list(),
@@ -26,7 +27,8 @@ export interface Props {
 }
 
 export interface VerboseCategory {
-  name: string;
+  name: null|string;
+  ancestors: null|Category[];
   children: Category[];
   products: Product[];
   categories: Category[];

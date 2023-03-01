@@ -49,6 +49,16 @@ const handlers = [
       }),
     );
   }),
+  graphql.query('CategoryAncestors', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryAncestors: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
 ];
 
 const server = setupServer(...handlers);
