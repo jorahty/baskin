@@ -6,7 +6,7 @@ import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 import '../matchMedia';
 
-import Create from '../../../pages/Create';
+import Create from '../../../pages/product/create';
 import { AppContextProvider } from '../../../context';
 
 const handlers = [
