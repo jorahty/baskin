@@ -43,3 +43,15 @@ test('List by ID', async () => {
       expect(res.body.data.category).toHaveLength(1);
     });
 });
+
+test('List children', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `{categoryChildren (slug: "vehicles") { name, slug }}`,
+    })
+    .expect(200)
+    .then(res => {
+      expect(res.body.data.categoryChildren).toBeDefined();
+    });
+});

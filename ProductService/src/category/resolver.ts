@@ -9,4 +9,9 @@ export class CategoryResolver {
   async category(@Args() { slug }: CategoryArgs): Promise<Category[]> {
     return new CategoryService().list(slug);
   }
+
+  @Query(() => [Category])
+  async categoryChildren(@Args() { slug }: CategoryArgs): Promise<Category[]> {
+    return new CategoryService().children(slug);
+  }
 }
