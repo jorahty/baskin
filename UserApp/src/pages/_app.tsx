@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <CssVarsProvider theme={theme} defaultMode="system">
       <CssBaseline />
-      <GlobalStyles styles={{ a: { textDecoration: 'none' } }} />
+      <GlobalStyles styles={{ a: { textDecoration: 'none', color: 'inherit' } }} />
       <Head>
         <title>Baskin</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
