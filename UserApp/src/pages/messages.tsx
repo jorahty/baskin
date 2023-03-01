@@ -21,7 +21,7 @@ export default function MessagesPage() {
 
     console.log(router.query.chat);
     console.log(router.pathname);
-    
+
 
     queryGQL(
       'http://localhost:3000/api/graphql',

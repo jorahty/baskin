@@ -44,7 +44,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
     });
     const query = gql`mutation removeProduct {removeProduct (product: "${product}") { id }}`;
     await graphQLClient.request(query);
-    setProductList(productList.filter((row) => row.id != product));
+    setProductList(productList.filter(row => row.id != product));
   };
 
   return (
@@ -65,9 +65,9 @@ export default function ProductTable({ products }: { products: Product[] }) {
         stickyHeader
         hoverRow
         sx={{
-          '--TableCell-headBackground': (theme) => theme.vars.palette.background.level1,
+          '--TableCell-headBackground': theme => theme.vars.palette.background.level1,
           '--Table-headerUnderlineThickness': '1px',
-          '--TableRow-hoverBackground': (theme) => theme.vars.palette.background.level1,
+          '--TableRow-hoverBackground': theme => theme.vars.palette.background.level1,
         }}
       >
         <thead>
@@ -99,7 +99,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
                   variant="plain"
                   color="neutral"
                   aria-label="menu"
-                  onClick={(event) => handleClick(event, row.id)}
+                  onClick={event => handleClick(event, row.id)}
                 >
                   <MoreVertIcon />
                 </Button>

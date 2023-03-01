@@ -1,4 +1,4 @@
-import { Button, Container, Modal, ModalClose, ModalDialog, Stack } from '@mui/joy';
+import { Button, Container, Stack } from '@mui/joy';
 import Typography from '@mui/joy/Typography';
 import { AddCircle } from '@mui/icons-material';
 import { useAppContext } from '../../../context';
@@ -10,7 +10,6 @@ import ProductTable from './ProductTable';
 export default function ProductMenu() {
   const { signedInUser } = useAppContext();
   const [products, setProducts] = useState<Product[]>([]);
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (!signedInUser) return;
@@ -45,7 +44,7 @@ export default function ProductMenu() {
     };
 
     fetchData();
-  }, [signedInUser, open]);
+  }, [signedInUser]);
 
   return (
     <Container sx={{ margin: '16px auto' }}>

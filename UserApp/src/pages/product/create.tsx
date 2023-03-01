@@ -29,7 +29,6 @@ import Router from 'next/router';
 import Layout from '../../components/layout/Layout';
 
 
-
 interface FormElements extends HTMLFormControlsCollection {
   name: HTMLInputElement;
   description: HTMLInputElement;
@@ -57,11 +56,11 @@ export default function Create() {
   const [pictures, setPictures] = React.useState(array);
   const [open, setOpen] = React.useState(false);
 
-  const handleCancel = (() =>{
+  const handleCancel = (() => {
     Router.push({
       pathname: '/',
     });
-  })
+  });
 
   useEffect(() => {
     const fetchData = async () => {
