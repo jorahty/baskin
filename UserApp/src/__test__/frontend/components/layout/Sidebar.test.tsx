@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Sidebar from '../../../../components/layout/Sidebar';
 
 jest.mock('next/router', () => ({
