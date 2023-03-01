@@ -1,16 +1,17 @@
 import Link from 'next/link';
-import { Box, Button, IconButton, Stack, Typography } from '@mui/joy';
-import MenuIcon from '@mui/icons-material/Menu';
-import ModeToggle from './ModeToggle';
-import Logo from './Logo';
-import UserMenu from './UserMenu';
-import { useAppContext } from '../../context';
+import { Stack, Typography } from '@mui/joy';
 
 export const footerHeight = '50px';
 
 export default function Footer() {
   return (
-    <Stack height={footerHeight} direction="row" alignItems="center" p={2}>
+    <Stack
+      height={footerHeight}
+      direction="row"
+      alignItems="center"
+      justifyContent="center"
+      p={2}
+    >
       <Typography>© Baskin</Typography>
       {[
         'Terms',

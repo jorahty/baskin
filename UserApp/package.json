@@ -6,8 +6,8 @@
     "test": "jest",
     "test:silent": "jest --silent",
     "test:watch": "jest --watchAll",
-    "test:backend": "jest --silent --collectCoverageFrom=src/graphql/**/*.* src/__tests__/graphql",
-    "test:frontend": "jest --silent --collectCoverageFrom=src/{pages,components}/**/*.tsx src/__tests__/frontend"
+    "test:backend": "jest --silent --collectCoverageFrom=src/graphql/**/*.* src/__test__/graphql",
+    "test:frontend": "jest --silent --collectCoverageFrom=src/{pages,components}/**/*.tsx src/__test__/frontend"
   },
   "devDependencies": {
     "@jest/globals": "*",
