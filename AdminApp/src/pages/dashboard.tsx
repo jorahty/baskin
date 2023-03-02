@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../components/layout/Sidebar';
 import Layout from '../components/layout/Layout';
 import CategoriesPage from '../components/categories/CategoriesPage';
+import AuthGuard from '../components/AuthGuard';
 
 
 export default function Dashoard(){
@@ -21,10 +22,10 @@ export default function Dashoard(){
   }, []);
 
   return (
-    <>
+    <AuthGuard>
       <Layout sidebar={<Sidebar tabs={tabs} current={current} setCurrent={setCurrent} />}>
         {comps[current]}
       </Layout>
-    </>
+    </AuthGuard>
   );
 }

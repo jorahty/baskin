@@ -6,6 +6,9 @@ import { graphql } from 'msw';
 
 import Dashboard from '../../../pages/dashboard';
 
+jest.mock('next/router', () => ({
+  push: jest.fn(),
+}));
 
 const handlers = [
   graphql.query('getAllCategories', async (req, res, ctx) => {

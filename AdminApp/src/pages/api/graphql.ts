@@ -3,6 +3,7 @@ import 'reflect-metadata'; // must come before buildSchema
 import { buildSchemaSync } from 'type-graphql';
 
 import { AuthResolver } from '../../graphql/auth/resolver';
+import { nextAuthChecker } from '../../graphql/auth/checker';
 import { CategoryResolver } from '../../graphql/category/resolver';
 
 const schema = buildSchemaSync({
@@ -11,6 +12,7 @@ const schema = buildSchemaSync({
     CategoryResolver,
   ],
   validate: { forbidUnknownValues: false },
+  authChecker: nextAuthChecker,
 });
 
 export default createYoga({

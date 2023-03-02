@@ -3,6 +3,7 @@ import * as bcrypt from 'bcrypt';
 
 import { Credentials, SignInPayload } from './schema';
 import request, { gql } from 'graphql-request';
+import { SessionUser } from '../../types/custom';
 
 export interface User {
   username: string;
@@ -47,6 +48,23 @@ export class AuthService {
           reject(new Error('Unauthorised'));
         }
       });
+    });
+  }
+
+  public async check(authHeader?: string): Promise<SessionUser> {
+    return new Promise((resolve, reject) => {
+      if (!authHeader) {
+        reject(new Error('Unauthorised'));
+      } else {
+        const token = authHeader.split(' ')[1];
+        jwt.verify(token, process.env.ACCESS_TOKEN as string, (err, user) => {
+          const newUser: User = user as User;
+          if (err) {
+            reject(err);
+          }
+          resolve({ email: newUser.email, name: newUser.name, username: newUser.username });
+        });
+      }
     });
   }
 }

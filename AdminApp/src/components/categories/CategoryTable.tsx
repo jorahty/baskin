@@ -38,14 +38,20 @@ export default function CategoryTable({ categories }: { categories: Category[] }
       >
         <thead>
           <tr>
-            <th style={{ width: '80%', padding: 12 }}>Name</th>
+            <th style={{ width: '50%', padding: 12 }}>Name</th>
+            <th style={{ width: '50%', padding: 12 }}>Parent</th>
           </tr>
         </thead>
         <tbody>
           {categoryList.map((row: Category) => (
-            <tr key={row.slug}>
+            <tr key={row.slug} aria-label={row.slug}>
               <td>
                 <Typography fontWeight="md">{row.name}</Typography>
+              </td>
+              <td>
+                <Typography fontWeight="md">{row.parent ?
+                  row.parent[0].toUpperCase() + row.parent.slice(1) : 'None'}
+                </Typography>
               </td>
             </tr>
           ))}
