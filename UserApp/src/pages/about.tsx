@@ -1,4 +1,4 @@
-import Layout from '@/components/layout/Layout';
+import Layout from '../components/layout/Layout';
 import { Box } from '@mui/joy';
 
 export default function AboutPage(){
