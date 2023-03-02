@@ -13,20 +13,6 @@ export default function Sidebar({ tabs, current, setCurrent }:
   {tabs: string[], current:string, setCurrent: (item: string) => void}) {
   return (
     <React.Fragment>
-      <Box
-        className="SecondSidebar-overlay"
-        sx={{
-          position: 'fixed',
-          zIndex: 9998,
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          bgcolor: 'background.body',
-          opacity: 'calc(var(--SideNavigation-slideIn, 0) - 0.2)',
-          transition: 'opacity 0.4s',
-        }}
-      />
       <Sheet
         className="SecondSidebar"
         sx={{
