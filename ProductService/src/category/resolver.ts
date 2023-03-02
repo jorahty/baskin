@@ -1,6 +1,7 @@
 import { Arg, Args, Resolver, Query, Mutation } from 'type-graphql';
 
-import { Category, CategoryAncestorsArgs, CategoryArgs, CategoryChildrenArgs, NewCategory } from './schema';
+import { Category, CategoryAncestorsArgs, CategoryArgs,
+  CategoryChildrenArgs, NewCategory } from './schema';
 import { CategoryService } from './service';
 
 @Resolver()

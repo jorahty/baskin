@@ -4,7 +4,8 @@ import { pool } from '../db';
 
 export class CategoryService {
   public async list(slug?: string): Promise<Category[]> {
-    let select = `SELECT data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category FROM category`;
+    let select = `SELECT data || jsonb_build_object('slug', slug, 'parent', parent_slug)
+      AS category FROM category`;
     if (slug) select += ' WHERE slug = $1';
     const query = {
       text: select,
@@ -52,7 +53,8 @@ export class CategoryService {
   }
 
   public async add(slug: string, name: string, parent?:string): Promise<Category> {
-    const insert = `INSERT INTO category (slug, parent_slug, data) VALUES ($1, $2, $3) RETURNING data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category`;
+    const insert = `INSERT INTO category (slug, parent_slug, data) VALUES ($1, $2, $3)
+      RETURNING data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category`;
 
     const query = {
       text: insert,
