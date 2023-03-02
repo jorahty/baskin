@@ -1,0 +1,99 @@
+{
+  "header": {
+  "signin": "登录",
+  "signup": "注册",
+  "dropdown": {
+  "profile": "个人资料",
+  "dashboard": "控制台",
+  "messages": "消息",
+  "signout": "登出"
+  }
+  },
+  "home": {
+  "sidebar": {
+  "categories": "所有类别"
+  },
+  "search": {
+  "placeholder": "搜索产品"
+  },
+  "sort": {
+  "placeholder": "排序方式",
+  "newest": "最新",
+  "oldest": "最旧",
+  "priceHigh": "价格高",
+  "priceLow": "价格低"
+  }
+  },
+  "dashboard": {
+  "sidebar": {
+  "dashboard": "控制台",
+  "profileSettings": "个人资料设置",
+  "products": "产品",
+  "favorites": "收藏"
+  },
+  "profileSettings": {
+  "title": "个人资料设置",
+  "form": {
+  "username": "用户名",
+  "updateUser": "更新用户名",
+  "email": "电子邮件",
+  "updateEmail": "更新电子邮件"
+  }
+  },
+  "products" : {
+  "title": "产品",
+  "addProduct": "添加产品",
+  "table": {
+  "image": "图片",
+  "product": "产品",
+  "category": "类别",
+  "price": "价格"
+  }
+  },
+  "favorites": {
+  }
+},
+"createNewProduct": {
+"title": "创建新产品",
+"form": {
+"productName": "产品名称",
+"productNamePlaceholder": "输入产品名称",
+"category": "类别",
+"categoryPlaceholder": "选择一个类别",
+"price": "价格",
+"pricePlaceholder": "输入价格",
+"quantity": "数量",
+"image": "添加图片",
+"description": "描述",
+"descriptionPlaceholder": "输入描述",
+"create": "创建",
+"cancel": "取消"
+}
+},
+"signin": {
+"title": "欢迎回来",
+"message": "让我们开始吧！请输入您的信息。",
+"form": {
+"username": "用户名",
+"usernamePlaceholder": "输入您的用户名",
+"password": "密码",
+"signin": "登录"
+}
+},
+"signup": {
+"title": "欢迎",
+"message": "让我们开始吧！请输入您的信息。",
+"form": {
+"firstName": "名",
+"firstNamePlaceholder": "输入您的名字",
+"lastName": "姓",
+"lastNamePlaceholder": "输入您的姓氏",
+"username": "用户名",
+"usernamePlaceholder": "输入您的用户名",
+"email": "电子邮件",
+"emailPlaceholder": "输入您的电子邮件",
+"password": "密码",
+"signup": "注册"
+}
+}
+}
