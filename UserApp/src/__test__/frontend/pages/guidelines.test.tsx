@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import  { CssVarsProvider }  from '@mui/joy/styles';
-import AboutPage from '../../../pages/about';
+import GuidelinesPage from '../../../pages/guidelines';
 import '../matchMedia';
 
 jest.mock('next/router', () => ({
@@ -30,7 +30,7 @@ jest.mock('react-i18next', () => ({
 const renderView = async () => {
   render(
     <CssVarsProvider>
-      <AboutPage />
+      <GuidelinesPage />
     </CssVarsProvider>
   );
 };

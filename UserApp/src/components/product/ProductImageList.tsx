@@ -45,7 +45,7 @@ export default function ProductImageList({
         }}
       >
         <Box
-          sx={(theme) => ({
+          sx={theme => ({
             display: 'flex',
             flexWrap: 'wrap',
             gap: 2,
