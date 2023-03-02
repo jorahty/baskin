@@ -1,8 +1,36 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import '../matchMedia';
+import { setupServer } from 'msw/node';
+import { graphql } from 'msw';
 
 import Dashboard from '../../../pages/dashboard';
+
+
+const handlers = [
+  graphql.query('getAllCategories', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        category: [
+          {
+            name: 'Vehicles',
+            slug: 'vehicles',
+          },
+        ],
+      }),
+    );
+  }),
+];
+
+const server = setupServer(...handlers);
+
+beforeAll(() => {
+  server.listen();
+});
+
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
 
 const renderView = async () => {
   render(
@@ -23,14 +51,11 @@ test('Clicks on sidebar', async () => {
 });
 
 
-test('Close User Menu', async () => {
-  // this test is kinda scuffed. I spent so long trying to make it disappear.
-  // The only way I got it to close was by clicking a button on the menu.
-  // Clicking away or on other elements NEVER triggered its handleClose()
+test('Shows differnt menu', async () => {
   renderView();
   fireEvent.click(screen.getByText('Welcome to the dashboard'));
   const sidebar = await screen.findByText('Categories');
   fireEvent.click(sidebar);
   expect(screen.queryByText('Welcome to the dashboard')).not.toBeInTheDocument();
-  fireEvent.click(screen.getByText('Welcome to the Categories'));
+  fireEvent.click(screen.getByText('All Categories'));
 });

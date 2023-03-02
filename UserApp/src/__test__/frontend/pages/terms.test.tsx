@@ -3,6 +3,7 @@ import { CssVarsProvider } from '@mui/joy/styles';
 import TermsPage from '../../../pages/terms';
 import '../matchMedia';
 
+
 jest.mock('next/router', () => ({
   useRouter() {
     return {

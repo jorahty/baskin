@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import Sidebar from '../components/Sidebar';
-import Layout from '../components/Layout';
+import Sidebar from '../components/layout/Sidebar';
+import Layout from '../components/layout/Layout';
+import CategoriesPage from '../components/categories/CategoriesPage';
 
 
 export default function Dashoard(){
@@ -9,7 +10,7 @@ export default function Dashoard(){
 
   const comps: Record<string, JSX.Element> = {
     'Overview': <div>Welcome to the dashboard</div>,
-    'Categories': <div>Welcome to the Categories</div>,
+    'Categories': <CategoriesPage />,
   };
 
   const tabs = ['Overview', 'Categories'];
