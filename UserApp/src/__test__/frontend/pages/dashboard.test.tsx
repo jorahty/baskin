@@ -10,6 +10,7 @@ jest.mock('next/router', () => ({
 
     };
   },
+  push: jest.fn(),
 }));
 
 jest.mock('react-i18next', () => ({
@@ -38,9 +39,6 @@ const renderView = async () => {
     </CssVarsProvider>
   );
 };
-jest.mock('next/router', () => ({
-  push: jest.fn(),
-}));
 
 
 test('Renders', async () => {
