@@ -27,6 +27,9 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import Router from 'next/router';
 import Layout from '../../components/layout/Layout';
+import { useTranslation } from 'react-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetServerSideProps } from "next";
 
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -48,6 +51,12 @@ interface PictureFormElement extends HTMLFormElement {
   readonly elements: PictureFormElements;
 }
 
+export const getServerSideProps: GetServerSideProps = async (context) => ({
+  props: {
+    ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
+  },
+});
+
 export default function Create() {
   const { signedInUser } = useAppContext();
   const [categories, setCategories] = React.useState<Category[]>([]);
@@ -55,6 +64,12 @@ export default function Create() {
   const array: string[] = [];
   const [pictures, setPictures] = React.useState(array);
   const [open, setOpen] = React.useState(false);
+
+  const { t } = useTranslation('common');
+  const productNamePlaceholder = t('createNewProduct.form.productNamePlaceholder');
+  const categoryPlaceholder = t('createNewProduct.form.categoryPlaceholder');
+  const descriptionPlaceholder = t('createNewProduct.form.descriptionPlaceholder');
+  const pricePlaceholder = t('createNewProduct.form.pricePlaceholder');
 
   const handleCancel = (() => {
     Router.push({
@@ -151,8 +166,8 @@ export default function Create() {
         >
           <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%', paddingTop: '50px' }}>
             <Grid xs={6} sx={{ paddingLeft: '50px' }}>
-              <Typography component="h2" fontSize="xl3" fontWeight="lg">
-                Create New Product
+              <Typography aria-label="Create New Product" component="h2" fontSize="xl3" fontWeight="lg">
+                {t('createNewProduct.title')}
               </Typography>
             </Grid>
             <Grid xs={10}>
@@ -219,7 +234,7 @@ export default function Create() {
                         onClick={() => setOpen(true)}
                         startDecorator={<PhotoCameraIcon />}
                       >
-                        Add Picture
+                        {t('createNewProduct.form.image')}
                       </Button>
                     </AspectRatio>
                   </Card>
@@ -246,13 +261,20 @@ export default function Create() {
               >
                 <Grid sx={{ height: '75px' }}>
                   <FormControl required>
-                    <FormLabel>Product Name</FormLabel>
-                    <Input placeholder="Enter Name" type="name" name="name" />
+                    <FormLabel>
+                      {t('createNewProduct.form.productName')}
+                    </FormLabel>
+                    <Input 
+                      aria-label="Enter Name"
+                      placeholder="Enter Name" type="name" name="name"
+                    />
                   </FormControl>
                 </Grid>
                 <Grid sx={{ height: '75px' }}>
                   <FormControl required>
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel>
+                      {t('createNewProduct.form.category')}
+                    </FormLabel>
                     <Select
                       id={'category'}
                       placeholder="Choose category"
@@ -271,11 +293,14 @@ export default function Create() {
                 </Grid>
                 <Grid sx={{ height: '75px' }}>
                   <FormControl required>
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel>
+                      {t('createNewProduct.form.price')}
+                    </FormLabel>
                     <Input
                       type="number"
                       name="price"
                       placeholder="Enter amount"
+                      aria-label="Enter Price"
                       startDecorator="$"
                       slotProps={{
                         input: {
@@ -288,11 +313,14 @@ export default function Create() {
                 </Grid>
                 <Grid sx={{ height: '75px' }}>
                   <FormControl required>
-                    <FormLabel>Quantity</FormLabel>
+                    <FormLabel>
+                      {t('createNewProduct.form.quantity')}
+                    </FormLabel>
                     <Input
                       placeholder="1"
                       name="quantity"
                       type="number"
+                      aria-label="Enter Quantity"
                       defaultValue={1}
                       slotProps={{
                         input: {
@@ -323,8 +351,11 @@ export default function Create() {
               >
                 <Grid sx={{ height: '250px' }}>
                   <FormControl required>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>
+                      {t('createNewProduct.form.description')}
+                    </FormLabel>
                     <Textarea
+                      aria-label="Enter Description"
                       name="description"
                       placeholder="Enter product description"
                       minRows={8}
@@ -335,10 +366,10 @@ export default function Create() {
                 <Grid>
                   <Box sx={{ display: 'flex', gap: 2 }}>
                     <Button onClick={handleCancel} fullWidth aria-label="cancel" variant="soft">
-                      Cancel
+                      {t('createNewProduct.form.cancel')}
                     </Button>
                     <Button type="submit" fullWidth aria-label="create">
-                      Create
+                      {t('createNewProduct.form.create')}
                     </Button>
                   </Box>
                 </Grid>

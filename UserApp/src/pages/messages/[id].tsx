@@ -6,6 +6,14 @@ import Layout from '../../components/layout/Layout';
 import MessageList from '../../components/message/list';
 import { useAppContext } from '../../context';
 import queryGQL from '../../queryQGL';
+import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+export const getServerSideProps: GetServerSideProps = async (context) => ({
+  props: {
+    ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
+  },
+});
 
 export default function MessagesPage() {
   const { signedInUser } = useAppContext();

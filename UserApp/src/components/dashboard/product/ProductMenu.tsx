@@ -70,6 +70,7 @@ export default function ProductMenu() {
           sx={{
             width: { md: 'fit-content' },
           }}
+          aria-label="Add Product"
         >
           {t('dashboard.products.addProduct')}
         </Button>

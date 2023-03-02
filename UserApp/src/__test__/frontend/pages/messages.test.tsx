@@ -6,7 +6,7 @@ import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 import '../matchMedia';
 
-import { getServerSideProps } from '../../../pages/messages';
+import { getServerSideProps } from '../../../pages/messages/[id]';
 import MessagesPage from '../../../pages/messages/[id]';
 
 jest.mock('../../../context', () => ({
@@ -19,22 +19,6 @@ jest.mock('../../../context', () => ({
       accessToken: 'whatever',
     },
   }),
-}));
-
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str: string) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {}),
-      },
-    };
-  },
-  initReactI18next: {
-    type: '3rdParty',
-    init: () => {},
-  },
 }));
 
 const handlers = [
@@ -91,7 +75,8 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 const renderView = async () => {
-  await getServerSideProps({} as any);
+  const { props } = await getServerSideProps({} as any) as any;
+  console.log(props);
   render(
     <CssVarsProvider>
       <MessagesPage />
@@ -130,6 +115,7 @@ test('Bad URL', async () => {
   await renderView();
   await screen.findByText('Samsung TV');
   await screen.findByText('Anna Admin');
+
 });
 
 test('Not signed in', async () => {

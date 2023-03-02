@@ -58,8 +58,8 @@
     "title": "Create New Product",
     "form": {
       "productName": "Product Name",
-      "productNamePlaceholder": "Enter name",
-      "category": "Category",
+      "productNamePlaceholder": "Enter Name",
+      "category": "category",
       "categoryPlaceholder": "Select category",
       "price": "Price",
       "pricePlaceholder": "Enter price",

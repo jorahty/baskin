@@ -11,11 +11,6 @@ export const molly = {
   password: 'mollymember',
 };
 
-export const anna = {
-  username: 'anna_admin',
-  password: 'annaadmin',
-};
-
 const nobby = {
   username: 'nobby_nobody',
   password: 'nobbynobody',

@@ -8,6 +8,7 @@ import '../matchMedia';
 
 import Create from '../../../pages/product/create';
 import { AppContextProvider } from '../../../context';
+import { getServerSideProps } from '../../../pages/product/create';
 
 const handlers = [
   graphql.mutation('addProduct', async (req, res, ctx) => {
@@ -80,6 +81,8 @@ jest.mock('react-i18next', () => ({
 }));
 
 const renderView = async () => {
+  const { props } = await getServerSideProps({} as any) as any;
+  console.log(props);
   render(
     <CssVarsProvider>
       <AppContextProvider>
@@ -163,7 +166,7 @@ test('Click create invalid', async () => {
     alerted = true;
   };
   screen.getByLabelText('Create New Product');
-  const name = screen.getByLabelText('Enter Name');
+  const name = await screen.findByLabelText('Enter Name');
   await userEvent.type(name, 'new');
   const price = screen.getByLabelText('Enter Price');
   await userEvent.type(price, '1.50');
