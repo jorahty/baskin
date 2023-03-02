@@ -30,7 +30,7 @@ import Layout from '../../components/layout/Layout';
 import AuthGuard from '../../components/util/AuthGuard';
 import { useTranslation } from 'react-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { GetServerSideProps } from "next";
+import { GetServerSideProps } from 'next';
 
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -52,7 +52,7 @@ interface PictureFormElement extends HTMLFormElement {
   readonly elements: PictureFormElements;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => ({
+export const getServerSideProps: GetServerSideProps = async context => ({
   props: {
     ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
   },
@@ -67,10 +67,6 @@ export default function Create() {
   const [open, setOpen] = React.useState(false);
 
   const { t } = useTranslation('common');
-  const productNamePlaceholder = t('createNewProduct.form.productNamePlaceholder');
-  const categoryPlaceholder = t('createNewProduct.form.categoryPlaceholder');
-  const descriptionPlaceholder = t('createNewProduct.form.descriptionPlaceholder');
-  const pricePlaceholder = t('createNewProduct.form.pricePlaceholder');
 
   const handleCancel = (() => {
     Router.push({
@@ -168,8 +164,11 @@ export default function Create() {
           >
             <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%', paddingTop: '50px' }}>
               <Grid xs={6} sx={{ paddingLeft: '50px' }}>
-                <Typography aria-label="Create New Product" component="h2" fontSize="xl3" fontWeight="lg">
-                {t('createNewProduct.title')}
+                <Typography
+                  aria-label="Create New Product"
+                  component="h2" fontSize="xl3" fontWeight="lg"
+                >
+                  {t('createNewProduct.title')}
                 </Typography>
               </Grid>
               <Grid xs={10}>
@@ -226,166 +225,166 @@ export default function Create() {
                       </Card>
                     ))}
 
-                  <Card variant="outlined">
-                    <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
-                      <Button
-                        size="lg"
-                        variant="soft"
-                        color="neutral"
-                        aria-label="add"
-                        onClick={() => setOpen(true)}
-                        startDecorator={<PhotoCameraIcon />}
-                      >
-                        {t('createNewProduct.form.image')}
-                      </Button>
-                    </AspectRatio>
-                  </Card>
-                </Box>
-              </Sheet>
-            </Grid>
-          </Grid>
-          <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%' }}>
-            <Grid xs={6} sx={{ paddingLeft: '25px' }}>
-              <Grid
-                container
-                direction="column"
-                alignItems="stretch"
-                sx={{
-                  '& form': {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 2,
-                  },
-                  [`& .${formLabelClasses.asterisk}`]: {
-                    visibility: 'hidden',
-                  },
-                }}
-              >
-                <Grid sx={{ height: '75px' }}>
-                  <FormControl required>
-                    <FormLabel>
-                      {t('createNewProduct.form.productName')}
-                    </FormLabel>
-                    <Input 
-                      aria-label="Enter Name"
-                      placeholder="Enter Name" type="name" name="name"
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid sx={{ height: '75px' }}>
-                  <FormControl required>
-                    <FormLabel>
-                      {t('createNewProduct.form.category')}
-                    </FormLabel>
-                    <Select
-                      id={'category'}
-                      placeholder="Choose category"
-                      data-testid="category"
-                      aria-label="category"
-                      name="category"
-                      onChange={(_, value) => setCategory(value as string)}
-                    >
-                      {categories?.map(({ name, slug }) => (
-                        <Option value={slug} key={slug} aria-label={name}>
-                          {name}
-                        </Option>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid sx={{ height: '75px' }}>
-                  <FormControl required>
-                    <FormLabel>
-                      {t('createNewProduct.form.price')}
-                    </FormLabel>
-                    <Input
-                      type="number"
-                      name="price"
-                      placeholder="Enter amount"
-                      aria-label="Enter Price"
-                      startDecorator="$"
-                      slotProps={{
-                        input: {
-                          min: 0,
-                          step: 0.01,
-                        },
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid sx={{ height: '75px' }}>
-                  <FormControl required>
-                    <FormLabel>
-                      {t('createNewProduct.form.quantity')}
-                    </FormLabel>
-                    <Input
-                      placeholder="1"
-                      name="quantity"
-                      type="number"
-                      aria-label="Enter Quantity"
-                      defaultValue={1}
-                      slotProps={{
-                        input: {
-                          min: 1,
-                          step: 1,
-                        },
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid xs={10}>
-              <Grid
-                container
-                direction="column"
-                alignItems="stretch"
-                sx={{
-                  '& form': {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 2,
-                  },
-                  [`& .${formLabelClasses.asterisk}`]: {
-                    visibility: 'hidden',
-                  },
-                }}
-              >
-                <Grid sx={{ height: '250px' }}>
-                  <FormControl required>
-                    <FormLabel>
-                      {t('createNewProduct.form.description')}
-                    </FormLabel>
-                    <Textarea
-                      aria-label="Enter Description"
-                      name="description"
-                      placeholder="Enter product description"
-                      minRows={8}
-                      maxRows={8}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid>
-                  <Box sx={{ display: 'flex', gap: 2 }}>
-                    <Button onClick={handleCancel} fullWidth aria-label="cancel" variant="soft">
-                      {t('createNewProduct.form.cancel')}
-                    </Button>
-                    <Button type="submit" fullWidth aria-label="create">
-                      {t('createNewProduct.form.create')}
-                    </Button>
+                    <Card variant="outlined">
+                      <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
+                        <Button
+                          size="lg"
+                          variant="soft"
+                          color="neutral"
+                          aria-label="add"
+                          onClick={() => setOpen(true)}
+                          startDecorator={<PhotoCameraIcon />}
+                        >
+                          {t('createNewProduct.form.image')}
+                        </Button>
+                      </AspectRatio>
+                    </Card>
                   </Box>
+                </Sheet>
+              </Grid>
+            </Grid>
+            <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%' }}>
+              <Grid xs={6} sx={{ paddingLeft: '25px' }}>
+                <Grid
+                  container
+                  direction="column"
+                  alignItems="stretch"
+                  sx={{
+                    '& form': {
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 2,
+                    },
+                    [`& .${formLabelClasses.asterisk}`]: {
+                      visibility: 'hidden',
+                    },
+                  }}
+                >
+                  <Grid sx={{ height: '75px' }}>
+                    <FormControl required>
+                      <FormLabel>
+                        {t('createNewProduct.form.productName')}
+                      </FormLabel>
+                      <Input
+                        aria-label="Enter Name"
+                        placeholder="Enter Name" type="name" name="name"
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid sx={{ height: '75px' }}>
+                    <FormControl required>
+                      <FormLabel>
+                        {t('createNewProduct.form.category')}
+                      </FormLabel>
+                      <Select
+                        id={'category'}
+                        placeholder="Choose category"
+                        data-testid="category"
+                        aria-label="category"
+                        name="category"
+                        onChange={(_, value) => setCategory(value as string)}
+                      >
+                        {categories?.map(({ name, slug }) => (
+                          <Option value={slug} key={slug} aria-label={name}>
+                            {name}
+                          </Option>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid sx={{ height: '75px' }}>
+                    <FormControl required>
+                      <FormLabel>
+                        {t('createNewProduct.form.price')}
+                      </FormLabel>
+                      <Input
+                        type="number"
+                        name="price"
+                        placeholder="Enter amount"
+                        aria-label="Enter Price"
+                        startDecorator="$"
+                        slotProps={{
+                          input: {
+                            min: 0,
+                            step: 0.01,
+                          },
+                        }}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid sx={{ height: '75px' }}>
+                    <FormControl required>
+                      <FormLabel>
+                        {t('createNewProduct.form.quantity')}
+                      </FormLabel>
+                      <Input
+                        placeholder="1"
+                        name="quantity"
+                        type="number"
+                        aria-label="Enter Quantity"
+                        defaultValue={1}
+                        slotProps={{
+                          input: {
+                            min: 1,
+                            step: 1,
+                          },
+                        }}
+                      />
+                    </FormControl>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid xs={10}>
+                <Grid
+                  container
+                  direction="column"
+                  alignItems="stretch"
+                  sx={{
+                    '& form': {
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 2,
+                    },
+                    [`& .${formLabelClasses.asterisk}`]: {
+                      visibility: 'hidden',
+                    },
+                  }}
+                >
+                  <Grid sx={{ height: '250px' }}>
+                    <FormControl required>
+                      <FormLabel>
+                        {t('createNewProduct.form.description')}
+                      </FormLabel>
+                      <Textarea
+                        aria-label="Enter Description"
+                        name="description"
+                        placeholder="Enter product description"
+                        minRows={8}
+                        maxRows={8}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid>
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                      <Button onClick={handleCancel} fullWidth aria-label="cancel" variant="soft">
+                        {t('createNewProduct.form.cancel')}
+                      </Button>
+                      <Button type="submit" fullWidth aria-label="create">
+                        {t('createNewProduct.form.create')}
+                      </Button>
+                    </Box>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </form>
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <ModalDialog
-            aria-labelledby="basic-modal-dialog-title"
-            aria-describedby="basic-modal-dialog-description"
-            sx={{ maxWidth: 500 }}
-          >
-            <Typography id="basic-modal-dialog-title" component="h2">
+          </form>
+          <Modal open={open} onClose={() => setOpen(false)}>
+            <ModalDialog
+              aria-labelledby="basic-modal-dialog-title"
+              aria-describedby="basic-modal-dialog-description"
+              sx={{ maxWidth: 500 }}
+            >
+              <Typography id="basic-modal-dialog-title" component="h2">
               Add new picture
               </Typography>
               <Typography id="basic-modal-dialog-description" textColor="text.tertiary">

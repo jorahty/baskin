@@ -1,6 +1,5 @@
 import { User, NewUser, SignUpPayload } from './schema';
 import queryGQL from '../../queryQGL';
-import { Request } from 'next';
 
 export class UserService {
   public async list(username?: string, email?: string): Promise<User[]> {

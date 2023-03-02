@@ -3,7 +3,7 @@ export default function Logo() {
     <svg
       width="130"
       fill="var(--joy-palette-neutral-plainColor)"
-      style={{ display: "block" }}
+      style={{ display: 'block' }}
       viewBox="0 0 103 28"
       xmlns="http://www.w3.org/2000/svg"
     >

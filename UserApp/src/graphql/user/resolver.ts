@@ -1,7 +1,6 @@
-import { Args, Query, Resolver, Mutation, Arg, Ctx, Authorized } from 'type-graphql';
+import { Args, Query, Resolver, Mutation, Arg } from 'type-graphql';
 import { User, UserArgs, NewUser, SignUpPayload } from './schema';
 import { UserService } from './service';
-import type { Request } from 'next';
 
 @Resolver()
 export class UserResolver {

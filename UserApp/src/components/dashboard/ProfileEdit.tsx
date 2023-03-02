@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/joy';
 import { useState } from 'react';
 import { useAppContext } from '../../context';
 import { GraphQLClient } from 'graphql-request';
-import { regexUsername, regexEmail } from '../../graphql/regex';
+import { regexUsername } from '../../graphql/regex';
 import UsernameUpdate from './UsernameUpdate';
 import Router from 'next/router';
 // import EmailUpdate from './EmailUpdate';
@@ -12,9 +12,9 @@ import { useTranslation } from 'next-i18next';
 
 export default function ProfileEdit() {
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
   const [validUsername, setValidUsername] = useState(false);
-  const [validEmail, setValidEmail] = useState(false);
+  // const [validEmail, setValidEmail] = useState(false);
 
   const { signedInUser, signOut } = useAppContext();
   const { t } = useTranslation('common');

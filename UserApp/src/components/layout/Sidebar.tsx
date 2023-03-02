@@ -15,7 +15,7 @@ export default function Sidebar({ category }: Props) {
   // const router = useRouter();
   // const { query } = router;
   // const { t } = useTranslation('common');
-  
+
   return (
     <Stack p={2} width="100%" gap={2}>
       <Link href="/product/create">

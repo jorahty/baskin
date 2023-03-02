@@ -3,7 +3,6 @@ import DashSidebar from '../components/layout/DashSidebar';
 import { useEffect, useState } from 'react';
 import ProfileEdit from '../components/dashboard/ProfileEdit';
 import ProductMenu from '../components/dashboard/product/ProductMenu';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSideProps } from 'next';
 
@@ -20,7 +19,6 @@ import AuthGuard from '../components/util/AuthGuard';
 export default function Dashboard() {
   const [items, setItems] = useState<string[]>([]);
   const [current, setCurrent] = useState<string>('');
-  const { t } = useTranslation('common');
 
   // const { signedInUser } = useAppContext();
   // let profileSettings = t("dashboard.sidebar.profileSettings");
@@ -35,7 +33,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     setItems(tabs);
-    setCurrent(tabs[0]);   // eslint-disable-next-line react-hooks/exhaustive-deps
+    setCurrent(tabs[0]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

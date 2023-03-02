@@ -9,7 +9,7 @@ import queryGQL from '../../queryQGL';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export const getServerSideProps: GetServerSideProps = async (context) => ({
+export const getServerSideProps: GetServerSideProps = async context => ({
   props: {
     ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
   },

@@ -9,7 +9,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Within `getServerSideProps` we can (and should) query
 // micro services directly. https://tinyurl.com/ysfwst5r
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
   const [category] = await new CategoryService().list(context.query.slug as string);
 
   if (!category) return {
@@ -28,7 +28,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 
   return {
-    props: { category: verboseCategory },
+    props: {
+      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      category: verboseCategory,
+    },
   };
 };
 

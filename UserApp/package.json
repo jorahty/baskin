@@ -58,8 +58,10 @@
     "extends": [
       "../.eslintrc",
       "next",
-      "next/core-web-vitals",
-      "next/babel"
-    ]
+      "next/core-web-vitals"
+    ],
+    "rules": {
+      "@typescript-eslint/no-empty-function": "off"
+    }
   }
 }
