@@ -14,6 +14,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => ({
     ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
   },
 });
+import AuthGuard from '../../components/util/AuthGuard';
 
 export default function MessagesPage() {
   const { signedInUser } = useAppContext();
@@ -62,12 +63,15 @@ export default function MessagesPage() {
   }, [selectedChat, signedInUser]);
 
   return (
-    <Layout
-      sidebar={
-        <ChatList chats={chats} selectedChat={selectedChat}/>
-      }
-    >
-      <MessageList messages={messages}/>
-    </Layout>
+    <AuthGuard>
+      <Layout
+        sidebar={
+          <ChatList chats={chats} selectedChat={selectedChat}/>
+        }
+      >
+
+        <MessageList messages={messages}/>
+      </Layout>
+    </AuthGuard>
   );
 }

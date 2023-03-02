@@ -14,6 +14,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
     },
   };
 };
+import AuthGuard from '../components/util/AuthGuard';
+// import { useAppContext } from '../context';
 
 export default function Dashboard() {
   const [items, setItems] = useState<string[]>([]);
@@ -38,9 +40,11 @@ export default function Dashboard() {
 
   return (
     <>
-      <Layout sidebar={<DashSidebar items={items} current={current} setCurrent={setCurrent} />}>
-        {comps[current]}
-      </Layout>
+      <AuthGuard>
+        <Layout sidebar={<DashSidebar items={items} current={current} setCurrent={setCurrent} />}>
+          {comps[current]}
+        </Layout>
+      </AuthGuard>
     </>
   );
 }

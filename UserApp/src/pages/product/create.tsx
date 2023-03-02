@@ -27,6 +27,7 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import Router from 'next/router';
 import Layout from '../../components/layout/Layout';
+import AuthGuard from '../../components/util/AuthGuard';
 import { useTranslation } from 'react-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSideProps } from "next";
@@ -148,81 +149,82 @@ export default function Create() {
   };
 
   return (
-    <Layout>
-      <CssVarsProvider>
-        <form
-          onSubmit={(event: React.FormEvent<ProductFormElement>) => {
-            event.preventDefault();
-            const formElements = event.currentTarget.elements;
-            handleCreate(
-              formElements.name.value,
-              formElements.description.value,
-              parseFloat(formElements.price.value),
-              category,
-              parseInt(formElements.quantity.value),
-              pictures,
-            );
-          }}
-        >
-          <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%', paddingTop: '50px' }}>
-            <Grid xs={6} sx={{ paddingLeft: '50px' }}>
-              <Typography aria-label="Create New Product" component="h2" fontSize="xl3" fontWeight="lg">
+    <AuthGuard>
+      <Layout>
+        <CssVarsProvider>
+          <form
+            onSubmit={(event: React.FormEvent<ProductFormElement>) => {
+              event.preventDefault();
+              const formElements = event.currentTarget.elements;
+              handleCreate(
+                formElements.name.value,
+                formElements.description.value,
+                parseFloat(formElements.price.value),
+                category,
+                parseInt(formElements.quantity.value),
+                pictures,
+              );
+            }}
+          >
+            <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%', paddingTop: '50px' }}>
+              <Grid xs={6} sx={{ paddingLeft: '50px' }}>
+                <Typography aria-label="Create New Product" component="h2" fontSize="xl3" fontWeight="lg">
                 {t('createNewProduct.title')}
-              </Typography>
-            </Grid>
-            <Grid xs={10}>
-              <Sheet
-                variant="outlined"
-                sx={{
-                  minHeight: '150px',
-                  borderRadius: 'sm',
-                  p: 2,
-                  mb: 3,
-                }}
-              >
-                <Box
-                  sx={theme => ({
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: 2,
-                    '& > div': {
-                      boxShadow: 'none',
-                      '--Card-padding': '0px',
-                      '--Card-radius': theme.vars.radius.sm,
-                    },
-                  })}
+                </Typography>
+              </Grid>
+              <Grid xs={10}>
+                <Sheet
+                  variant="outlined"
+                  sx={{
+                    minHeight: '150px',
+                    borderRadius: 'sm',
+                    p: 2,
+                    mb: 3,
+                  }}
                 >
-                  {pictures.map((picture, index) => (
-                    <Card variant="outlined" key={index}>
-                      <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
-                        <Image src={picture} alt="Picture not availabe" fill />
-                      </AspectRatio>
-                      <CardCover>
-                        <Box>
-                          <Box
-                            sx={{
-                              p: 1,
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 1.5,
-                              flexGrow: 1,
-                              alignSelf: 'flex-start',
-                            }}
-                          >
-                            <IconButton
-                              aria-label={'remove' + index}
-                              value="pict"
-                              size="sm"
-                              color="neutral"
-                              onClick={() => removePicture(index)}
+                  <Box
+                    sx={theme => ({
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: 2,
+                      '& > div': {
+                        boxShadow: 'none',
+                        '--Card-padding': '0px',
+                        '--Card-radius': theme.vars.radius.sm,
+                      },
+                    })}
+                  >
+                    {pictures.map((picture, index) => (
+                      <Card variant="outlined" key={index}>
+                        <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
+                          <Image src={picture} alt="Picture not availabe" fill />
+                        </AspectRatio>
+                        <CardCover>
+                          <Box>
+                            <Box
+                              sx={{
+                                p: 1,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 1.5,
+                                flexGrow: 1,
+                                alignSelf: 'flex-start',
+                              }}
                             >
-                              <CloseIcon />
-                            </IconButton>
+                              <IconButton
+                                aria-label={'remove' + index}
+                                value="pict"
+                                size="sm"
+                                color="neutral"
+                                onClick={() => removePicture(index)}
+                              >
+                                <CloseIcon />
+                              </IconButton>
+                            </Box>
                           </Box>
-                        </Box>
-                      </CardCover>
-                    </Card>
-                  ))}
+                        </CardCover>
+                      </Card>
+                    ))}
 
                   <Card variant="outlined">
                     <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
@@ -385,32 +387,33 @@ export default function Create() {
           >
             <Typography id="basic-modal-dialog-title" component="h2">
               Add new picture
-            </Typography>
-            <Typography id="basic-modal-dialog-description" textColor="text.tertiary">
+              </Typography>
+              <Typography id="basic-modal-dialog-description" textColor="text.tertiary">
               Fill in the url of picture
-            </Typography>
-            <form
-              onSubmit={(event: React.FormEvent<PictureFormElement>) => {
-                event.preventDefault();
-                const formElements = event.currentTarget.elements;
-                const picture: string = formElements.picture.value;
-                setPictures([...pictures, picture]);
-                setOpen(false);
-              }}
-            >
-              <Stack spacing={2}>
-                <FormControl>
-                  <FormLabel>URL</FormLabel>
-                  <Input autoFocus required aria-label="picture" name="picture" type="string" />
-                </FormControl>
-                <Button type="submit" aria-label="submit">
+              </Typography>
+              <form
+                onSubmit={(event: React.FormEvent<PictureFormElement>) => {
+                  event.preventDefault();
+                  const formElements = event.currentTarget.elements;
+                  const picture: string = formElements.picture.value;
+                  setPictures([...pictures, picture]);
+                  setOpen(false);
+                }}
+              >
+                <Stack spacing={2}>
+                  <FormControl>
+                    <FormLabel>URL</FormLabel>
+                    <Input autoFocus required aria-label="picture" name="picture" type="string" />
+                  </FormControl>
+                  <Button type="submit" aria-label="submit">
                   Submit
-                </Button>
-              </Stack>
-            </form>
-          </ModalDialog>
-        </Modal>
-      </CssVarsProvider>
-    </Layout>
+                  </Button>
+                </Stack>
+              </form>
+            </ModalDialog>
+          </Modal>
+        </CssVarsProvider>
+      </Layout>
+    </AuthGuard>
   );
 }
