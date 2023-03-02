@@ -6,6 +6,7 @@ import Layout from '../../components/layout/Layout';
 import MessageList from '../../components/message/list';
 import { useAppContext } from '../../context';
 import queryGQL from '../../queryQGL';
+import AuthGuard from '../../components/util/AuthGuard';
 
 export default function MessagesPage() {
   const { signedInUser } = useAppContext();
@@ -54,12 +55,15 @@ export default function MessagesPage() {
   }, [selectedChat, signedInUser]);
 
   return (
-    <Layout
-      sidebar={
-        <ChatList chats={chats} selectedChat={selectedChat}/>
-      }
-    >
-      <MessageList messages={messages}/>
-    </Layout>
+    <AuthGuard>
+      <Layout
+        sidebar={
+          <ChatList chats={chats} selectedChat={selectedChat}/>
+        }
+      >
+
+        <MessageList messages={messages}/>
+      </Layout>
+    </AuthGuard>
   );
 }

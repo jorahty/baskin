@@ -27,6 +27,7 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import Router from 'next/router';
 import Layout from '../../components/layout/Layout';
+import AuthGuard from '../../components/util/AuthGuard';
 
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -133,253 +134,255 @@ export default function Create() {
   };
 
   return (
-    <Layout>
-      <CssVarsProvider>
-        <form
-          onSubmit={(event: React.FormEvent<ProductFormElement>) => {
-            event.preventDefault();
-            const formElements = event.currentTarget.elements;
-            handleCreate(
-              formElements.name.value,
-              formElements.description.value,
-              parseFloat(formElements.price.value),
-              category,
-              parseInt(formElements.quantity.value),
-              pictures,
-            );
-          }}
-        >
-          <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%', paddingTop: '50px' }}>
-            <Grid xs={6} sx={{ paddingLeft: '50px' }}>
-              <Typography component="h2" fontSize="xl3" fontWeight="lg">
-                Create New Product
-              </Typography>
-            </Grid>
-            <Grid xs={10}>
-              <Sheet
-                variant="outlined"
-                sx={{
-                  minHeight: '150px',
-                  borderRadius: 'sm',
-                  p: 2,
-                  mb: 3,
-                }}
-              >
-                <Box
-                  sx={theme => ({
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: 2,
-                    '& > div': {
-                      boxShadow: 'none',
-                      '--Card-padding': '0px',
-                      '--Card-radius': theme.vars.radius.sm,
-                    },
-                  })}
-                >
-                  {pictures.map((picture, index) => (
-                    <Card variant="outlined" key={index}>
-                      <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
-                        <Image src={picture} alt="Picture not availabe" fill />
-                      </AspectRatio>
-                      <CardCover>
-                        <Box>
-                          <Box
-                            sx={{
-                              p: 1,
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 1.5,
-                              flexGrow: 1,
-                              alignSelf: 'flex-start',
-                            }}
-                          >
-                            <IconButton
-                              aria-label={'remove' + index}
-                              value="pict"
-                              size="sm"
-                              color="neutral"
-                              onClick={() => removePicture(index)}
-                            >
-                              <CloseIcon />
-                            </IconButton>
-                          </Box>
-                        </Box>
-                      </CardCover>
-                    </Card>
-                  ))}
-
-                  <Card variant="outlined">
-                    <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
-                      <Button
-                        size="lg"
-                        variant="soft"
-                        color="neutral"
-                        aria-label="add"
-                        onClick={() => setOpen(true)}
-                        startDecorator={<PhotoCameraIcon />}
-                      >
-                        Add Picture
-                      </Button>
-                    </AspectRatio>
-                  </Card>
-                </Box>
-              </Sheet>
-            </Grid>
-          </Grid>
-          <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%' }}>
-            <Grid xs={6} sx={{ paddingLeft: '25px' }}>
-              <Grid
-                container
-                direction="column"
-                alignItems="stretch"
-                sx={{
-                  '& form': {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 2,
-                  },
-                  [`& .${formLabelClasses.asterisk}`]: {
-                    visibility: 'hidden',
-                  },
-                }}
-              >
-                <Grid sx={{ height: '75px' }}>
-                  <FormControl required>
-                    <FormLabel>Product Name</FormLabel>
-                    <Input placeholder="Enter Name" type="name" name="name" />
-                  </FormControl>
-                </Grid>
-                <Grid sx={{ height: '75px' }}>
-                  <FormControl required>
-                    <FormLabel>Category</FormLabel>
-                    <Select
-                      id={'category'}
-                      placeholder="Choose category"
-                      data-testid="category"
-                      aria-label="category"
-                      name="category"
-                      onChange={(_, value) => setCategory(value as string)}
-                    >
-                      {categories?.map(({ name, slug }) => (
-                        <Option value={slug} key={slug} aria-label={name}>
-                          {name}
-                        </Option>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid sx={{ height: '75px' }}>
-                  <FormControl required>
-                    <FormLabel>Price</FormLabel>
-                    <Input
-                      type="number"
-                      name="price"
-                      placeholder="Enter amount"
-                      startDecorator="$"
-                      slotProps={{
-                        input: {
-                          min: 0,
-                          step: 0.01,
-                        },
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid sx={{ height: '75px' }}>
-                  <FormControl required>
-                    <FormLabel>Quantity</FormLabel>
-                    <Input
-                      placeholder="1"
-                      name="quantity"
-                      type="number"
-                      defaultValue={1}
-                      slotProps={{
-                        input: {
-                          min: 1,
-                          step: 1,
-                        },
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid xs={10}>
-              <Grid
-                container
-                direction="column"
-                alignItems="stretch"
-                sx={{
-                  '& form': {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 2,
-                  },
-                  [`& .${formLabelClasses.asterisk}`]: {
-                    visibility: 'hidden',
-                  },
-                }}
-              >
-                <Grid sx={{ height: '250px' }}>
-                  <FormControl required>
-                    <FormLabel>Description</FormLabel>
-                    <Textarea
-                      name="description"
-                      placeholder="Enter product description"
-                      minRows={8}
-                      maxRows={8}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid>
-                  <Box sx={{ display: 'flex', gap: 2 }}>
-                    <Button onClick={handleCancel} fullWidth aria-label="cancel" variant="soft">
-                      Cancel
-                    </Button>
-                    <Button type="submit" fullWidth aria-label="create">
-                      Create
-                    </Button>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-        </form>
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <ModalDialog
-            aria-labelledby="basic-modal-dialog-title"
-            aria-describedby="basic-modal-dialog-description"
-            sx={{ maxWidth: 500 }}
+    <AuthGuard>
+      <Layout>
+        <CssVarsProvider>
+          <form
+            onSubmit={(event: React.FormEvent<ProductFormElement>) => {
+              event.preventDefault();
+              const formElements = event.currentTarget.elements;
+              handleCreate(
+                formElements.name.value,
+                formElements.description.value,
+                parseFloat(formElements.price.value),
+                category,
+                parseInt(formElements.quantity.value),
+                pictures,
+              );
+            }}
           >
-            <Typography id="basic-modal-dialog-title" component="h2">
-              Add new picture
-            </Typography>
-            <Typography id="basic-modal-dialog-description" textColor="text.tertiary">
-              Fill in the url of picture
-            </Typography>
-            <form
-              onSubmit={(event: React.FormEvent<PictureFormElement>) => {
-                event.preventDefault();
-                const formElements = event.currentTarget.elements;
-                const picture: string = formElements.picture.value;
-                setPictures([...pictures, picture]);
-                setOpen(false);
-              }}
+            <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%', paddingTop: '50px' }}>
+              <Grid xs={6} sx={{ paddingLeft: '50px' }}>
+                <Typography component="h2" fontSize="xl3" fontWeight="lg">
+                Create New Product
+                </Typography>
+              </Grid>
+              <Grid xs={10}>
+                <Sheet
+                  variant="outlined"
+                  sx={{
+                    minHeight: '150px',
+                    borderRadius: 'sm',
+                    p: 2,
+                    mb: 3,
+                  }}
+                >
+                  <Box
+                    sx={theme => ({
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: 2,
+                      '& > div': {
+                        boxShadow: 'none',
+                        '--Card-padding': '0px',
+                        '--Card-radius': theme.vars.radius.sm,
+                      },
+                    })}
+                  >
+                    {pictures.map((picture, index) => (
+                      <Card variant="outlined" key={index}>
+                        <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
+                          <Image src={picture} alt="Picture not availabe" fill />
+                        </AspectRatio>
+                        <CardCover>
+                          <Box>
+                            <Box
+                              sx={{
+                                p: 1,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 1.5,
+                                flexGrow: 1,
+                                alignSelf: 'flex-start',
+                              }}
+                            >
+                              <IconButton
+                                aria-label={'remove' + index}
+                                value="pict"
+                                size="sm"
+                                color="neutral"
+                                onClick={() => removePicture(index)}
+                              >
+                                <CloseIcon />
+                              </IconButton>
+                            </Box>
+                          </Box>
+                        </CardCover>
+                      </Card>
+                    ))}
+
+                    <Card variant="outlined">
+                      <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
+                        <Button
+                          size="lg"
+                          variant="soft"
+                          color="neutral"
+                          aria-label="add"
+                          onClick={() => setOpen(true)}
+                          startDecorator={<PhotoCameraIcon />}
+                        >
+                        Add Picture
+                        </Button>
+                      </AspectRatio>
+                    </Card>
+                  </Box>
+                </Sheet>
+              </Grid>
+            </Grid>
+            <Grid container spacing={2} columns={16} sx={{ maxWidth: '100%' }}>
+              <Grid xs={6} sx={{ paddingLeft: '25px' }}>
+                <Grid
+                  container
+                  direction="column"
+                  alignItems="stretch"
+                  sx={{
+                    '& form': {
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 2,
+                    },
+                    [`& .${formLabelClasses.asterisk}`]: {
+                      visibility: 'hidden',
+                    },
+                  }}
+                >
+                  <Grid sx={{ height: '75px' }}>
+                    <FormControl required>
+                      <FormLabel>Product Name</FormLabel>
+                      <Input placeholder="Enter Name" type="name" name="name" />
+                    </FormControl>
+                  </Grid>
+                  <Grid sx={{ height: '75px' }}>
+                    <FormControl required>
+                      <FormLabel>Category</FormLabel>
+                      <Select
+                        id={'category'}
+                        placeholder="Choose category"
+                        data-testid="category"
+                        aria-label="category"
+                        name="category"
+                        onChange={(_, value) => setCategory(value as string)}
+                      >
+                        {categories?.map(({ name, slug }) => (
+                          <Option value={slug} key={slug} aria-label={name}>
+                            {name}
+                          </Option>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid sx={{ height: '75px' }}>
+                    <FormControl required>
+                      <FormLabel>Price</FormLabel>
+                      <Input
+                        type="number"
+                        name="price"
+                        placeholder="Enter amount"
+                        startDecorator="$"
+                        slotProps={{
+                          input: {
+                            min: 0,
+                            step: 0.01,
+                          },
+                        }}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid sx={{ height: '75px' }}>
+                    <FormControl required>
+                      <FormLabel>Quantity</FormLabel>
+                      <Input
+                        placeholder="1"
+                        name="quantity"
+                        type="number"
+                        defaultValue={1}
+                        slotProps={{
+                          input: {
+                            min: 1,
+                            step: 1,
+                          },
+                        }}
+                      />
+                    </FormControl>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid xs={10}>
+                <Grid
+                  container
+                  direction="column"
+                  alignItems="stretch"
+                  sx={{
+                    '& form': {
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 2,
+                    },
+                    [`& .${formLabelClasses.asterisk}`]: {
+                      visibility: 'hidden',
+                    },
+                  }}
+                >
+                  <Grid sx={{ height: '250px' }}>
+                    <FormControl required>
+                      <FormLabel>Description</FormLabel>
+                      <Textarea
+                        name="description"
+                        placeholder="Enter product description"
+                        minRows={8}
+                        maxRows={8}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid>
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                      <Button onClick={handleCancel} fullWidth aria-label="cancel" variant="soft">
+                      Cancel
+                      </Button>
+                      <Button type="submit" fullWidth aria-label="create">
+                      Create
+                      </Button>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </form>
+          <Modal open={open} onClose={() => setOpen(false)}>
+            <ModalDialog
+              aria-labelledby="basic-modal-dialog-title"
+              aria-describedby="basic-modal-dialog-description"
+              sx={{ maxWidth: 500 }}
             >
-              <Stack spacing={2}>
-                <FormControl>
-                  <FormLabel>URL</FormLabel>
-                  <Input autoFocus required aria-label="picture" name="picture" type="string" />
-                </FormControl>
-                <Button type="submit" aria-label="submit">
+              <Typography id="basic-modal-dialog-title" component="h2">
+              Add new picture
+              </Typography>
+              <Typography id="basic-modal-dialog-description" textColor="text.tertiary">
+              Fill in the url of picture
+              </Typography>
+              <form
+                onSubmit={(event: React.FormEvent<PictureFormElement>) => {
+                  event.preventDefault();
+                  const formElements = event.currentTarget.elements;
+                  const picture: string = formElements.picture.value;
+                  setPictures([...pictures, picture]);
+                  setOpen(false);
+                }}
+              >
+                <Stack spacing={2}>
+                  <FormControl>
+                    <FormLabel>URL</FormLabel>
+                    <Input autoFocus required aria-label="picture" name="picture" type="string" />
+                  </FormControl>
+                  <Button type="submit" aria-label="submit">
                   Submit
-                </Button>
-              </Stack>
-            </form>
-          </ModalDialog>
-        </Modal>
-      </CssVarsProvider>
-    </Layout>
+                  </Button>
+                </Stack>
+              </form>
+            </ModalDialog>
+          </Modal>
+        </CssVarsProvider>
+      </Layout>
+    </AuthGuard>
   );
 }

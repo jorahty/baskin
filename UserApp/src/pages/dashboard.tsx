@@ -4,6 +4,7 @@ import { Box } from '@mui/joy';
 import { useEffect, useState } from 'react';
 import ProfileEdit from '../components/dashboard/ProfileEdit';
 import ProductMenu from '../components/dashboard/product/ProductMenu';
+import AuthGuard from '../components/util/AuthGuard';
 // import { useAppContext } from '../context';
 
 export default function Dashboard() {
@@ -28,9 +29,11 @@ export default function Dashboard() {
 
   return (
     <>
-      <Layout sidebar={<DashSidebar items={items} current={current} setCurrent={setCurrent} />}>
-        {comps[current]}
-      </Layout>
+      <AuthGuard>
+        <Layout sidebar={<DashSidebar items={items} current={current} setCurrent={setCurrent} />}>
+          {comps[current]}
+        </Layout>
+      </AuthGuard>
     </>
   );
 }

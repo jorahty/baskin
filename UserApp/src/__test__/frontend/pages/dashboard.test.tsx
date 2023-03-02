@@ -10,6 +10,10 @@ const renderView = async () => {
     </CssVarsProvider>
   );
 };
+jest.mock('next/router', () => ({
+  push: jest.fn(),
+}));
+
 
 test('Renders', async () => {
   renderView();
