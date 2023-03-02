@@ -81,3 +81,62 @@ test('List children', async () => {
     });
 });
 
+
+test('Add category', async () =>{
+  await request
+  .post('/graphql')
+  .send({
+    query: `
+      mutation {
+        addCategory( input: {
+          name: "New"
+          slug: "new"
+        }) 
+        {
+          name, slug, parent
+        }
+      }
+    `,
+  })
+
+  .expect('Content-Type', /json/)
+  .then(data => {
+    expect(data).toBeDefined();
+    expect(data.body).toBeDefined();
+    expect(data.body.data).toBeDefined();
+    expect(data.body.data.addCategory.name).toBeDefined();
+    expect(data.body.data.addCategory.name).toEqual('New');
+    expect(data.body.data.addCategory.slug).toEqual('new');
+    expect(data.body.data.addCategory.parent).toEqual(null);
+  });
+})
+
+test('Add subcategory', async () =>{
+  await request
+  .post('/graphql')
+  .send({
+    query: `
+      mutation {
+        addCategory( input: {
+          name: "Soccer"
+          slug: "soccer"
+          parent: "sports"
+        }) 
+        {
+          name, slug, parent
+        }
+      }
+    `,
+  })
+  .expect(200)
+  .expect('Content-Type', /json/)
+  .then(data => {
+    expect(data).toBeDefined();
+    expect(data.body).toBeDefined();
+    expect(data.body.data).toBeDefined();
+    expect(data.body.data.addCategory.name).toBeDefined();
+    expect(data.body.data.addCategory.name).toEqual('Soccer');
+    expect(data.body.data.addCategory.slug).toEqual('soccer');
+    expect(data.body.data.addCategory.parent).toEqual('sports');
+  });
+})

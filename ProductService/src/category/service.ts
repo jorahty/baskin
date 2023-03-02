@@ -4,7 +4,7 @@ import { pool } from '../db';
 
 export class CategoryService {
   public async list(slug?: string): Promise<Category[]> {
-    let select = `SELECT data || jsonb_build_object('slug', slug) AS category FROM category`;
+    let select = `SELECT data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category FROM category`;
     if (slug) select += ' WHERE slug = $1';
     const query = {
       text: select,
@@ -16,7 +16,7 @@ export class CategoryService {
 
   public async children(slug?: string): Promise<Category[]> {
     const select = `
-      SELECT data || jsonb_build_object('slug', slug) AS category FROM category
+      SELECT data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category FROM category
       WHERE parent_slug ${slug ? '= $1' : 'IS NULL'}
     `;
     const query = {
@@ -38,7 +38,7 @@ export class CategoryService {
         FROM category_ancestors ca
         JOIN category c ON c.slug = ca.parent_slug
       )
-      SELECT data || jsonb_build_object('slug', slug) AS category
+      SELECT data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category
       FROM category_ancestors
       WHERE slug != $1
       ORDER BY level DESC;
@@ -49,5 +49,18 @@ export class CategoryService {
     };
     const { rows } = await pool.query(query);
     return rows.map(row => row.category);
+  }
+
+  public async add(slug: string, name: string, parent?:string): Promise<Category> {
+    const insert = `INSERT INTO category (slug, parent_slug, data) VALUES ($1, $2, $3) RETURNING data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category`;
+
+    const query = {
+      text: insert,
+      values: [slug, (parent ? parent : null), {name: name}],
+    }
+
+    const { rows } = await pool.query(query);
+
+    return rows.map(row => row.category)[0];
   }
 }
