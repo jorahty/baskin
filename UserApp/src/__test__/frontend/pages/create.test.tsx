@@ -9,6 +9,7 @@ import '../matchMedia';
 import Create from '../../../pages/product/create';
 import { AppContextProvider } from '../../../context';
 import { getServerSideProps } from '../../../pages/product/create';
+import { addImage } from '../components/product/productImage';
 
 const handlers = [
   graphql.mutation('addProduct', async (req, res, ctx) => {
@@ -96,7 +97,7 @@ const renderView = async () => {
 test('Renders', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
   screen.getByLabelText('Create New Product');
@@ -105,7 +106,7 @@ test('Renders', async () => {
 test('Click Cancel', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
   await screen.findByLabelText('Create New Product');
@@ -142,13 +143,9 @@ test('Click create', async () => {
   const description = screen.getByLabelText('Enter Description');
   await userEvent.type(description, 'great product');
 
-  await userEvent.click(await screen.findByLabelText('add'));
-  const url = await screen.getByLabelText('picture');
-  await userEvent.type(
-    url,
-    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
-  );
-  fireEvent.click(screen.getByLabelText('submit'));
+  await addImage('valid.jpeg', 'jpeg');
+
+  // Create product
   fireEvent.click(screen.getByLabelText('create'));
 
   await waitFor(() => {
@@ -179,57 +176,5 @@ test('Click create invalid', async () => {
   fireEvent.click(screen.getByLabelText('create'));
   await waitFor(() => {
     expect(alerted).toBe(true);
-  });
-});
-
-test('Add image and remove', async () => {
-  localStorage.setItem(
-    'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
-  );
-  await renderView();
-  let alerted = false;
-  window.alert = () => {
-    alerted = true;
-  };
-  screen.getByLabelText('Create New Product');
-  await userEvent.click(await screen.findByLabelText('add'));
-  const url = await screen.getByLabelText('picture');
-  await userEvent.type(
-    url,
-    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
-  );
-  await fireEvent.click(screen.getByLabelText('submit'));
-  await fireEvent.click(screen.getByLabelText('remove0'));
-  await waitFor(() => {
-    expect(alerted).toBe(false);
-  });
-});
-
-test('Add image and cancel', async () => {
-  localStorage.setItem(
-    'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
-  );
-  await renderView();
-  let alerted = false;
-  window.alert = () => {
-    alerted = true;
-  };
-  await screen.getByLabelText('Create New Product');
-  await userEvent.click(await screen.findByLabelText('add'));
-  const url = await screen.getByLabelText('picture');
-  await userEvent.type(
-    url,
-    'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600'
-  );
-  fireEvent.keyDown(screen.getByText('Submit'), {
-    key: 'Escape',
-    code: 'Escape',
-    keyCode: 27,
-    charCode: 27,
-  });
-  await waitFor(() => {
-    expect(alerted).toBe(false);
   });
 });
