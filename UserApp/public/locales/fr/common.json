@@ -1,0 +1,100 @@
+{
+  "header": {
+  "signin": "Se connecter",
+  "signup": "S'inscrire",
+  "dropdown": {
+  "profile": "Profil",
+  "dashboard": "Tableau de bord",
+  "messages": "Messages",
+  "signout": "Se déconnecter"
+  }
+  },
+  "home": {
+  "sidebar": {
+  "categories": "Toutes les catégories"
+  },
+  "search": {
+  "placeholder": "Rechercher un produit"
+  },
+  "sort": {
+  "placeholder": "Trier par",
+  "newest": "Plus récent",
+  "oldest": "Plus ancien",
+  "priceHigh": "Prix élevé",
+  "priceLow": "Prix bas"
+  }
+  },
+  "dashboard": {
+  "sidebar": {
+  "dashboard": "Tableau de bord",
+  "profileSettings": "Paramètres du profil",
+  "products": "Produits",
+  "favorites": "Favoris"
+  },
+  "profileSettings": {
+  "title": "Paramètres du profil",
+  "form": {
+  "username": "Nom d'utilisateur",
+  "updateUser": "Mettre à jour le nom d'utilisateur",
+  "email": "Email",
+  "updateEmail": "Mettre à jour l'adresse e-mail"
+  }
+  },
+  "products" : {
+  "title": "Produits",
+  "addProduct": "Ajouter un produit",
+  "table": {
+  "image": "Image",
+  "product": "Produit",
+  "category": "Catégorie",
+  "price": "Prix"
+  }
+  },
+  "favorites": {
+    
+  }
+  },
+  "createNewProduct": {
+  "title": "Créer un nouveau produit",
+  "form": {
+  "productName": "Nom du produit",
+  "productNamePlaceholder": "Entrez le nom du produit",
+  "category": "Catégorie",
+  "categoryPlaceholder": "Sélectionnez une catégorie",
+  "price": "Prix",
+  "pricePlaceholder": "Entrez le prix",
+  "quantity": "Quantité",
+  "image": "Ajouter une image",
+  "description": "Description",
+  "descriptionPlaceholder": "Entrez une description",
+  "create": "Créer",
+  "cancel": "Annuler"
+  }
+  },
+  "signin": {
+  "title": "Bienvenue de nouveau",
+  "message": "Commençons! Veuillez entrer vos informations.",
+  "form": {
+  "username": "Nom d'utilisateur",
+  "usernamePlaceholder": "Entrez votre nom d'utilisateur",
+  "password": "Mot de passe",
+  "signin": "Se connecter"
+  }
+  },
+  "signup": {
+  "title": "Bienvenue",
+  "message": "Commençons! Veuillez entrer vos informations.",
+  "form": {
+  "firstName": "Prénom",
+  "firstNamePlaceholder": "Entrez votre prénom",
+  "lastName": "Nom",
+  "lastNamePlaceholder": "Entrez votre nom de famille",
+  "username": "Nom d'utilisateur",
+  "usernamePlaceholder": "Entrez votre nom d'utilisateur",
+  "email": "Email",
+  "emailPlaceholder": "Entrez votre adresse e-mail",
+  "password": "Mot de passe",
+  "signup": "S'inscrire"
+  }
+  }
+  }
