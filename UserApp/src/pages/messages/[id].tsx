@@ -8,13 +8,13 @@ import { useAppContext } from '../../context';
 import queryGQL from '../../queryQGL';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import AuthGuard from '../../components/util/AuthGuard';
 
 export const getServerSideProps: GetServerSideProps = async context => ({
   props: {
     ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
   },
 });
-// import AuthGuard from '../../components/util/AuthGuard';
 
 export default function MessagesPage() {
   const { signedInUser } = useAppContext();
@@ -45,7 +45,7 @@ export default function MessagesPage() {
       if (selected) {
         setSelectedChat(selected);
       } else {
-        router.push(data.chat[0].id);
+        router.push(data.chat[0].id, undefined, { shallow: true });
       }
     });
   }, [signedInUser, router.query.id, router]);
@@ -63,15 +63,12 @@ export default function MessagesPage() {
   }, [selectedChat, signedInUser]);
 
   return (
-    // <AuthGuard>
-    <Layout
-      sidebar={
-        <ChatList chats={chats} selectedChat={selectedChat}/>
-      }
-    >
-
-      <MessageList messages={messages}/>
-    </Layout>
-    // </AuthGuard>
+    <AuthGuard>
+      <Layout
+        sidebar={<ChatList chats={chats} selectedChat={selectedChat}/>}
+      >
+        <MessageList messages={messages}/>
+      </Layout>
+    </AuthGuard>
   );
 }

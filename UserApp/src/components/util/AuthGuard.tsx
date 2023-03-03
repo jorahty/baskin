@@ -1,21 +1,14 @@
 import  Router  from 'next/router';
 import { useEffect } from 'react';
-import { useAppContext } from '../../context';
 
-interface Props{
+interface Props {
   children: React.ReactNode;
 }
+
 export default function AuthGuard({ children }: Props){
-  const { signedInUser } = useAppContext();
-
   useEffect(() => {
-    if (!signedInUser) {
-      Router.push('/');
-    }
-  }, [signedInUser]);
-  return(
-
-    <> {children} </>
-  );
+    const item = localStorage.getItem('user');
+    if (!item) Router.push('/');
+  }, []);
+  return (<>{children}</>);
 }
-

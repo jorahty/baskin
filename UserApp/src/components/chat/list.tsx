@@ -5,9 +5,7 @@ import Router from 'next/router';
 
 interface Props {
   chats: Chat[],
-  selectedChat: {
-    id: string;
-  } | undefined
+  selectedChat: undefined|Chat,
 }
 
 export default function ChatList({ chats, selectedChat }: Props) {
@@ -31,8 +29,9 @@ export default function ChatList({ chats, selectedChat }: Props) {
       {chats.map(chat => (
         <ListItem key={chat.id}>
           <ListItemButton
-            onClick={() => Router.push(`/messages/${chat.id}`)}
             selected={chat.id === selectedChat?.id}
+            onClick={() => Router.push(`/messages/${chat.id}`, undefined, { shallow: true })
+            }
           >
             {renderChatName(chat)}
           </ListItemButton>
