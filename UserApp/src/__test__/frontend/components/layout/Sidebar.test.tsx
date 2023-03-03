@@ -1,3 +1,4 @@
+import { AppContextProvider } from '../../../../context';
 import { render } from '@testing-library/react';
 import CategoryControls from '../../../../components/category/controls';
 
@@ -28,7 +29,11 @@ const category =  {
 };
 
 const renderView = async () => {
-  render(<CategoryControls category={category} />);
+  render(
+    <AppContextProvider>
+      <CategoryControls category={category} />
+    </AppContextProvider>
+  );
 };
 
 test('Renders', async () => {

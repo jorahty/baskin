@@ -1,48 +1,35 @@
-import { AppContextProvider } from '../../../../context';
-import { findByRole, fireEvent, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render } from '@testing-library/react';
 import ProductList from '../../../../components/product/list';
 
-const products = [
-  {
-    user: 'string',
-    id: 'string',
-    category: 'string',
-    name: 'string',
-    price: 0,
-    quantity: 1,
-    description: 'string',
-    date: new Date().toISOString(),
-    pictures: [
-      'https://images.pexels.com/photos' +
-      '/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    ],
-    discount: 0,
-  },
-  {
-    user: 'string',
-    id: 'string',
-    category: 'string',
-    name: 'string',
-    price: 1,
-    quantity: 1,
-    description: 'string',
-    date: new Date().toISOString(),
-    pictures: [
-      'https://images.pexels.com/photos' +
-      '/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    ],
-    discount: 0,
-  },
-];
-
-jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      query: { username: '123' },
-    };
-  },
-}));
+const products = [{
+  user: 'string',
+  id: 'string',
+  category: 'string',
+  name: 'string',
+  price: 0,
+  quantity: 1,
+  description: 'string',
+  date: new Date().toISOString(),
+  discount: 0,
+  pictures: [
+    'https://images.pexels.com/photos' +
+    '/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  ],
+}, {
+  user: 'string',
+  id: 'string',
+  category: 'string',
+  name: 'string',
+  price: 1,
+  quantity: 1,
+  description: 'string',
+  date: new Date().toISOString(),
+  discount: 0,
+  pictures: [
+    'https://images.pexels.com/photos' +
+    '/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  ],
+}];
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -62,30 +49,35 @@ jest.mock('react-i18next', () => ({
 
 const renderView = async () => {
   render(
-    <AppContextProvider>
-      <ProductList products={products} showSearch={true} showSorter={true} />
-    </AppContextProvider>
+    <ProductList products={products} />
   );
 };
 
-test('Renders', async () => {
+let sort = 'date-new';
+
+jest.mock('../../../../context', () => ({
+  useAppContext: () => ({
+    refinement: {
+      sort: sort,
+    },
+  }),
+}));
+
+test('Renders (By Newest)', async () => {
   renderView();
 });
 
-test('Searching', async () => {
+test('By Oldest', async () => {
+  sort = 'date-old';
   renderView();
-  const search = screen.getByLabelText('Search Products');
-  fireEvent.change(search, { target: { value: 'Air' } });
 });
 
-test('Sorting', async () => {
+test('By Highest Price', async () => {
+  sort = 'price-high';
   renderView();
-  await userEvent.click(await findByRole(await screen.findByTestId('sort'), 'combobox'));
-  fireEvent.click(screen.getByLabelText('newest'));
-  await userEvent.click(await findByRole(await screen.findByTestId('sort'), 'combobox'));
-  fireEvent.click(screen.getByLabelText('oldest'));
-  await userEvent.click(await findByRole(await screen.findByTestId('sort'), 'combobox'));
-  fireEvent.click(screen.getByLabelText('price-high'));
-  await userEvent.click(await findByRole(await screen.findByTestId('sort'), 'combobox'));
-  fireEvent.click(screen.getByLabelText('price-low'));
+});
+
+test('By Lowest Price', async () => {
+  sort = 'price-low';
+  renderView();
 });

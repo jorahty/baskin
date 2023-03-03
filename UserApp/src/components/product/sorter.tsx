@@ -6,7 +6,7 @@ export default function ProductSorter() {
   const { refinement, setRefinement } = useAppContext();
 
   const handleChange = (
-    event: any, // eslint-disable-line @typescript-eslint/no-explicit-any,
+    event: any, // eslint-disable-line @typescript-eslint/no-explicit-any
     value: string | null,
   ) => {
     setRefinement({
@@ -19,7 +19,7 @@ export default function ProductSorter() {
   return (
     <Select
       startDecorator="Sort:"
-      value={refinement?.sort}
+      value={refinement.sort}
       onChange={handleChange}
     >
       <Option value="date-new">Newest</Option>

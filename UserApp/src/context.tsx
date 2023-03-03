@@ -14,7 +14,7 @@ interface AppContextType {
 
 export type SortMode = 'date-new'|'date-old'|'price-high'|'price-low';
 
-interface Refinement {
+export interface Refinement {
   search: string;
   sort: SortMode;
   filter: any, // eslint-disable-line @typescript-eslint/no-explicit-any
