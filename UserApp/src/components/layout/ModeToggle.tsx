@@ -15,6 +15,7 @@ export default function ModeToggle() {
 
   return (
     <IconButton
+      variant="plain"
       aria-label="mode-toggle"
       onClick={() => (mode === 'light' ? setMode('dark') : setMode('light'))}
     >

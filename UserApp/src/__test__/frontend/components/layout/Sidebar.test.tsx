@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Sidebar from '../../../../components/layout/Sidebar';
+import CategoryControls from '../../../../components/category/controls';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -28,7 +28,7 @@ const category =  {
 };
 
 const renderView = async () => {
-  render(<Sidebar category={category} />);
+  render(<CategoryControls category={category} />);
 };
 
 test('Renders', async () => {

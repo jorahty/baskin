@@ -19,20 +19,13 @@ export default function Header({ handleSidebarOpen }: { handleSidebarOpen: () =>
       height={headerHeight}
       direction="row"
       alignItems="center"
-      sx={{
-        sm: {
-          px: 3,
-          gap: 3,
-        },
-        px: 3,
-        gap: 1,
-      }}>
+      px={3}
+      gap={1}
+    >
       <IconButton
         aria-label="menu-icon"
         onClick={handleSidebarOpen}
-        sx={{
-          display: { xs: 'block', md: 'none' },
-        }}
+        sx={{ display: { xs: 'block', md: 'none' } }}
       >
         <MenuIcon />
       </IconButton>

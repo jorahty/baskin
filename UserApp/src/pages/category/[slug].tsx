@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import Layout from '../../components/layout/Layout';
-import Sidebar from '../../components/layout/Sidebar';
+import CategoryControls from '../../components/category/controls';
 import { ProductService } from '../../graphql/product/service';
 import { CategoryService } from '../../graphql/category/service';
 import CategoryContent from '../../components/category/content';
@@ -41,7 +41,7 @@ interface Props {
 
 export default function CategoryPage({ category }: Props) {
   return (
-    <Layout sidebar={<Sidebar category={category} />}>
+    <Layout sidebar={<CategoryControls category={category} />}>
       <CategoryContent category={category}/>
     </Layout>
   );

@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { Product } from '@/graphql/product/schema';
 import { Category } from '../graphql/category/schema';
 import Layout from '../components/layout/Layout';
-import Sidebar from '../components/layout/Sidebar';
+import CategoryControls from '../components/category/controls';
 import { ProductService } from '../graphql/product/service';
 import { CategoryService } from '../graphql/category/service';
 import CategoryContent from '../components/category/content';
@@ -39,7 +39,7 @@ export interface VerboseCategory {
 
 export default function IndexPage({ category }: Props) {
   return (
-    <Layout sidebar={<Sidebar category={category} />}>
+    <Layout sidebar={<CategoryControls category={category} />}>
       <CategoryContent category={category}/>
     </Layout>
   );

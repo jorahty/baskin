@@ -2,10 +2,6 @@ import { useState } from 'react';
 import { Box, Divider, GlobalStyles, Stack } from '@mui/joy';
 import React from 'react';
 import Header, { headerHeight } from './Header';
-import BackDrop from './BackDrop';
-// import { useTranslation } from 'react-i18next';
-// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-// import { GetServerSideProps } from 'next';
 import Footer, { footerHeight } from './Footer';
 
 interface Props {
@@ -16,8 +12,11 @@ interface Props {
 const sx = {
   overflowY: 'scroll',
   height: `calc(100vh - ${headerHeight} - ${footerHeight})`,
-  flexGrow: 1,
 };
+
+// Note:
+// Do not hard-code the width of the sidebar.
+// Instead, adjust the width of the content inside the sidebar
 
 export default function Layout({ children, sidebar }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -29,41 +28,42 @@ export default function Layout({ children, sidebar }: Props) {
   return (
     <>
       <GlobalStyles styles={{ body: { overflow: 'hidden' } }} />
-      <Box bgcolor="background.surface" sx={{ zIndex: 3 }}>
+      <Box bgcolor="background.surface">
         <Header handleSidebarOpen={handleSidebarOpen} />
       </Box>
       <Divider />
       <Stack direction="row" height="100%" alignItems="flex-start">
         {sidebar && (
-          <>
+          <Stack direction="row"
+            zIndex={10}
+            sx={{
+              position: { xs: 'fixed', md: 'relative' },
+              display: {
+                xs: sidebarOpen ? 'flex' : 'none',
+                md: 'flex',
+              },
+            }}
+          >
             <Box
               bgcolor="background.surface"
-              sx={{
-                zIndex: 3,
-                minWidth: 240,
-                maxWidth: 240,
-                position: { xs: 'fixed', md: 'relative' },
-                display: {
-                  xs: sidebarOpen ? 'flex' : 'none',
-                  // xs: (sidebarOpen && "flex") || "none",
-                  md: 'flex',
-                },
-                ...sx,
-              }}
+              minWidth="min-content"
+              sx={sx}
             >
               {sidebar}
             </Box>
-            {sidebarOpen && <BackDrop handleClick={handleSidebarOpen} />}
             <Divider orientation="vertical" />
-          </>
+          </Stack>
         )}
-        <Box
-          width="calc(100vw - 240)"
-          sx={{
-            ...(sidebarOpen && { zIndex: -1 }),
-            ...sx,
+        <Box sx={sx}>
+          {sidebarOpen && <Box sx={{
+            display: { md: 'none' },
+            zIndex: 9,
+            background: '#00000055',
+            position: 'fixed',
+            height: `calc(100vh - ${headerHeight} - ${footerHeight})`,
+            width: '100%',
           }}
-        >
+          />}
           {children}
         </Box>
       </Stack>

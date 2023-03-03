@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import ProductImageList from '../../../../components/product/ProductImageList';
+import ProductImageList from '../../../../components/common/ProductImageList';
 import { afterEach } from 'jest-circus';
 import { addImage } from './productImage';
 

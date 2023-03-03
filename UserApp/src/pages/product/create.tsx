@@ -16,7 +16,7 @@ import { useAppContext } from '../../context';
 import { useEffect } from 'react';
 import Router from 'next/router';
 import Layout from '../../components/layout/Layout';
-import ProductImageList from '../../components/product/ProductImageList';
+import ProductImageList from '../../components/common/ProductImageList';
 import AuthGuard from '../../components/common/AuthGuard';
 import { useTranslation } from 'react-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
