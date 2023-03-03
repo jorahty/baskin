@@ -1,3 +1,4 @@
+import { AppContextProvider } from '../../../../context';
 import { findByRole, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ProductList from '../../../../components/product/list';
@@ -60,7 +61,11 @@ jest.mock('react-i18next', () => ({
 }));
 
 const renderView = async () => {
-  render(<ProductList products={products} showSearch={true} showSorter={true} />);
+  render(
+    <AppContextProvider>
+      <ProductList products={products} showSearch={true} showSorter={true} />
+    </AppContextProvider>
+  );
 };
 
 test('Renders', async () => {

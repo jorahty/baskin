@@ -11,8 +11,8 @@ export default function ProductSorter() {
   ) => {
     setRefinement({
       sort: value as SortMode,
-      filter: refinement?.filter,
-      search: refinement?.search,
+      filter: refinement.filter,
+      search: refinement.search,
     });
   };
 

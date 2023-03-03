@@ -6,6 +6,7 @@ import { setupServer } from 'msw/node';
 
 import UserPage from '../../../pages/user/[username]';
 import { getServerSideProps } from '../../../pages/user/[username]';
+import { AppContextProvider } from '../../../context';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -76,7 +77,9 @@ const renderView = async () => {
   } as any) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
   render(
     <CssVarsProvider>
-      <UserPage user={props.user} products={props.products} />
+      <AppContextProvider>
+        <UserPage user={props.user} products={props.products} />
+      </AppContextProvider>
     </CssVarsProvider>
   );
 };

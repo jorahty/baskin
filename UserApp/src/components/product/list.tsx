@@ -18,7 +18,7 @@ export default function ProductList({
   const [sortedProducts, setSortedProducts] = React.useState<Product[]>([]);
 
   const { refinement } = useAppContext();
-  const sort = refinement?.sort;
+  const sort = refinement.sort;
 
   useEffect(() => {
     setSortedProducts(products);

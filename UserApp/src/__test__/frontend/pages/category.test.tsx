@@ -7,6 +7,7 @@ import '../matchMedia';
 
 import CategoryPage from '../../../pages/category/[slug]';
 import { getServerSideProps } from '../../../pages/category/[slug]';
+import { AppContextProvider } from '../../../context';
 
 const handlers = [
   graphql.query('ListProducts', async (req, res, ctx) => {
@@ -103,9 +104,11 @@ const renderView = async (slug: string) => {
   } as any) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
   props && render(
     <CssVarsProvider>
-      <CategoryPage
-        category={props.category}
-      />
+      <AppContextProvider>
+        <CategoryPage
+          category={props.category}
+        />
+      </AppContextProvider>
     </CssVarsProvider>
   );
 };
