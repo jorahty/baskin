@@ -2,12 +2,22 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { SignInPayload } from './graphql/auth/schema';
 
 // Enable `useAppContext` throught the entire application. Example:
-// const { signIn, signOut, signedInUser, setSignedInUser } = useAppContext();
+// const { signIn, signOut, signedInUser } = useAppContext();
 
 interface AppContextType {
   signIn: (user: SignInPayload) => void;
   signOut: () => void;
   signedInUser: SignInPayload | null;
+  refinement: Refinement;
+  setRefinement: (refinement: Refinement) => void;
+}
+
+export type SortMode = 'date-new'|'date-old'|'price-high'|'price-low';
+
+interface Refinement {
+  search: string;
+  sort: SortMode;
+  filter: any, // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 const AppContext = createContext<AppContextType>({} as AppContextType);
@@ -40,8 +50,15 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
     setSignedInUser(null);
   }
 
+  // Search refinements
+  const [refinement, setRefinement] = useState<Refinement>({
+    search: '',
+    sort: 'date-new',
+    filter: {},
+  });
+
   return (
-    <AppContext.Provider value={{ signIn, signOut, signedInUser }}>
+    <AppContext.Provider value={{ signIn, signOut, signedInUser, refinement, setRefinement }}>
       {children}
     </AppContext.Provider>
   );

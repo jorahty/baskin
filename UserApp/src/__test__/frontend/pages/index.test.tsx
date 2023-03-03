@@ -7,6 +7,7 @@ import '../matchMedia';
 
 import IndexPage from '../../../pages/index';
 import { getServerSideProps } from '../../../pages/index';
+import { AppContextProvider } from '../../../context';
 
 const handlers = [
   graphql.query('ListProducts', async (req, res, ctx) => {
@@ -85,9 +86,11 @@ const renderView = async () => {
   const { props } = await getServerSideProps({} as any) as any;
   render(
     <CssVarsProvider>
-      <IndexPage
-        category={props.category}
-      />
+      <AppContextProvider>
+        <IndexPage
+          category={props.category}
+        />
+      </AppContextProvider>
     </CssVarsProvider>
   );
 };

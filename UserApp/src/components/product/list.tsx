@@ -4,6 +4,7 @@ import { Box, Grid } from '@mui/joy';
 import ProductCard from './card';
 import React, { useEffect } from 'react';
 import Search from '../common/search';
+import { useAppContext } from '../../context';
 
 export default function ProductList({
   products,
@@ -16,12 +17,16 @@ export default function ProductList({
 }) {
   const [sortedProducts, setSortedProducts] = React.useState<Product[]>([]);
 
+  const { refinement } = useAppContext();
+  const sort = refinement?.sort;
+
   useEffect(() => {
     setSortedProducts(products);
   }, [products]);
 
   return (
     <>
+      {sort}
       {(showSearch || showSorter) &&
         <Box
           sx={{
