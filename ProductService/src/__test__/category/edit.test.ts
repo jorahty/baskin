@@ -20,17 +20,16 @@ afterAll(done => {
   db.shutdown();
 });
 
-
-test('Add category', async () =>{
+test('Edit category parent', async () =>{
   await request
   .post('/graphql')
   .send({
     query: `
       mutation {
-        addCategory( input: {
-          name: "New"
-          slug: "new"
-        }) 
+        editCategory(
+          parent: "property"
+          slug: "trucks"
+        ) 
         {
           name, slug, parent
         }
@@ -43,24 +42,23 @@ test('Add category', async () =>{
     expect(data).toBeDefined();
     expect(data.body).toBeDefined();
     expect(data.body.data).toBeDefined();
-    expect(data.body.data.addCategory.name).toBeDefined();
-    expect(data.body.data.addCategory.name).toEqual('New');
-    expect(data.body.data.addCategory.slug).toEqual('new');
-    expect(data.body.data.addCategory.parent).toEqual(null);
+    expect(data.body.data.editCategory.name).toBeDefined();
+    expect(data.body.data.editCategory.name).toEqual('Trucks');
+    expect(data.body.data.editCategory.slug).toEqual('trucks');
+    expect(data.body.data.editCategory.parent).toEqual('property');
   });
 })
 
-test('Add subcategory', async () =>{
+test('Edit category name', async () =>{
   await request
   .post('/graphql')
   .send({
     query: `
       mutation {
-        addCategory( input: {
-          name: "Soccer"
-          slug: "soccer"
-          parent: "sports"
-        }) 
+        editCategory(
+          name: "Transporters"
+          slug: "vehicles"
+        ) 
         {
           name, slug, parent
         }
@@ -73,9 +71,31 @@ test('Add subcategory', async () =>{
     expect(data).toBeDefined();
     expect(data.body).toBeDefined();
     expect(data.body.data).toBeDefined();
-    expect(data.body.data.addCategory.name).toBeDefined();
-    expect(data.body.data.addCategory.name).toEqual('Soccer');
-    expect(data.body.data.addCategory.slug).toEqual('soccer');
-    expect(data.body.data.addCategory.parent).toEqual('sports');
+    expect(data.body.data.editCategory.name).toBeDefined();
+    expect(data.body.data.editCategory.name).toEqual('Transporters');
+    expect(data.body.data.editCategory.slug).toEqual('transporters');
+    expect(data.body.data.editCategory.parent).toEqual(null);
   });
 })
+
+test('Failed edit category with name or parent', async () =>{
+  await request
+  .post('/graphql')
+  .send({
+    query: `
+      mutation {
+        editCategory(
+          slug: "vehicles"
+        ) 
+        {
+          name, slug, parent
+        }
+      }
+    `,
+  })
+  .expect('Content-Type', /json/)
+  .then(data => {
+    expect(data.body.errors.length).toEqual(1);
+  });
+})
+
