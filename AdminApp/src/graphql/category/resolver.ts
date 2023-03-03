@@ -7,6 +7,7 @@ import {
   CategoryChildrenArgs,
   NewCategory,
   RemoveCategoryArgs,
+  EditCategoryArgs,
 } from './schema';
 
 @Resolver()
@@ -49,5 +50,13 @@ export class CategoryResolver {
     @Args() { slug }: RemoveCategoryArgs
   ): Promise<Category> {
     return new CategoryService().remove(slug);
+  }
+
+  @Authorized()
+  @Mutation(() => Category)
+  async editCategory(
+    @Args() { slug, name, parent }: EditCategoryArgs
+  ): Promise<Category> {
+    return new CategoryService().edit(slug, name, parent);
   }
 }

@@ -43,6 +43,19 @@ export class RemoveCategoryArgs {
     slug!: string;
 }
 
+@ArgsType()
+export class EditCategoryArgs {
+  @Field()
+  @Matches(regexSlug)
+    slug!: string;
+  @Field({ nullable: true })
+  @Length(1, 32)
+    name?: string;
+  @Field({ nullable: true })
+  @Matches(regexSlug)
+    parent?: string;
+}
+
 @ObjectType()
 @InputType('CategoryInput')
 export class NewCategory {
