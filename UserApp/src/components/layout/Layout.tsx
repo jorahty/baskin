@@ -54,7 +54,7 @@ export default function Layout({ children, sidebar }: Props) {
             <Divider orientation="vertical" />
           </Stack>
         )}
-        <Box sx={sx}>
+        <Box sx={{ ...sx, flexGrow: 1 }}>
           {sidebarOpen && <Box sx={{
             display: { md: 'none' },
             zIndex: 9,
