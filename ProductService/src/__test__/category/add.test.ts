@@ -21,11 +21,11 @@ afterAll(done => {
 });
 
 
-test('Add category', async () =>{
+test('Add category', async () => {
   await request
-  .post('/graphql')
-  .send({
-    query: `
+    .post('/graphql')
+    .send({
+      query: `
       mutation {
         addCategory( input: {
           name: "New"
@@ -36,25 +36,25 @@ test('Add category', async () =>{
         }
       }
     `,
-  })
-  .expect(200)
-  .expect('Content-Type', /json/)
-  .then(data => {
-    expect(data).toBeDefined();
-    expect(data.body).toBeDefined();
-    expect(data.body.data).toBeDefined();
-    expect(data.body.data.addCategory.name).toBeDefined();
-    expect(data.body.data.addCategory.name).toEqual('New');
-    expect(data.body.data.addCategory.slug).toEqual('new');
-    expect(data.body.data.addCategory.parent).toEqual(null);
-  });
-})
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.addCategory.name).toBeDefined();
+      expect(data.body.data.addCategory.name).toEqual('New');
+      expect(data.body.data.addCategory.slug).toEqual('new');
+      expect(data.body.data.addCategory.parent).toEqual(null);
+    });
+});
 
-test('Add subcategory', async () =>{
+test('Add subcategory', async () => {
   await request
-  .post('/graphql')
-  .send({
-    query: `
+    .post('/graphql')
+    .send({
+      query: `
       mutation {
         addCategory( input: {
           name: "Soccer"
@@ -66,16 +66,16 @@ test('Add subcategory', async () =>{
         }
       }
     `,
-  })
-  .expect(200)
-  .expect('Content-Type', /json/)
-  .then(data => {
-    expect(data).toBeDefined();
-    expect(data.body).toBeDefined();
-    expect(data.body.data).toBeDefined();
-    expect(data.body.data.addCategory.name).toBeDefined();
-    expect(data.body.data.addCategory.name).toEqual('Soccer');
-    expect(data.body.data.addCategory.slug).toEqual('soccer');
-    expect(data.body.data.addCategory.parent).toEqual('sports');
-  });
-})
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.addCategory.name).toBeDefined();
+      expect(data.body.data.addCategory.name).toEqual('Soccer');
+      expect(data.body.data.addCategory.slug).toEqual('soccer');
+      expect(data.body.data.addCategory.parent).toEqual('sports');
+    });
+});

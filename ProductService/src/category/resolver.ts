@@ -1,12 +1,12 @@
 import { Arg, Args, Resolver, Query, Mutation } from 'type-graphql';
-import { 
+import {
   Category,
-  CategoryAncestorsArgs, 
+  CategoryAncestorsArgs,
   CategoryArgs,
-  CategoryChildrenArgs, 
-  EditCategoryArgs, 
-  NewCategory, 
-  RemoveCategoryArgs
+  CategoryChildrenArgs,
+  EditCategoryArgs,
+  NewCategory,
+  RemoveCategoryArgs,
 } from './schema';
 import { CategoryService } from './service';
 
@@ -36,7 +36,7 @@ export class CategoryResolver {
 
   @Mutation(() => Category)
   async addCategory(
-    @Arg('input') input: NewCategory, 
+    @Arg('input') input: NewCategory,
   ): Promise<Category> {
     return new CategoryService().add(input.slug, input.name, input.parent);
   }

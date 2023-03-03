@@ -20,11 +20,11 @@ afterAll(done => {
   db.shutdown();
 });
 
-test('Edit category parent', async () =>{
+test('Edit category parent', async () => {
   await request
-  .post('/graphql')
-  .send({
-    query: `
+    .post('/graphql')
+    .send({
+      query: `
       mutation {
         editCategory(
           parent: "property"
@@ -35,25 +35,25 @@ test('Edit category parent', async () =>{
         }
       }
     `,
-  })
-  .expect(200)
-  .expect('Content-Type', /json/)
-  .then(data => {
-    expect(data).toBeDefined();
-    expect(data.body).toBeDefined();
-    expect(data.body.data).toBeDefined();
-    expect(data.body.data.editCategory.name).toBeDefined();
-    expect(data.body.data.editCategory.name).toEqual('Trucks');
-    expect(data.body.data.editCategory.slug).toEqual('trucks');
-    expect(data.body.data.editCategory.parent).toEqual('property');
-  });
-})
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.editCategory.name).toBeDefined();
+      expect(data.body.data.editCategory.name).toEqual('Trucks');
+      expect(data.body.data.editCategory.slug).toEqual('trucks');
+      expect(data.body.data.editCategory.parent).toEqual('property');
+    });
+});
 
-test('Edit category name', async () =>{
+test('Edit category name', async () => {
   await request
-  .post('/graphql')
-  .send({
-    query: `
+    .post('/graphql')
+    .send({
+      query: `
       mutation {
         editCategory(
           name: "Transporters"
@@ -64,25 +64,25 @@ test('Edit category name', async () =>{
         }
       }
     `,
-  })
-  .expect(200)
-  .expect('Content-Type', /json/)
-  .then(data => {
-    expect(data).toBeDefined();
-    expect(data.body).toBeDefined();
-    expect(data.body.data).toBeDefined();
-    expect(data.body.data.editCategory.name).toBeDefined();
-    expect(data.body.data.editCategory.name).toEqual('Transporters');
-    expect(data.body.data.editCategory.slug).toEqual('transporters');
-    expect(data.body.data.editCategory.parent).toEqual(null);
-  });
-})
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.editCategory.name).toBeDefined();
+      expect(data.body.data.editCategory.name).toEqual('Transporters');
+      expect(data.body.data.editCategory.slug).toEqual('transporters');
+      expect(data.body.data.editCategory.parent).toEqual(null);
+    });
+});
 
-test('Failed edit category with name or parent', async () =>{
+test('Failed edit category with name or parent', async () => {
   await request
-  .post('/graphql')
-  .send({
-    query: `
+    .post('/graphql')
+    .send({
+      query: `
       mutation {
         editCategory(
           slug: "vehicles"
@@ -92,10 +92,10 @@ test('Failed edit category with name or parent', async () =>{
         }
       }
     `,
-  })
-  .expect('Content-Type', /json/)
-  .then(data => {
-    expect(data.body.errors.length).toEqual(1);
-  });
-})
+    })
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data.body.errors.length).toEqual(1);
+    });
+});
 

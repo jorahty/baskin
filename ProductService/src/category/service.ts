@@ -58,8 +58,8 @@ export class CategoryService {
 
     const query = {
       text: insert,
-      values: [slug, (parent ? parent : null), {name: name}],
-    }
+      values: [slug, (parent ? parent : null), { name: name }],
+    };
 
     const { rows } = await pool.query(query);
 
@@ -73,7 +73,7 @@ export class CategoryService {
     const query = {
       text: insert,
       values: [slug],
-    }
+    };
 
     const { rows } = await pool.query(query);
 
@@ -86,28 +86,27 @@ export class CategoryService {
     }
 
     let update = '';
-    let query = {text: '', values: ['']};
+    let query = { text: '', values: [''] };
     if (name){
-      const newSlug = name.toLowerCase()
+      const newSlug = name.toLowerCase();
       update = `Update category SET slug = $1,  data = jsonb_set(data, '{name}', $2, false)
         WHERE slug = $3
         RETURNING data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category`;
       query = {
         text: update,
         values: [newSlug, `"${name}"`, slug],
-      }
-    } 
-    
+      };
+    }
+
     if (parent) {
       update = `Update category SET parent_slug = $1 WHERE slug = $2
-        RETURNING data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category`
+        RETURNING data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category`;
       query = {
         text: update,
         values: [parent, slug],
-      }
-    }  
-    
-    
+      };
+    }
+
 
     const { rows } = await pool.query(query);
 
