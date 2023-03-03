@@ -5,7 +5,7 @@ import ModeToggle from './ModeToggle';
 import Logo from './Logo';
 import UserMenu from './UserMenu';
 import { useAppContext } from '../../context';
-import LanguageSwitch from '../common/LanguageSwitch';
+import LangSelect from '../common/LangSelect';
 import { useTranslation } from 'next-i18next';
 
 export const headerHeight = '80px';
@@ -20,7 +20,7 @@ export default function Header({ handleSidebarOpen }: { handleSidebarOpen: () =>
       direction="row"
       alignItems="center"
       px={3}
-      gap={1}
+      gap={2}
     >
       <IconButton
         aria-label="menu-icon"
@@ -35,6 +35,9 @@ export default function Header({ handleSidebarOpen }: { handleSidebarOpen: () =>
         </Link>
       </Box>
       <Box ml="auto" />
+      <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <LangSelect />
+      </Box>
       {signedInUser ? (
         <UserMenu />
       ) : (
@@ -56,7 +59,6 @@ export default function Header({ handleSidebarOpen }: { handleSidebarOpen: () =>
           </Link>
         </>
       )}
-      <LanguageSwitch />
       <ModeToggle />
     </Stack>
   );
