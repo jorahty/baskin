@@ -17,6 +17,16 @@ const categories = [
     slug: 'trucks',
     parent: '',
   },
+  {
+    name: 'Tractors',
+    slug: 'tractors',
+    parent: '',
+  },
+  {
+    name: 'Trailers',
+    slug: 'trailers',
+    parent: '',
+  },
 ];
 
 const handlers = [

@@ -91,4 +91,22 @@ export class CategoryService {
 
     return data.removeCategory;
   }
+
+  public async edit(slug:string, name?:string, parent?:string): Promise<Category>{
+    const mutation = gql`
+      mutation EditCategory($slug: String!, $name: String, $parent: String) {
+        editCategory(slug: $slug, name: $name, parent: $parent) {
+          slug, parent, name
+        }
+      }
+    `;
+    const data = await request(
+      'http://localhost:3013/graphql',
+      mutation,
+      { slug: slug, name: name, parent: parent },
+    );
+
+
+    return data.editCategory;
+  }
 }

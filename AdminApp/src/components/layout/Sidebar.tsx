@@ -8,9 +8,13 @@ import ListItemButton from '@mui/joy/ListItemButton';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
+import { useAppContext } from '../../context';
 
 export default function Sidebar({ tabs, current, setCurrent }:
   {tabs: string[], current:string, setCurrent: (item: string) => void}) {
+
+  const { signedInUser } = useAppContext();
+
   return (
     <React.Fragment>
       <Sheet
@@ -55,9 +59,9 @@ export default function Sidebar({ tabs, current, setCurrent }:
         <Box sx={{ pl: 1, mt: 'auto', display: 'flex', alignItems: 'center' }}>
           <div>
             <Typography fontWeight="lg" level="body2">
-              Olivia Ryhe
+              {signedInUser?.name}
             </Typography>
-            <Typography level="body2">olivia@email.com</Typography>
+            <Typography level="body2">{signedInUser?.username}</Typography>
           </div>
           <IconButton variant="plain" sx={{ ml: 'auto' }}>
             <i data-feather="log-out" />

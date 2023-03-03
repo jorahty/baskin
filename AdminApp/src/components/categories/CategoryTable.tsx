@@ -11,6 +11,7 @@ import IconButton from '@mui/joy/IconButton';
 import Delete from '@mui/icons-material/Delete';
 import { useAppContext } from '../../context';
 import { gql, GraphQLClient } from 'graphql-request';
+import CategoryField from './CategoryField';
 
 // Reference: https://codesandbox.io/s/6bmeke?file=/components/OrderTable.tsx:7018-12425
 // Reference: https://mui.com/joy-ui/react-menu/
@@ -58,7 +59,7 @@ export default function CategoryTable({ categories, setCategories }:
   };
 
   React.useEffect(() => {
-    setCategoryList(categories);
+    setCategoryList(categories.sort((a, b) => a.name.localeCompare(b.name)));
   }, [categories]);
 
   return (
@@ -88,6 +89,7 @@ export default function CategoryTable({ categories, setCategories }:
           <tr>
             <th style={{ width: '50%', padding: 12 }}>Name</th>
             <th style={{ width: '45%', padding: 12 }}>Parent</th>
+            <th style={{ width: '5%', padding: 12 }} />
             <th
               aria-label="last"
               style={{ width: 'var(--Table-lastColumnWidth)' }}
@@ -98,12 +100,10 @@ export default function CategoryTable({ categories, setCategories }:
           {categoryList.map((row: Category) => (
             <tr key={row.slug} aria-label={row.slug}>
               <td>
-                <Typography fontWeight="md">{row.name}</Typography>
+                <CategoryField id={row.slug} value={row.name} field={'name'} />
               </td>
               <td>
-                <Typography fontWeight="md">{row.parent ?
-                  row.parent[0].toUpperCase() + row.parent.slice(1) : 'None'}
-                </Typography>
+                <CategoryField id={row.slug} value={row.parent ? row.parent : 'none'} field={'parent'} />
               </td>
               <td>
                 <IconButton aria-label={'delete-'+row.slug}
