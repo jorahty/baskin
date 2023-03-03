@@ -64,12 +64,31 @@ export class CategoryService {
         }
       }
     `;
+    console.log(mutation);
     const data = await request(
       'http://localhost:3013/graphql',
       mutation,
-      { input: { name: name, parent: parent ? parent: null, slug: slug } },
+      { input: { name: name, parent: parent, slug: slug } },
     );
 
+
     return data.addCategory;
+  }
+
+  public async remove(slug: string): Promise<Category> {
+    const mutation = gql`
+      mutation RemoveCategory($slug: String!) {
+        removeCategory(slug: $slug) {
+          slug, parent, name
+        }
+      }
+    `;
+    const data = await request(
+      'http://localhost:3013/graphql',
+      mutation,
+      { slug: slug },
+    );
+
+    return data.removeCategory;
   }
 }

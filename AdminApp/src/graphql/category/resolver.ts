@@ -6,6 +6,7 @@ import {
   CategoryArgs,
   CategoryChildrenArgs,
   NewCategory,
+  RemoveCategoryArgs,
 } from './schema';
 
 @Resolver()
@@ -40,5 +41,13 @@ export class CategoryResolver {
     @Arg('input') input: NewCategory,
   ): Promise<Category> {
     return new CategoryService().add(input.slug, input.name, input.parent);
+  }
+
+  @Authorized()
+  @Mutation(() => Category)
+  async removeCategory(
+    @Args() { slug }: RemoveCategoryArgs
+  ): Promise<Category> {
+    return new CategoryService().remove(slug);
   }
 }

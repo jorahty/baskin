@@ -1,5 +1,4 @@
 import { Arg, Args, Resolver, Query, Mutation } from 'type-graphql';
-
 import { 
   Category,
   CategoryAncestorsArgs, 

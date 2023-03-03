@@ -41,6 +41,17 @@ const handlers = [
             },
         }),
       );
+    } else if (json.query.indexOf('parentless') >= 0) {
+      return res(
+        ctx.data({
+          addCategory:
+            {
+              name: 'Parentless',
+              slug: 'parentless',
+              parent: null,
+            },
+        }),
+      );
     } else {
       return res(
         ctx.errors([
@@ -72,7 +83,7 @@ const renderView = async () => {
   );
 };
 
-test('Renders Product Menu', async () => {
+test('Renders Categories page', async () => {
   localStorage.setItem(
     'user',
     `{"username":"molly_member","accessToken":"blergh","name":"Molly Member"}`,
@@ -134,6 +145,27 @@ test('Create new category', async () => {
   fireEvent.click(await screen.findByText('Submit'));
 
   await screen.findByLabelText('new');
+});
+
+test('Create new category without parent', async () => {
+  localStorage.setItem(
+    'user',
+    `{"username":"molly_member","accessToken":"blergh","name":"Molly Member"}`,
+  );
+
+  await renderView();
+  fireEvent.click(await screen.findByText('Add Category'));
+  const name = await screen.getByLabelText('name');
+  categories = categories.concat({
+    name: 'Parentless',
+    slug: 'parentless',
+    parent: null,
+  });
+  await userEvent.type(name, 'Parentless');
+
+  fireEvent.click(await screen.findByText('Submit'));
+
+  await screen.findByLabelText('parentless');
 });
 
 test('Cancel when creating a new category', async () => {

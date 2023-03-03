@@ -28,6 +28,7 @@ export default function CategoriesPage() {
   const { signedInUser } = useAppContext();
   const [categories, setCategories] = useState<Category[]>([]);
   const [open, setOpen] = useState(false);
+
   const [parent, setParent] = useState('');
 
   const handleCancel = () => {
@@ -42,7 +43,9 @@ export default function CategoriesPage() {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
-    const query = gql`
+    let query = '';
+    if (parent){
+      query = gql`
         mutation addCategory {
           addCategory ( input: {
             name: "${name}",
@@ -52,6 +55,18 @@ export default function CategoriesPage() {
             ) {slug}
         }
     `;
+    } else {
+      query = gql`
+        mutation addCategory {
+          addCategory ( input: {
+            name: "${name}",
+            slug: "${name.toLowerCase()}",
+            parent: ${null}
+          }  
+            ) {slug}
+        }
+    `;
+    }
 
     await graphQLClient
       .request(query)
@@ -87,7 +102,7 @@ export default function CategoriesPage() {
     };
 
     fetchData();
-  }, [signedInUser, open]);
+  }, [signedInUser, open, categories]);
 
   return (
     <Container sx={{ margin: '16px auto' }}>
@@ -112,7 +127,7 @@ export default function CategoriesPage() {
           Add Category
       </Button>
       <Stack height={'80vh'}>
-        <CategoryTable categories={categories} />
+        <CategoryTable categories={categories} setCategories={setCategories} />
       </Stack>
       <Modal open={open} onClose={() => setOpen(false)}>
         <ModalDialog

@@ -36,6 +36,13 @@ export class CategoryAncestorsArgs {
     slug!: string;
 }
 
+@ArgsType()
+export class RemoveCategoryArgs {
+  @Field()
+  @Matches(regexSlug)
+    slug!: string;
+}
+
 @ObjectType()
 @InputType('CategoryInput')
 export class NewCategory {
