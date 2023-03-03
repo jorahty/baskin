@@ -89,7 +89,8 @@ export class CategoryService {
     let query = {text: '', values: ['']};
     if (name){
       const newSlug = name.toLowerCase()
-      update = `Update category SET slug = $1,  data = jsonb_set(data, '{name}', $2, false) WHERE slug = $3
+      update = `Update category SET slug = $1,  data = jsonb_set(data, '{name}', $2, false)
+        WHERE slug = $3
         RETURNING data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category`;
       query = {
         text: update,
