@@ -8,7 +8,7 @@ import { useAppContext } from '../../context';
 import queryGQL from '../../queryQGL';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import AuthGuard from '../../components/util/AuthGuard';
+import AuthGuard from '../../components/common/AuthGuard';
 
 export const getServerSideProps: GetServerSideProps = async context => ({
   props: {

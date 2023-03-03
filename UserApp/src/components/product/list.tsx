@@ -1,9 +1,9 @@
 import { Product } from '@/graphql/product/schema';
-import Sorter from '../util/sorter';
+import Sorter from '../common/sorter';
 import { Box, Grid } from '@mui/joy';
 import ProductCard from './card';
 import React, { useEffect } from 'react';
-import Search from '../util/search';
+import Search from '../common/search';
 
 export default function ProductList({
   products,

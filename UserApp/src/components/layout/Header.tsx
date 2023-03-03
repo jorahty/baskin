@@ -5,7 +5,7 @@ import ModeToggle from './ModeToggle';
 import Logo from './Logo';
 import UserMenu from './UserMenu';
 import { useAppContext } from '../../context';
-import LanguageSwitch from '../util/LanguageSwitch';
+import LanguageSwitch from '../common/LanguageSwitch';
 import { useTranslation } from 'next-i18next';
 
 export const headerHeight = '80px';

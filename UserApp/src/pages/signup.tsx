@@ -10,7 +10,7 @@ import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
 import { useAppContext } from '../context';
-import BackRedirect from '../components/util/BackRedirect';
+import BackRedirect from '../components/common/BackRedirect';
 import { useTranslation } from 'next-i18next';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';

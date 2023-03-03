@@ -17,7 +17,7 @@ import { useEffect } from 'react';
 import Router from 'next/router';
 import Layout from '../../components/layout/Layout';
 import ProductImageList from '../../components/product/ProductImageList';
-import AuthGuard from '../../components/util/AuthGuard';
+import AuthGuard from '../../components/common/AuthGuard';
 import { useTranslation } from 'react-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSideProps } from 'next';

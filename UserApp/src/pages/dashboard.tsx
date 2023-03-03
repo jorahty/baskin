@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     },
   };
 };
-import AuthGuard from '../components/util/AuthGuard';
+import AuthGuard from '../components/common/AuthGuard';
 // import { useAppContext } from '../context';
 
 export default function Dashboard() {

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import BackRedirect from '../../../../components/util/BackRedirect';
+import BackRedirect from '../../../../components/common/BackRedirect';
 import Router from 'next/router';
 
 jest.mock('next/router', () => ({
