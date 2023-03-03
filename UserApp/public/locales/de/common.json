@@ -1,0 +1,103 @@
+{
+  "header": {
+  "signin": "Anmelden",
+  "signup": "Registrieren",
+  "dropdown": {
+  "profile": "Profil",
+  "dashboard": "Dashboard",
+  "messages": "Nachrichten",
+  "signout": "Abmelden"
+  }
+  },
+  "home": {
+  "sidebar": {
+  "categories": "Alle Kategorien"
+  },
+  "search": {
+  "placeholder": "Produkt suchen"
+  },
+  "sort": {
+  "placeholder": "Sortieren nach",
+  "newest": "Neueste",
+  "oldest": "Älteste",
+  "priceHigh": "Preis hoch",
+  "priceLow": "Preis niedrig"
+  }
+  },
+  "dashboard": {
+  "sidebar": {
+  "dashboard": "Dashboard",
+  "profileSettings": "Profil Einstellungen",
+  "products": "Produkte",
+  "favorites": "Favoriten"
+  },
+  "profileSettings": {
+  "title": "Profil Einstellungen",
+  "form": {
+  "username": "Benutzername",
+  "updateUser": "Benutzername aktualisieren",
+  "email": "E-Mail",
+  "updateEmail": "E-Mail aktualisieren"
+  }
+  },
+  "products" : {
+  "title": "Produkte",
+  "addProduct": "Produkt hinzufügen",
+  "table": {
+  "image": "Bild",
+  "product": "Produkt",
+  "category": "Kategorie",
+  "price": "Preis"
+  }
+  },
+  "favorites": {
+
+  }
+},
+"createNewProduct": {
+"title": "Neues Produkt erstellen",
+"form": {
+"productName": "Produktname",
+"productNamePlaceholder": "Geben Sie den Namen des Produkts ein",
+"category": "Kategorie",
+"categoryPlaceholder": "Wählen Sie eine Kategorie",
+"price": "Preis",
+"pricePlaceholder": "Geben Sie den Preis ein",
+"quantity": "Menge",
+"image": "Bild hinzufügen",
+"description": "Beschreibung",
+"descriptionPlaceholder": "Geben Sie eine Beschreibung ein",
+"create": "Erstellen",
+"cancel": "Abbrechen"
+}
+},
+"signin": {
+"title": "Willkommen zurück",
+"message": "Lass uns beginnen! Bitte geben Sie Ihre Daten ein.",
+"form": {
+"username": "Benutzername",
+"usernamePlaceholder": "Geben Sie Ihren Benutzernamen ein",
+"password": "Passwort",
+"signin": "Anmelden"
+}
+},
+"signup": {
+"title": "Willkommen",
+"message": "Lass uns beginnen! Bitte geben Sie Ihre Daten ein.",
+"form": {
+"firstName": "Vorname",
+"firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+"lastName": "Nachname",
+"lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
+"username": "Benutzername",
+"usernamePlaceholder": "Geben Sie Ihren Benutzernamen ein",
+"email": "E-Mail",
+"emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+"password": "Passwort",
+"signup": "Registrieren"
+}
+}
+}
+
+
+
