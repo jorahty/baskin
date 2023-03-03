@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { CssVarsProvider, useColorScheme, extendTheme } from '@mui/joy/styles';
 import Head from 'next/head';
 
