@@ -1,7 +1,13 @@
 import { Arg, Args, Resolver, Query, Mutation } from 'type-graphql';
 
-import { Category, CategoryAncestorsArgs, CategoryArgs,
-  CategoryChildrenArgs, NewCategory } from './schema';
+import { 
+  Category,
+  CategoryAncestorsArgs, 
+  CategoryArgs,
+  CategoryChildrenArgs, 
+  NewCategory, 
+  RemoveCategoryArgs
+} from './schema';
 import { CategoryService } from './service';
 
 @Resolver()
@@ -33,5 +39,12 @@ export class CategoryResolver {
     @Arg('input') input: NewCategory, 
   ): Promise<Category> {
     return new CategoryService().add(input.slug, input.name, input.parent);
+  }
+
+  @Mutation(() => Category)
+  async removeCategory(
+    @Args() { slug }: RemoveCategoryArgs
+  ): Promise<Category> {
+    return new CategoryService().remove(slug);
   }
 }

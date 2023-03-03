@@ -65,4 +65,18 @@ export class CategoryService {
 
     return rows.map(row => row.category)[0];
   }
+
+  public async remove(slug: string): Promise<Category> {
+    const insert = `DELETE FROM category WHERE slug = $1
+      RETURNING data || jsonb_build_object('slug', slug, 'parent', parent_slug) AS category`;
+
+    const query = {
+      text: insert,
+      values: [slug],
+    }
+
+    const { rows } = await pool.query(query);
+
+    return rows.map(row => row.category)[0];
+  }
 }
