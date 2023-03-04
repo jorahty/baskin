@@ -25,7 +25,7 @@ export default function ChatList({ chats, selectedChat }: Props) {
   }
 
   return (
-    <List sx ={{ p: 0 }}>
+    <List sx ={{ p: 0, width: 240 }}>
       {chats.map(chat => (
         <ListItem key={chat.id}>
           <ListItemButton
