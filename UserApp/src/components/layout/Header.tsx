@@ -7,12 +7,26 @@ import UserMenu from './UserMenu';
 import { useAppContext } from '../../context';
 import LangSelect from '../common/LangSelect';
 import { useTranslation } from 'next-i18next';
+import ProductSearch from '../product/search';
+import Router from 'next/router';
+import { useEffect, useState } from 'react';
 
 export const headerHeight = '80px';
 
-export default function Header({ handleSidebarOpen }: { handleSidebarOpen: () => void }) {
+interface Props {
+  handleSidebarOpen: () => void;
+}
+
+export default function Header({ handleSidebarOpen }: Props) {
   const { signedInUser } = useAppContext();
+  const [searchVisible, setSearchVisible] = useState(false);
   const { t } = useTranslation('common');
+
+  useEffect(() => {
+    setSearchVisible(
+      Router.pathname === '/' || Router.pathname === '/category/[slug]'
+    );
+  }, []);
 
   return (
     <Stack
@@ -29,12 +43,13 @@ export default function Header({ handleSidebarOpen }: { handleSidebarOpen: () =>
       >
         <MenuIcon />
       </IconButton>
-      <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+      <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
         <Link href="/">
           <Logo />
         </Link>
       </Box>
       <Box ml="auto" />
+      {searchVisible && <ProductSearch />}
       <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
         <LangSelect />
       </Box>
@@ -59,7 +74,9 @@ export default function Header({ handleSidebarOpen }: { handleSidebarOpen: () =>
           </Link>
         </>
       )}
-      <ModeToggle />
+      <Box sx={{ display: { xs: 'none' } }}>
+        <ModeToggle />
+      </Box>
     </Stack>
   );
 }
