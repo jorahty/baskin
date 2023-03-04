@@ -1,6 +1,7 @@
 {
   "name": "baskin-microservice-image",
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express": "*",
     "@types/jest": "*",
     "@types/multer": "*",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "@types/sharp": "^0.31.1",
+    "cors": "^2.8.5",
     "express": "*",
     "multer": "*",
     "sharp": "^0.31.3",

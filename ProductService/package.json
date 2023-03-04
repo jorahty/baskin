@@ -1,6 +1,7 @@
 {
   "name": "baskin-microservice-product",
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express": "*",
     "@types/jest": "*",
     "@types/node": "*",
@@ -16,6 +17,7 @@
     "typescript": "*"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "*",
     "express": "*",
     "express-graphql": "*",

@@ -1,13 +1,13 @@
 import path from 'path';
 import fs from 'fs';
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 export async function addImage(imageName: string, imageType: string) {
   // Adding image
   const imagePathName = path.resolve(__dirname, '../../') + `/images/${imageName}`;
-  const imageContent = fs.readFileSync(imagePathName);
-  const blob = new Blob([imageContent], { type: `image/${imageType}` });
-  const file = new File([blob], imageName, { type: `image/${imageType}` });
+  const fileContent = fs.readFileSync(imagePathName);
+  const file = new File([fileContent], 'imageName.jpeg', { type: `image/${imageType}` });
 
   // Get the input button
   const input = screen.getByLabelText('add product image');
@@ -18,6 +18,5 @@ export async function addImage(imageName: string, imageType: string) {
     configurable: true,
   });
 
-  fireEvent.change(input, { target: { files: [file] } });
-  // delete window.URL.createObjectURL;
+  await userEvent.upload(input, [file]);
 }

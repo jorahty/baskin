@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import { Typography } from '@mui/joy';
 import Button from '@mui/joy/Button';
@@ -8,12 +9,11 @@ import Input from '@mui/joy/Input';
 import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/joy/Box';
 import Textarea from '@mui/joy/Textarea';
-import { GraphQLClient, gql } from 'graphql-request';
+import { gql, GraphQLClient } from 'graphql-request';
 import { Category } from '@/graphql/category/schema';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import { useAppContext } from '../../context';
-import { useEffect } from 'react';
 import Router from 'next/router';
 import Layout from '../../components/layout/Layout';
 import ProductImageList from '../../components/common/ProductImageList';
@@ -21,8 +21,10 @@ import AuthGuard from '../../components/common/AuthGuard';
 import { useTranslation } from 'react-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSideProps } from 'next';
+import fetch from 'node-fetch';
+import FormData from 'form-data';
 
-export const getServerSideProps: GetServerSideProps = async context => ({
+export const getServerSideProps: GetServerSideProps = async (context) => ({
   props: {
     ...(await serverSideTranslations((context.locale as string) ?? 'en', ['common'])),
   },
@@ -90,32 +92,54 @@ export default function Create() {
     quantity: number,
     pictures: File[],
   ) => {
-    const bearerToken = signedInUser?.accessToken;
-    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-      headers: {
-        Authorization: `Bearer ${bearerToken}`,
-      },
+    // const bearerToken = signedInUser?.accessToken;
+    const formData: FormData = new FormData();
+    pictures.map((picture: File) => {
+      formData.append('files', picture, picture.name);
+    });
+
+    const imageData = await fetch('http://localhost:3012/api/v0/image', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const picturesIdArr: string[] = await imageData.json();
+
+    const graphQLClient = new GraphQLClient('http://localhost:3013/graphql', {
+      // headers: {
+      //   Authorization: `Bearer ${bearerToken}`,
+      // },
     });
     const query = gql`
         mutation addProduct {
-            addProduct (
+            addProduct (input: {
+                user: "${signedInUser?.username}",
                 name: "${name}",
                 description: "${description}",
                 price: ${price},
                 category: "${category}",
                 quantity: ${quantity},
-                pictures: [${pictures.map(x => '"' + x + '"')}]
-            ) {id}
+                pictures: [${picturesIdArr.map((p: string) => `"${p}"`)}],
+                discount: 0,
+            }) {id}
         }
     `;
 
     await graphQLClient
       .request(query)
-      .then(() => Router.push({
-        pathname: '/',
-      }),
+      .then(() =>
+        Router.push({
+          pathname: '/',
+        }),
       )
-      .catch(() => alert('Error creating product, Try again'));
+      .catch(() => {
+        picturesIdArr.forEach((pic: string) => {
+          fetch(`http://localhost:3012/api/v0/image/${pic}`, {
+            method: 'DELETE',
+          });
+        });
+        alert('Error creating product, Try again');
+      });
   };
 
   return (

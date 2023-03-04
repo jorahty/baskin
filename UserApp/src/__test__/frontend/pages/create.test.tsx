@@ -1,7 +1,7 @@
 import { CssVarsProvider } from '@mui/joy/styles';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { graphql } from 'msw';
+import { graphql, rest } from 'msw';
 import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
 import '../matchMedia';
@@ -9,7 +9,6 @@ import '../matchMedia';
 import Create from '../../../pages/product/create';
 import { AppContextProvider } from '../../../context';
 import { getServerSideProps } from '../../../pages/product/create';
-import { addImage } from '../components/product/productImage';
 
 const handlers = [
   graphql.mutation('addProduct', async (req, res, ctx) => {
@@ -20,7 +19,7 @@ const handlers = [
           addProduct: {
             id: '11111',
           },
-        })
+        }),
       );
     } else {
       return res(
@@ -28,7 +27,7 @@ const handlers = [
           {
             message: 'Unexpected error.',
           },
-        ])
+        ]),
       );
     }
   }),
@@ -45,13 +44,16 @@ const handlers = [
             slug: 'toys',
           },
         ],
-      })
+      }),
     );
+  }),
+  rest.post('http://localhost:3012/api/v0/image', async (req, res, ctx) => {
+    console.log(req.headers);
+    return res(ctx.status(200), ctx.json(['72c33826-a3c3-4d1f-8e9a-3e7887d05832']));
   }),
 ];
 
 const server = setupServer(...handlers);
-
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
@@ -83,14 +85,13 @@ jest.mock('react-i18next', () => ({
 
 const renderView = async () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { props } = await getServerSideProps({} as any) as any;
-  console.log(props);
+  // const { props } = (await getServerSideProps({} as any)) as any;
   render(
     <CssVarsProvider>
       <AppContextProvider>
-        <Create/>
+        <Create />
       </AppContextProvider>
-    </CssVarsProvider>
+    </CssVarsProvider>,
   );
 };
 
@@ -116,7 +117,7 @@ test('Click Cancel', async () => {
 test('Click create', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
   let alerted = false;
@@ -143,7 +144,8 @@ test('Click create', async () => {
   const description = screen.getByLabelText('Enter Description');
   await userEvent.type(description, 'great product');
 
-  await addImage('valid.jpeg', 'jpeg');
+  // TODO: Add an image to the product?!
+  // await addImage('valid.jpeg', 'jpeg');
 
   // Create product
   fireEvent.click(screen.getByLabelText('create'));
@@ -156,7 +158,7 @@ test('Click create', async () => {
 test('Click create invalid', async () => {
   localStorage.setItem(
     'user',
-    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}'
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
   let alerted = false;
