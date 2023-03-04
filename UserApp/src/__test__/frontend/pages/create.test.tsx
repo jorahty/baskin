@@ -8,7 +8,6 @@ import '../matchMedia';
 
 import Create from '../../../pages/product/create';
 import { AppContextProvider } from '../../../context';
-import { getServerSideProps } from '../../../pages/product/create';
 
 const handlers = [
   graphql.mutation('addProduct', async (req, res, ctx) => {

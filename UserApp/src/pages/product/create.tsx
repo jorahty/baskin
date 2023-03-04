@@ -24,7 +24,7 @@ import { GetServerSideProps } from 'next';
 import fetch from 'node-fetch';
 import FormData from 'form-data';
 
-export const getServerSideProps: GetServerSideProps = async (context) => ({
+export const getServerSideProps: GetServerSideProps = async context => ({
   props: {
     ...(await serverSideTranslations((context.locale as string) ?? 'en', ['common'])),
   },
@@ -127,10 +127,9 @@ export default function Create() {
 
     await graphQLClient
       .request(query)
-      .then(() =>
-        Router.push({
-          pathname: '/',
-        }),
+      .then(() => Router.push({
+        pathname: '/',
+      }),
       )
       .catch(() => {
         picturesIdArr.forEach((pic: string) => {
