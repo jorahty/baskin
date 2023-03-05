@@ -74,7 +74,7 @@ export default function Header({ handleSidebarOpen }: Props) {
           </Link>
         </>
       )}
-      <Box sx={{ display: { xs: 'none' } }}>
+      <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
         <ModeToggle />
       </Box>
     </Stack>
