@@ -2,25 +2,19 @@ import { Avatar, Box, ListItem, ListItemContent, ListItemDecorator, Typography, 
 import { useAppContext } from '../../context';
 
 import { MessageGroup } from './list';
+import { SenderMessageBubble, OtherMessageBubble } from './bubble';
 
-function SenderMessage({ group }: { group: MessageGroup }) {
+interface MessageCardProps {
+  group: MessageGroup;
+}
+
+function SenderMessage({ group }: MessageCardProps) {
   return (
     <ListItemContent>
       <Box display="flex" justifyContent="flex-end" alignItems="end">
         <Stack direction="column" flexGrow={1} alignItems="flex-end" spacing={0.25}>
           {group.messages.map((message, i) => (
-            <Box
-              key={i}
-              px={1.5}
-              py={0.5}
-              maxWidth="75%"
-              borderRadius="16px"
-              bgcolor="var(--joy-palette-primary-softColor)"
-            >
-              <Typography key={i} sx={{ color: 'var(--joy-palette-neutral-softBg)' }}>
-                {message}
-              </Typography>
-            </Box>
+            <SenderMessageBubble key={i} message={message} />
           ))}
         </Stack>
         {/* <ListItemDecorator sx={{ justifyContent: 'flex-end' }}>
@@ -31,7 +25,7 @@ function SenderMessage({ group }: { group: MessageGroup }) {
   );
 }
 
-function OtherMessage({ group }: { group: { sender: string; messages: string[] } }) {
+function OtherMessage({ group }: MessageCardProps) {
   return (
     <ListItemContent>
       <Box display="flex" justifyContent="flex-start" alignItems="end">
@@ -43,16 +37,7 @@ function OtherMessage({ group }: { group: { sender: string; messages: string[] }
             {group.sender}
           </Typography>
           {group.messages.map((message, i) => (
-            <Box
-              key={i}
-              px={1.5}
-              py={0.5}
-              maxWidth="75%"
-              borderRadius="16px"
-              bgcolor="var(--joy-palette-primary-softBg)"
-            >
-              <Typography key={i}>{message}</Typography>
-            </Box>
+            <OtherMessageBubble key={i} message={message} />
           ))}
         </Stack>
       </Box>
@@ -60,7 +45,7 @@ function OtherMessage({ group }: { group: { sender: string; messages: string[] }
   );
 }
 
-export default function ListCard({ group }: { group: { sender: string; messages: string[] } }) {
+export default function MessageCard({ group }: { group: MessageGroup }) {
   const { signedInUser } = useAppContext();
 
   return (

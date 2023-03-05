@@ -34,7 +34,8 @@ export default function Layout({ children, sidebar }: Props) {
       <Divider />
       <Stack direction="row" height="100%" alignItems="flex-start">
         {sidebar && (
-          <Stack direction="row"
+          <Stack
+            direction="row"
             zIndex={10}
             sx={{
               position: { xs: 'fixed', md: 'relative' },
@@ -44,26 +45,26 @@ export default function Layout({ children, sidebar }: Props) {
               },
             }}
           >
-            <Box
-              bgcolor="background.surface"
-              minWidth="min-content"
-              sx={sx}
-            >
+            <Box bgcolor="background.surface" minWidth="min-content" sx={sx}>
               {sidebar}
             </Box>
             <Divider orientation="vertical" />
           </Stack>
         )}
         <Box sx={{ ...sx, flexGrow: 1 }}>
-          {sidebarOpen && <Box sx={{
-            display: { md: 'none' },
-            zIndex: 9,
-            background: '#00000055',
-            position: 'fixed',
-            height: `calc(100vh - ${headerHeight} - ${footerHeight})`,
-            width: '100%',
-          }}
-          />}
+          {sidebarOpen && (
+            <Box
+              onClick={handleSidebarOpen}
+              sx={{
+                display: { md: 'none' },
+                zIndex: 9,
+                background: '#00000055',
+                position: 'fixed',
+                height: `calc(100vh - ${headerHeight} - ${footerHeight})`,
+                width: '100%',
+              }}
+            />
+          )}
           {children}
         </Box>
       </Stack>

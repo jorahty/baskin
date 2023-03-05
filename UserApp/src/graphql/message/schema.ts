@@ -14,6 +14,8 @@ export class Message {
     sender!: string;
   @Field()
     content!: string;
+  @Field()
+    date!: string;
 }
 
 @ArgsType()

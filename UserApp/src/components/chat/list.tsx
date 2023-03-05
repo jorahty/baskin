@@ -4,8 +4,8 @@ import { List, ListItem, ListItemButton } from '@mui/joy';
 import Router from 'next/router';
 
 interface Props {
-  chats: Chat[],
-  selectedChat: undefined|Chat,
+  chats: Chat[];
+  selectedChat: undefined | Chat;
 }
 
 export default function ChatList({ chats, selectedChat }: Props) {
@@ -25,13 +25,13 @@ export default function ChatList({ chats, selectedChat }: Props) {
   }
 
   return (
-    <List sx ={{ p: 0, width: 240 }}>
+    <List sx={{ p: 0, width: 240 }}>
       {chats.map(chat => (
         <ListItem key={chat.id}>
           <ListItemButton
             selected={chat.id === selectedChat?.id}
-            onClick={() => Router.push(`/messages/${chat.id}`, undefined, { shallow: true })
-            }
+            variant={chat.id === selectedChat?.id ? 'soft' : 'plain'}
+            onClick={() => Router.push(`/messages/${chat.id}`, undefined, { shallow: true })}
           >
             {renderChatName(chat)}
           </ListItemButton>

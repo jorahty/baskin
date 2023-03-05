@@ -8,6 +8,7 @@ export class MessageService {
         message(id: $id) {
           content
           sender
+          date
         }
       }
     `;

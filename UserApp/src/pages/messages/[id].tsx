@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Chat } from '@/graphql/chat/schema';
+import { Chat } from '../../graphql/chat/schema';
 import ChatList from '../../components/chat/list';
 import Layout from '../../components/layout/Layout';
 import MessageList from '../../components/message/list';
@@ -9,10 +9,13 @@ import queryGQL from '../../queryQGL';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import AuthGuard from '../../components/common/AuthGuard';
+import { Box, Divider, Stack } from '@mui/joy';
+import MessageInput from '../../components/message/input';
+import ChatHeader from '../../components/chat/header';
 
 export const getServerSideProps: GetServerSideProps = async context => ({
   props: {
-    ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
+    ...(await serverSideTranslations((context.locale as string) ?? 'en', ['common'])),
   },
 });
 
@@ -33,14 +36,12 @@ export default function MessagesPage() {
           id, name, members { name, username }
         }
       }`,
-      signedInUser?.accessToken,
+      signedInUser?.accessToken
     ).then(data => {
       setChats(data.chat);
 
       // Select chat with id from URL path
-      const selected = data.chat.find(
-        (chat: Chat) => chat.id === router.query.id
-      );
+      const selected = data.chat.find((chat: Chat) => chat.id === router.query.id);
 
       if (selected) {
         setSelectedChat(selected);
@@ -55,8 +56,8 @@ export default function MessagesPage() {
     if (!selectedChat) return;
     queryGQL(
       'http://localhost:3000/api/graphql',
-      `query message { message(id: "${selectedChat?.id}" ) { content, sender } }`,
-      signedInUser?.accessToken,
+      `query message { message(id: "${selectedChat?.id}" ) { content, sender, date } }`,
+      signedInUser?.accessToken
     ).then(data => {
       setMessages(data.message);
     });
@@ -64,10 +65,19 @@ export default function MessagesPage() {
 
   return (
     <AuthGuard>
-      <Layout
-        sidebar={<ChatList chats={chats} selectedChat={selectedChat}/>}
-      >
-        <MessageList messages={messages}/>
+      <Layout sidebar={<ChatList chats={chats} selectedChat={selectedChat} />}>
+        <Stack direction="column" height="100%">
+          <ChatHeader chat={selectedChat} />
+          <Divider />
+          <Box display="flex" height="100%" flexDirection="column-reverse" overflow="auto">
+            <Box>
+              <MessageList messages={messages} />
+            </Box>
+          </Box>
+          <Box flexGrow={0} p={1.5}>
+            <MessageInput />
+          </Box>
+        </Stack>
       </Layout>
     </AuthGuard>
   );
