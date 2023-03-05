@@ -12,7 +12,7 @@ export class CategoryService {
     `;
 
     const data = await request(
-      'http://localhost:3013/graphql',
+      'http://localhost:4002/graphql',
       mutation,
       { slug: slug },
     );
@@ -30,7 +30,7 @@ export class CategoryService {
     `;
 
     const data = await request(
-      'http://localhost:3013/graphql',
+      'http://localhost:4002/graphql',
       mutation,
       { slug: slug },
     );
@@ -48,7 +48,7 @@ export class CategoryService {
     `;
 
     const data = await request(
-      'http://localhost:3013/graphql',
+      'http://localhost:4002/graphql',
       mutation,
       { slug: slug },
     );

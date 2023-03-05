@@ -87,7 +87,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
             <tr key={row.id}>
               <td>
                 <Avatar
-                  src={`http://localhost:3012/${row.pictures[0]}.jpeg`}
+                  src={`http://localhost:4001/${row.pictures[0]}.jpeg`}
                   alt={`Product image of ${row.name}`}
                   sx={{ borderRadius: 'sm', height: '100px', width: '100px' }}
                 />

@@ -10,7 +10,7 @@ import * as login from './login';
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
-const URL = 'http://localhost:3011/graphql';
+const URL = 'http://localhost:4000/graphql';
 
 let password = '$2b$10$Y00XOZD/f5gBSpDusPUgU.iJufk6Nxx6gAoHRG8t2eHyGgoP2bK4y';
 const handlers = [

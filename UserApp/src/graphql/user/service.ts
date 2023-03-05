@@ -13,7 +13,7 @@ export class UserService {
     query += `{email, username, name}}`;
     console.log(query);
     const data = await queryGQL(
-      'http://localhost:3011/graphql',
+      'http://localhost:4000/graphql',
       query,
     );
     return data.user;
@@ -21,7 +21,7 @@ export class UserService {
 
   public async add(newMember: NewUser): Promise<SignUpPayload> {
     const data = await queryGQL(
-      'http://localhost:3011/graphql',
+      'http://localhost:4000/graphql',
       `mutation addNewUser { addUser (input: {
         username: "${newMember.username}",
         email: "${newMember.email}",
@@ -33,7 +33,7 @@ export class UserService {
 
   // public async updateUsername(request: Request, newName: string): Promise<User> {
   //   const data = await queryGQL(
-  //     'http://localhost:3011/graphql',
+  //     'http://localhost:4000/graphql',
   //     `mutation changeUsername { updateUsername (
   //       username: "${request.user.username}"
   //       newName: "${newName}"
@@ -44,7 +44,7 @@ export class UserService {
 
   // public async updateEmail(request: Request, newEmail: string): Promise<User> {
   //   const data = await queryGQL(
-  //     'http://localhost:3011/graphql',
+  //     'http://localhost:4000/graphql',
   //     `mutation changeEmail { updateEmail (
   //       username: "${request.user.username}"
   //       newEmail: "${newEmail}"

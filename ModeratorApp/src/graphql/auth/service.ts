@@ -19,7 +19,7 @@ export class AuthService {
       { email, name, username, password, roles } 
     }`;
     const data = await request(
-      'http://localhost:3011/graphql',
+      'http://localhost:4000/graphql',
       query,
     );
     return data.user[0];

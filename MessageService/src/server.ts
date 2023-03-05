@@ -3,7 +3,7 @@ dotenv.config();
 
 import app from './app';
 
-const port = 3014;
+const port = 4003;
 
 app.listen(port, () => {
   console.log(`Running a GraphQL API server at http://localhost:${port}/graphql`);

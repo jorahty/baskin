@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 
-const URL = 'http://localhost:3011/graphql';
+const URL = 'http://localhost:4000/graphql';
 const handlers = [
   rest.post(URL, async (req, res, ctx) => {
     const json = await req.json();

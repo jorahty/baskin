@@ -98,14 +98,14 @@ export default function Create() {
       formData.append('files', picture, picture.name);
     });
 
-    const imageData = await fetch('http://localhost:3012/api/v0/image', {
+    const imageData = await fetch('http://localhost:4001/api/v0/image', {
       method: 'POST',
       body: formData,
     });
 
     const picturesIdArr: string[] = await imageData.json();
 
-    const graphQLClient = new GraphQLClient('http://localhost:3013/graphql', {
+    const graphQLClient = new GraphQLClient('http://localhost:4002/graphql', {
       // headers: {
       //   Authorization: `Bearer ${bearerToken}`,
       // },
@@ -133,7 +133,7 @@ export default function Create() {
       )
       .catch(() => {
         picturesIdArr.forEach((pic: string) => {
-          fetch(`http://localhost:3012/api/v0/image/${pic}`, {
+          fetch(`http://localhost:4001/api/v0/image/${pic}`, {
             method: 'DELETE',
           });
         });

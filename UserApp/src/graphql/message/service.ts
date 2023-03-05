@@ -12,7 +12,7 @@ export class MessageService {
       }
     `;
 
-    const { message: messages } = await request('http://localhost:3014/graphql', query, { id });
+    const { message: messages } = await request('http://localhost:4003/graphql', query, { id });
     return messages;
   }
 }

@@ -15,7 +15,7 @@ export class ChatService {
       }
     `;
 
-    const { chat: chats } = await request('http://localhost:3014/graphql', chatQuery, { username });
+    const { chat: chats } = await request('http://localhost:4003/graphql', chatQuery, { username });
 
     for await (const chat of chats) {
       const accountQuery = gql`
@@ -27,7 +27,7 @@ export class ChatService {
       `;
 
       for await (const member of chat.members) {
-        const { user } = await request('http://localhost:3011/graphql', accountQuery, {
+        const { user } = await request('http://localhost:4000/graphql', accountQuery, {
           username: member.username,
         });
         member.name = user[0].name;

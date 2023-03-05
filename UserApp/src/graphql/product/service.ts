@@ -25,7 +25,7 @@ export class ProductService {
     `;
 
     const data = await request(
-      'http://localhost:3013/graphql',
+      'http://localhost:4002/graphql',
       query,
       { user, id, category },
     );
@@ -44,7 +44,7 @@ export class ProductService {
     `;
 
     const data = await request(
-      'http://localhost:3013/graphql',
+      'http://localhost:4002/graphql',
       mutation,
       { input: newProduct },
     );
@@ -70,7 +70,7 @@ export class ProductService {
     `;
 
     const data = await request(
-      'http://localhost:3013/graphql',
+      'http://localhost:4002/graphql',
       mutation,
       { id: id },
     );
