@@ -21,6 +21,6 @@ test('Renders', async () => {
 });
 
 test('With User', async () => {
-  localStorage.setItem('user', '["whatever"]')
+  localStorage.setItem('user', '["whatever"]');
   await renderView();
 });
