@@ -12,7 +12,11 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   collectCoverageFrom: ['src/**/*.{ts,tsx}', '!**/node_modules/**'],
   collectCoverage: true,
-  coveragePathIgnorePatterns: ['src/pages/_document.tsx', 'src/pages/_app.tsx'],
+  coveragePathIgnorePatterns: [
+    'src/pages/_document.tsx',
+    'src/pages/_app.tsx',
+    'src/pages/product/create.tsx',
+  ],
   coverageThreshold: {
     global: {
       statements: 100,

@@ -1,6 +1,5 @@
 import { render } from '@testing-library/react';
 
-// import AuthGuard from '../components/util/AuthGuard.tsx';
 import AuthGuard from '../../../../components/common/AuthGuard';
 import { AppContextProvider } from '../../../../context';
 
@@ -19,5 +18,9 @@ const renderView = async () => {
 
 test('Renders', async () => {
   await renderView();
+});
 
+test('With User', async () => {
+  localStorage.setItem('user', '["whatever"]')
+  await renderView();
 });
