@@ -1,6 +1,6 @@
 import { CssVarsProvider } from '@mui/joy/styles';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen /* waitFor, fireEvent */ } from '@testing-library/react';
+// import userEvent from '@testing-library/user-event';
 import { graphql, rest } from 'msw';
 import { setupServer } from 'msw/node';
 import 'whatwg-fetch';
