@@ -8,7 +8,7 @@ import { useAppContext } from '../../context';
 import LangSelect from '../common/LangSelect';
 import { useTranslation } from 'next-i18next';
 import ProductSearch from '../product/search';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export const headerHeight = '80px';
@@ -20,13 +20,14 @@ interface Props {
 export default function Header({ handleSidebarOpen }: Props) {
   const { signedInUser } = useAppContext();
   const [searchVisible, setSearchVisible] = useState(false);
+  const router = useRouter();
   const { t } = useTranslation('common');
 
   useEffect(() => {
     setSearchVisible(
-      Router.pathname === '/' || Router.pathname === '/category/[slug]'
+      router.pathname === '/' || router.pathname === '/category/[slug]'
     );
-  }, []);
+  }, [router.pathname]);
 
   return (
     <Stack

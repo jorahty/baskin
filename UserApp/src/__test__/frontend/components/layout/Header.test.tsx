@@ -6,10 +6,13 @@ import { AppContextProvider } from '../../../../context';
 
 let handleSidebarOpen: () => void;
 
+let pathname = '/';
+
 jest.mock('next/router', () => ({
   useRouter() {
     return {
       query: { username: '123' },
+      pathname: pathname,
     };
   },
 }));
@@ -77,4 +80,9 @@ test('Log Out in User Menu', async () => {
   fireEvent.click(screen.getByLabelText(/user-avatar/i));
   screen.getByLabelText('Sign out');
   fireEvent.click(screen.getByLabelText('Sign out'));
+});
+
+test('Without Search', async () => {
+  pathname = '/whatever';
+  renderView();
 });
