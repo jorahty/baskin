@@ -40,7 +40,21 @@ function refineProducts(
   products: Product[],
   refinement: Refinement,
 ) {
+  // search
+  const searched = products.filter(product => {
+    const match = (a: string, b: string) => a.toLowerCase().includes(b.toLowerCase());
+    return match(product.name, refinement.search)
+      || match(product.category, refinement.search)
+      || match(product.user, refinement.search)
+      || match(product.description, refinement.search);
+  });
+
+  // filter (TODO)
+  const filtered = searched;
+
+  // sort
   const compareFn = compareFunctions[refinement.sort];
-  const sorted = products.sort(compareFn);
+  const sorted = filtered.sort(compareFn);
+
   return sorted;
 }

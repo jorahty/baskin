@@ -1,14 +1,15 @@
+import { useAppContext } from '../../../../context';
 import { render } from '@testing-library/react';
 import ProductList from '../../../../components/product/list';
 
 const products = [{
-  user: 'string',
-  id: 'string',
-  category: 'string',
-  name: 'string',
+  user: 'molly_member',
+  id: '123',
+  category: 'cars',
+  name: 'Used Truck',
   price: 0,
   quantity: 1,
-  description: 'string',
+  description: 'Heavy-duty',
   date: new Date().toISOString(),
   discount: 0,
   pictures: [
@@ -53,31 +54,76 @@ const renderView = async () => {
   );
 };
 
-let sort = 'date-new';
+jest.mock('../../../../context');
 
-jest.mock('../../../../context', () => ({
-  useAppContext: () => ({
-    refinement: {
-      sort: sort,
-    },
-  }),
-}));
+const mockUseAppContext = useAppContext as jest.MockedFunction<typeof useAppContext>;
 
 test('Renders (By Newest)', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: '',
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();
 });
 
-test('By Oldest', async () => {
-  sort = 'date-old';
+test('Renders (By Oldest)', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-old',
+      search: '',
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();
 });
 
-test('By Highest Price', async () => {
-  sort = 'price-high';
+test('Renders (By Highest Price)', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'price-high',
+      search: '',
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();
 });
 
-test('By Lowest Price', async () => {
-  sort = 'price-low';
+test('Renders (By Lowest Price)', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'price-low',
+      search: '',
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+  renderView();
+});
+
+test('Search by name', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: 'Used Truck',
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+  renderView();
+});
+
+test('Search by user', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: 'molly_member',
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+  renderView();
+});
+
+test('Search by category', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: 'cars',
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();
 });
