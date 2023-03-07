@@ -2,6 +2,9 @@ import { Button, Stack, Typography } from '@mui/joy';
 import { VerboseCategory } from '../../pages';
 import Link from 'next/link';
 import ProductSorter from '../product/sorter';
+import AttributeNumber from '../attribute/number';
+import AttributeColor from '../attribute/color';
+import AttributeSet from '../attribute/set';
 
 export interface Props {
   category: VerboseCategory;
@@ -19,9 +22,13 @@ export default function CategoryControls({ category }: Props) {
         </Typography>
       }
       <ProductSorter />
-      <Typography>
-        Category-specific attributes will go here
-      </Typography>
+      {category.attributes.map(attribute => {
+        switch (attribute.type) {
+        case 'number': return <AttributeNumber attribute={attribute} />;
+        case 'set': return <AttributeSet />;
+        case 'color': return <AttributeColor />;
+        }
+      })}
     </Stack>
   );
 }

@@ -26,6 +26,7 @@ const category =  {
   children: [],
   products: [],
   categories: categories,
+  attributes: [],
 };
 
 const renderView = async () => {

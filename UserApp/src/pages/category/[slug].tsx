@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     children: await new CategoryService().children(context.query.slug as string),
     ancestors: await new CategoryService().ancestors(context.query.slug as string),
     products: await new ProductService().list({ category: context.query.slug as string }),
-    categories: await new CategoryService().list(),
+    attributes: await new CategoryService().attributes(context.query.slug as string),
   };
 
   return {

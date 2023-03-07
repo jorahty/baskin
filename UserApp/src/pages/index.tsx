@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { Product } from '@/graphql/product/schema';
-import { Category } from '../graphql/category/schema';
+import { Attribute, Category } from '../graphql/category/schema';
 import Layout from '../components/layout/Layout';
 import CategoryControls from '../components/category/controls';
 import { ProductService } from '../graphql/product/service';
@@ -16,6 +16,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     ancestors: null,
     children: await new CategoryService().children(),
     products: await new ProductService().list({}),
+    attributes: [],
   };
 
   return {
@@ -35,6 +36,7 @@ export interface VerboseCategory {
   ancestors: Category[];
   children: Category[];
   products: Product[];
+  attributes: Attribute[];
 }
 
 export default function IndexPage({ category }: Props) {

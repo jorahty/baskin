@@ -66,6 +66,17 @@ const handlers = [
       }),
     );
   }),
+  graphql.query('CategoryAttributes', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryAttributes: [{
+          id: '1',
+          name: 'Color',
+          type: 'color',
+        }],
+      }),
+    );
+  }),
 ];
 
 const server = setupServer(...handlers);
