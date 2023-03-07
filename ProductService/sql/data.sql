@@ -112,3 +112,42 @@ INSERT INTO product (member_username, category_slug, data) VALUES ('molly_member
 INSERT INTO product (member_username, category_slug, data) VALUES ('anna_admin', 'furniture', '{"name": "Mid-Century Modern Sofa", "quantity": 1, "price": 600, "discount": 0, "description": "A comfortable and stylish sofa for any living room", "date": "2023-02-12T19:55:39.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (member_username, category_slug, data) VALUES ('mia_moderator', 'appliances', '{"name": "KitchenAid Stand Mixer", "quantity": 1, "price": 300, "discount": 0, "description": "A powerful and versatile kitchen appliance for baking and cooking", "date": "2023-02-13T06:34:58.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (member_username, category_slug, data) VALUES ('molly_member', 'kitchen', '{"name": "Stainless Steel Cookware Set", "quantity": 1, "price": 200, "discount": 0, "description": "A set of pots and pans made with durable and easy-to-clean stainless steel", "date": "2023-02-13T17:22:58.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
+
+-- ██ attribute ██
+
+DELETE FROM attribute;
+
+INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Condition", "type": "set", "values": ["new", "used"] }');
+INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Model year", "type": "number", "min": 1886, "max": 2023 }');
+INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Miles driven", "type": "number", "min": 0, "max": 200000, "step": 100 }');
+INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel"] }');
+INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Top speed", "type": "number", "min": 5, "max": 300, "step": 5 }');
+
+INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Transmission type", "type": "set", "values": ["Automatic", "Manual"] }');
+INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Seats", "type": "number", "min": 1, "max": 10 }');
+INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Interior", "type": "color" }');
+INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Exterior", "type": "color" }');
+
+INSERT INTO attribute (category_slug, data) VALUES ('motorcycles', '{ "name": "Color", "type": "color" }');
+
+INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Length", "type": "number", "min": 1, "max": 300, "symbol": "ft" }');
+INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Interior", "type": "color" }');
+INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Exterior", "type": "color" }');
+
+INSERT INTO attribute (category_slug, data) VALUES ('sailboats', '{ "name": "Hull material", "type": "set", "values": ["Steel", "Aluminum", "Fiberglass", "Plastic", "Wood"] }');
+
+INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Bedrooms", "type": "number", "min": 0, "max": 20 }');
+INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Bathrooms", "type": "number", "min": 0, "max": 20 }');
+INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Square feet", "type": "number", "min": 10, "max": 10000, "step": 10 }');
+
+INSERT INTO attribute (category_slug, data) VALUES ('apparel', '{ "name": "Color", "type": "color" }');
+INSERT INTO attribute (category_slug, data) VALUES ('apparel', '{ "name": "Condition", "type": "set", "values": ["new", "used"] }');
+
+INSERT INTO attribute (category_slug, data) VALUES ('tops', '{ "name": "Size", "type": "set", "values": ["XS", "S", "M", "L", "XL"] }');
+
+INSERT INTO attribute (category_slug, data) VALUES ('shirts', '{ "name": "Sleeve type", "type": "set", "values": ["Short sleeve", "Long sleeve", "Sleeveless" ] }');
+
+INSERT INTO attribute (category_slug, data) VALUES ('bottoms', '{ "name": "Waist", "type": "number", "min": 20, "max": 50 }');
+INSERT INTO attribute (category_slug, data) VALUES ('bottoms', '{ "name": "Inseam", "type": "number", "min": 20, "max": 40 }');
+
+INSERT INTO attribute (category_slug, data) VALUES ('shoes', '{ "name": "Size", "type": "number", "min": 4, "max": 15 }');
