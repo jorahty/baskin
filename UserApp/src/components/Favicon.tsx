@@ -7,7 +7,7 @@ function SetFavicon() {
   const { systemMode } = useColorScheme();
   return (
     <Head>
-      <link rel="icon" href={`/favicon-${systemMode}.ico`} />
+      <link rel="icon" href={`/favicon-${systemMode || 'light'}.ico`} />
     </Head>
   );
 }
