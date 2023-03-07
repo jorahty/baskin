@@ -52,6 +52,9 @@
     "extends": [
       "../.eslintrc",
       "next"
-    ]
+    ],
+    "rules": {
+      "react-hooks/exhaustive-deps": "off"
+    }
   }
 }
