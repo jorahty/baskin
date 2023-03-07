@@ -1,4 +1,3 @@
-
 -- ██ category ██
 
 DELETE FROM category;
@@ -113,10 +112,3 @@ INSERT INTO product (member_username, category_slug, data) VALUES ('molly_member
 INSERT INTO product (member_username, category_slug, data) VALUES ('anna_admin', 'furniture', '{"name": "Mid-Century Modern Sofa", "quantity": 1, "price": 600, "discount": 0, "description": "A comfortable and stylish sofa for any living room", "date": "2023-02-12T19:55:39.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (member_username, category_slug, data) VALUES ('mia_moderator', 'appliances', '{"name": "KitchenAid Stand Mixer", "quantity": 1, "price": 300, "discount": 0, "description": "A powerful and versatile kitchen appliance for baking and cooking", "date": "2023-02-13T06:34:58.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (member_username, category_slug, data) VALUES ('molly_member', 'kitchen', '{"name": "Stainless Steel Cookware Set", "quantity": 1, "price": 200, "discount": 0, "description": "A set of pots and pans made with durable and easy-to-clean stainless steel", "date": "2023-02-13T17:22:58.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-
--- favorite
-DELETE FROM favorite;
-INSERT INTO favorite (member_username, product_id) VALUES ('molly_member', '72c33826-a3c3-4d1f-8e9a-3e7887d05832');
-INSERT INTO favorite (member_username, product_id) VALUES ('molly_member', '035f4c91-b755-4c4e-994f-1c5338960b7b');
-INSERT INTO favorite (member_username, product_id) VALUES ('anna_admin', '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d');
-INSERT INTO favorite (member_username, product_id) VALUES ('anna_admin', '5c55a266-a631-4598-9bd5-52bd5ee2d9aa');
