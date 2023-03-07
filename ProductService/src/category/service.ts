@@ -75,7 +75,7 @@ export class CategoryService {
       values: [slug],
     };
     const { rows } = await pool.query(query);
-    return rows.map(row => row.attribute).reverse();
+    return rows.map(row => row.attribute);
   }
 
   public async add(slug: string, name: string, parent?:string): Promise<Category> {
