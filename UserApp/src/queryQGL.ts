@@ -10,5 +10,5 @@ export default async function queryGQL(url: string, query: string, bearerToken?:
     },
   });
   const data = await graphQLClient.request(gql`${query}`);
-  return data;
+  return data as any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
