@@ -66,7 +66,7 @@ afterAll(() => server.close());
 
 const renderView = async () => {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const setCategories = () => {};
+  const setCategories = () => null;
   render(
     <CssVarsProvider>
       <AppContextProvider>
