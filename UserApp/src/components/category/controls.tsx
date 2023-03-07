@@ -24,9 +24,9 @@ export default function CategoryControls({ category }: Props) {
       <ProductSorter />
       {category.attributes.map(attribute => {
         switch (attribute.type) {
-        case 'number': return <AttributeNumber attribute={attribute} />;
-        case 'set': return <AttributeSet />;
-        case 'color': return <AttributeColor />;
+        case 'number': return <AttributeNumber key={attribute.id} attribute={attribute} />;
+        case 'set': return <AttributeSet key={attribute.id} />;
+        case 'color': return <AttributeColor key={attribute.id} />;
         }
       })}
     </Stack>
