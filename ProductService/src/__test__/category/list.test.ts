@@ -68,8 +68,7 @@ test('List roots', async () => {
     });
 });
 
-
-test('List children', async () => {
+test('List ancestors', async () => {
   await request
     .post('/graphql')
     .send({
@@ -78,5 +77,17 @@ test('List children', async () => {
     .expect(200)
     .then(res => {
       expect(res.body.data.categoryAncestors).toBeDefined();
+    });
+});
+
+test('List attributes', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `{categoryAttributes (slug: "sailboats") { name }}`,
+    })
+    .expect(200)
+    .then(res => {
+      expect(res.body.data.categoryAttributes).toBeDefined();
     });
 });

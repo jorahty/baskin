@@ -1,4 +1,4 @@
-import { Category } from './schema';
+import { Attribute, Category } from './schema';
 
 import { pool } from '../db';
 
@@ -50,6 +50,32 @@ export class CategoryService {
     };
     const { rows } = await pool.query(query);
     return rows.map(row => row.category);
+  }
+
+  public async attributes(slug: string): Promise<Attribute[]> {
+    const select = `
+      WITH RECURSIVE category_tree AS (
+        SELECT slug, parent_slug, data
+        FROM category
+        WHERE slug = $1
+        UNION ALL
+        SELECT c.slug, c.parent_slug, c.data
+        FROM category c
+        JOIN category_tree ct ON ct.parent_slug = c.slug
+      )
+      SELECT a.data || jsonb_build_object(
+        'id', a.id,
+        'category', a.category_slug
+      ) AS attribute
+      FROM attribute a
+      JOIN category_tree ct ON ct.slug = a.category_slug
+    `;
+    const query = {
+      text: select,
+      values: [slug],
+    };
+    const { rows } = await pool.query(query);
+    return rows.map(row => row.attribute).reverse();
   }
 
   public async add(slug: string, name: string, parent?:string): Promise<Category> {

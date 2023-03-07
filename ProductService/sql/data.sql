@@ -133,8 +133,10 @@ INSERT INTO attribute (category_slug, data) VALUES ('motorcycles', '{ "name": "C
 INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Length", "type": "number", "min": 1, "max": 300, "symbol": "ft" }');
 INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Interior", "type": "color" }');
 INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Exterior", "type": "color" }');
+INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Hull material", "type": "set", "values": ["Steel", "Aluminum", "Fiberglass", "Plastic", "Wood"] }');
+INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Passenger capacity", "type": "number", "min": 1, "max": 100 }');
 
-INSERT INTO attribute (category_slug, data) VALUES ('sailboats', '{ "name": "Hull material", "type": "set", "values": ["Steel", "Aluminum", "Fiberglass", "Plastic", "Wood"] }');
+INSERT INTO attribute (category_slug, data) VALUES ('sailboats', '{ "name": "Sail material", "type": "set", "values": ["Dacron", "Kevlar", "Carbon fiber", "Spectra", "Technora", "Vectran"] }');
 
 INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Bedrooms", "type": "number", "min": 0, "max": 20 }');
 INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Bathrooms", "type": "number", "min": 0, "max": 20 }');

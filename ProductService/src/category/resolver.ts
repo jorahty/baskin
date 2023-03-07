@@ -1,8 +1,10 @@
 import { Arg, Args, Resolver, Query, Mutation } from 'type-graphql';
 import {
+  Attribute,
   Category,
   CategoryAncestorsArgs,
   CategoryArgs,
+  CategoryAttributesArgs,
   CategoryChildrenArgs,
   EditCategoryArgs,
   NewCategory,
@@ -33,6 +35,12 @@ export class CategoryResolver {
     return new CategoryService().ancestors(slug);
   }
 
+  @Query(() => [Attribute])
+  async categoryAttributes(
+    @Args() { slug }: CategoryAttributesArgs
+  ): Promise<Attribute[]> {
+    return new CategoryService().attributes(slug);
+  }
 
   @Mutation(() => Category)
   async addCategory(
