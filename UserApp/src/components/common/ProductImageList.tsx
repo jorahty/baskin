@@ -24,7 +24,7 @@ export default function ProductImageList({
   // Update parent with the latest images
   useEffect(() => {
     updatedImages(pictures);
-  }, [pictures]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [pictures]);
 
   // Removes an image based off the index
   const removePicture = (index: number) => {

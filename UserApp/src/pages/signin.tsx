@@ -39,7 +39,7 @@ export default function Signin() {
 
   React.useEffect(() => {
     signOut();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = (username: string, password: string) => {
     const query = {

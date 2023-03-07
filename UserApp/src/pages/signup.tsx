@@ -43,7 +43,7 @@ export default function Signup() {
 
   React.useEffect(() => {
     signOut();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = (
     email: string,

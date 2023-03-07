@@ -39,7 +39,7 @@ test('Add image and Remove', async () => {
 });
 
 test('Add Large Image', async () => {
-  const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
+  const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => null);
 
   await renderView();
 
@@ -51,7 +51,7 @@ test('Add Large Image', async () => {
 });
 
 test('Add Unsupported Image', async () => {
-  const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
+  const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => null);
 
   await renderView();
 

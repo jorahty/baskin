@@ -72,7 +72,7 @@ export default function ProfileEdit() {
       }
     };
     fetchData();
-  }, [username]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [username]);
 
   return (
     <Box

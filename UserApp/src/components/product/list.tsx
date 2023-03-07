@@ -19,13 +19,20 @@ export default function ProductList({ products }: Props) {
   }, [products, refinement]);
 
   return (
-    <Grid container spacing={2} columns={{ xl: 4, lg: 3, md: 2, sm: 2, xs: 1 }} >
-      {refinedProducts.map((product, index) => (
-        <Grid xs={1} key={index}>
-          <ProductCard product={product} />
-        </Grid>
+    <>
+      {refinement.filters.map(filter => (
+        <div key={filter.id}>
+        id: {filter.id}, selection: {JSON.stringify(filter.selection)}
+        </div>
       ))}
-    </Grid>
+      <Grid container spacing={2} columns={{ xl: 4, lg: 3, md: 2, sm: 2, xs: 1 }} >
+        {refinedProducts.map((product, index) => (
+          <Grid xs={1} key={index}>
+            <ProductCard product={product} />
+          </Grid>
+        ))}
+      </Grid>
+    </>
   );
 }
 

@@ -38,13 +38,13 @@ jest.mock('react-i18next', () => ({
     return {
       t: (str: string) => str,
       i18n: {
-        changeLanguage: () => new Promise(() => {}),
+        changeLanguage: () => new Promise(() => null),
       },
     };
   },
   initReactI18next: {
     type: '3rdParty',
-    init: () => {},
+    init: () => null,
   },
 }));
 
@@ -63,6 +63,7 @@ test('Renders (By Newest)', async () => {
     refinement: {
       sort: 'date-new',
       search: '',
+      filters: [],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();
@@ -73,6 +74,7 @@ test('Renders (By Oldest)', async () => {
     refinement: {
       sort: 'date-old',
       search: '',
+      filters: [],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();
@@ -83,6 +85,7 @@ test('Renders (By Highest Price)', async () => {
     refinement: {
       sort: 'price-high',
       search: '',
+      filters: [],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();
@@ -93,6 +96,7 @@ test('Renders (By Lowest Price)', async () => {
     refinement: {
       sort: 'price-low',
       search: '',
+      filters: [],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();
@@ -103,6 +107,7 @@ test('Search by name', async () => {
     refinement: {
       sort: 'date-new',
       search: 'Used Truck',
+      filters: [],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();
@@ -113,6 +118,7 @@ test('Search by user', async () => {
     refinement: {
       sort: 'date-new',
       search: 'molly_member',
+      filters: [],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();
@@ -123,6 +129,7 @@ test('Search by category', async () => {
     refinement: {
       sort: 'date-new',
       search: 'cars',
+      filters: [],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();

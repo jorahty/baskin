@@ -34,7 +34,6 @@ export default function Dashboard() {
   useEffect(() => {
     setItems(tabs);
     setCurrent(tabs[0]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

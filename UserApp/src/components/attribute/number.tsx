@@ -1,4 +1,3 @@
-import { useAppContext } from '../../context';
 import { Attribute } from '@/graphql/category/schema';
 import { Box, Slider, Typography } from '@mui/joy';
 import { useState } from 'react';
@@ -16,12 +15,10 @@ export default function AttributeNumber({ attribute }: Props) {
 }
 
 function Restricted({ attribute }: Props) {
-  const { refinement } = useAppContext();
   const [value, setValue] = useState<number[]>([attribute.min, attribute.max] as number[]);
 
   return (
     <Box px={2}>
-      {JSON.stringify(refinement.filters)}
       <Typography fontWeight="lg">
         {attribute.name}
       </Typography>

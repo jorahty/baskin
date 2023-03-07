@@ -5,12 +5,27 @@ import ProductSorter from '../product/sorter';
 import AttributeNumber from '../attribute/number';
 import AttributeColor from '../attribute/color';
 import AttributeSet from '../attribute/set';
+import { useAppContext } from '../../context';
+import { useEffect } from 'react';
 
 export interface Props {
   category: VerboseCategory;
 }
 
 export default function CategoryControls({ category }: Props) {
+  const { refinement, setRefinement } = useAppContext();
+
+  useEffect(() => {
+    const filters = category.attributes.map(attribute => ({
+      id: attribute.id,
+      selection: undefined,
+    }));
+    setRefinement({
+      ...refinement,
+      filters: filters,
+    });
+  }, [category]);
+
   return (
     <Stack p={2} gap={2} width={340}>
       <Link href="/product/create">

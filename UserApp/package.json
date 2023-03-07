@@ -64,7 +64,7 @@
       "next/core-web-vitals"
     ],
     "rules": {
-      "@typescript-eslint/no-empty-function": "off"
+      "react-hooks/exhaustive-deps": "off"
     }
   }
 }

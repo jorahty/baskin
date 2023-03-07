@@ -43,13 +43,13 @@ jest.mock('react-i18next', () => ({
     return {
       t: (str: string) => str,
       i18n: {
-        changeLanguage: () => new Promise(() => {}),
+        changeLanguage: () => new Promise(() => null),
       },
     };
   },
   initReactI18next: {
     type: '3rdParty',
-    init: () => {},
+    init: () => null,
   },
 }));
 const ProductInputsWrapper = () => {
