@@ -39,6 +39,17 @@ const handlers = [
       }),
     );
   }),
+  graphql.query('CategoryAttributes', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryAttributes: [{
+          id: '1',
+          name: 'Color',
+          type: 'color',
+        }],
+      }),
+    );
+  }),
 ];
 
 const microServiceServer = setupServer(...handlers);
@@ -101,5 +112,17 @@ test('List ancestors', async () => {
     .expect(200)
     .then(res => {
       expect(res.body.data.categoryAncestors).toBeDefined();
+    });
+});
+
+test('List attributes', async () => {
+  await request
+    .post('/api/graphql')
+    .send({
+      query: `{categoryAttributes (slug: "cars") { id, name, type }}`,
+    })
+    .expect(200)
+    .then(res => {
+      expect(res.body.data.categoryAttributes).toBeDefined();
     });
 });
