@@ -22,6 +22,12 @@ export default function CategoryControls({ category }: Props) {
         </Typography>
       }
       <ProductSorter />
+      <AttributeNumber attribute={{
+        id: '1',
+        category: 'NA',
+        type: 'number',
+        name: 'Price',
+      }} />
       {category.attributes.map(attribute => {
         switch (attribute.type) {
         case 'number': return <AttributeNumber key={attribute.id} attribute={attribute} />;

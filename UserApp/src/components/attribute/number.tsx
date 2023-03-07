@@ -1,12 +1,45 @@
 import { Attribute } from '@/graphql/category/schema';
-import { Box } from '@mui/joy';
+import { Box, Slider, Typography } from '@mui/joy';
+import { useState } from 'react';
 
 interface Props {
   attribute: Attribute;
 }
 
 export default function AttributeNumber({ attribute }: Props) {
+  if (isNaN(attribute.min as number) || isNaN(attribute.max as number)) {
+    return <AttributeRange attribute={attribute}/>;
+  } else {
+    return <AttributeSlider attribute={attribute}/>;
+  }
+}
+
+function AttributeSlider({ attribute }: Props) {
+  const [value, setValue] = useState<number[]>([attribute.min, attribute.max] as number[]);
+
   return (
-    <Box>{attribute.name}</Box>
+    <Box px={2}>
+      <Typography fontWeight="lg">
+        {attribute.name}
+      </Typography>
+      <Slider
+        aria-label="slider"
+        value={value}
+        min={attribute.min}
+        max={attribute.max}
+        step={attribute.step || 1}
+        onChange={(e, newValue) => setValue(newValue as number[])}
+        valueLabelDisplay="auto"
+        size="lg"
+      />
+    </Box>
+  );
+}
+
+function AttributeRange({ attribute }: Props) {
+  return (
+    <Box>
+      Range: {attribute.name}
+    </Box>
   );
 }
