@@ -1,3 +1,4 @@
+import { useAppContext } from '../../context';
 import { Attribute } from '@/graphql/category/schema';
 import { Box, Slider, Typography } from '@mui/joy';
 import { useState } from 'react';
@@ -8,17 +9,19 @@ interface Props {
 
 export default function AttributeNumber({ attribute }: Props) {
   if (isNaN(attribute.min as number) || isNaN(attribute.max as number)) {
-    return <AttributeRange attribute={attribute}/>;
+    return <Unrestricted attribute={attribute}/>;
   } else {
-    return <AttributeSlider attribute={attribute}/>;
+    return <Restricted attribute={attribute}/>;
   }
 }
 
-function AttributeSlider({ attribute }: Props) {
+function Restricted({ attribute }: Props) {
+  const { refinement } = useAppContext();
   const [value, setValue] = useState<number[]>([attribute.min, attribute.max] as number[]);
 
   return (
     <Box px={2}>
+      {JSON.stringify(refinement.filters)}
       <Typography fontWeight="lg">
         {attribute.name}
       </Typography>
@@ -36,7 +39,7 @@ function AttributeSlider({ attribute }: Props) {
   );
 }
 
-function AttributeRange({ attribute }: Props) {
+function Unrestricted({ attribute }: Props) {
   return (
     <Box>
       Range: {attribute.name}

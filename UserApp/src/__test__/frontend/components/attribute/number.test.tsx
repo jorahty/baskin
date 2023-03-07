@@ -1,3 +1,4 @@
+import { AppContextProvider } from '../../../../context';
 import { Attribute } from '@/graphql/category/schema';
 import { screen, fireEvent, render } from '@testing-library/react';
 import AttributeNumber from '../../../../components/attribute/number';
@@ -19,7 +20,11 @@ const lengthAttribute = {
 };
 
 const renderView = async (attribute: Attribute) => {
-  render(<AttributeNumber attribute={attribute} />);
+  render(
+    <AppContextProvider>
+      <AttributeNumber attribute={attribute} />
+    </AppContextProvider>
+  );
 };
 
 test('Render Range', async () => {

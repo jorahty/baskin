@@ -17,13 +17,18 @@ export type SortMode = 'date-new'|'date-old'|'price-high'|'price-low';
 export interface Refinement {
   search: string;
   sort: SortMode;
-  filter: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+  filters: Filter[];
+}
+
+interface Filter {
+  id: string;
+  selection: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 const AppContext = createContext<AppContextType>({} as AppContextType);
 
 export function AppContextProvider({ children }: { children: React.ReactNode }) {
-  const [signedInUser, setSignedInUser] = useState<SignInPayload | null>(null);
+  const [signedInUser, setSignedInUser] = useState<null|SignInPayload>(null);
 
   useEffect(() => {
     const item = localStorage.getItem('user');
@@ -50,11 +55,11 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
     setSignedInUser(null);
   }
 
-  // Search refinements
+  // Search refinement
   const [refinement, setRefinement] = useState<Refinement>({
     search: '',
     sort: 'date-new',
-    filter: {},
+    filters: [],
   });
 
   return (

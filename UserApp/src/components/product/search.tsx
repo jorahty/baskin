@@ -13,7 +13,7 @@ export default function ProductSearch() {
   ) => {
     setRefinement({
       sort: refinement.sort,
-      filter: refinement.filter,
+      filters: refinement.filters,
       search: value,
     });
   };
@@ -21,7 +21,7 @@ export default function ProductSearch() {
   const handleClear = () => {
     setRefinement({
       sort: refinement.sort,
-      filter: refinement.filter,
+      filters: refinement.filters,
       search: '',
     });
   };
