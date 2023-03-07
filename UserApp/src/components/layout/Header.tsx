@@ -34,7 +34,7 @@ export default function Header({ handleSidebarOpen }: Props) {
       height={headerHeight}
       direction="row"
       alignItems="center"
-      px={3}
+      sx={{ p: { xs: 2, sm: 3 } }}
       gap={2}
     >
       <IconButton
@@ -49,7 +49,7 @@ export default function Header({ handleSidebarOpen }: Props) {
           <Logo />
         </Link>
       </Box>
-      <Box ml="auto" />
+      <Box ml="auto" sx={{ display: { xs: 'none', sm: 'block' } }} />
       {searchVisible && <ProductSearch />}
       <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
         <LangSelect />

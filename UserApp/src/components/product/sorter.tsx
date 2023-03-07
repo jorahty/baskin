@@ -21,6 +21,7 @@ export default function ProductSorter() {
       startDecorator="Sort:"
       value={refinement.sort}
       onChange={handleChange}
+      sx={{ bgcolor: 'background.body' }}
     >
       <Option value="date-new">Newest</Option>
       <Option value="date-old">Oldest</Option>

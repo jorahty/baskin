@@ -18,4 +18,13 @@ export default extendTheme({
       },
     },
   },
+  components: {
+    JoySelect: {
+      styleOverrides: {
+        listbox: {
+          padding: 0,
+        },
+      },
+    },
+  },
 });
