@@ -1,4 +1,4 @@
-import { Button, Container, Stack } from '@mui/joy';
+import { Button, Container, Link, Stack } from '@mui/joy';
 import Typography from '@mui/joy/Typography';
 import { AddCircle } from '@mui/icons-material';
 import { useAppContext } from '../../../context';
@@ -70,7 +70,9 @@ export default function ProductMenu() {
           sx={{
             width: { md: 'fit-content' },
           }}
+          component={Link}
           aria-label="Add Product"
+          href={'/product/create'}
         >
           {t('dashboard.products.addProduct')}
         </Button>

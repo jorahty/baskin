@@ -104,8 +104,8 @@ export default function ProductImageList({
                       const uploadedFile = e.target.files[0];
 
                       // File checks
-                      if (uploadedFile.size / 1024 / 1024 > 4) {
-                        // Has to be smaller than ~4MB
+                      if (uploadedFile.size / 1024 / 1024 > 6) {
+                        // Has to be smaller than ~6MB
                         alert('File too large!');
                       } else if (!validTypes.find((img: string) => img === uploadedFile.type)) {
                         alert('Image type not supported.');

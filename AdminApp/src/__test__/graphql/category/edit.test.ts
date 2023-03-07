@@ -39,7 +39,7 @@ afterAll(done => {
   microServiceServer.close();
 });
 
-test('Edit category parent', async () => {
+test('Id category parent', async () => {
   const accessToken = await login.asAnna(request);
   await request
     .post('/api/graphql')

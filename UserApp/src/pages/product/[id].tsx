@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const [product] = await new ProductService().list({ id: context.query.id as string });
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...(await serverSideTranslations(context.locale ?? 'en', ['common'])),
       product: product,
     },
   };

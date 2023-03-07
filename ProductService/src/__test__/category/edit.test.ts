@@ -20,7 +20,7 @@ afterAll(done => {
   db.shutdown();
 });
 
-test('Edit category parent', async () => {
+test('Id category parent', async () => {
   await request
     .post('/graphql')
     .send({
@@ -49,7 +49,7 @@ test('Edit category parent', async () => {
     });
 });
 
-test('Edit category name', async () => {
+test('Id category name', async () => {
   await request
     .post('/graphql')
     .send({
@@ -98,4 +98,3 @@ test('Failed edit category with name or parent', async () => {
       expect(data.body.errors.length).toEqual(1);
     });
 });
-

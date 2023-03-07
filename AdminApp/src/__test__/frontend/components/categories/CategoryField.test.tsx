@@ -7,7 +7,6 @@ import { CssVarsProvider } from '@mui/joy';
 import '../../matchMedia';
 import { setupServer } from 'msw/node';
 
-
 const handlers = [
   graphql.mutation('editCategory', async (req, res, ctx) => {
     const json = await req.json();
@@ -15,11 +14,10 @@ const handlers = [
     if (json.query.indexOf('Vehicles') >= 0) {
       return res(
         ctx.data({
-          editCategory:
-            {
-              name: 'Vehicles',
-              slug: 'vehicles',
-            },
+          editCategory: {
+            name: 'Vehicles',
+            slug: 'vehicles',
+          },
         }),
       );
     } else {
@@ -28,7 +26,7 @@ const handlers = [
           {
             message: 'Unexpected error.',
           },
-        ])
+        ]),
       );
     }
   }),
@@ -47,7 +45,7 @@ const renderView = async () => {
   render(
     <CssVarsProvider>
       <AppContextProvider>
-        <CategoryField id={'vehicle'} value={'Vehicle'} field={'name'}/>
+        <CategoryField id={'vehicle'} value={'Vehicle'} field={'name'} />
       </AppContextProvider>
     </CssVarsProvider>,
   );
@@ -65,7 +63,7 @@ test('Renders Categories field', async () => {
   fireEvent.mouseLeave(await screen.findByText('Vehicle'));
 });
 
-test('Edit Categories field and click cancel', async () => {
+test('Id Categories field and click cancel', async () => {
   localStorage.setItem(
     'user',
     `{"username":"molly_member","accessToken":"blergh","name":"Molly Member"}`,
@@ -77,7 +75,7 @@ test('Edit Categories field and click cancel', async () => {
   fireEvent.click(await screen.findByLabelText('cancel-vehicle'));
 });
 
-test('Edit Categories field', async () => {
+test('Id Categories field', async () => {
   localStorage.setItem(
     'user',
     `{"username":"molly_member","accessToken":"blergh","name":"Molly Member"}`,
@@ -92,7 +90,7 @@ test('Edit Categories field', async () => {
   await screen.findByText('Vehicles');
 });
 
-test('Edit Categories field failed request', async () => {
+test('Id Categories field failed request', async () => {
   localStorage.setItem(
     'user',
     `{"username":"molly_member","accessToken":"blergh","name":"Molly Member"}`,
