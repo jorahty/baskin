@@ -5,7 +5,7 @@ import ChatList from '../../components/chat/list';
 import Layout from '../../components/layout/Layout';
 import MessageList from '../../components/message/list';
 import { useAppContext } from '../../context';
-import queryGQL from '../../queryQGL';
+import queryGQL from '../../queryGQL';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import AuthGuard from '../../components/common/AuthGuard';
