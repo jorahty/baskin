@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import CategoriesPage from '../../../../components/categories/CategoriesPage';
+import CategoryPage from '../../../../components/categories/CategoryPage';
 import { AppContextProvider } from '../../../../context';
 import { graphql } from 'msw';
 import { CssVarsProvider } from '@mui/joy';
@@ -77,7 +77,7 @@ const renderView = async () => {
   render(
     <CssVarsProvider>
       <AppContextProvider>
-        <CategoriesPage />
+        <CategoryPage />
       </AppContextProvider>
     </CssVarsProvider>,
   );

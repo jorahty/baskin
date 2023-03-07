@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Sidebar from '../components/layout/Sidebar';
 import Layout from '../components/layout/Layout';
-import CategoriesPage from '../components/categories/CategoriesPage';
+import CategoryPage from '../components/categories/CategoryPage';
 import AuthGuard from '../components/AuthGuard';
 
 
@@ -11,10 +11,10 @@ export default function Dashoard(){
 
   const comps: Record<string, JSX.Element> = {
     'Overview': <div>Welcome to the dashboard</div>,
-    'Categories': <CategoriesPage />,
+    'Category': <CategoryPage />,
   };
 
-  const tabs = ['Overview', 'Categories'];
+  const tabs = ['Overview', 'Category'];
 
   useEffect(() => {
     setCurrent(tabs[0]);

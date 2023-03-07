@@ -49,7 +49,7 @@ test('Render page', async () => {
 
 test('Clicks on sidebar', async () => {
   renderView();
-  const sidebar = await screen.findByText('Categories');
+  const sidebar = await screen.findByText('Category');
   fireEvent.click(sidebar);
 });
 
@@ -57,7 +57,7 @@ test('Clicks on sidebar', async () => {
 test('Shows differnt menu', async () => {
   renderView();
   fireEvent.click(screen.getByText('Welcome to the dashboard'));
-  const sidebar = await screen.findByText('Categories');
+  const sidebar = await screen.findByText('Category');
   fireEvent.click(sidebar);
   expect(screen.queryByText('Welcome to the dashboard')).not.toBeInTheDocument();
   fireEvent.click(screen.getByText('All Categories'));

@@ -24,7 +24,7 @@ interface CategoryFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
-export default function CategoriesPage() {
+export default function CategoryPage() {
   const { signedInUser } = useAppContext();
   const [categories, setCategories] = useState<Category[]>([]);
   const [open, setOpen] = useState(false);
