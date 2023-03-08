@@ -4,6 +4,7 @@ import Sidebar from '../components/layout/Sidebar';
 import Layout from '../components/layout/Layout';
 import CategoryPage from '../components/category/CategoryPage';
 import AuthGuard from '../components/AuthGuard';
+import AttributePage from '../components/attribute/AttributePage';
 
 
 export default function Dashoard(){
@@ -12,9 +13,10 @@ export default function Dashoard(){
   const comps: Record<string, JSX.Element> = {
     'Overview': <div>Welcome to the dashboard</div>,
     'Category': <CategoryPage />,
+    'Attribute': <AttributePage />,
   };
 
-  const tabs = ['Overview', 'Category'];
+  const tabs = ['Overview', 'Category', 'Attribute'];
 
   useEffect(() => {
     setCurrent(tabs[0]);
