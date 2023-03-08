@@ -16,13 +16,17 @@ export default function CategoryControls({ category }: Props) {
   const { refinement, setRefinement } = useAppContext();
 
   useEffect(() => {
-    const filters = category.attributes.map(attribute => ({
-      id: attribute.id,
-      selection: attribute.type === 'number' ? {
-        min: attribute.min,
-        max: attribute.max,
-      } : [],
-    }));
+    const filters = category.attributes.map(attribute => {
+      const filter = refinement.filters.find(filter => filter.id === attribute.id);
+      if (filter) return filter;
+      return {
+        id: attribute.id,
+        selection: attribute.type === 'set' ? [] : {
+          min: attribute.min,
+          max: attribute.max,
+        },
+      };
+  });
     setRefinement({
       ...refinement,
       filters: filters,
@@ -49,7 +53,7 @@ export default function CategoryControls({ category }: Props) {
       {category.attributes.map(attribute => {
         switch (attribute.type) {
         case 'number': return <AttributeNumber key={attribute.id} attribute={attribute} />;
-        case 'set': return <AttributeSet key={attribute.id} />;
+        case 'set': return <AttributeSet key={attribute.id} attribute={attribute} />;
         case 'color': return <AttributeColor key={attribute.id} />;
         }
       })}
