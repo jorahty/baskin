@@ -1,6 +1,6 @@
 import { Attribute } from '@/graphql/category/schema';
 import { screen, fireEvent, render } from '@testing-library/react';
-import AttributeNumber from '../../../../components/attribute/number';
+import AttributeNumber from '../../../../../components/attribute/number';
 
 const priceAttribute = {
   id: '1',
@@ -24,7 +24,7 @@ const renderView = async (attribute: Attribute) => {
   );
 };
 
-jest.mock('../../../../context', () => ({
+jest.mock('../../../../../context', () => ({
   useAppContext: () => ({
     refinement: {
       search: '',

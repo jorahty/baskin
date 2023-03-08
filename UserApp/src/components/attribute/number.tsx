@@ -1,7 +1,7 @@
 import { Filter, useAppContext } from '../../context';
 import { Attribute } from '@/graphql/category/schema';
 import { Box, Input, Slider, Stack, Typography } from '@mui/joy';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface Props {
   attribute: Attribute;
@@ -72,7 +72,28 @@ function Restricted({ attribute }: Props) {
   );
 }
 
-function Unrestricted({ attribute }: Props) {
+export function Unrestricted({ attribute }: Props) {
+  function handleChange(
+    { target: { value } }: ChangeEvent<HTMLInputElement>,
+    part: 'min'|'max',
+  ) {
+    console.log(part, value);
+    // const filters: Filter[] = refinement.filters.map(filter => {
+    //   if (filter.id === attribute.id) {
+    //     return {
+    //       id: filter.id,
+    //       selection: { min: newValue[0], max: newValue[1] },
+    //     };
+    //   } else {
+    //     return filter;
+    //   }
+    // });
+    // setRefinement({
+    //   ...refinement,
+    //   filters: filters,
+    // });
+  }
+
   const slotProps = {
     input: {
       min: attribute.min,
@@ -88,6 +109,7 @@ function Unrestricted({ attribute }: Props) {
       </Typography>
       <Stack direction="row" alignItems="center" gap={2}>
         <Input
+          onChange={e => handleChange(e, 'min')}
           type="number"
           placeholder="Min"
           endDecorator={attribute.symbol}
@@ -96,6 +118,7 @@ function Unrestricted({ attribute }: Props) {
         />
         <Typography>to</Typography>
         <Input
+          onChange={e => handleChange(e, 'max')}
           type="number"
           placeholder="Max"
           endDecorator={attribute.symbol}
