@@ -19,12 +19,17 @@ export default function CategoryControls({ category }: Props) {
     const filters = category.attributes.map(attribute => {
       const filter = refinement.filters.find(filter => filter.id === attribute.id);
       if (filter) return filter;
-      return {
-        id: attribute.id,
-        selection: attribute.type === 'set' ? [] : {
+      const defaultSelections = {
+        number: {
           min: attribute.min,
           max: attribute.max,
         },
+        set: [],
+        color: null,
+      };
+      return {
+        id: attribute.id,
+        selection: defaultSelections[attribute.type as 'number'|'set'|'color'],
       };
     });
     setRefinement({
