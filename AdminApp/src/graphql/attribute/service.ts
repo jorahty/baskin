@@ -1,4 +1,4 @@
-import { Attribute } from './schema';
+import { Attribute, NewAttribute } from './schema';
 
 import request, { gql } from 'graphql-request';
 
@@ -36,5 +36,24 @@ export class AttributeService {
     );
 
     return data.removeAttribute;
+  }
+
+  public async add(input: NewAttribute): Promise<Attribute> {
+    const mutation = gql`
+      mutation AddAttribute($input: AttributeInput!) {
+        addAttribute(input: $input) {
+          id, category, name, type, min, max, step, symbol, values
+        }
+      }
+    `;
+
+    const data = await request(
+      'http://localhost:4002/graphql',
+      mutation,
+      { input: input },
+    );
+
+
+    return data.addAttribute;
   }
 }
