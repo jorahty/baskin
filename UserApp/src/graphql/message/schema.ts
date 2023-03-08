@@ -1,6 +1,6 @@
-import { ArgsType, Field, ObjectType } from 'type-graphql';
+import { ArgsType, Field, ObjectType, InputType } from 'type-graphql';
 import { Matches } from 'class-validator';
-import { regexUUID } from '../regex';
+import { regexUUID, regexUsername, regexISODate } from '../regex';
 
 @ObjectType()
 export class Message {
@@ -11,10 +11,12 @@ export class Message {
   @Matches(regexUUID)
     chat_id!: string;
   @Field()
+  @Matches(regexUsername)
     sender!: string;
   @Field()
     content!: string;
   @Field()
+  @Matches(regexISODate)
     date!: string;
 }
 
@@ -23,4 +25,14 @@ export class MessageArgs {
   @Field()
   @Matches(regexUUID)
     id!: string;
+}
+
+@ObjectType()
+@InputType('MessageInput')
+export class NewMessage {
+  @Field()
+  @Matches(regexUUID)
+    chat_id!: string;
+  @Field()
+    content!: string;
 }

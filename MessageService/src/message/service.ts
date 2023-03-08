@@ -2,7 +2,7 @@ import { pool } from '../db';
 import { Message } from './schema';
 
 export class MessageService {
-  public async list(id: string): Promise<Message[]> {
+  public async list(chat_id: string): Promise<Message[]> {
     const select = `
       SELECT data || jsonb_build_object('id', id) 
       AS message 
@@ -12,9 +12,25 @@ export class MessageService {
 
     const query = {
       text: select,
-      values: [id],
+      values: [chat_id],
     };
     const { rows } = await pool.query(query);
     return rows.map(row => row.message);
+  }
+
+  public async send(chat_id: string, sender: string, content: string): Promise<Message> {
+    const insert = `
+      INSERT INTO message(chat_id, data)
+      VALUES ($1, $2)
+      RETURNING data || jsonb_build_object('id', id, 'chat_id', chat_id)
+      AS message
+    `;
+    const date = new Date().toISOString();
+    const query = {
+      text: insert,
+      values: [chat_id, { sender, content, date }],
+    };
+    const { rows } = await pool.query(query);
+    return rows[0].message;
   }
 }
