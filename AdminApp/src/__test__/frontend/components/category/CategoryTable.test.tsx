@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import CategoriesTable from '../../../../components/categories/CategoryTable';
+import CategoriesTable from '../../../../components/category/CategoryTable';
 import { AppContextProvider } from '../../../../context';
 import { graphql } from 'msw';
 import { CssVarsProvider } from '@mui/joy';

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Sidebar from '../components/layout/Sidebar';
 import Layout from '../components/layout/Layout';
-import CategoryPage from '../components/categories/CategoryPage';
+import CategoryPage from '../components/category/CategoryPage';
 import AuthGuard from '../components/AuthGuard';
 
 

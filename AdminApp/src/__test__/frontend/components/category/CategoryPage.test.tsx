@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import CategoryPage from '../../../../components/categories/CategoryPage';
+import CategoryPage from '../../../../components/category/CategoryPage';
 import { AppContextProvider } from '../../../../context';
 import { graphql } from 'msw';
 import { CssVarsProvider } from '@mui/joy';
