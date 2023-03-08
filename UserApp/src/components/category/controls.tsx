@@ -20,10 +20,10 @@ export default function CategoryControls({ category }: Props) {
       const filter = refinement.filters.find(filter => filter.id === attribute.id);
       if (filter) return filter;
       const defaultSelections = {
-        number: attribute.min && attribute.max ? {
-          min: attribute.min,
-          max: attribute.max,
-        } : null,
+        number: {
+          min: attribute.min || null,
+          max: attribute.max || null,
+        },
         set: [],
         color: null,
       };
