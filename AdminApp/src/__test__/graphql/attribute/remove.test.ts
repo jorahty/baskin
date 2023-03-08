@@ -9,15 +9,16 @@ import * as login from '../login';
 let server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 let request: supertest.SuperTest<supertest.Test>;
 
+
 const handlers = [
   login.loginHandlers,
-  graphql.query('ListAttributes', async (req, res, ctx) => {
+  graphql.mutation('RemoveAttribute', async (req, res, ctx) => {
     return res(
       ctx.data({
-        attribute: [{
+        removeAttribute: {
           id: 'X0bZdioM6D',
-          name: 'Cars',
-        }],
+          name: 'Condition',
+        },
       }),
     );
   }),
@@ -39,30 +40,22 @@ afterAll(done => {
 });
 
 
-test('List All', async () => {
+test('Remove attribute', async () => {
   const accessToken = await login.asAnna(request);
   await request
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
-      query: `{attribute { name }}`,
+      query: `mutation {removeAttribute(id:"X0bZdioM6D")
+        { name, id }}`,
     })
     .expect(200)
-    .then(res => {
-      expect(res.body.data.attribute).toBeDefined();
-    });
-});
-
-test('List by ID', async () => {
-  const accessToken = await login.asAnna(request);
-  await request
-    .post('/api/graphql')
-    .set('Authorization', 'Bearer ' + accessToken)
-    .send({
-      query: `{attribute (id: "X0bZdioM6D") { name, id }}`,
-    })
-    .expect(200)
-    .then(res => {
-      expect(res.body.data.attribute).toHaveLength(1);
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.removeAttribute.name).toEqual('Condition');
+      expect(data.body.data.removeAttribute.id).toEqual('X0bZdioM6D');
     });
 });

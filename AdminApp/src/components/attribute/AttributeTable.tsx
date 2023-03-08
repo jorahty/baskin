@@ -3,14 +3,63 @@ import { Attribute } from '../../graphql/attribute/schema';
 import Sheet from '@mui/joy/Sheet';
 import Table from '@mui/joy/Table';
 import Chip from '@mui/joy/Chip';
+import IconButton from '@mui/joy/IconButton';
+import Delete from '@mui/icons-material/Delete';
+import Modal from '@mui/joy/Modal';
+import ModalDialog from '@mui/joy/ModalDialog';
+import Box from '@mui/joy/Box';
+import Typography from '@mui/joy/Typography';
+import Divider from '@mui/joy/Divider';
+import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
+import Button from '@mui/joy/Button';
+import { useAppContext } from '../../context';
+import { gql, GraphQLClient } from 'graphql-request';
 
 
 // Reference: https://codesandbox.io/s/6bmeke?file=/components/OrderTable.tsx:7018-12425
 // Reference: https://mui.com/joy-ui/react-menu/
 
-export default function AttributeTable({ attributes }:
-  { attributes: Attribute[]}) {
+export default function AttributeTable({ attributes, setAttributes }:
+  { attributes: Attribute[], setAttributes: React.Dispatch<React.SetStateAction<Attribute[]>>}) {
+  const { signedInUser } = useAppContext();
   const [attributeList, setAttributeList] = React.useState<Attribute[]>([]);
+  const [open, setOpen] = React.useState(false);
+  const [attribute, setAttribute] = React.useState('');
+
+  const handleOpen = (id: string) => {
+    setOpen(true);
+    setAttribute(id);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setAttribute('');
+  };
+
+  const handleDelete = async () => {
+    const bearerToken = signedInUser?.accessToken;
+    const graphQLClient = new GraphQLClient('http://localhost:3001/api/graphql', {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
+    const query = gql`
+        mutation removeAttribute {
+          removeAttribute (
+            id: "${attribute}"
+          ) {id}
+        }
+    `;
+
+    await graphQLClient
+      .request(query)
+      .then(() => {
+        setOpen(false);
+        setAttribute('');
+        setAttributes([]);
+      })
+      .catch(() => alert('Error deleting category, Try again'));
+  };
 
   React.useEffect(() => {
     setAttributeList(attributes.sort((a, b) => a.name.localeCompare(b.name)));
@@ -48,7 +97,8 @@ export default function AttributeTable({ attributes }:
             <th style={{ width: '7.5%', padding: 12 }}>Max</th>
             <th style={{ width: '7.5%', padding: 12 }}>Step</th>
             <th style={{ width: '7.5%', padding: 12 }}>Symbol</th>
-            <th style={{ width: '35%', padding: 12 }}>Values</th>
+            <th style={{ width: '30%', padding: 12 }}>Values</th>
+            <th style={{ width: '5%', padding: 12 }} />
             <th
               aria-label="last"
               style={{ width: 'var(--Table-lastColumnWidth)' }}
@@ -84,10 +134,45 @@ export default function AttributeTable({ attributes }:
                   <Chip key={value} sx={{ margin: '2px' }} variant="soft" color="neutral">{value}</Chip>
                 ))}
               </td>
+              <td>
+                <IconButton aria-label={'delete-'+row.id}
+                  size="sm" color="danger" onClick={() => handleOpen(row.id)}>
+                  <Delete />
+                </IconButton>
+              </td>
             </tr>
           ))}
         </tbody>
       </Table>
+      <Modal open={open} onClose={handleClose}>
+        <ModalDialog
+          variant="outlined"
+          role="alertdialog"
+          aria-labelledby="alert-dialog-modal-title"
+          aria-describedby="alert-dialog-modal-description"
+        >
+          <Typography
+            id="alert-dialog-modal-title"
+            component="h2"
+            startDecorator={<WarningRoundedIcon />}
+          >
+            Confirmation
+          </Typography>
+          <Divider />
+          <Typography id="alert-dialog-modal-description" textColor="text.tertiary">
+            Are you sure you want to discard delete this category?
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end', pt: 2 }}>
+            <Button variant="plain" color="neutral" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant="solid" color="danger"
+              aria-label="delete" onClick={handleDelete}>
+              Delete Category
+            </Button>
+          </Box>
+        </ModalDialog>
+      </Modal>
     </Sheet>
   );
 }

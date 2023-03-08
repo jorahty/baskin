@@ -43,7 +43,7 @@ export default function AttributePage() {
     };
 
     fetchData();
-  }, [signedInUser]);
+  }, [signedInUser, attributes]);
 
   return (
     <Container sx={{ margin: '16px auto' }}>
@@ -59,7 +59,7 @@ export default function AttributePage() {
         All Attributes
       </Typography>
       <Stack height={'80vh'}>
-        <AttributeTable attributes={attributes} />
+        <AttributeTable attributes={attributes} setAttributes={setAttributes} />
       </Stack>
     </Container>
   );

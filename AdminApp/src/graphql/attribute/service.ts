@@ -20,4 +20,21 @@ export class AttributeService {
 
     return data.attribute;
   }
+
+  public async remove(id: string): Promise<Attribute> {
+    const mutation = gql`
+      mutation RemoveAttribute($id: String!) {
+        removeAttribute(id: $id) {
+          id, category, name, type, min, max, step, symbol, values
+        }
+      }
+    `;
+    const data = await request(
+      'http://localhost:4002/graphql',
+      mutation,
+      { id: id },
+    );
+
+    return data.removeAttribute;
+  }
 }
