@@ -33,6 +33,6 @@ export class Attribute {
 @ArgsType()
 export class AttributeArgs {
   @Field({ nullable: true })
-  @Matches(regexUUID)
+  @Length(10)
     id?: string;
 }

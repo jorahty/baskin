@@ -1,8 +1,8 @@
 import { Args, Resolver, Query } from 'type-graphql';
 import {
   Attribute,
-  AttributeArgs
-} from './schema'
+  AttributeArgs,
+} from './schema';
 import { AttributeService } from './service';
 
 

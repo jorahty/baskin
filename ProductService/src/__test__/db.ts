@@ -24,6 +24,7 @@ const run = async (file: string) => {
 };
 
 const reset = async () => {
+  await run('sql/nanoid.sql');
   await run('sql/schema.sql');
   await run('sql/data.sql');
 };
