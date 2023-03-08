@@ -1,6 +1,6 @@
 import { Filter, useAppContext } from '../../context';
 import { Attribute } from '@/graphql/category/schema';
-import { Box, Slider, Typography } from '@mui/joy';
+import { Box, Input, Slider, Stack, Typography } from '@mui/joy';
 import { useState } from 'react';
 
 interface Props {
@@ -73,9 +73,36 @@ function Restricted({ attribute }: Props) {
 }
 
 function Unrestricted({ attribute }: Props) {
+  const slotProps = {
+    input: {
+      min: attribute.min,
+      max: attribute.max,
+      step: attribute.step,
+    },
+  };
+
   return (
     <Box>
-      Unrestricted: {attribute.name}
+      <Typography fontWeight="lg" pb={1}>
+        {attribute.name}
+      </Typography>
+      <Stack direction="row" alignItems="center" gap={2}>
+        <Input
+          type="number"
+          placeholder="Min"
+          endDecorator={attribute.symbol}
+          sx={{ bgcolor: 'background.body' }}
+          slotProps={slotProps}
+        />
+        <Typography>to</Typography>
+        <Input
+          type="number"
+          placeholder="Max"
+          endDecorator={attribute.symbol}
+          sx={{ bgcolor: 'background.body' }}
+          slotProps={slotProps}
+        />
+      </Stack>
     </Box>
   );
 }
