@@ -140,6 +140,32 @@ export function Unrestricted({ attribute }: Props) {
 // set up that way. Therefore filtering by price needs to be handled
 // differently.
 export function AttributePrice() {
+  const { refinement, setRefinement } = useAppContext();
+
+  function handleChange(
+    { target: { value } }: ChangeEvent<HTMLInputElement>,
+    part: 'min'|'max',
+  ) {
+    const filters: Filter[] = refinement.filters.map(filter => {
+      if (filter.id === 'PRICE') {
+        const selection = filter.selection;
+        selection[part] = value || null;
+        return {
+          id: filter.id,
+          selection: selection,
+        };
+      } else {
+        return filter;
+      }
+    });
+
+    // update filters
+    setRefinement({
+      ...refinement,
+      filters: filters,
+    });
+  }
+
   const slotProps = {
     input: {
       min: 0,
@@ -154,6 +180,7 @@ export function AttributePrice() {
       </Typography>
       <Stack direction="row" alignItems="center" gap={2}>
         <Input
+          onChange={e => handleChange(e, 'min')}
           type="number"
           placeholder="Min"
           startDecorator={'$'}
@@ -162,6 +189,7 @@ export function AttributePrice() {
         />
         <Typography>to</Typography>
         <Input
+          onChange={e => handleChange(e, 'max')}
           type="number"
           placeholder="Max"
           startDecorator={'$'}
