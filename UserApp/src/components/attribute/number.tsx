@@ -73,25 +73,30 @@ function Restricted({ attribute }: Props) {
 }
 
 export function Unrestricted({ attribute }: Props) {
+  const { refinement, setRefinement } = useAppContext();
+
   function handleChange(
     { target: { value } }: ChangeEvent<HTMLInputElement>,
     part: 'min'|'max',
   ) {
-    console.log(part, value);
-    // const filters: Filter[] = refinement.filters.map(filter => {
-    //   if (filter.id === attribute.id) {
-    //     return {
-    //       id: filter.id,
-    //       selection: { min: newValue[0], max: newValue[1] },
-    //     };
-    //   } else {
-    //     return filter;
-    //   }
-    // });
-    // setRefinement({
-    //   ...refinement,
-    //   filters: filters,
-    // });
+    const filters: Filter[] = refinement.filters.map(filter => {
+      if (filter.id === attribute.id) {
+        const selection = filter.selection;
+        selection[part] = value || null;
+        return {
+          id: filter.id,
+          selection: selection,
+        };
+      } else {
+        return filter;
+      }
+    });
+
+    // update filters
+    setRefinement({
+      ...refinement,
+      filters: filters,
+    });
   }
 
   const slotProps = {
