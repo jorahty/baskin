@@ -1,4 +1,4 @@
-import { Attribute } from "./schema";
+import { Attribute } from './schema';
 
 import { pool } from '../db';
 

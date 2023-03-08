@@ -32,12 +32,11 @@ test('List All', async () => {
     });
 });
 
-
 test('List by ID', async () => {
   await request
     .post('/graphql')
     .send({
-      query: `{attribute (id: "0ce2da04-d05d-46cf-8602-ae58ab7ecaaa") { name }}`,
+      query: `{attribute (id: "X0bZdioM6D") { name }}`,
     })
     .expect(200)
     .then(res => {

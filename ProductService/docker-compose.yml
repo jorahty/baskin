@@ -12,5 +12,6 @@ services:
       - "5434:5432"
     volumes:
       - ./sql/databases.sql:/docker-entrypoint-initdb.d/1.databases.sql
-      - ./sql/schema.sql:/docker-entrypoint-initdb.d/2.schema.sql
-      - ./sql/data.sql:/docker-entrypoint-initdb.d/3.data.sql
+      - ./sql/nanoid.sql:/docker-entrypoint-initdb.d/2.nanoid.sql
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/3.schema.sql
+      - ./sql/data.sql:/docker-entrypoint-initdb.d/4.data.sql
