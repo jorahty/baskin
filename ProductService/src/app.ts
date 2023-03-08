@@ -6,6 +6,7 @@ import expressPlayground from 'graphql-playground-middleware-express';
 
 import { CategoryResolver } from './category/resolver';
 import { ProductResolver } from './product/resolver';
+import { AttributeResolver } from './attribute/resolver';
 import cors from 'cors';
 
 const app = express();
@@ -14,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const schema = buildSchemaSync({
-  resolvers: [CategoryResolver, ProductResolver],
+  resolvers: [CategoryResolver, ProductResolver, AttributeResolver],
 });
 
 app.use('/graphql', graphqlHTTP({ schema }));

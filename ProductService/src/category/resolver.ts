@@ -1,6 +1,5 @@
 import { Arg, Args, Resolver, Query, Mutation } from 'type-graphql';
 import {
-  Attribute,
   Category,
   CategoryAncestorsArgs,
   CategoryArgs,
@@ -10,6 +9,7 @@ import {
   NewCategory,
   RemoveCategoryArgs,
 } from './schema';
+import { Attribute } from '../attribute/schema';
 import { CategoryService } from './service';
 
 @Resolver()

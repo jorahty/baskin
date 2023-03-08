@@ -117,7 +117,8 @@ INSERT INTO product (member_username, category_slug, data) VALUES ('molly_member
 
 DELETE FROM attribute;
 
-INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Condition", "type": "set", "values": ["new", "used"] }');
+--  for testing
+INSERT INTO attribute (id, category_slug, data) VALUES ('0ce2da04-d05d-46cf-8602-ae58ab7ecaaa', 'vehicles', '{ "name": "Condition", "type": "set", "values": ["new", "used"] }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Model year", "type": "number", "min": 1886, "max": 2023 }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Miles driven", "type": "number", "min": 0, "max": 200000, "step": 100 }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel"] }');

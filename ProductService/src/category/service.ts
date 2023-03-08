@@ -1,4 +1,5 @@
-import { Attribute, Category } from './schema';
+import { Category } from './schema';
+import { Attribute } from '../attribute/schema';
 
 import { pool } from '../db';
 
