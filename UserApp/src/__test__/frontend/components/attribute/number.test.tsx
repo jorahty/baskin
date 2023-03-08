@@ -9,7 +9,7 @@ const priceAttribute = {
   type: 'number',
 };
 
-const lengthAttribute = {
+const lengthAttribute: Attribute = {
   id: '2',
   name: 'Length',
   category: 'NA',
@@ -43,6 +43,13 @@ test('Render Range', async () => {
 });
 
 test('Render Slider', async () => {
+  renderView(lengthAttribute);
+  const sliders = screen.getAllByRole('slider');
+  fireEvent.change(sliders[0], { target: { value: 25 } });
+});
+
+test('Render Slider With Symbol', async () => {
+  lengthAttribute.symbol = 'ft';
   renderView(lengthAttribute);
   const sliders = screen.getAllByRole('slider');
   fireEvent.change(sliders[0], { target: { value: 25 } });

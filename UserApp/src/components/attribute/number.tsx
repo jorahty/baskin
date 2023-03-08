@@ -54,6 +54,16 @@ function Restricted({ attribute }: Props) {
         onChange={(e, v) => handleChange(e, v as number[])}
         valueLabelDisplay="auto"
         size="lg"
+        marks={[
+          {
+            value: attribute.min as number,
+            label: attribute.symbol ? `${attribute.min} ${attribute.symbol}` : `${attribute.min}`,
+          },
+          {
+            value: attribute.max as number,
+            label: attribute.symbol ? `${attribute.max} ${attribute.symbol}` : `${attribute.max}`,
+          },
+        ]}
       />
     </Box>
   );
