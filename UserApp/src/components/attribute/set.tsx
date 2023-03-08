@@ -1,6 +1,5 @@
 import { Attribute } from '@/graphql/category/schema';
-import { Check } from '@mui/icons-material';
-import { Select, Option, SelectOption, Box, Typography, ListItemDecorator, Checkbox } from '@mui/joy';
+import { Select, Option, Box, Typography, ListItemDecorator, Checkbox } from '@mui/joy';
 import { Filter, useAppContext } from '../../context';
 
 interface Props {
@@ -32,7 +31,6 @@ export default function AttributeSet({ attribute }: Props) {
   const selection = refinement.filters.find(filter => filter.id === attribute.id)?.selection;
 
   const renderValue = () => {
-    // const { selection } = refinement.filters.find(filter => filter.id === attribute.id) as Filter;
     if (selection.length > 0) {
       return selection.join(', ');
     } else {
@@ -52,6 +50,7 @@ export default function AttributeSet({ attribute }: Props) {
       >
         {attribute.values?.map(value => (
           <Option
+            key={value}
             color="neutral"
             value={value}
             sx={{ fontWeight: 'md' }}

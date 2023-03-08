@@ -1,4 +1,4 @@
-import { AppContextProvider, useAppContext } from '../../../../context';
+import { useAppContext } from '../../../../context';
 import { render } from '@testing-library/react';
 import CategoryControls from '../../../../components/category/controls';
 

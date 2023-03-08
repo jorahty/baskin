@@ -26,7 +26,7 @@ export default function CategoryControls({ category }: Props) {
           max: attribute.max,
         },
       };
-  });
+    });
     setRefinement({
       ...refinement,
       filters: filters,
