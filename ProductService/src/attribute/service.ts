@@ -14,4 +14,18 @@ export class AttributeService {
     const { rows } = await pool.query(query);
     return rows.map(row => row.attribute);
   }
+
+  public async remove(id: string): Promise<Attribute> {
+    const insert = `DELETE FROM attribute WHERE id = $1
+      RETURNING data || jsonb_build_object('id', id, 'category', category_slug) AS attribute`;
+
+    const query = {
+      text: insert,
+      values: [id],
+    };
+
+    const { rows } = await pool.query(query);
+
+    return rows.map(row => row.attribute)[0];
+  }
 }

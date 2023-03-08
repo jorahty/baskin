@@ -36,3 +36,10 @@ export class AttributeArgs {
   @Length(10)
     id?: string;
 }
+
+@ArgsType()
+export class RemoveAttributeArgs {
+  @Field()
+  @Length(10)
+    id!: string;
+}
