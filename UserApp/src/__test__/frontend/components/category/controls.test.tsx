@@ -29,6 +29,14 @@ const category = {
       category: 'vehciles',
       type: 'number',
     },
+    {
+      id: '3',
+      name: 'Seats',
+      category: 'vehciles',
+      type: 'number',
+      min: 2,
+      max: 10,
+    },
   ],
 };
 

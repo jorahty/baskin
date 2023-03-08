@@ -120,7 +120,7 @@ DELETE FROM attribute;
 --  for testing
 INSERT INTO attribute (id, category_slug, data) VALUES ('X0bZdioM6D', 'vehicles', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Model year", "type": "number", "min": 1886, "max": 2023 }');
-INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Miles driven", "type": "number", "min": 0, "max": 200000, "step": 100 }');
+INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Miles driven", "type": "number", "min": 0, "step": 100 }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel"] }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Top speed", "type": "number", "min": 5, "max": 300, "step": 5 }');
 

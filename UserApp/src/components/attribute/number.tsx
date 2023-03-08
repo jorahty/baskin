@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function AttributeNumber({ attribute }: Props) {
-  if (isNaN(attribute.min as number) || isNaN(attribute.max as number)) {
+  if (typeof attribute.min !== 'number' || typeof attribute.max !== 'number') {
     return <Unrestricted attribute={attribute}/>;
   } else {
     return <Restricted attribute={attribute}/>;
@@ -75,7 +75,7 @@ function Restricted({ attribute }: Props) {
 function Unrestricted({ attribute }: Props) {
   return (
     <Box>
-      Range: {attribute.name}
+      Unrestricted: {attribute.name}
     </Box>
   );
 }
