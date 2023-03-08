@@ -18,7 +18,10 @@ export default function CategoryControls({ category }: Props) {
   useEffect(() => {
     const filters = category.attributes.map(attribute => ({
       id: attribute.id,
-      selection: undefined,
+      selection: attribute.type === 'number' ? {
+        min: attribute.min,
+        max: attribute.max,
+      } : [],
     }));
     setRefinement({
       ...refinement,

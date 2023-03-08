@@ -1,4 +1,3 @@
-import { AppContextProvider } from '../../../../context';
 import { Attribute } from '@/graphql/category/schema';
 import { screen, fireEvent, render } from '@testing-library/react';
 import AttributeNumber from '../../../../components/attribute/number';
@@ -21,11 +20,23 @@ const lengthAttribute = {
 
 const renderView = async (attribute: Attribute) => {
   render(
-    <AppContextProvider>
-      <AttributeNumber attribute={attribute} />
-    </AppContextProvider>
+    <AttributeNumber attribute={attribute} />
   );
 };
+
+jest.mock('../../../../context', () => ({
+  useAppContext: () => ({
+    refinement: {
+      search: '',
+      sort: 'date-new',
+      filters: [
+        { id: '1', selection: undefined },
+        { id: '2', selection: undefined },
+      ],
+    },
+    setRefinement: () => (null),
+  }),
+}));
 
 test('Render Range', async () => {
   renderView(priceAttribute);

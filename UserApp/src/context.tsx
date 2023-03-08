@@ -20,7 +20,7 @@ export interface Refinement {
   filters: Filter[];
 }
 
-interface Filter {
+export interface Filter {
   id: string;
   selection: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
