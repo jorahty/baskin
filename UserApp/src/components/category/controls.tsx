@@ -34,7 +34,7 @@ export default function CategoryControls({ category }: Props) {
     });
     setRefinement({
       ...refinement,
-      filters: filters,
+      filters: [{ id: 'PRICE', selection: { min: null, max: null } }, ...filters],
     });
   }, [category]);
 
