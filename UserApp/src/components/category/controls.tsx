@@ -2,7 +2,7 @@ import { Button, Stack, Typography } from '@mui/joy';
 import { VerboseCategory } from '../../pages';
 import Link from 'next/link';
 import ProductSorter from '../product/sorter';
-import AttributeNumber from '../attribute/number';
+import AttributeNumber, { AttributePrice } from '../attribute/number';
 import AttributeColor from '../attribute/color';
 import AttributeSet from '../attribute/set';
 import { useAppContext } from '../../context';
@@ -49,12 +49,7 @@ export default function CategoryControls({ category }: Props) {
         </Typography>
       }
       <ProductSorter />
-      <AttributeNumber attribute={{
-        id: '1',
-        category: 'NA',
-        type: 'number',
-        name: 'Price',
-      }} />
+      <AttributePrice />
       {category.attributes.map(attribute => {
         switch (attribute.type) {
         case 'number': return <AttributeNumber key={attribute.id} attribute={attribute} />;

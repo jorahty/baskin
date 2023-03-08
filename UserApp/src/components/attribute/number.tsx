@@ -106,3 +106,41 @@ function Unrestricted({ attribute }: Props) {
     </Box>
   );
 }
+
+// Ideally "Price" would be a regular attribute that is assigned to all
+// products, but the GraphQL `Product` and `NewProduct` types are not currently
+// set up that way. Therefore filtering by price needs to be handled
+// differently.
+export function AttributePrice() {
+  const slotProps = {
+    input: {
+      min: 0,
+      step: 0.1,
+    },
+  };
+
+  return (
+    <Box>
+      <Typography fontWeight="lg" pb={1}>
+        Price
+      </Typography>
+      <Stack direction="row" alignItems="center" gap={2}>
+        <Input
+          type="number"
+          placeholder="Min"
+          startDecorator={'$'}
+          sx={{ bgcolor: 'background.body' }}
+          slotProps={slotProps}
+        />
+        <Typography>to</Typography>
+        <Input
+          type="number"
+          placeholder="Max"
+          startDecorator={'$'}
+          sx={{ bgcolor: 'background.body' }}
+          slotProps={slotProps}
+        />
+      </Stack>
+    </Box>
+  );
+}
