@@ -1,8 +1,9 @@
-import { Args, Resolver, Query, Mutation } from 'type-graphql';
+import { Arg, Args, Resolver, Query, Mutation } from 'type-graphql';
 import {
   Attribute,
   AttributeArgs,
   RemoveAttributeArgs,
+  NewAttribute,
 } from './schema';
 import { AttributeService } from './service';
 
@@ -14,6 +15,13 @@ export class AttributeResolver {
     @Args() { id }: AttributeArgs
   ): Promise<Attribute[]> {
     return new AttributeService().list(id);
+  }
+
+  @Mutation(() => Attribute)
+  async addAttribute(
+    @Arg('input') input: NewAttribute,
+  ): Promise<Attribute> {
+    return new AttributeService().add(input);
   }
 
   @Mutation(() => Attribute)

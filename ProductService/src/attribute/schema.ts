@@ -1,4 +1,4 @@
-import { ArgsType, Field, ObjectType } from 'type-graphql';
+import { ArgsType, Field, ObjectType, InputType } from 'type-graphql';
 import { Matches, Length, MinLength } from 'class-validator';
 import { regexSlug, regexUUID } from '../regex';
 
@@ -42,4 +42,28 @@ export class RemoveAttributeArgs {
   @Field()
   @Length(10)
     id!: string;
+}
+
+@ObjectType()
+@InputType('AttributeInput')
+export class NewAttribute {
+  @Field()
+    category!: string;
+  @Field()
+  @Length(1, 32)
+    name!: string;
+  @Field()
+  @Length(1, 32)
+    type!: string;
+  @Field({ nullable: true })
+    min?: number;
+  @Field({ nullable: true })
+    max?: number;
+  @Field({ nullable: true })
+    step?: number;
+  @Field({ nullable: true })
+  @Length(1, 8)
+    symbol?: string;
+  @Field(() => [String], { nullable: true })
+    values?: string[];
 }
