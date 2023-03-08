@@ -1,6 +1,8 @@
 import { useAppContext } from '../../../../context';
 import { render } from '@testing-library/react';
 import CategoryControls from '../../../../components/category/controls';
+import { CssVarsProvider } from '@mui/joy';
+import '../../matchMedia';
 
 const category = {
   name: null,
@@ -36,7 +38,9 @@ const mockUseAppContext = useAppContext as jest.MockedFunction<typeof useAppCont
 
 const renderView = async () => {
   render(
-    <CategoryControls category={category} />
+    <CssVarsProvider>
+      <CategoryControls category={category} />
+    </CssVarsProvider>
   );
 };
 

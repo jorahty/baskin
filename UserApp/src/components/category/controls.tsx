@@ -59,7 +59,7 @@ export default function CategoryControls({ category }: Props) {
         switch (attribute.type) {
         case 'number': return <AttributeNumber key={attribute.id} attribute={attribute} />;
         case 'set': return <AttributeSet key={attribute.id} attribute={attribute} />;
-        case 'color': return <AttributeColor key={attribute.id} />;
+        case 'color': return <AttributeColor key={attribute.id} attribute={attribute} />;
         }
       })}
     </Stack>

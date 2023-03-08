@@ -118,7 +118,7 @@ INSERT INTO product (member_username, category_slug, data) VALUES ('molly_member
 DELETE FROM attribute;
 
 --  for testing
-INSERT INTO attribute (id, category_slug, data) VALUES ('X0bZdioM6D', 'vehicles', '{ "name": "Condition", "type": "set", "values": ["new", "used"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('X0bZdioM6D', 'vehicles', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Model year", "type": "number", "min": 1886, "max": 2023 }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Miles driven", "type": "number", "min": 0, "max": 200000, "step": 100 }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel"] }');
@@ -144,7 +144,7 @@ INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Bath
 INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Square feet", "type": "number", "min": 10, "max": 10000, "step": 10 }');
 
 INSERT INTO attribute (category_slug, data) VALUES ('apparel', '{ "name": "Color", "type": "color" }');
-INSERT INTO attribute (category_slug, data) VALUES ('apparel', '{ "name": "Condition", "type": "set", "values": ["new", "used"] }');
+INSERT INTO attribute (category_slug, data) VALUES ('apparel', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
 
 INSERT INTO attribute (category_slug, data) VALUES ('tops', '{ "name": "Size", "type": "set", "values": ["XS", "S", "M", "L", "XL"] }');
 
