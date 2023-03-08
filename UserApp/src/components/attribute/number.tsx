@@ -41,30 +41,33 @@ function Restricted({ attribute }: Props) {
   }
 
   return (
-    <Box px={2}>
+    <Box>
       <Typography fontWeight="lg">
         {attribute.name}
       </Typography>
-      <Slider
-        aria-label="slider"
-        value={value}
-        min={attribute.min}
-        max={attribute.max}
-        step={attribute.step || 1}
-        onChange={(e, v) => handleChange(e, v as number[])}
-        valueLabelDisplay="auto"
-        size="lg"
-        marks={[
-          {
-            value: attribute.min as number,
-            label: attribute.symbol ? `${attribute.min} ${attribute.symbol}` : `${attribute.min}`,
-          },
-          {
-            value: attribute.max as number,
-            label: attribute.symbol ? `${attribute.max} ${attribute.symbol}` : `${attribute.max}`,
-          },
-        ]}
-      />
+      <Box px={2} pb={2.5}>
+        <Slider
+          sx={{ p: 2 }}
+          aria-label="slider"
+          value={value}
+          min={attribute.min}
+          max={attribute.max}
+          step={attribute.step || 1}
+          onChange={(e, v) => handleChange(e, v as number[])}
+          valueLabelDisplay="auto"
+          size="lg"
+          marks={[
+            {
+              value: attribute.min as number,
+              label: attribute.symbol ? `${attribute.min} ${attribute.symbol}` : `${attribute.min}`,
+            },
+            {
+              value: attribute.max as number,
+              label: attribute.symbol ? `${attribute.max} ${attribute.symbol}` : `${attribute.max}`,
+            },
+          ]}
+        />
+      </Box>
     </Box>
   );
 }

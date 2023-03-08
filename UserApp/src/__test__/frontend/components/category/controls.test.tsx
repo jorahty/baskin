@@ -1,4 +1,4 @@
-import { AppContextProvider } from '../../../../context';
+import { useAppContext } from '../../../../context';
 import { render } from '@testing-library/react';
 import CategoryControls from '../../../../components/category/controls';
 
@@ -30,14 +30,41 @@ const category = {
   ],
 };
 
+jest.mock('../../../../context');
+
+const mockUseAppContext = useAppContext as jest.MockedFunction<typeof useAppContext>;
+
 const renderView = async () => {
   render(
-    <AppContextProvider>
-      <CategoryControls category={category} />
-    </AppContextProvider>
+    <CategoryControls category={category} />
   );
 };
 
 test('Renders', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: '',
+      filters: [],
+    },
+    setRefinement: jest.fn(),
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+
+  renderView();
+});
+
+test('Renders with existing filter', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: '',
+      filters: [{
+        id: '1',
+        selection: [],
+      }],
+    },
+    setRefinement: jest.fn(),
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+
   renderView();
 });
