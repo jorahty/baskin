@@ -129,7 +129,7 @@ INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Seats", 
 INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Interior", "type": "color" }');
 INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Exterior", "type": "color" }');
 
-INSERT INTO attribute (category_slug, data) VALUES ('motorcycles', '{ "name": "Color", "type": "color" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('S8xteMD6V5', 'motorcycles', '{ "name": "Color", "type": "color" }');
 
 INSERT INTO attribute (id, category_slug, data) VALUES ('3GZ3ozPoCS', 'boats', '{ "name": "Length", "type": "number", "min": 1, "max": 300, "symbol": "ft" }');
 INSERT INTO attribute (id, category_slug, data) VALUES ('4gDdn60Dbd', 'boats', '{ "name": "Interior", "type": "color" }');
@@ -183,3 +183,11 @@ INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-c
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'iiAoJcJ5RH', '{ "value": "#ffffff" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'R2BDfhnUXF', '{ "value": "Steel" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', '767cAm6pTR', '{ "value": 50 }');
+
+-- Harley Davidson
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'X0bZdioM6D', '{ "value": "New" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 't6guOpyORQ', '{ "value": 2019 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'UM9PPU64GB', '{ "value": 0 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'Iwiw1QLbXP', '{ "value": 125 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'S8xteMD6V5', '{ "value": "#ff0000" }');
