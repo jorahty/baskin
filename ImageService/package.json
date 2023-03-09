@@ -29,6 +29,7 @@
     "uuid": "*"
   },
   "scripts": {
+    "prebuild": "npm run swagger",
     "build": "tsc",
     "swagger": "tsoa spec-and-routes",
     "predev": "npm run swagger",
