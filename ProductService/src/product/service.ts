@@ -2,23 +2,29 @@ import { NewProduct, Product } from './schema';
 import { pool } from '../db';
 
 export class ProductService {
-  public async list(id?: string, username?: string, category?: string): Promise<Product[]> {
+  public async list(
+    id?: string,
+    username?: string,
+    category?: string,
+  ): Promise<Product[]> {
     if (category) {
       const select = `
-          WITH RECURSIVE category_tree AS (SELECT slug, parent_slug
-                                           FROM category
-                                           WHERE slug = $1
-                                           UNION ALL
-                                           SELECT c.slug, c.parent_slug
-                                           FROM category_tree ct
-                                                    JOIN category c ON ct.slug = c.parent_slug)
-          SELECT p.data || jsonb_build_object(
-                  'id', p.id,
-                  'user', p.member_username,
-                  'category', p.category_slug
-              ) AS product
-          FROM product p
-                   JOIN category_tree ct ON p.category_slug = ct.slug
+        WITH RECURSIVE category_tree AS (
+          SELECT slug, parent_slug
+          FROM category
+          WHERE slug = $1
+          UNION ALL
+          SELECT c.slug, c.parent_slug
+          FROM category_tree ct
+          JOIN category c ON ct.slug = c.parent_slug
+        )
+        SELECT p.data || jsonb_build_object(
+          'id', p.id,
+          'user', p.member_username,
+          'category', p.category_slug
+        ) AS product
+        FROM product p
+        JOIN category_tree ct ON p.category_slug = ct.slug
       `;
       const values = [category];
       const query = {
@@ -29,12 +35,11 @@ export class ProductService {
       return rows.map(row => row.product);
     }
     let select = `
-        SELECT data || jsonb_build_object(
-                'id', id,
-                'user', member_username,
-                'category', category_slug
-            ) AS product
-        FROM product
+      SELECT data || jsonb_build_object(
+        'id', id,
+        'user', member_username,
+        'category', category_slug
+      ) AS product FROM product
     `;
     let values: string[] = [];
     if (id) {
@@ -54,9 +59,8 @@ export class ProductService {
 
   public async add(newProduct: NewProduct): Promise<Product> {
     const insert = `
-        INSERT INTO product(member_username, category_slug, data)
-        VALUES ($1, $2, $3)
-        RETURNING *
+      INSERT INTO product(member_username, category_slug, data)
+      VALUES ($1, $2, $3) RETURNING *
     `;
     const { user, category, ...other } = newProduct;
     const data = Object.assign(other, { date: new Date().toISOString() });
@@ -65,36 +69,6 @@ export class ProductService {
       values: [user, category, data],
     };
     const { rows } = await pool.query(query);
-
-    const product = rows[0].data;
-    product.user = rows[0].member_username;
-    product.category = rows[0].category_slug;
-    product.id = rows[0].id;
-
-    return product;
-  }
-
-  public async updateProduct(
-    id: string,
-    updatedProduct: NewProduct,
-    dateCreated: string,
-  ): Promise<Product> {
-    const update = `
-        UPDATE product
-        SET category_slug=$2,
-            data=$3
-        WHERE id = $1
-        RETURNING *
-    `;
-    const { user, category, ...other } = updatedProduct;
-    const data = Object.assign(other, { date: dateCreated });
-    console.log(data);
-    const query = {
-      text: update,
-      values: [id, category, JSON.stringify(data)],
-    };
-    const { rows } = await pool.query(query);
-    console.log(rows);
 
     const product = rows[0].data;
     product.user = rows[0].member_username;
