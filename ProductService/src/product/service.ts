@@ -21,7 +21,13 @@ export class ProductService {
         SELECT p.data || jsonb_build_object(
           'id', p.id,
           'user', p.member_username,
-          'category', p.category_slug
+          'category', p.category_slug,
+          'attributes', COALESCE((
+            SELECT jsonb_agg(jsonb_build_object(
+              'id', attribute_id,
+              'value', (data ->> 'value')
+            )) FROM attribute_value WHERE product_id = p.id
+          ), '[]'::jsonb)
         ) AS product
         FROM product p
         JOIN category_tree ct ON p.category_slug = ct.slug
@@ -38,7 +44,13 @@ export class ProductService {
       SELECT data || jsonb_build_object(
         'id', id,
         'user', member_username,
-        'category', category_slug
+        'category', category_slug,
+        'attributes', COALESCE((
+          SELECT jsonb_agg(jsonb_build_object(
+            'id', attribute_id,
+            'value', (data ->> 'value')
+          )) FROM attribute_value WHERE product_id = product.id
+        ), '[]'::jsonb)
       ) AS product FROM product
     `;
     let values: string[] = [];
