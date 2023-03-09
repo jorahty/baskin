@@ -27,6 +27,20 @@ export default function AttributeColor({ attribute }: Props) {
     });
   };
 
+  const handleClear = () => {
+    const filters = refinement.filters.map(filter => {
+      if (filter.id !== attribute.id) return filter;
+      return {
+        id: filter.id,
+        selection: null,
+      };
+    });
+    setRefinement({
+      ...refinement,
+      filters: filters,
+    });
+  };
+
   const defaultColor = mode === 'light' ? '#F7F7F8' : '#09090D';
 
   const selection = refinement?.filters.find(filter => filter.id === attribute.id)?.selection;
@@ -60,10 +74,10 @@ export default function AttributeColor({ attribute }: Props) {
         }}
       />
       {selection &&
-        <Button size="sm" variant="plain">
+        <Button size="sm" variant="plain" onClick={handleClear}>
           Clear
         </Button>
       }
-      </Stack>
+    </Stack>
   );
 }
