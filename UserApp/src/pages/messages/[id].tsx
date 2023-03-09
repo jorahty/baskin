@@ -12,6 +12,7 @@ import AuthGuard from '../../components/common/AuthGuard';
 import { Box, Divider, Stack } from '@mui/joy';
 import MessageInput from '../../components/message/input';
 import ChatHeader from '../../components/chat/header';
+import { Message } from '../../graphql/message/schema';
 
 export const getServerSideProps: GetServerSideProps = async context => ({
   props: {
@@ -23,7 +24,7 @@ export default function MessagesPage() {
   const { signedInUser } = useAppContext();
   const router = useRouter();
   const [chats, setChats] = useState([]);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [selectedChat, setSelectedChat] = useState<Chat>();
 
   // Fetch chats
@@ -53,14 +54,25 @@ export default function MessagesPage() {
 
   // Fetch messages
   useEffect(() => {
+    const fetchMessages = async () => {
+      queryGQL(
+        'http://localhost:3000/api/graphql',
+        `query message { message(id: "${selectedChat?.id}" ) { content, sender, date } }`,
+        signedInUser?.accessToken
+      ).then(data => {
+        setMessages(data.message);
+      });
+    };
+
     if (!selectedChat) return;
-    queryGQL(
-      'http://localhost:3000/api/graphql',
-      `query message { message(id: "${selectedChat?.id}" ) { content, sender, date } }`,
-      signedInUser?.accessToken
-    ).then(data => {
-      setMessages(data.message);
-    });
+
+    fetchMessages();
+
+    const myInterval = setInterval(fetchMessages, 10000);
+    return () => {
+      // should clear the interval when the component unmounts
+      clearInterval(myInterval);
+    };
   }, [selectedChat, signedInUser]);
 
   return (
@@ -75,7 +87,7 @@ export default function MessagesPage() {
             </Box>
           </Box>
           <Box flexGrow={0} p={1.5}>
-            <MessageInput />
+            <MessageInput chat={selectedChat} messages={messages} setMessages={setMessages} />
           </Box>
         </Stack>
       </Layout>

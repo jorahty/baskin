@@ -19,10 +19,7 @@ export class AuthService {
       user (username: "${username}") 
       { email, name, username, password, roles } 
     }`;
-    const data = await request(
-      'http://localhost:4000/graphql',
-      query,
-    );
+    const data = await request('http://localhost:4000/graphql', query);
     return data.user[0];
   }
 
@@ -34,7 +31,6 @@ export class AuthService {
             { email: user.email, name: user.name, roles: user.roles, username: user.username },
             process.env.ACCESS_TOKEN as string,
             {
-              expiresIn: '30m',
               algorithm: 'HS256',
             }
           );

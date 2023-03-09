@@ -1,5 +1,6 @@
 import { CssVarsProvider } from '@mui/joy/styles';
 import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { graphql } from 'msw';
 import { setupServer } from 'msw/node';
@@ -8,6 +9,7 @@ import '../matchMedia';
 
 import { getServerSideProps } from '../../../pages/messages/[id]';
 import MessagesPage from '../../../pages/messages/[id]';
+// import { loginHandlers } from '../../graphql/login';
 
 jest.mock('../../../context', () => ({
   useAppContext: () => ({
@@ -78,6 +80,17 @@ const handlers = [
             date: new Date().toString(),
           },
         ],
+      })
+    );
+  }),
+  graphql.mutation('sendMessage', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        sendMessage: {
+          sender: 'molly_member',
+          content: 'bogus text',
+          date: new Date().toISOString(),
+        },
       })
     );
   }),
@@ -161,4 +174,12 @@ test('Not signed in', async () => {
   }));
 
   await renderView();
+});
+
+test('Send Message', async () => {
+  renderView();
+  await screen.findByPlaceholderText('Aa');
+  await userEvent.type(screen.getByPlaceholderText('Aa'), 'bogus text');
+  fireEvent.click(screen.getByLabelText('send-message'));
+  await screen.findByText('bogus text');
 });
