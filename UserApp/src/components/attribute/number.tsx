@@ -45,7 +45,7 @@ function Restricted({ attribute }: Props) {
       <Typography fontWeight="lg">
         {attribute.name}
       </Typography>
-      <Box px={2} pb={2.5}>
+      <Box px={3} pb={2.5}>
         <Slider
           sx={{ p: 2 }}
           aria-label="slider"

@@ -71,7 +71,7 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('19b2a9dc
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('0ce2da04-d05d-46cf-8602-ae58ab7ec215', 'anna_admin', 'sports', '{"name": "Surfboard", "quantity": 4,"price": 400, "discount": 0, "description": "Brand new custom made surf boards, different size. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2022-02-09T00:15:08.000Z", "pictures": ["6d1dd747-8172-4dd1-88b9-093dde1ba612"]}');
 
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'molly_member', 'vehicles', '{"name": "Electric Skateboard", "quantity": 2,"price": 480, "discount": 0, "description": "20-mile range, battery and remote included", "date": "2023-02-09T06:43:08.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'anna_admin', 'boats', '{"name": "Sailing Yacht", "quantity": 1,"price": 50000, "discount": 0, "description": "Classic beauty, fully restored", "date": "2023-02-10T09:12:47.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'anna_admin', 'boats', '{"name": "Island Yacht", "quantity": 1,"price": 50000, "discount": 0, "description": "Classic beauty, fully restored", "date": "2023-02-10T09:12:47.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'mia_moderator', 'sailboats', '{"name": "Racing Sailboat", "quantity": 1,"price": 75000, "discount": 0, "description": "Fast and sleek, perfect for competitions", "date": "2023-02-11T16:20:15.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'molly_member', 'cars', '{"name": "Sports Car", "quantity": 1,"price": 90000, "discount": 0, "description": "Brand new, top of the line model", "date": "2023-02-12T18:59:33.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'anna_admin', 'trucks', '{"name": "Pickup Truck", "quantity": 1,"price": 35000, "discount": 0, "description": "Heavy-duty, perfect for hauling", "date": "2023-02-13T22:48:02.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
@@ -168,6 +168,18 @@ INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '3GZ3ozPoCS', '{ "value": 30 }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '4gDdn60Dbd', '{ "value": "#ffffff" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'iiAoJcJ5RH', '{ "value": "#ffffff" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'R2BDfhnUXF', '{ "value": "Steel" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'R2BDfhnUXF', '{ "value": "Aluminum" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '767cAm6pTR', '{ "value": 11 }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '6B1BUxiIys', '{ "value": "Dacron" }');
+
+-- Island Yacht
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'X0bZdioM6D', '{ "value": "Used" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 't6guOpyORQ', '{ "value": 2014 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'UM9PPU64GB', '{ "value": 60000 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'Iwiw1QLbXP', '{ "value": 40 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', '3GZ3ozPoCS', '{ "value": 200 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', '4gDdn60Dbd', '{ "value": "#ffffff" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'iiAoJcJ5RH', '{ "value": "#ffffff" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'R2BDfhnUXF', '{ "value": "Steel" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', '767cAm6pTR', '{ "value": 50 }');

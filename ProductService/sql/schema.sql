@@ -9,4 +9,4 @@ CREATE TABLE product (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), member_user
 
 CREATE TABLE attribute (id CHAR(10) PRIMARY KEY DEFAULT nanoid(10), category_slug VARCHAR(32) REFERENCES category(slug) ON DELETE CASCADE ON UPDATE CASCADE, data jsonb, UNIQUE (id));
 
-CREATE TABLE attribute_value (id CHAR(10) PRIMARY KEY DEFAULT nanoid(10), product_id UUID REFERENCES product(id), attribute_id CHAR(10) REFERENCES attribute(id), data jsonb, UNIQUE (id));
+CREATE TABLE attribute_value (id CHAR(10) PRIMARY KEY DEFAULT nanoid(10), product_id UUID REFERENCES product(id) ON DELETE CASCADE ON UPDATE CASCADE, attribute_id CHAR(10) REFERENCES attribute(id) ON DELETE CASCADE ON UPDATE CASCADE, data jsonb, UNIQUE (id));
