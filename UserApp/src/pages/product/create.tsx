@@ -39,7 +39,7 @@ interface ProductFormElement extends HTMLFormElement {
 
 export default function Create() {
   const [category, setCategory] = React.useState('Choose Category');
-  const [pictures, setPictures] = React.useState<File[]>([]);
+  const [images, setImages] = React.useState<File[]>([]);
 
   const { signedInUser } = useAppContext();
   const { t } = useTranslation('common');
@@ -56,11 +56,11 @@ export default function Create() {
     price: number,
     category: string,
     quantity: number,
-    pictures: File[],
+    images: File[],
   ) => {
     // const bearerToken = signedInUser?.accessToken;
     const formData: FormData = new FormData();
-    pictures.map((picture: File) => {
+    images.map((picture: File) => {
       formData.append('files', picture, picture.name);
     });
 
@@ -69,7 +69,7 @@ export default function Create() {
       body: formData,
     });
 
-    const picturesIdArr: string[] = await imageData.json();
+    const imagesIdArr: string[] = await imageData.json();
 
     const graphQLClient = new GraphQLClient('http://localhost:4002/graphql', {
       // headers: {
@@ -85,7 +85,7 @@ export default function Create() {
                 price: ${price},
                 category: "${category}",
                 quantity: ${quantity},
-                pictures: [${picturesIdArr.map((p: string) => `"${p}"`)}],
+                images: [${imagesIdArr.map((p: string) => `"${p}"`)}],
                 discount: 0,
             }) {id}
         }
@@ -98,7 +98,7 @@ export default function Create() {
       }),
       )
       .catch(() => {
-        picturesIdArr.forEach((pic: string) => {
+        imagesIdArr.forEach((pic: string) => {
           fetch(`http://localhost:4001/api/v0/image/${pic}`, {
             method: 'DELETE',
           });
@@ -127,11 +127,11 @@ export default function Create() {
                   parseFloat(formElements.price.value),
                   category,
                   parseInt(formElements.quantity.value),
-                  pictures,
+                  images,
                 );
               }}
             >
-              <ProductImageList updatedImages={setPictures} />
+              <ProductImageList updatedImages={setImages} />
 
               <Grid container spacing={2} columns={16} sx={{ flexGrow: 1 }}>
                 <ProductInputs t={t} setCategory={setCategory} />

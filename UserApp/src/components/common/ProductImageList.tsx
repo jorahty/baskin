@@ -18,19 +18,19 @@ export default function ProductImageList({
 }: {
   updatedImages: React.Dispatch<React.SetStateAction<File[]>>;
 }) {
-  const [pictures, setPictures] = React.useState<File[]>([]);
+  const [images, setImages] = React.useState<File[]>([]);
   const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
 
   // Update parent with the latest images
   useEffect(() => {
-    updatedImages(pictures);
-  }, [pictures]);
+    updatedImages(images);
+  }, [images]);
 
   // Removes an image based off the index
   const removePicture = (index: number) => {
-    const temp = [...pictures];
+    const temp = [...images];
     temp.splice(index, 1);
-    setPictures(temp);
+    setImages(temp);
   };
 
   return (
@@ -56,7 +56,7 @@ export default function ProductImageList({
             },
           })}
         >
-          {pictures.map((picture, index) => (
+          {images.map((picture, index) => (
             <Card variant="outlined" key={index}>
               <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
                 <Image src={URL.createObjectURL(picture)} alt="Picture not available" fill />
@@ -110,7 +110,7 @@ export default function ProductImageList({
                       } else if (!validTypes.find((img: string) => img === uploadedFile.type)) {
                         alert('Image type not supported.');
                       } else {
-                        setPictures([...pictures, e.target.files[0]]);
+                        setImages([...images, e.target.files[0]]);
                       }
                     }
                   }}

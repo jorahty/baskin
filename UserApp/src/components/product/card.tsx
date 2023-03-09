@@ -17,7 +17,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <CardOverflow>
         <Link href={`/product/${product.id}`}>
           <AspectRatio minHeight="269px">
-            <Image alt={product.name} src={`http://localhost:4001/${product.pictures[0]}.jpeg`} fill />
+            <Image alt={product.name} src={`http://localhost:4001/${product.images[0]}.jpeg`} fill />
           </AspectRatio>
         </Link>
         {product.discount > 0 && (

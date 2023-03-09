@@ -27,7 +27,7 @@ const discountProduct = {
   user: 'molly_member',
   quantity: 40,
   description: 'something not too long',
-  pictures: [
+  images: [
     'https://images.pexels.com/whatever',
   ],
 };
@@ -76,7 +76,7 @@ const handlers = [
           discount: 0,
           quantity: 1,
           description: 'Never worn',
-          pictures: [
+          images: [
             'https://images.pexels.com/whatever',
           ],
         }],

@@ -47,7 +47,7 @@ const handlers = [
             discount: 0,
             quantity: 1,
             description: 'Never worn',
-            pictures: ['https://images.pexels.com/whatever'],
+            images: ['https://images.pexels.com/whatever'],
           },
         ],
       })
@@ -66,7 +66,7 @@ const handlers = [
           discount: 0,
           quantity: 1,
           description: 'brand new',
-          pictures: ['https://images.pexels.com/whatever'],
+          images: ['https://images.pexels.com/whatever'],
         },
       })
     );

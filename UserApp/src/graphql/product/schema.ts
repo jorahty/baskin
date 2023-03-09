@@ -31,7 +31,7 @@ export class Product {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Field(type => [String])
   @MinLength(1)
-    pictures!: string[];
+    images!: string[];
 }
 
 @ArgsType()
@@ -69,5 +69,5 @@ export class NewProductArgs {
     description!: string;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Field(type => [String])
-    pictures!: string[];
+    images!: string[];
 }

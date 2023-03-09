@@ -53,7 +53,7 @@ const products: Product[] = [
     price: 23,
     discount: 0,
     quantity: 23,
-    pictures: [
+    images: [
       'https://images.pexels.com/photos/6020432/' +
       'pexels-photo-6020432.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     ],

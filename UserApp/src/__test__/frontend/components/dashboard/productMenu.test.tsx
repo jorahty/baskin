@@ -23,7 +23,7 @@ const handlers = [
               discount: 0,
               quantity: 34,
               date: '2023-01-21T21:43:08.000Z',
-              pictures: [
+              images: [
                 'https://images.pexels.com/photos/51383/' +
                   'photo-camera-subject-photographer-51383.jp' +
                   'eg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',

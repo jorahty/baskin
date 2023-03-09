@@ -13,7 +13,7 @@ const product = {
   quantity: 90,
   description: 'string',
   date: 'string',
-  pictures: [
+  images: [
     'https://images.pexels.com/photos/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
   ],
   discount: 0,

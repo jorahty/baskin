@@ -28,7 +28,7 @@ export default function ProductMenu() {
         query getAllProducts($username: String!) {
           product(user: $username) {
             price
-            pictures
+            images
             date
             description
             name

@@ -26,7 +26,7 @@ const handlers = [
           discount: 0,
           quantity: 1,
           description: 'brand new',
-          pictures: [
+          images: [
             'https://images.pexels.com/whatever',
           ],
         },
@@ -60,7 +60,7 @@ test('Create new product without header', async () => {
         category:"toys"
         price:100
         quantity: 1
-        pictures: ["temp"]
+        images: ["temp"]
       ) {
         name, description, category, price, quantity, user
       }}`,
@@ -81,7 +81,7 @@ test('Create new product corrupt header', async () => {
         category:"toys"
         price:100
         quantity: 1
-        pictures: ["temp"]
+        images: ["temp"]
       ) {
         name, description, category, price, quantity, user
       }}`,
@@ -103,7 +103,7 @@ test('Create new product without member roles', async () => {
         category:"toys"
         price:100
         quantity: 1
-        pictures: ["temp"]
+        images: ["temp"]
       ) {
         name, description, category, price, quantity, user
       }}`,
@@ -125,7 +125,7 @@ test('Create new product', async () => {
         category:"toys"
         price:100
         quantity: 1
-        pictures: ["temp"]
+        images: ["temp"]
       ) {
         name, description, category, price, quantity, user
       }}`,

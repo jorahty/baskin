@@ -10,7 +10,7 @@ interface NewProduct {
   discount: number;
   quantity: number;
   description: string;
-  pictures: string[];
+  images: string[];
 }
 
 export class ProductService {
@@ -19,7 +19,7 @@ export class ProductService {
       query ListProducts($id: String, $user: String, $category: String) {
         product(id: $id, user: $user, category: $category) {
           id, user, category, name, price, discount,
-          quantity, description, date, pictures
+          quantity, description, date, images
         }
       }
     `;
@@ -38,7 +38,7 @@ export class ProductService {
       mutation AddProduct($input: ProductInput!) {
         addProduct(input: $input) {
           id, user, category, name, price, discount,
-          quantity, description, date, pictures
+          quantity, description, date, images
         }
       }
     `;
@@ -64,7 +64,7 @@ export class ProductService {
       mutation RemoveProduct($id: String!) {
         removeProduct(id: $id) {
           id, user, category, name, price, discount,
-          quantity, description, date, pictures
+          quantity, description, date, images
         }
       }
     `;

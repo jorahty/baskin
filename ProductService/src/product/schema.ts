@@ -30,7 +30,7 @@ export class Product {
     date!: string;
   @Field(() => [String])
   @MinLength(1)
-    pictures!: string[];
+    images!: string[];
   @Field(() => [AttributeValue], { nullable: true })
     attributes!: AttributeValue[];
 }
@@ -78,7 +78,7 @@ export class NewProduct {
   @Length(1, 1024)
     description!: string;
   @Field(() => [String])
-    pictures!: string[];
+    images!: string[];
 }
 
 @ArgsType()

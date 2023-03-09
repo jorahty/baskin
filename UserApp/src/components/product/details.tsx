@@ -35,7 +35,7 @@ export default function ProductDetails({ product }: { product: Product }) {
       >
         <CardOverflow sx={{ flexGrow: 1 }}>
           <AspectRatio ratio="1" sx={{ borderTopRightRadius: 0 }}>
-            <Image alt={product.name} src={`http://localhost:4001/${product.pictures[0]}.jpeg`} fill />
+            <Image alt={product.name} src={`http://localhost:4001/${product.images[0]}.jpeg`} fill />
           </AspectRatio>
         </CardOverflow>
         <Stack

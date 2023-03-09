@@ -35,11 +35,11 @@ test('Add Product', async () => {
               discount: 0
               quantity: 1
               description: "brand new"
-              pictures: ["123"]
+              images: ["123"]
             }
           ) {
             id, user, category, name, price, discount,
-            quantity, description, pictures, date
+            quantity, description, images, date
           }
         }
       `,

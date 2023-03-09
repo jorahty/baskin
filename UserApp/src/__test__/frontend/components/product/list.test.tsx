@@ -12,7 +12,7 @@ const products = [{
   description: 'Heavy-duty',
   date: new Date().toISOString(),
   discount: 0,
-  pictures: [
+  images: [
     'https://images.pexels.com/photos' +
     '/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
   ],
@@ -26,7 +26,7 @@ const products = [{
   description: 'string',
   date: new Date().toISOString(),
   discount: 0,
-  pictures: [
+  images: [
     'https://images.pexels.com/photos' +
     '/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
   ],
