@@ -1,4 +1,4 @@
-import { Attribute, NewAttribute } from './schema';
+import { Attribute, EditAttribute, NewAttribute } from './schema';
 
 import { pool } from '../db';
 
@@ -48,6 +48,30 @@ export class AttributeService {
     const query = {
       text: insert,
       values: [id],
+    };
+
+    const { rows } = await pool.query(query);
+
+    return rows.map(row => row.attribute)[0];
+  }
+
+  public async edit(attribute: EditAttribute): Promise<Attribute>{
+    const update = `Update attribute SET category_slug = $2, data = $3
+    WHERE id = $1
+    RETURNING data || jsonb_build_object('id', id, 'category', category_slug) AS attribute`;
+
+    const query = {
+      text: update,
+      values: [attribute.id, attribute.category,
+      { 
+        name: attribute.name, 
+        type: attribute.type,
+        min: attribute.min,
+        max: attribute.max,
+        step: attribute.step,
+        symbol: attribute.symbol,
+        values: attribute.values,
+      }],
     };
 
     const { rows } = await pool.query(query);
