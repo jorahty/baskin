@@ -6,6 +6,10 @@ const renderView = async () => {
   render(<Favicon />);
 };
 
+jest.mock('@mui/joy', () => ({
+  useColorScheme: () => ({ systemMode: undefined }),
+}));
+
 test('Renders', async () => {
   renderView();
 });

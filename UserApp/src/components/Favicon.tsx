@@ -1,4 +1,5 @@
-import { CssVarsProvider, useColorScheme, extendTheme } from '@mui/joy/styles';
+import { CssVarsProvider, extendTheme } from '@mui/joy/styles';
+import { useColorScheme } from '@mui/joy';
 import Head from 'next/head';
 
 const theme = extendTheme({ cssVarPrefix: 'favicon' });
