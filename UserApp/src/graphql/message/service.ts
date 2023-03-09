@@ -13,8 +13,8 @@ export class MessageService {
       }
     `;
 
-    const { message: messages } = await request('http://localhost:4003/graphql', query, { id });
-    return messages;
+    const data:{message: Message[]} = await request('http://localhost:4003/graphql', query, { id });
+    return data.message;
   }
 
   public async send(chat_id: string, sender: string, content: string): Promise<Message> {
@@ -28,11 +28,11 @@ export class MessageService {
       }
     `;
 
-    const { sendMessage: message } = await request('http://localhost:4003/graphql', query, {
+    const data:{sendMessage: Message} = await request('http://localhost:4003/graphql', query, {
       chat_id,
       sender,
       content,
     });
-    return message;
+    return data.sendMessage;
   }
 }

@@ -40,8 +40,8 @@ export default function MessageInput({ chat, messages, setMessages }: MessageInp
         }
       `;
 
-    const { sendMessage: newMessage } = await graphQLClient.request(mutation);
-    setMessages([...messages, newMessage]);
+    const data:{sendMessage: Message} = await graphQLClient.request(mutation);
+    setMessages([...messages, data.sendMessage]);
   };
 
   return (

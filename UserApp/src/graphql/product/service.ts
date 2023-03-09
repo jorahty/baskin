@@ -24,7 +24,7 @@ export class ProductService {
       }
     `;
 
-    const data = await request(
+    const data:{product:Product[]} = await request(
       'http://localhost:4002/graphql',
       query,
       { user, id, category },
@@ -43,7 +43,7 @@ export class ProductService {
       }
     `;
 
-    const data = await request(
+    const data:{addProduct:Product} = await request(
       'http://localhost:4002/graphql',
       mutation,
       { input: newProduct },
@@ -69,7 +69,7 @@ export class ProductService {
       }
     `;
 
-    const data = await request(
+    const data:{removeProduct:Product}  = await request(
       'http://localhost:4002/graphql',
       mutation,
       { id: id },

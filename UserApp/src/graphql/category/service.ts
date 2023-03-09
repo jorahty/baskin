@@ -11,7 +11,7 @@ export class CategoryService {
       }
     `;
 
-    const data = await request(
+    const data:{category: Category[]} = await request(
       'http://localhost:4002/graphql',
       query,
       { slug: slug },
@@ -29,7 +29,7 @@ export class CategoryService {
       }
     `;
 
-    const data = await request(
+    const data:{categoryChildren: Category[]} = await request(
       'http://localhost:4002/graphql',
       query,
       { slug: slug },
@@ -47,7 +47,7 @@ export class CategoryService {
       }
     `;
 
-    const data = await request(
+    const data:{categoryAncestors: Category[]} = await request(
       'http://localhost:4002/graphql',
       query,
       { slug: slug },
@@ -65,7 +65,7 @@ export class CategoryService {
       }
     `;
 
-    const data = await request(
+    const data:{categoryAttributes: Attribute[]} = await request(
       'http://localhost:4002/graphql',
       query,
       { slug: slug },

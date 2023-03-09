@@ -32,6 +32,7 @@
     "type-graphql": "*"
   },
   "scripts": {
+    "build": "tsc",
     "dev": "nodemon",
     "test": "jest --runInBand --coverage --verbose --forceExit",
     "lint": "eslint ./src/* --fix"

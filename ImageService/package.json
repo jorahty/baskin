@@ -29,6 +29,7 @@
     "uuid": "*"
   },
   "scripts": {
+    "build": "tsc",
     "swagger": "tsoa spec-and-routes",
     "predev": "npm run swagger",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",

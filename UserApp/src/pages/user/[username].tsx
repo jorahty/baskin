@@ -27,7 +27,7 @@ export default function UserPage({ user, products }: { user: User; products: Pro
     <Layout>
       <Stack p={3} gap={3} maxWidth={1200} m="auto">
         <UserDetails user={user} />
-        <ProductList products={products} showSearch={false} showSorter={false} />
+        <ProductList products={products} />
       </Stack>
     </Layout>
   );

@@ -34,7 +34,7 @@ export default function ProfileEdit() {
       },
     });
     const query = `mutation updateUsername { updateUsername(newName: "${username}") { username } }`;
-    const data = await graphQLClient.request(query);
+    const data:{updateUsername: {username:string}} = await graphQLClient.request(query);
     if (signedInUser) {
       const temp = signedInUser;
       temp.username = data.updateUsername.username;
@@ -51,7 +51,7 @@ export default function ProfileEdit() {
       if (!signedInUser) {
         return;
       } else {
-        let data;
+        let data:{user: string};
         if (regexUsername.test(username)) {
           const accessToken = signedInUser?.accessToken;
           const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {

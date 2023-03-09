@@ -1,6 +1,7 @@
 {
   "name": "baskin-webapp-admin",
   "scripts": {
+    "build": "next build",
     "dev": "next dev -p 3002",
     "lint": "next lint --fix",
     "test": "jest",

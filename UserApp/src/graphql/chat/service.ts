@@ -15,9 +15,9 @@ export class ChatService {
       }
     `;
 
-    const { chat: chats } = await request('http://localhost:4003/graphql', chatQuery, { username });
+    const data:{chat:Chat[]} = await request('http://localhost:4003/graphql', chatQuery, { username });
 
-    for await (const chat of chats) {
+    for await (const chat of data.chat) {
       const accountQuery = gql`
         query getAccountName($username: String) {
           user(username: $username) {
@@ -27,13 +27,14 @@ export class ChatService {
       `;
 
       for await (const member of chat.members) {
-        const { user } = await request('http://localhost:4000/graphql', accountQuery, {
-          username: member.username,
-        });
-        member.name = user[0].name;
+        const data:{user:{name:string}[]}
+          = await request('http://localhost:4000/graphql', accountQuery, {
+            username: member.username,
+          });
+        member.name = data.user[0].name;
       }
     }
 
-    return chats;
+    return data.chat;
   }
 }

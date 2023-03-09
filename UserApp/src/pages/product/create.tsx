@@ -16,11 +16,12 @@ import FormData from 'form-data';
 import ProductInputs from '../../components/common/ProductInputs';
 import ProductTextarea from '../../components/common/ProductTextarea';
 import { useAppContext } from '../../context';
+import { GetStaticProps } from 'next';
 
-export const getStaticProps = async ({ locale }) => {
+export const getStaticProps:GetStaticProps = async context => {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['common'])),
+      ...(await serverSideTranslations(context.locale as string ?? 'en', ['common'])),
     },
   };
 };
