@@ -70,7 +70,7 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('4951a289
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('19b2a9dc-b085-41d1-970a-69a2b1cbd8e1', 'anna_admin', 'electronics', '{"name": "Canon EOS R6", "quantity": 1,"price": 1000, "discount": 0, "description": "Used but no damage, has about 20,000 shutter count. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2022-01-19T02:43:08.000Z", "pictures": ["84bb26c6-1172-4fff-bc34-80cdd697b8f4"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('0ce2da04-d05d-46cf-8602-ae58ab7ec215', 'anna_admin', 'sports', '{"name": "Surfboard", "quantity": 4,"price": 400, "discount": 0, "description": "Brand new custom made surf boards, different size. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2022-02-09T00:15:08.000Z", "pictures": ["6d1dd747-8172-4dd1-88b9-093dde1ba612"]}');
 
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'molly_member', 'vehicles', '{"name": "Used Car", "quantity": 2,"price": 12000, "discount": 0, "description": "Low mileage, excellent condition", "date": "2023-02-09T06:43:08.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'molly_member', 'vehicles', '{"name": "Electric Skateboard", "quantity": 2,"price": 480, "discount": 0, "description": "20-mile range, battery and remote included", "date": "2023-02-09T06:43:08.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'anna_admin', 'boats', '{"name": "Sailing Yacht", "quantity": 1,"price": 50000, "discount": 0, "description": "Classic beauty, fully restored", "date": "2023-02-10T09:12:47.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'mia_moderator', 'sailboats', '{"name": "Racing Sailboat", "quantity": 1,"price": 75000, "discount": 0, "description": "Fast and sleek, perfect for competitions", "date": "2023-02-11T16:20:15.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'molly_member', 'cars', '{"name": "Sports Car", "quantity": 1,"price": 90000, "discount": 0, "description": "Brand new, top of the line model", "date": "2023-02-12T18:59:33.000Z", "pictures": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
@@ -121,8 +121,8 @@ DELETE FROM attribute;
 INSERT INTO attribute (id, category_slug, data) VALUES ('X0bZdioM6D', 'vehicles', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Model year", "type": "number", "min": 1886, "max": 2023 }');
 INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Miles driven", "type": "number", "min": 0, "step": 100 }');
-INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel"] }');
-INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Top speed", "type": "number", "min": 5, "max": 300, "step": 5 }');
+INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel", "Other"] }');
+INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Top speed", "type": "number", "min": 5, "max": 300, "step": 5, symbol: "mph" }');
 
 INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Transmission type", "type": "set", "values": ["Automatic", "Manual"] }');
 INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Seats", "type": "number", "min": 1, "max": 10 }');
@@ -159,4 +159,15 @@ INSERT INTO attribute (category_slug, data) VALUES ('shoes', '{ "name": "Size", 
 
 DELETE FROM attribute_value;
 
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('b5a1c785-fd9e-4482-bf77-5d5b51a5b91e', 'dCdFfnYJ3A', '{ "value": 10 }');
+-- Racing Sailboat
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'X0bZdioM6D', '{ "value": "New" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 't6guOpyORQ', '{ "value": 2017 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'UM9PPU64GB', '{ "value": 40000 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'VuLNBGpP7Z', '{ "value": "Other" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'Iwiw1QLbXP', '{ "value": 80 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '3GZ3ozPoCS', '{ "value": 10 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '4gDdn60Dbd', '{ "value": 10 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'iiAoJcJ5RH', '{ "value": 10 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'R2BDfhnUXF', '{ "value": 10 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '767cAm6pTR', '{ "value": 10 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '6B1BUxiIys', '{ "value": 10 }');
