@@ -18,6 +18,20 @@ const renderView = async () => {
   );
 };
 
+jest.mock('../../../../../context', () => ({
+  useAppContext: () => ({
+    refinement: {
+      search: '',
+      sort: 'date-new',
+      filters: [
+        { id: '1', selection: undefined },
+        { id: '2', selection: undefined },
+      ],
+    },
+    setRefinement: () => (null),
+  }),
+}));
+
 test('Renders', async () => {
   renderView();
 });

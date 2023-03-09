@@ -1,3 +1,4 @@
+import { useAppContext } from '../../context';
 import { Attribute } from '@/graphql/category/schema';
 import { Button, GlobalStyles, Stack, Typography, useColorScheme } from '@mui/joy';
 import { ChangeEvent } from 'react';
@@ -7,17 +8,28 @@ interface Props {
 }
 
 export default function AttributeColor({ attribute }: Props) {
+  const { refinement, setRefinement } = useAppContext();
   const { mode } = useColorScheme();
 
   const handleChange = (
     { target: { value } }: ChangeEvent<HTMLInputElement>
   ) => {
-    console.log('change!', value);
+    const filters = refinement.filters.map(filter => {
+      if (filter.id !== attribute.id) return filter;
+      return {
+        id: filter.id,
+        selection: value,
+      };
+    });
+    setRefinement({
+      ...refinement,
+      filters: filters,
+    });
   };
 
   const defaultColor = mode === 'light' ? '#F7F7F8' : '#09090D';
 
-  const selection = null; // this will be the filter selection
+  const selection = refinement?.filters.find(filter => filter.id === attribute.id)?.selection;
 
   return (
     <Stack direction="row" alignItems="center" gap={1}>
