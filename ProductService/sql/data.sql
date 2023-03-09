@@ -124,10 +124,10 @@ INSERT INTO attribute (id, category_slug, data) VALUES ('UM9PPU64GB', 'vehicles'
 INSERT INTO attribute (id, category_slug, data) VALUES ('VuLNBGpP7Z', 'vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel", "Other"] }');
 INSERT INTO attribute (id, category_slug, data) VALUES ('Iwiw1QLbXP', 'vehicles', '{ "name": "Top speed", "type": "number", "min": 5, "max": 300, "step": 5, "symbol": "mph" }');
 
-INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Transmission type", "type": "set", "values": ["Automatic", "Manual"] }');
-INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Seats", "type": "number", "min": 1, "max": 10 }');
-INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Interior", "type": "color" }');
-INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Exterior", "type": "color" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('ni6pEhjovT', 'cars', '{ "name": "Transmission type", "type": "set", "values": ["Automatic", "Manual"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('7O5s6eKwwh', 'cars', '{ "name": "Seats", "type": "number", "min": 1, "max": 10 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('lRriZmW7bx', 'cars', '{ "name": "Interior", "type": "color" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('QxCtZcsWVh', 'cars', '{ "name": "Exterior", "type": "color" }');
 
 INSERT INTO attribute (id, category_slug, data) VALUES ('S8xteMD6V5', 'motorcycles', '{ "name": "Color", "type": "color" }');
 
@@ -191,3 +191,14 @@ INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'Iwiw1QLbXP', '{ "value": 125 }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'S8xteMD6V5', '{ "value": "#ff0000" }');
+
+-- Pickup Truck
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'X0bZdioM6D', '{ "value": "Used" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 't6guOpyORQ', '{ "value": 2006 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'UM9PPU64GB', '{ "value": 150000 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'Iwiw1QLbXP', '{ "value": 95 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'ni6pEhjovT', '{ "value": "Manual" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', '7O5s6eKwwh', '{ "value": 2 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'lRriZmW7bx', '{ "value": "#000080" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'QxCtZcsWVh', '{ "value": "#ffffff" }');
