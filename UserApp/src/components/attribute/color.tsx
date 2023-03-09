@@ -59,9 +59,11 @@ export default function AttributeColor({ attribute }: Props) {
           border: 'none',
         }}
       />
-      <Button size="sm" variant="plain">
-        Clear
-      </Button>
-    </Stack>
+      {selection &&
+        <Button size="sm" variant="plain">
+          Clear
+        </Button>
+      }
+      </Stack>
   );
 }

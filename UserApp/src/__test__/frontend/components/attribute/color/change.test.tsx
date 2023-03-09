@@ -24,7 +24,7 @@ jest.mock('../../../../../context', () => ({
       search: '',
       sort: 'date-new',
       filters: [
-        { id: '1', selection: undefined },
+        { id: '1', selection: '#00ff00' },
         { id: '2', selection: undefined },
       ],
     },
@@ -40,4 +40,11 @@ test('Change Color', async () => {
   renderView();
   const input = screen.getByLabelText('color-input');
   fireEvent.change(input, { target: { value: '#ff0000' } });
+});
+
+test('Clear Color', async () => {
+  renderView();
+  const input = screen.getByLabelText('color-input');
+  fireEvent.change(input, { target: { value: '#ff0000' } });
+  fireEvent.click(await screen.findByText('Clear'));
 });
