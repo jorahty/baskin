@@ -14,7 +14,8 @@ import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 import Button from '@mui/joy/Button';
 import { useAppContext } from '../../context';
 import { gql, GraphQLClient } from 'graphql-request';
-
+import EditIcon from '@mui/icons-material/Edit';
+import EditAttributeModal from './EditAttributeModal';
 
 // Reference: https://codesandbox.io/s/6bmeke?file=/components/OrderTable.tsx:7018-12425
 // Reference: https://mui.com/joy-ui/react-menu/
@@ -23,7 +24,9 @@ export default function AttributeTable({ attributes, setAttributes }:
   { attributes: Attribute[], setAttributes: React.Dispatch<React.SetStateAction<Attribute[]>>}) {
   const { signedInUser } = useAppContext();
   const [attributeList, setAttributeList] = React.useState<Attribute[]>([]);
+  const [currentAttribute, setCurrentAttribute] = React.useState<Attribute>();
   const [open, setOpen] = React.useState(false);
+  const [edit, setEdit] = React.useState(false);
   const [attribute, setAttribute] = React.useState('');
 
   const handleOpen = (id: string) => {
@@ -34,6 +37,11 @@ export default function AttributeTable({ attributes, setAttributes }:
   const handleClose = () => {
     setOpen(false);
     setAttribute('');
+  };
+
+  const handleEdit = (attribute: Attribute) => {
+    setCurrentAttribute(attribute);
+    setEdit(true);
   };
 
   const handleDelete = async () => {
@@ -97,12 +105,9 @@ export default function AttributeTable({ attributes, setAttributes }:
             <th style={{ width: '7.5%', padding: 12 }}>Max</th>
             <th style={{ width: '7.5%', padding: 12 }}>Step</th>
             <th style={{ width: '7.5%', padding: 12 }}>Symbol</th>
-            <th style={{ width: '30%', padding: 12 }}>Values</th>
+            <th style={{ width: '25%', padding: 12 }}>Values</th>
             <th style={{ width: '5%', padding: 12 }} />
-            <th
-              aria-label="last"
-              style={{ width: 'var(--Table-lastColumnWidth)' }}
-            />
+            <th style={{ width: '5%', padding: 12 }} />
           </tr>
         </thead>
         <tbody>
@@ -133,6 +138,14 @@ export default function AttributeTable({ attributes, setAttributes }:
                 {row.values?.map((value:string) => (
                   <Chip key={value} sx={{ margin: '2px' }} variant="soft" color="neutral">{value}</Chip>
                 ))}
+              </td>
+              <td>
+                <IconButton aria-label={'edit-'+row.id}
+                  onClick={() => handleEdit(row)}
+                  sx={{ borderRadius: '50%' }}
+                  size="sm" color="neutral">
+                  <EditIcon />
+                </IconButton>
               </td>
               <td>
                 <IconButton aria-label={'delete-'+row.id}
@@ -173,6 +186,9 @@ export default function AttributeTable({ attributes, setAttributes }:
           </Box>
         </ModalDialog>
       </Modal>
+      {currentAttribute &&
+        <EditAttributeModal attribute={currentAttribute} open={edit} setOpen={setEdit} />
+      }
     </Sheet>
   );
 }

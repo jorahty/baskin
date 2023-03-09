@@ -1,11 +1,11 @@
 import { ArgsType, Field, ObjectType, InputType } from 'type-graphql';
 import { Matches, Length, MinLength } from 'class-validator';
-import { regexSlug, regexUUID } from '../regex';
+import { regexSlug } from '../regex';
 
 @ObjectType()
 export class Attribute {
   @Field()
-  @Matches(regexUUID)
+  @Length(10)
     id!: string;
   @Field()
   @Matches(regexSlug)
@@ -53,6 +53,33 @@ export class NewAttribute {
   @Length(1, 32)
     name!: string;
   @Field()
+  @Length(1, 32)
+    type!: string;
+  @Field({ nullable: true })
+    min?: number;
+  @Field({ nullable: true })
+    max?: number;
+  @Field({ nullable: true })
+    step?: number;
+  @Field({ nullable: true })
+  @Length(1, 8)
+    symbol?: string;
+  @Field(() => [String], { nullable: true })
+    values?: string[];
+}
+
+@ObjectType()
+@InputType('EditAttributeInput')
+export class EditAttribute {
+  @Field()
+  @Length(10)
+    id!: string;
+  @Field({ nullable: true })
+    category!: string;
+  @Field({ nullable: true })
+  @Length(1, 32)
+    name!: string;
+  @Field({ nullable: true })
   @Length(1, 32)
     type!: string;
   @Field({ nullable: true })

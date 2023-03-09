@@ -40,7 +40,6 @@ export default function AttributePage() {
 
   const [open, setOpen] = useState(false);
 
-  const [focus, setFocus] = useState(false);
   const [category, setCategory] = useState('');
   const [type, setType] = useState('');
   const [selections, setSelections] = useState<string[]>([]);
@@ -48,8 +47,7 @@ export default function AttributePage() {
 
 
   const handleAdd = () => {
-    if (!selections.includes(newSelection) || newSelection != '') {
-      setFocus(true);
+    if (!selections.includes(newSelection) && newSelection != '') {
       setSelections(selections.concat([newSelection]));
       setNewSelection('');
     }
@@ -187,7 +185,7 @@ export default function AttributePage() {
           sx={{ width: 750 }}
         >
           <Typography id="basic-modal-dialog-title" component="h2">
-            Create new category
+            Create new attribute
           </Typography>
           <Typography id="basic-modal-dialog-description" textColor="text.tertiary">
             Fill in the information of the category.
@@ -209,7 +207,7 @@ export default function AttributePage() {
               <FormControl>
                 <FormLabel>Attribute Name</FormLabel>
                 <Input name="name" aria-label="name"
-                  placeholder="Enter a name…" autoFocus={!focus} required />
+                  placeholder="Enter a name…" autoFocus required />
               </FormControl>
               <FormControl>
                 <FormLabel>Category</FormLabel>
@@ -311,7 +309,7 @@ export default function AttributePage() {
                 <Input name="selection" aria-label="selection"
                   value={newSelection}
                   onChange={e => setNewSelection(e.target.value)}
-                  placeholder="Enter a selection" autoFocus={focus}
+                  placeholder="Enter a selection"
                   endDecorator={
                     <IconButton type="button" onClick={handleAdd}
                       aria-label="add-selection"

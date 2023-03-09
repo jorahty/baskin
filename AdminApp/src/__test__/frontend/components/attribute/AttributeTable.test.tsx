@@ -128,3 +128,13 @@ test('Esapce delete attribute', async () => {
     charCode: 27,
   });
 });
+
+test('Click edit attribute', async () => {
+  localStorage.setItem(
+    'user',
+    `{"username":"molly_member","accessToken":"blergh","name":"Molly Member"}`,
+  );
+
+  await renderView();
+  fireEvent.click(await screen.findByLabelText('edit-X0bZdioM6D'));
+});

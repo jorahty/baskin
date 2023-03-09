@@ -4,6 +4,7 @@ import {
   AttributeArgs,
   RemoveAttributeArgs,
   NewAttribute,
+  EditAttribute,
 } from './schema';
 import { AttributeService } from './service';
 
@@ -24,6 +25,13 @@ export class AttributeResolver {
     @Arg('input') input: NewAttribute,
   ): Promise<Attribute> {
     return new AttributeService().add(input);
+  }
+
+  @Mutation(() => Attribute)
+  async editAttribute(
+    @Arg('input') input: EditAttribute,
+  ): Promise<Attribute> {
+    return new AttributeService().edit(input);
   }
 
   @Authorized()
