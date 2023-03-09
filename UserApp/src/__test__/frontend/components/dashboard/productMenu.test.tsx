@@ -91,3 +91,4 @@ test('Click new button', async () => {
   await renderView();
   fireEvent.click(screen.getByLabelText('Add Product'));
 });
+

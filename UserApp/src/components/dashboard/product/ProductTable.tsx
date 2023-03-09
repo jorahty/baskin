@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Sheet, Table, Typography, Avatar } from '@mui/joy';
+import { Button, Sheet, Table, Typography, Avatar, Modal, ModalDialog, ModalClose } from '@mui/joy';
 import { Product } from '../../../graphql/product/schema';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/joy/Menu';
@@ -11,14 +11,17 @@ import DeleteForever from '@mui/icons-material/DeleteForever';
 import { useAppContext } from '../../../context';
 import { GraphQLClient, gql } from 'graphql-request';
 import { useTranslation } from 'next-i18next';
+import ProductEdit from '../../../components/dashboard/product/ProductEdit';
 
 // Reference: https://codesandbox.io/s/6bmeke?file=/components/OrderTable.tsx:7018-12425
 // Reference: https://mui.com/joy-ui/react-menu/
 
 export default function ProductTable({ products }: { products: Product[] }) {
   const { signedInUser } = useAppContext();
+  const [modalOpen, setModalOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [product, setProduct] = React.useState('');
+  const [selectedProduct, setSelectedProduct] = React.useState<Product>();
   const [productList, setProductList] = React.useState<Product[]>([]);
   const open = Boolean(anchorEl);
 
@@ -28,8 +31,13 @@ export default function ProductTable({ products }: { products: Product[] }) {
     setProductList(products);
   }, [products]);
 
-  const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, product: string) => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    product: string,
+    productObj?: Product,
+  ) => {
     setProduct(product);
+    if (productObj) setSelectedProduct(productObj);
     setAnchorEl(event.currentTarget);
   };
 
@@ -83,7 +91,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
           </tr>
         </thead>
         <tbody>
-          {productList.map((row: Product) => (
+          {productList.map((row: Product, index: number) => (
             <tr key={row.id}>
               <td>
                 <Avatar
@@ -101,8 +109,8 @@ export default function ProductTable({ products }: { products: Product[] }) {
                 <Button
                   variant="plain"
                   color="neutral"
-                  aria-label="menu"
-                  onClick={event => handleClick(event, row.id)}
+                  aria-label={`menu-${index}`}
+                  onClick={event => handleClick(event, row.id, row)}
                 >
                   <MoreVertIcon />
                 </Button>
@@ -119,7 +127,13 @@ export default function ProductTable({ products }: { products: Product[] }) {
         aria-labelledby="positioned-demo-button"
         placement="bottom-end"
       >
-        <MenuItem onClick={handleClose} aria-label="edit">
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            setModalOpen(true);
+          }}
+          aria-label="edit"
+        >
           <ListItemDecorator>
             <Edit />
           </ListItemDecorator>{' '}
@@ -133,6 +147,18 @@ export default function ProductTable({ products }: { products: Product[] }) {
           Delete
         </MenuItem>
       </Menu>
+
+      <Modal
+        aria-labelledby="modal-title"
+        aria-describedby="modal-desc"
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+      >
+        <ModalDialog layout={'fullscreen'} style={{ overflow: 'scroll' }}>
+          <ModalClose aria-label={'modal-close'} />
+          {selectedProduct && <ProductEdit product={selectedProduct} />}
+        </ModalDialog>
+      </Modal>
     </Sheet>
   );
 }
