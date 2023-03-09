@@ -1,6 +1,6 @@
 import { ArgsType, Field, ObjectType, InputType } from 'type-graphql';
 import { Matches, Length, MinLength } from 'class-validator';
-import { regexSlug, regexUUID } from '../regex';
+import { regexSlug } from '../regex';
 
 @ObjectType()
 export class Attribute {
