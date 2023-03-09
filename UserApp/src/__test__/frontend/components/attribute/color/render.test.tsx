@@ -1,7 +1,7 @@
 import { Attribute } from '@/graphql/category/schema';
 import { useColorScheme } from '@mui/joy';
 import { render } from '@testing-library/react';
-import AttributeColor from '../../../../components/attribute/color';
+import AttributeColor from '../../../../../components/attribute/color';
 
 const attribute = {
   id: '1',

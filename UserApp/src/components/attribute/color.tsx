@@ -1,5 +1,6 @@
 import { Attribute } from '@/graphql/category/schema';
 import { Button, GlobalStyles, Stack, Typography, useColorScheme } from '@mui/joy';
+import { ChangeEvent } from 'react';
 
 interface Props {
   attribute: Attribute;
@@ -7,6 +8,16 @@ interface Props {
 
 export default function AttributeColor({ attribute }: Props) {
   const { mode } = useColorScheme();
+
+  const handleChange = (
+    { target: { value } }: ChangeEvent<HTMLInputElement>
+  ) => {
+    console.log('change!', value);
+  };
+
+  const defaultColor = mode === 'light' ? '#F7F7F8' : '#09090D';
+
+  const selection = null; // this will be the filter selection
 
   return (
     <Stack direction="row" alignItems="center" gap={1}>
@@ -25,8 +36,10 @@ export default function AttributeColor({ attribute }: Props) {
         }}
       />
       <input
+        aria-label="color-input"
+        onChange={handleChange}
         type="color"
-        value={ mode === 'light' ? '#F7F7F8' : '#09090D' }
+        value={selection || defaultColor}
         style={{
           width: 50,
           height: 50,
