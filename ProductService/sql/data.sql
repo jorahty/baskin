@@ -161,62 +161,62 @@ DELETE FROM attribute_value;
 
 -- Racing Sailboat
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'X0bZdioM6D', '{ "value": "New" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 't6guOpyORQ', '{ "value": 2017 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'UM9PPU64GB', '{ "value": 40000 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 't6guOpyORQ', '{ "value": "2017" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'UM9PPU64GB', '{ "value": "40000" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'VuLNBGpP7Z', '{ "value": "Other" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'Iwiw1QLbXP', '{ "value": 80 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '3GZ3ozPoCS', '{ "value": 30 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'Iwiw1QLbXP', '{ "value": "80" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '3GZ3ozPoCS', '{ "value": "30" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '4gDdn60Dbd', '{ "value": "#ffffff" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'iiAoJcJ5RH', '{ "value": "#ffffff" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'R2BDfhnUXF', '{ "value": "Aluminum" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '767cAm6pTR', '{ "value": 11 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '767cAm6pTR', '{ "value": "11" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '6B1BUxiIys', '{ "value": "Dacron" }');
 
 -- Island Yacht
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'X0bZdioM6D', '{ "value": "Used" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 't6guOpyORQ', '{ "value": 2014 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'UM9PPU64GB', '{ "value": 60000 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 't6guOpyORQ', '{ "value": "2014" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'UM9PPU64GB', '{ "value": "60000" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'Iwiw1QLbXP', '{ "value": 40 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', '3GZ3ozPoCS', '{ "value": 200 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'Iwiw1QLbXP', '{ "value": "40" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', '3GZ3ozPoCS', '{ "value": "200" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', '4gDdn60Dbd', '{ "value": "#ffffff" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'iiAoJcJ5RH', '{ "value": "#ffffff" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', 'R2BDfhnUXF', '{ "value": "Steel" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', '767cAm6pTR', '{ "value": 50 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('0dc12e27-cc41-4d8a-a2c4-08044cb2a1a8', '767cAm6pTR', '{ "value": "50" }');
 
 -- Harley Davidson
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'X0bZdioM6D', '{ "value": "New" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 't6guOpyORQ', '{ "value": 2019 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'UM9PPU64GB', '{ "value": 0 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 't6guOpyORQ', '{ "value": "2019" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'UM9PPU64GB', '{ "value": "0" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'Iwiw1QLbXP', '{ "value": 125 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'Iwiw1QLbXP', '{ "value": "125" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6a33d0d7-6e9a-497a-8b52-6e0c6c51004e', 'S8xteMD6V5', '{ "value": "#ff0000" }');
 
 -- Pickup Truck
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'X0bZdioM6D', '{ "value": "Used" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 't6guOpyORQ', '{ "value": 2006 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'UM9PPU64GB', '{ "value": 150000 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 't6guOpyORQ', '{ "value": "2006" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'UM9PPU64GB', '{ "value": "150000" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'Iwiw1QLbXP', '{ "value": 95 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'Iwiw1QLbXP', '{ "value": "95" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'ni6pEhjovT', '{ "value": "Manual" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', '7O5s6eKwwh', '{ "value": 2 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', '7O5s6eKwwh', '{ "value": "2" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'lRriZmW7bx', '{ "value": "#000080" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('343f8d01-92b9-4e23-9c4b-8c4d29a470a5', 'QxCtZcsWVh', '{ "value": "#ffffff" }');
 
 -- Sports Car
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'X0bZdioM6D', '{ "value": "New" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 't6guOpyORQ', '{ "value": 2020 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'UM9PPU64GB', '{ "value": 0 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 't6guOpyORQ', '{ "value": "2020" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'UM9PPU64GB', '{ "value": "0" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'VuLNBGpP7Z', '{ "value": "Electric" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'Iwiw1QLbXP', '{ "value": 216 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'Iwiw1QLbXP', '{ "value": "216" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'ni6pEhjovT', '{ "value": "Automatic" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', '7O5s6eKwwh', '{ "value": 5 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', '7O5s6eKwwh', '{ "value": "5" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'lRriZmW7bx', '{ "value": "#000000" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('c8e8c29b-83b3-4cf7-8d1f-65afae0b1911', 'QxCtZcsWVh', '{ "value": "#ff00ff" }');
 
 -- Electric Skateboard
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'X0bZdioM6D', '{ "value": "New" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 't6guOpyORQ', '{ "value": 2023 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'UM9PPU64GB', '{ "value": 0 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 't6guOpyORQ', '{ "value": "2023" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'UM9PPU64GB', '{ "value": "0" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'VuLNBGpP7Z', '{ "value": "Electric" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'Iwiw1QLbXP', '{ "value": 25 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'Iwiw1QLbXP', '{ "value": "25" }');

@@ -31,6 +31,18 @@ export class Product {
   @Field(() => [String])
   @MinLength(1)
     pictures!: string[];
+  @Field(() => [AttributeValue], { nullable: true })
+    attributes!: AttributeValue[];
+}
+
+@ObjectType()
+class AttributeValue {
+  @Field()
+  @Length(10)
+    id!: string;
+  @Field()
+  @Length(1, 32)
+    value!: string;
 }
 
 @ArgsType()
