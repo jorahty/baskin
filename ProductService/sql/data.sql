@@ -119,10 +119,10 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('e3d53512
 DELETE FROM attribute;
 
 INSERT INTO attribute (id, category_slug, data) VALUES ('X0bZdioM6D', 'vehicles', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
-INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Model year", "type": "number", "min": 1886, "max": 2023 }');
-INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Miles driven", "type": "number", "min": 0, "step": 100 }');
-INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel", "Other"] }');
-INSERT INTO attribute (category_slug, data) VALUES ('vehicles', '{ "name": "Top speed", "type": "number", "min": 5, "max": 300, "step": 5, symbol: "mph" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('t6guOpyORQ', 'vehicles', '{ "name": "Model year", "type": "number", "min": 1886, "max": 2023 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('UM9PPU64GB', 'vehicles', '{ "name": "Miles driven", "type": "number", "min": 0, "step": 100 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('VuLNBGpP7Z', 'vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel", "Other"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('Iwiw1QLbXP', 'vehicles', '{ "name": "Top speed", "type": "number", "min": 5, "max": 300, "step": 5, "symbol": "mph" }');
 
 INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Transmission type", "type": "set", "values": ["Automatic", "Manual"] }');
 INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Seats", "type": "number", "min": 1, "max": 10 }');
@@ -131,13 +131,13 @@ INSERT INTO attribute (category_slug, data) VALUES ('cars', '{ "name": "Exterior
 
 INSERT INTO attribute (category_slug, data) VALUES ('motorcycles', '{ "name": "Color", "type": "color" }');
 
-INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Length", "type": "number", "min": 1, "max": 300, "symbol": "ft" }');
-INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Interior", "type": "color" }');
-INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Exterior", "type": "color" }');
-INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Hull material", "type": "set", "values": ["Steel", "Aluminum", "Fiberglass", "Plastic", "Wood"] }');
-INSERT INTO attribute (category_slug, data) VALUES ('boats', '{ "name": "Passenger capacity", "type": "number", "min": 1, "max": 100 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('3GZ3ozPoCS', 'boats', '{ "name": "Length", "type": "number", "min": 1, "max": 300, "symbol": "ft" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('4gDdn60Dbd', 'boats', '{ "name": "Interior", "type": "color" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('iiAoJcJ5RH', 'boats', '{ "name": "Exterior", "type": "color" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('R2BDfhnUXF', 'boats', '{ "name": "Hull material", "type": "set", "values": ["Steel", "Aluminum", "Fiberglass", "Plastic", "Wood"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('767cAm6pTR', 'boats', '{ "name": "Passenger capacity", "type": "number", "min": 1, "max": 100 }');
 
-INSERT INTO attribute (category_slug, data) VALUES ('sailboats', '{ "name": "Sail material", "type": "set", "values": ["Dacron", "Kevlar", "Carbon fiber", "Spectra", "Technora", "Vectran"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('6B1BUxiIys', 'sailboats', '{ "name": "Sail material", "type": "set", "values": ["Dacron", "Kevlar", "Carbon fiber", "Spectra", "Technora", "Vectran"] }');
 
 INSERT INTO attribute (id, category_slug, data) VALUES ('dCdFfnYJ3A', 'property', '{ "name": "Bedrooms", "type": "number", "min": 0, "max": 20 }');
 INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Bathrooms", "type": "number", "min": 0, "max": 20 }');
@@ -165,9 +165,9 @@ INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'UM9PPU64GB', '{ "value": 40000 }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'VuLNBGpP7Z', '{ "value": "Other" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'Iwiw1QLbXP', '{ "value": 80 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '3GZ3ozPoCS', '{ "value": 10 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '4gDdn60Dbd', '{ "value": 10 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'iiAoJcJ5RH', '{ "value": 10 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'R2BDfhnUXF', '{ "value": 10 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '767cAm6pTR', '{ "value": 10 }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '6B1BUxiIys', '{ "value": 10 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '3GZ3ozPoCS', '{ "value": 30 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '4gDdn60Dbd', '{ "value": "#ffffff" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'iiAoJcJ5RH', '{ "value": "#ffffff" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', 'R2BDfhnUXF', '{ "value": "Steel" }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '767cAm6pTR', '{ "value": 11 }');
+INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('905ee7b9-3b15-48d3-a03c-7a75f4969822', '6B1BUxiIys', '{ "value": "Dacron" }');
