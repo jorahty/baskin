@@ -46,6 +46,7 @@ export default function ProductMenu() {
 
       setProducts(data.product);
     };
+
     fetchData();
   }, [signedInUser]);
 

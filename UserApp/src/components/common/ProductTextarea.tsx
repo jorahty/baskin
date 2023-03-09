@@ -5,13 +5,7 @@ import Textarea from '@mui/joy/Textarea';
 import * as React from 'react';
 import { TFunction } from 'i18next';
 
-export default function ProductTextarea({
-  t,
-  data,
-}: {
-  t: TFunction<'common', undefined, 'common'>;
-  data?: string;
-}) {
+export default function ProductTextarea({ t }: { t: TFunction<'common', undefined, 'common'> }) {
   return (
     <Grid xs={16} md={10}>
       <FormControl required style={{ height: '100%' }}>
@@ -23,7 +17,6 @@ export default function ProductTextarea({
           minRows={8}
           maxRows={8}
           style={{ height: '100%' }}
-          defaultValue={data}
         />
       </FormControl>
     </Grid>
