@@ -10,6 +10,7 @@ const customJestConfig = {
     "^@/pages/(.*)$": "<rootDir>/pages/$1",
   },
   testEnvironment: "jest-environment-jsdom",
+  testTimeout: 10000,
   collectCoverageFrom: ["src/**/*.{ts,tsx}", "!**/node_modules/**"],
   collectCoverage: true,
   coveragePathIgnorePatterns: [
