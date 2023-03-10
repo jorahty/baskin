@@ -1,48 +1,24 @@
 import * as React from 'react';
-import { CssVarsProvider } from '@mui/joy/styles';
-import { Container, Typography } from '@mui/joy';
-import Button from '@mui/joy/Button';
-import Grid from '@mui/material/Unstable_Grid2';
-import Box from '@mui/joy/Box';
 import { gql, GraphQLClient } from 'graphql-request';
 import Router from 'next/router';
 import Layout from '../../components/layout/Layout';
-import ProductImageList from '../../components/common/ProductImageList';
 import AuthGuard from '../../components/common/AuthGuard';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import fetch from 'node-fetch';
 import FormData from 'form-data';
-import ProductInputs from '../../components/common/ProductInputs';
-import ProductTextarea from '../../components/common/ProductTextarea';
 import { useAppContext } from '../../context';
-import { GetStaticProps } from 'next';
+import CreateLayout from '../../components/layout/CreateLayout';
 
-export const getStaticProps:GetStaticProps = async context => {
+export const getStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale as string ?? 'en', ['common'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['common'])),
     },
   };
 };
 
-interface FormElements extends HTMLFormControlsCollection {
-  name: HTMLInputElement;
-  description: HTMLInputElement;
-  quantity: HTMLInputElement;
-  price: HTMLInputElement;
-}
-
-interface ProductFormElement extends HTMLFormElement {
-  readonly elements: FormElements;
-}
-
 export default function Create() {
-  const [category, setCategory] = React.useState('Choose Category');
-  const [images, setImages] = React.useState<File[]>([]);
-
   const { signedInUser } = useAppContext();
-  const { t } = useTranslation('common');
 
   const handleCancel = () => {
     Router.push({
@@ -50,17 +26,16 @@ export default function Create() {
     });
   };
 
-  const handleCreate = async (
+  async function handleCreate(
     name: string,
     description: string,
     price: number,
     category: string,
     quantity: number,
-    images: File[],
-  ) => {
-    // const bearerToken = signedInUser?.accessToken;
+    pictures: File[],
+  ) {
     const formData: FormData = new FormData();
-    images.map((picture: File) => {
+    pictures.map((picture: File) => {
       formData.append('files', picture, picture.name);
     });
 
@@ -69,86 +44,45 @@ export default function Create() {
       body: formData,
     });
 
-    const imagesIdArr: string[] = await imageData.json();
+    const picturesIdArr: string[] = await imageData.json();
 
-    const graphQLClient = new GraphQLClient('http://localhost:4002/graphql', {
-      // headers: {
-      //   Authorization: `Bearer ${bearerToken}`,
-      // },
-    });
+    const graphQLClient = new GraphQLClient('http://localhost:4002/graphql');
     const query = gql`
-        mutation addProduct {
-            addProduct (input: {
-                user: "${signedInUser?.username}",
-                name: "${name}",
-                description: "${description}",
-                price: ${price},
-                category: "${category}",
-                quantity: ${quantity},
-                images: [${imagesIdArr.map((p: string) => `"${p}"`)}],
-                discount: 0,
-            }) {id}
-        }
+      mutation addProduct {
+        addProduct (input: {
+          user: "${signedInUser?.username}",
+          name: "${name}",
+          description: "${description}",
+          price: ${price},
+          category: "${category}",
+          quantity: ${quantity},
+          imagesgit: [${picturesIdArr.map((p: string) => `"${p}"`)}],
+          discount: 0,
+        }) {id}
+      }
     `;
 
     await graphQLClient
       .request(query)
-      .then(() => Router.push({
-        pathname: '/',
-      }),
+      .then(() =>
+        Router.push({
+          pathname: '/',
+        }),
       )
       .catch(() => {
-        imagesIdArr.forEach((pic: string) => {
+        picturesIdArr.forEach((pic: string) => {
           fetch(`http://localhost:4001/api/v0/image/${pic}`, {
             method: 'DELETE',
           });
         });
         alert('Error creating product, Try again');
       });
-  };
+  }
 
   return (
     <AuthGuard>
       <Layout>
-        <CssVarsProvider>
-          <Container style={{ margin: '50px auto' }}>
-            <Typography aria-label="Create New Product" component="h2" fontSize="xl3" fontWeight="lg">
-              {t('createNewProduct.title')}
-            </Typography>
-          </Container>
-          <Container style={{ paddingBottom: 50 }}>
-            <form
-              onSubmit={(event: React.FormEvent<ProductFormElement>) => {
-                event.preventDefault();
-                const formElements = event.currentTarget.elements;
-                handleCreate(
-                  formElements.name.value,
-                  formElements.description.value,
-                  parseFloat(formElements.price.value),
-                  category,
-                  parseInt(formElements.quantity.value),
-                  images,
-                );
-              }}
-            >
-              <ProductImageList updatedImages={setImages} />
-
-              <Grid container spacing={2} columns={16} sx={{ flexGrow: 1 }}>
-                <ProductInputs t={t} setCategory={setCategory} />
-
-                <ProductTextarea t={t} />
-              </Grid>
-              <Box sx={{ display: 'flex', gap: 2, marginTop: { xs: 5, md: 10 } }}>
-                <Button onClick={handleCancel} fullWidth aria-label="cancel" variant="soft">
-                  {t('createNewProduct.form.cancel')}
-                </Button>
-                <Button type="submit" fullWidth aria-label="create">
-                  {t('createNewProduct.form.create')}
-                </Button>
-              </Box>
-            </form>
-          </Container>
-        </CssVarsProvider>
+        <CreateLayout handleCreate={handleCreate} handleCancel={handleCancel} />
       </Layout>
     </AuthGuard>
   );

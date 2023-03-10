@@ -28,7 +28,7 @@ export class ProductService {
               'name', (attribute.data ->> 'name'),
               'value', (attribute_value.data ->> 'value'),
               'symbol', (attribute.data ->> 'symbol')
-            )) FROM attribute_value 
+            )) FROM attribute_value
             JOIN attribute ON attribute_value.attribute_id = attribute.id
             WHERE product_id = p.id
           ), '[]'::jsonb)
@@ -55,7 +55,7 @@ export class ProductService {
             'name', (attribute.data ->> 'name'),
             'value', (attribute_value.data ->> 'value'),
             'symbol', (attribute.data ->> 'symbol')
-          )) FROM attribute_value 
+          )) FROM attribute_value
           JOIN attribute ON attribute_value.attribute_id = attribute.id
           WHERE product_id = product.id
         ), '[]'::jsonb)
@@ -75,6 +75,35 @@ export class ProductService {
     };
     const { rows } = await pool.query(query);
     return rows.map(row => row.product);
+  }
+
+  public async updateProduct(
+    id: string,
+    updatedProduct: NewProduct,
+    dateCreated: string,
+  ): Promise<Product> {
+    const update = `
+        UPDATE product
+        SET category_slug=$2,
+            data=$3
+        WHERE id = $1
+        RETURNING *
+    `;
+    const { user, category, ...other } = updatedProduct;
+    const data = Object.assign(other, { date: dateCreated });
+    console.log(data);
+    const query = {
+      text: update,
+      values: [id, category, JSON.stringify(data)],
+    };
+    const { rows } = await pool.query(query);
+
+    const product = rows[0].data;
+    product.user = rows[0].member_username;
+    product.category = rows[0].category_slug;
+    product.id = rows[0].id;
+
+    return product;
   }
 
   public async add(newProduct: NewProduct): Promise<Product> {

@@ -90,13 +90,14 @@ test('Renders Product Menu', async () => {
 
 test('Edits product', async () => {
   await renderView();
-  fireEvent.click(screen.getByLabelText('menu'));
+  fireEvent.click(screen.getByLabelText('menu-0'));
   fireEvent.click(screen.getByLabelText('edit'));
+  fireEvent.click(screen.getByLabelText('close-modal'))
 });
 
 test('Deletes product', async () => {
   await renderView();
-  fireEvent.click(screen.getByLabelText('menu'));
+  fireEvent.click(screen.getByLabelText('menu-0'));
   fireEvent.click(screen.getByLabelText('delete'));
   await new Promise(resolve => setTimeout(resolve, 1000));
   expect(screen.queryByText('Honda Civic Toy Car')).not.toBeInTheDocument();

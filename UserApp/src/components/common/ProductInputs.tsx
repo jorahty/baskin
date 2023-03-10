@@ -10,13 +10,16 @@ import { TFunction } from 'i18next';
 import { useEffect } from 'react';
 import { gql, GraphQLClient } from 'graphql-request';
 import { useAppContext } from '../../context';
+import { Product } from '../../graphql/product/schema';
 
 export default function ProductInputs({
-  t,
-  setCategory,
-}: {
+                                        t,
+                                        setCategory,
+                                        product,
+                                      }: {
   t: TFunction<'common', undefined, 'common'>;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
+  product?: Product;
 }) {
   const { signedInUser } = useAppContext();
   const [categories, setCategories] = React.useState<Category[]>([]);
@@ -40,7 +43,7 @@ export default function ProductInputs({
         }
       `;
 
-      const data:{category: Category[]} = await graphQLClient.request(query, {
+      const data = await graphQLClient.request(query, {
         username: `${signedInUser.username}`,
       });
 
@@ -70,13 +73,20 @@ export default function ProductInputs({
         <Grid sx={{ height: '75px' }}>
           <FormControl required>
             <FormLabel>{t('createNewProduct.form.productName')}</FormLabel>
-            <Input aria-label="Enter Name" placeholder="Enter Name" type="name" name="name" />
+            <Input
+              defaultValue={product?.name}
+              aria-label="Enter Name"
+              placeholder="Enter Name"
+              type="name"
+              name="name"
+            />
           </FormControl>
         </Grid>
         <Grid sx={{ height: '75px' }}>
           <FormControl required>
             <FormLabel>{t('createNewProduct.form.category')}</FormLabel>
             <Select
+              value={product?.category}
               id={'category'}
               placeholder="Choose category"
               data-testid="category"
@@ -96,6 +106,7 @@ export default function ProductInputs({
           <FormControl required>
             <FormLabel>{t('createNewProduct.form.price')}</FormLabel>
             <Input
+              defaultValue={product?.price}
               type="number"
               name="price"
               placeholder="Enter amount"
@@ -118,7 +129,7 @@ export default function ProductInputs({
               name="quantity"
               type="number"
               aria-label="Enter Quantity"
-              defaultValue={1}
+              defaultValue={product ? product.quantity : 1}
               slotProps={{
                 input: {
                   min: 1,

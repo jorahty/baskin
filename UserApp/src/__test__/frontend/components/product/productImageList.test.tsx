@@ -2,14 +2,32 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import ProductImageList from '../../../../components/common/ProductImageList';
 import { afterEach } from 'jest-circus';
 import { addImage } from './productImage';
+import { Product } from '@/graphql/product/schema';
+import userEvent from "@testing-library/user-event";
 
 const handleFileUpload = jest.fn();
+
+const product: Product = {
+  id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+  user: 'molly_member',
+  category: 'toys',
+  name: 'Honda Civic Toy Car',
+  price: 23,
+  discount: 0,
+  quantity: 23,
+  images: [
+    '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+    '038b7e70-a5c0-47e6-80f3-5b1772bb4a1d',
+  ],
+  description: 'something',
+  date: '2022-07-28T01:00:08.000Z',
+};
 
 afterEach(() => {
   handleFileUpload.mockReset();
 });
-const renderView = async () => {
-  return render(<ProductImageList updatedImages={handleFileUpload} />);
+const renderView = async (product?: Product) => {
+  return render(<ProductImageList updatedImages={handleFileUpload} product={product} />);
 };
 
 test('OK', async () => {
@@ -67,4 +85,28 @@ test('Add Supported Image - PNG', async () => {
 
   await addImage('ucsc-logo.png', 'png');
   expect(handleFileUpload).toHaveBeenCalled();
+});
+
+test('OK - Render Product', async () => {
+  localStorage.setItem(
+    'user',
+    '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
+  );
+  await renderView(product);
+});
+
+test('Add Supported Image - PNG - Then None', async () => {
+  await renderView();
+
+  await addImage('ucsc-logo.png', 'png');
+  expect(handleFileUpload).toHaveBeenCalled();
+
+  // Get the input button
+  const input = screen.getByLabelText('add product image');
+  await userEvent.upload(input, []);
+});
+
+test('Delete existing picture', async () => {
+  await renderView(product);
+  fireEvent.click(screen.getByLabelText('existing-remove-0'));
 });
