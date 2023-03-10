@@ -74,28 +74,8 @@ export class ProductService {
       values: values,
     };
     const { rows } = await pool.query(query);
+    console.log(rows);
     return rows.map(row => row.product);
-  }
-
-  public async add(newProduct: NewProduct): Promise<Product> {
-    const insert = `
-      INSERT INTO product(member_username, category_slug, data)
-      VALUES ($1, $2, $3) RETURNING *
-    `;
-    const { user, category, ...other } = newProduct;
-    const data = Object.assign(other, { date: new Date().toISOString() });
-    const query = {
-      text: insert,
-      values: [user, category, data],
-    };
-    const { rows } = await pool.query(query);
-
-    const product = rows[0].data;
-    product.user = rows[0].member_username;
-    product.category = rows[0].category_slug;
-    product.id = rows[0].id;
-
-    return product;
   }
 
   public async updateProduct(
@@ -116,6 +96,27 @@ export class ProductService {
     const query = {
       text: update,
       values: [id, category, JSON.stringify(data)],
+    };
+    const { rows } = await pool.query(query);
+
+    const product = rows[0].data;
+    product.user = rows[0].member_username;
+    product.category = rows[0].category_slug;
+    product.id = rows[0].id;
+
+    return product;
+  }
+
+  public async add(newProduct: NewProduct): Promise<Product> {
+    const insert = `
+      INSERT INTO product(member_username, category_slug, data)
+      VALUES ($1, $2, $3) RETURNING *
+    `;
+    const { user, category, ...other } = newProduct;
+    const data = Object.assign(other, { date: new Date().toISOString() });
+    const query = {
+      text: insert,
+      values: [user, category, data],
     };
     const { rows } = await pool.query(query);
 
