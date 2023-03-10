@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Router from 'next/router';
 import { Select, Option } from '@mui/joy';
 import TranslateIcon from '@mui/icons-material/Translate';
 
-export default function LangSelect() {
+interface Props {
+  localeG: string;
+}
+
+export default function LangSelect({ localeG }: Props) {
   const [locale, setLocale] = useState('en');
 
   const handleChange = (
@@ -13,6 +17,10 @@ export default function LangSelect() {
     Router.push(Router.asPath, undefined, { locale: value as string });
     setLocale(value as string);
   };
+
+  useEffect(() => {
+    setLocale(localeG);
+  }, [localeG]);
 
   return (
     <Select

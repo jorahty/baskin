@@ -17,10 +17,11 @@ import { Message } from '../../graphql/message/schema';
 export const getServerSideProps: GetServerSideProps = async context => ({
   props: {
     ...(await serverSideTranslations((context.locale as string) ?? 'en', ['common'])),
+    locale: (context.locale as string) ?? 'en',
   },
 });
 
-export default function MessagesPage() {
+export default function MessagesPage({ locale }: { locale: string}) {
   const { signedInUser } = useAppContext();
   const router = useRouter();
   const [chats, setChats] = useState([]);
@@ -77,7 +78,7 @@ export default function MessagesPage() {
 
   return (
     <AuthGuard>
-      <Layout sidebar={<ChatList chats={chats} selectedChat={selectedChat} />}>
+      <Layout sidebar={<ChatList chats={chats} selectedChat={selectedChat} />} locale={locale}>
         <Stack direction="column" height="100%">
           <ChatHeader chat={selectedChat} />
           <Divider />

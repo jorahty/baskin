@@ -125,7 +125,7 @@ const renderView = async (id: string) => {
 
   render(
     <CssVarsProvider>
-      <ProductPage product={props.product} />
+      <ProductPage product={props.product} locale={props.locale} />
     </CssVarsProvider>
   );
 };
@@ -133,11 +133,12 @@ const renderView = async (id: string) => {
 const renderDiscountView = async () => {
   const { props } = (await getServerSideProps({
     query: { id: '2759559e-84f2-4c41-9512-932589163f4f' },
+    locale: 'en',
   } as any)) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
   render(
     <CssVarsProvider>
-      <ProductPage product={props.product} />
+      <ProductPage product={props.product} locale={props.locale} />
     </CssVarsProvider>
   );
 };

@@ -89,7 +89,7 @@ export default function ProductImageList({
           ))}
 
           <Card variant="outlined">
-            <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
+            <AspectRatio ratio="1" sx={{ minWidth: 100 }}>
               <FormControl sx={{}}>
                 <FormLabel sx={{ margin: 'auto', flex: 1, width: '100%', cursor: 'pointer' }}>
                   <PhotoCameraIcon />

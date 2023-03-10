@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import  { CssVarsProvider }  from '@mui/joy/styles';
-import AboutPage from '../../../pages/about';
+import AboutPage, { getServerSideProps } from '../../../pages/about';
 import '../matchMedia';
 
 jest.mock('next/router', () => ({
@@ -28,9 +28,11 @@ jest.mock('react-i18next', () => ({
 }));
 
 const renderView = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { props } = await getServerSideProps({} as any) as any;
   render(
     <CssVarsProvider>
-      <AboutPage />
+      <AboutPage locale={props.locale} />
     </CssVarsProvider>
   );
 };

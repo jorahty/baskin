@@ -12,14 +12,15 @@ export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
       ...(await serverSideTranslations(context.locale ?? 'en', ['common'])),
+      locale: context.locale ?? 'en',
       product: product,
     },
   };
 };
 
-export default function ProductPage({ product }: { product: Product }) {
+export default function ProductPage({ product, locale }: { product: Product, locale: string }) {
   return (
-    <Layout>
+    <Layout locale={locale}>
       <ProductDetails product={product} />
     </Layout>
   );

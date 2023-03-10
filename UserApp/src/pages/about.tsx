@@ -1,11 +1,25 @@
 import Layout from '../components/layout/Layout';
 import { Box } from '@mui/joy';
+import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export default function AboutPage(){
+export const getServerSideProps: GetServerSideProps = async context => {
+  return {
+    props: {
+      ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
+      locale: context.locale as string ?? 'en',
+    },
+  };
+};
+
+interface Props {
+  locale: string;
+}
+
+export default function AboutPage({ locale }: Props) {
 
   return(
-    <Layout>
-
+    <Layout locale={locale}>
       <Box
         margin= "auto"
 

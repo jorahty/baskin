@@ -36,7 +36,7 @@ const renderView = async () => {
   console.log(props);
   render(
     <CssVarsProvider>
-      <Dashboard />
+      <Dashboard locale={props.locale} />
     </CssVarsProvider>
   );
 };

@@ -18,10 +18,11 @@ import ProductTextarea from '../../components/common/ProductTextarea';
 import { useAppContext } from '../../context';
 import { GetStaticProps } from 'next';
 
-export const getStaticProps:GetStaticProps = async context => {
+export const getStaticProps: GetStaticProps = async context => {
   return {
     props: {
       ...(await serverSideTranslations(context.locale as string ?? 'en', ['common'])),
+      locale: context.locale as string ?? 'en',
     },
   };
 };
@@ -37,7 +38,7 @@ interface ProductFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
-export default function Create() {
+export default function Create({ locale }: { locale: string }) {
   const [category, setCategory] = React.useState('Choose Category');
   const [images, setImages] = React.useState<File[]>([]);
 
@@ -109,7 +110,7 @@ export default function Create() {
 
   return (
     <AuthGuard>
-      <Layout>
+      <Layout locale={locale}>
         <CssVarsProvider>
           <Container style={{ margin: '50px auto' }}>
             <Typography aria-label="Create New Product" component="h2" fontSize="xl3" fontWeight="lg">

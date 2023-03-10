@@ -117,6 +117,7 @@ const renderView = async (slug: string) => {
     <CssVarsProvider>
       <AppContextProvider>
         <CategoryPage
+          locale={props.locale}
           category={props.category}
         />
       </AppContextProvider>

@@ -78,7 +78,7 @@ const renderView = async () => {
   render(
     <CssVarsProvider>
       <AppContextProvider>
-        <UserPage user={props.user} products={props.products} />
+        <UserPage user={props.user} products={props.products} locale={props.locale} />
       </AppContextProvider>
     </CssVarsProvider>
   );

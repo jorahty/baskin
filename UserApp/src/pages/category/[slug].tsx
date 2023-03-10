@@ -30,6 +30,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
       ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      locale: context.locale ?? 'en',
       category: verboseCategory,
     },
   };
@@ -37,11 +38,12 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
 interface Props {
   category: VerboseCategory;
+  locale: string;
 }
 
-export default function CategoryPage({ category }: Props) {
+export default function CategoryPage({ category, locale }: Props) {
   return (
-    <Layout sidebar={<CategoryControls category={category} />}>
+    <Layout sidebar={<CategoryControls category={category} />} locale={locale}>
       <CategoryContent category={category}/>
     </Layout>
   );
