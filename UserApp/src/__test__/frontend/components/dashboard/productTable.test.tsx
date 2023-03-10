@@ -92,7 +92,7 @@ test('Edits product', async () => {
   await renderView();
   fireEvent.click(screen.getByLabelText('menu-0'));
   fireEvent.click(screen.getByLabelText('edit'));
-  fireEvent.click(screen.getByLabelText('close-modal'))
+  fireEvent.click(screen.getByLabelText('close-modal'));
 });
 
 test('Deletes product', async () => {

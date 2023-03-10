@@ -1,7 +1,7 @@
 import { Args, Resolver, Query, Mutation, Arg } from 'type-graphql';
 import { NewProduct, Product, ProductArgs, RemoveProductArgs } from './schema';
 import { ProductService } from './service';
-import {GraphQLError} from "graphql";
+import { GraphQLError } from 'graphql';
 
 @Resolver()
 export class ProductResolver {

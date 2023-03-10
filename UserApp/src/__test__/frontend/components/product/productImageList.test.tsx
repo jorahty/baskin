@@ -3,7 +3,7 @@ import ProductImageList from '../../../../components/common/ProductImageList';
 import { afterEach } from 'jest-circus';
 import { addImage } from './productImage';
 import { Product } from '@/graphql/product/schema';
-import userEvent from "@testing-library/user-event";
+import userEvent from '@testing-library/user-event';
 
 const handleFileUpload = jest.fn();
 

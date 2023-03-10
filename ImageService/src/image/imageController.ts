@@ -1,4 +1,6 @@
-import { Response, Controller, Post, Route, UploadedFiles, SuccessResponse, Delete, Path, Get, UploadedFile } from 'tsoa';
+import { Response, Controller,
+  Post, Route, UploadedFiles, SuccessResponse,
+  Delete, Path, UploadedFile } from 'tsoa';
 import { ImageService } from './imageService';
 
 @Route('image')

@@ -64,10 +64,9 @@ export default function Create() {
 
     await graphQLClient
       .request(query)
-      .then(() =>
-        Router.push({
-          pathname: '/',
-        }),
+      .then(() => Router.push({
+        pathname: '/',
+      }),
       )
       .catch(() => {
         picturesIdArr.forEach((pic: string) => {

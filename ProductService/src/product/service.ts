@@ -89,6 +89,7 @@ export class ProductService {
         WHERE id = $1
         RETURNING *
     `;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { user, category, ...other } = updatedProduct;
     const data = Object.assign(other, { date: dateCreated });
     console.log(data);

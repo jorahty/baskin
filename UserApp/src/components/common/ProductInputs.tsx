@@ -13,10 +13,10 @@ import { useAppContext } from '../../context';
 import { Product } from '../../graphql/product/schema';
 
 export default function ProductInputs({
-                                        t,
-                                        setCategory,
-                                        product,
-                                      }: {
+  t,
+  setCategory,
+  product,
+}: {
   t: TFunction<'common', undefined, 'common'>;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   product?: Product;
