@@ -124,10 +124,10 @@ export default function ProductDetails({ product }: { product: Product }) {
             >
               <Table stripe="odd">
                 <tbody>
-                  {product.attributes.map(({ id, name, value }) => (
+                  {product.attributes.map(({ id, name, value, symbol }) => (
                     <tr key={id}>
                       <td><b>{name}</b></td>
-                      <td>{value}</td>
+                      <td>{value} {symbol}</td>
                     </tr>
                   ))}
                 </tbody>

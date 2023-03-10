@@ -26,7 +26,8 @@ export class ProductService {
             SELECT jsonb_agg(jsonb_build_object(
               'id', attribute_id,
               'name', (attribute.data ->> 'name'),
-              'value', (attribute_value.data ->> 'value')
+              'value', (attribute_value.data ->> 'value'),
+              'symbol', (attribute.data ->> 'symbol')
             )) FROM attribute_value 
             JOIN attribute ON attribute_value.attribute_id = attribute.id
             WHERE product_id = p.id
@@ -52,7 +53,8 @@ export class ProductService {
           SELECT jsonb_agg(jsonb_build_object(
             'id', attribute_id,
             'name', (attribute.data ->> 'name'),
-            'value', (attribute_value.data ->> 'value')
+            'value', (attribute_value.data ->> 'value'),
+            'symbol', (attribute.data ->> 'symbol')
           )) FROM attribute_value 
           JOIN attribute ON attribute_value.attribute_id = attribute.id
           WHERE product_id = product.id

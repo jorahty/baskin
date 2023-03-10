@@ -46,6 +46,9 @@ class AttributeValue {
   @Field()
   @Length(1, 32)
     value!: string;
+  @Field({ nullable: true })
+  @Length(1, 32)
+    symbol?: string;
 }
 
 @ArgsType()
