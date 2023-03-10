@@ -47,6 +47,7 @@ export default function ProductDetails({ product }: { product: Product }) {
       `;
 
     const data: { addChat: Chat } = await graphQLClient.request(mutation);
+    console.log(message, data.addChat);
   };
 
   return (
