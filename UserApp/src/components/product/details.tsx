@@ -7,7 +7,6 @@ import {
   Card,
   CardOverflow,
   Chip,
-  IconButton,
   Input,
   Sheet,
   Stack,
@@ -19,7 +18,6 @@ import Link from 'next/link';
 import { gql, GraphQLClient } from 'graphql-request';
 import { useAppContext } from '../../context';
 import { Chat } from '../../graphql/chat/schema';
-import CloseIcon from '@mui/icons-material/Close';
 
 interface FormElements extends HTMLFormControlsCollection {
   message: HTMLInputElement;
@@ -126,9 +124,9 @@ export default function ProductDetails({ product }: { product: Product }) {
             >
               <Table stripe="odd">
                 <tbody>
-                  {product.attributes.map(({ id, value }) => (
-                    <tr>
-                      <td><b>{id}</b></td>
+                  {product.attributes.map(({ id, name, value }) => (
+                    <tr key={id}>
+                      <td><b>{name}</b></td>
                       <td>{value}</td>
                     </tr>
                   ))}

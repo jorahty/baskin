@@ -13,6 +13,10 @@ const product: Product = {
   date: 'string',
   discount: 20,
   images: ['https://images.pexels.com/photos/11108129/pexels-photo-11108129.jpeg'],
+  attributes: [
+    { id: '1', name: 'Condition', value: 'New' },
+    { id: '2', name: 'Color', value: '#ffffff' },
+  ],
 };
 
 const renderView = async () => {

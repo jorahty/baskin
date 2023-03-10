@@ -28,6 +28,10 @@ const discountProduct = {
   quantity: 40,
   description: 'something not too long',
   images: ['https://images.pexels.com/whatever'],
+  attributes: [
+    { id: '1', name: 'Condition', value: 'New' },
+    { id: '2', name: 'Color', value: '#ffffff' },
+  ],
 };
 
 jest.mock('next/router', () => ({
@@ -77,6 +81,10 @@ const handlers = [
             quantity: 1,
             description: 'Never worn',
             images: ['https://images.pexels.com/whatever'],
+            attributes: [
+              { id: '1', name: 'Condition', value: 'New' },
+              { id: '2', name: 'Color', value: '#ffffff' },
+            ],
           },
         ],
       })
