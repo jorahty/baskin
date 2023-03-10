@@ -23,7 +23,6 @@ const product: Product = {
 
 const handlers = [
   graphql.mutation('updateProduct', async (req, res, ctx) => {
-    console.log(req.json());
     return res(
       ctx.data({
         updateProduct: {},

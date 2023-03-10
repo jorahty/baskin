@@ -61,7 +61,6 @@ jest.mock('react-i18next', () => ({
 const renderView = async () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { props } = await getServerSideProps({} as any) as any;
-  console.log(props);
   render(
     <CssVarsProvider>
       <AppContextProvider>

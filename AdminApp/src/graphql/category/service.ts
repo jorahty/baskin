@@ -64,7 +64,7 @@ export class CategoryService {
         }
       }
     `;
-    console.log(mutation);
+
     const data = await request(
       'http://localhost:4002/graphql',
       mutation,

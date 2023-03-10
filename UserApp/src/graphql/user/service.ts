@@ -11,7 +11,6 @@ export class UserService {
       query += `)`;
     }
     query += `{email, username, name}}`;
-    console.log(query);
     const data = await queryGQL(
       'http://localhost:4000/graphql',
       query,

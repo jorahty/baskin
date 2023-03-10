@@ -74,7 +74,6 @@ export class ProductService {
       values: values,
     };
     const { rows } = await pool.query(query);
-    console.log(rows);
     return rows.map(row => row.product);
   }
 

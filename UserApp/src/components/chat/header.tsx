@@ -7,14 +7,12 @@ export default function ChatHeader({ chat }: { chat: Chat | undefined }) {
 
   function renderChatName(chat: Chat) {
     if (!chat) return undefined;
-    console.log(chat);
     if (chat.name) return chat.name; // chat already has a name
 
     // get array of other members (remove the signed-in user from chat members array)
     const otherMembers = chat.members.filter(member => member.username !== signedInUser?.username);
 
     // if there is only one other chat member, render their full name
-    console.log(otherMembers.length);
     if (otherMembers.length === 1) return otherMembers[0].name;
 
     // else, render comma-seperated list of first names

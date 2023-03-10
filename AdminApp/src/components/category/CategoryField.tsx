@@ -35,7 +35,6 @@ export default function CategoryField({ id, value, field }: {id: string, value: 
           ) {slug}
         }
     `;
-    console.log(query);
 
     await graphQLClient
       .request(query)

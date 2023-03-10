@@ -63,7 +63,6 @@ test('Send Message', async () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then(res => {
-      console.log(res.body);
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
       expect(res.body.data).toBeDefined();

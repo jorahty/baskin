@@ -47,7 +47,6 @@ const handlers = [
     );
   }),
   rest.post('http://localhost:4001/api/v0/image', async (req, res, ctx) => {
-    console.log(req.headers);
     return res(ctx.status(200), ctx.json(['72c33826-a3c3-4d1f-8e9a-3e7887d05832']));
   }),
 ];

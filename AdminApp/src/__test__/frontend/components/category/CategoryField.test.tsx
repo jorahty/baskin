@@ -10,7 +10,6 @@ import { setupServer } from 'msw/node';
 const handlers = [
   graphql.mutation('editCategory', async (req, res, ctx) => {
     const json = await req.json();
-    console.log(json);
     if (json.query.indexOf('Vehicles') >= 0) {
       return res(
         ctx.data({

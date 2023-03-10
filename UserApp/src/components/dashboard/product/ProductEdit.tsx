@@ -13,9 +13,6 @@ export default function ProductEdit({ product }: { product: Product }) {
     Router.back();
   };
 
-  console.log('test');
-
-
   const handleUpdate = async (
     name: string,
     description: string,
@@ -24,28 +21,22 @@ export default function ProductEdit({ product }: { product: Product }) {
     quantity: number,
     pictures: File[],
   ) => {
-    console.log('test 1');
 
     const existingImages: string[] = product.images;
     const formData: FormData = new FormData();
     pictures.map((picture: File) => {
       formData.append('files', picture, picture.name);
     });
-    console.log('test 2');
 
     const imageData = await fetch('http://localhost:4001/api/v0/image', {
       method: 'POST',
       body: formData,
     });
-    console.log('test 3');
 
     const picturesIdArr: string[] = await imageData.json();
     const allImages = existingImages.concat(picturesIdArr);
 
-    console.log('test 4');
-
     const graphQLClient = new GraphQLClient('http://localhost:4002/graphql');
-    console.log(category);
     const query = gql`
         mutation updateProduct {
             updateProduct (
