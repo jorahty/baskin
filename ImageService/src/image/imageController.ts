@@ -1,8 +1,29 @@
-import { Response, Controller, Post, Route, UploadedFiles, SuccessResponse, Delete, Path } from 'tsoa';
+import { Response, Controller, Post, Route,
+  UploadedFiles, SuccessResponse,
+  Delete, Path, UploadedFile } from 'tsoa';
 import { ImageService } from './imageService';
 
 @Route('image')
 export class ImageController extends Controller {
+  @Post('compress')
+  @SuccessResponse('200', 'Image compressed')
+  @Response('415', 'Unsupported Media Type')
+  public async compressImage(@UploadedFile() file: Express.Multer.File)
+    : Promise<Express.Multer.File|void> {
+    const supported = ['image/png', 'image/jpeg', 'image/webp'];
+
+    if (supported.includes(file.mimetype) === false) {
+      return this.setStatus(415);
+    }
+
+    return new ImageService().compress(file)
+      .then((file: Express.Multer.File | undefined) => {
+        if (!file)
+          return this.setStatus(415);
+        return file;
+      });
+  }
+
   @Post()
   @SuccessResponse('201', 'Image created')
   @Response('415', 'Unsupported Media Type')

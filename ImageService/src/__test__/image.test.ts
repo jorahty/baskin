@@ -113,3 +113,61 @@ test('POST New - 3 Images, 1 Corrupt File', async () => {
       });
     });
 });
+
+test('POST New - Compression', async () => {
+  await request
+    .post('/api/v0/image/compress')
+    .set('accept', 'application/json')
+    .set('Content-Type', 'multipart/form-data')
+    .attach('file', path.join(__dirname, 'assets/large.jpg'))
+    .expect(200)
+    .then(res => {
+      expect(res.body).toBeDefined();
+      expect(res.body.buffer).toBeDefined();
+      // fs.writeFileSync('oop.jpeg', new Int8Array(res.body.buffer.data));
+    });
+});
+
+test('POST New - Compression - Long and Tall images', async () => {
+  await request
+    .post('/api/v0/image/compress')
+    .set('accept', 'application/json')
+    .set('Content-Type', 'multipart/form-data')
+    .attach('file', path.join(__dirname, 'assets/long_image.jpg'))
+    .expect(200)
+    .then(res => {
+      expect(res.body).toBeDefined();
+      expect(res.body.buffer).toBeDefined();
+      // fs.writeFileSync('oop.jpeg', new Int8Array(res.body.buffer.data));
+    });
+
+  await request
+    .post('/api/v0/image/compress')
+    .set('accept', 'application/json')
+    .set('Content-Type', 'multipart/form-data')
+    .attach('file', path.join(__dirname, 'assets/tall_image.jpg'))
+    .expect(200)
+    .then(res => {
+      expect(res.body).toBeDefined();
+      expect(res.body.buffer).toBeDefined();
+      // fs.writeFileSync('oop.jpeg', new Int8Array(res.body.buffer.data));
+    });
+});
+
+test('POST New - Compression - Wrong Format', async () => {
+  await request
+    .post('/api/v0/image/compress')
+    .set('accept', 'application/json')
+    .set('Content-Type', 'multipart/form-data')
+    .attach('file', path.join(__dirname, 'assets/bad.txt'))
+    .expect(415);
+});
+
+test('POST - Compression - Corrupted', async () => {
+  await request
+    .post('/api/v0/image/compress')
+    .set('accept', 'application/json')
+    .set('Content-Type', 'multipart/form-data')
+    .attach('file', path.join(__dirname, 'assets/corrupt.jpeg'))
+    .expect(415);
+});

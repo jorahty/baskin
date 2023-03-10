@@ -20,6 +20,18 @@ const handlers = [
       })
     );
   }),
+  graphql.query('getAllCategories', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        category: [
+          {
+            name: 'Toys',
+            slug: 'toys',
+          },
+        ],
+      })
+    );
+  }),
 ];
 
 const server = setupServer(...handlers);
