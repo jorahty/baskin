@@ -127,7 +127,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                   {product.attributes.map(({ id, name, value, symbol }) => (
                     <tr key={id}>
                       <td><b>{name}</b></td>
-                      <td>{value} {symbol}</td>
+                      <td>{value[0] === '#' ? <Color value={value}/> : `${value} ${symbol || ''}`}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -157,5 +157,16 @@ export default function ProductDetails({ product }: { product: Product }) {
         </Stack>
       </Card>
     </Box>
+  );
+}
+
+function Color({ value }: { value: string }) {
+  return (
+    <Box
+      width={40}
+      height={20}
+      borderRadius={20}
+      bgcolor={value}
+    />
   );
 }
