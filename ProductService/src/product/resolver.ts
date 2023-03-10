@@ -1,6 +1,7 @@
 import { Args, Resolver, Query, Mutation, Arg } from 'type-graphql';
 import { NewProduct, Product, ProductArgs, RemoveProductArgs } from './schema';
 import { ProductService } from './service';
+
 @Resolver()
 export class ProductResolver {
   @Query(() => [Product])
@@ -20,9 +21,6 @@ export class ProductResolver {
   @Mutation(() => Product)
   async updateProduct(@Arg('id') id: string, @Arg('input') input: NewProduct): Promise<Product> {
     return new ProductService().list(id).then(async (product: Product[]): Promise<Product> => {
-      // if (product.length === 0) {
-      //   throw new GraphQLError('ID doesn\'t exist');
-      // }
       return new ProductService().updateProduct(id, input, product[0].date);
     });
   }

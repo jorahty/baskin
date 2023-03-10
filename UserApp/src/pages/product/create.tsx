@@ -8,6 +8,7 @@ import fetch from 'node-fetch';
 import FormData from 'form-data';
 import { useAppContext } from '../../context';
 import CreateLayout from '../../components/layout/CreateLayout';
+import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps = async context => {
   return {
@@ -18,7 +19,7 @@ export const getStaticProps: GetStaticProps = async context => {
   };
 };
 
-export default function Create({locale}: {locale: string}) {
+export default function Create({ locale }: {locale: string}) {
   const { signedInUser } = useAppContext();
 
   const handleCancel = () => {
@@ -78,11 +79,11 @@ export default function Create({locale}: {locale: string}) {
         });
         alert('Error creating product, Try again');
       });
-  }
+  };
 
   return (
     <AuthGuard>
-      <Layout>
+      <Layout locale={locale} >
         <CreateLayout handleCreate={handleCreate} handleCancel={handleCancel} />
       </Layout>
     </AuthGuard>
