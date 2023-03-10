@@ -28,10 +28,21 @@ export class Product {
   @Field()
   @Matches(regexISODate)
     date!: string;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @Field(type => [String])
+  @Field(() => [String])
   @MinLength(1)
     images!: string[];
+  @Field(() => [AttributeValue], { nullable: true })
+    attributes!: AttributeValue[];
+}
+
+@ObjectType()
+class AttributeValue {
+  @Field()
+  @Length(10)
+    id!: string;
+  @Field()
+  @Length(1, 32)
+    value!: string;
 }
 
 @ArgsType()

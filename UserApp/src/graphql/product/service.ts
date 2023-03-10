@@ -19,7 +19,7 @@ export class ProductService {
       query ListProducts($id: String, $user: String, $category: String) {
         product(id: $id, user: $user, category: $category) {
           id, user, category, name, price, discount,
-          quantity, description, date, images
+          quantity, description, date, images, attributes { id, value }
         }
       }
     `;
