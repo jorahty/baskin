@@ -16,6 +16,6 @@ test('Renders', async () => {
 
 test('Select', async () => {
   renderView();
-  fireEvent.click(screen.getByText('Newest'));
-  fireEvent.click(await screen.findByText('Oldest'));
+  fireEvent.click(await screen.findByLabelText('sort'));
+  fireEvent.click(await screen.findByLabelText('Oldest'));
 });

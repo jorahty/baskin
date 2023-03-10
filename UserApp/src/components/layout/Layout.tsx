@@ -7,6 +7,7 @@ import Footer, { footerHeight } from './Footer';
 interface Props {
   children: React.ReactNode;
   sidebar?: React.ReactNode;
+  locale: string;
 }
 
 const sx = {
@@ -18,7 +19,7 @@ const sx = {
 // Do not hard-code the width of the sidebar.
 // Instead, adjust the width of the content inside the sidebar
 
-export default function Layout({ children, sidebar }: Props) {
+export default function Layout({ children, sidebar, locale }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleSidebarOpen = () => {
@@ -29,7 +30,7 @@ export default function Layout({ children, sidebar }: Props) {
     <>
       <GlobalStyles styles={{ body: { overflow: 'hidden' } }} />
       <Box bgcolor="background.surface">
-        <Header handleSidebarOpen={handleSidebarOpen} />
+        <Header handleSidebarOpen={handleSidebarOpen} locale={locale}/>
       </Box>
       <Divider />
       <Stack direction="row" height="100%" alignItems="flex-start">

@@ -108,7 +108,7 @@ const renderView = async () => {
   console.log(props);
   render(
     <CssVarsProvider>
-      <MessagesPage />
+      <MessagesPage locale={props.locale} />
     </CssVarsProvider>
   );
 };

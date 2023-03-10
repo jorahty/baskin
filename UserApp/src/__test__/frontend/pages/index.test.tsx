@@ -88,6 +88,7 @@ const renderView = async () => {
     <CssVarsProvider>
       <AppContextProvider>
         <IndexPage
+          locale={props.locale}
           category={props.category}
         />
       </AppContextProvider>

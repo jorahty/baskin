@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { CssVarsProvider } from '@mui/joy/styles';
-import Cart from '../../../pages/cart';
+import Cart, { getServerSideProps } from '../../../pages/cart';
 import '../matchMedia';
 
 jest.mock('next/router', () => ({
@@ -12,9 +12,11 @@ jest.mock('next/router', () => ({
 }));
 
 const renderView = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { props } = await getServerSideProps({} as any) as any;
   render(
     <CssVarsProvider>
-      <Cart />
+      <Cart locale={props.locale} />
     </CssVarsProvider>
   );
 };

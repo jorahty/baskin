@@ -15,9 +15,10 @@ export const headerHeight = '80px';
 
 interface Props {
   handleSidebarOpen: () => void;
+  locale: string;
 }
 
-export default function Header({ handleSidebarOpen }: Props) {
+export default function Header({ handleSidebarOpen, locale }: Props) {
   const { signedInUser } = useAppContext();
   const [searchVisible, setSearchVisible] = useState(false);
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function Header({ handleSidebarOpen }: Props) {
       <Box ml="auto" sx={{ display: { xs: 'none', sm: 'block' } }} />
       {searchVisible && <ProductSearch />}
       <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-        <LangSelect />
+        <LangSelect localeG={locale}/>
       </Box>
       {signedInUser ? (
         <UserMenu />

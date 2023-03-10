@@ -14,10 +14,10 @@
       "categories": "All Categories"
     },
     "search": {
-      "placeholder": "Search for a product"
+      "placeholder": "Search..."
     },
     "sort": {
-      "placeholder": "Sort by",
+      "placeholder": "Sort",
       "newest": "Newest",
       "oldest": "Oldest",
       "priceHigh": "Price High",

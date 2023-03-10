@@ -10,13 +10,18 @@ export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
       ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
+      locale: context.locale as string ?? 'en',
     },
   };
 };
 import AuthGuard from '../components/common/AuthGuard';
 // import { useAppContext } from '../context';
 
-export default function Dashboard() {
+interface Props {
+  locale: string;
+}
+
+export default function Dashboard({ locale }: Props) {
   const [items, setItems] = useState<string[]>([]);
   const [current, setCurrent] = useState<string>('');
 
@@ -39,7 +44,9 @@ export default function Dashboard() {
   return (
     <>
       <AuthGuard>
-        <Layout sidebar={<DashSidebar items={items} current={current} setCurrent={setCurrent} />}>
+        <Layout sidebar={
+          <DashSidebar items={items} current={current} setCurrent={setCurrent} />
+        } locale={locale}>
           {comps[current]}
         </Layout>
       </AuthGuard>

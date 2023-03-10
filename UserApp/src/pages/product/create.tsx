@@ -9,15 +9,16 @@ import FormData from 'form-data';
 import { useAppContext } from '../../context';
 import CreateLayout from '../../components/layout/CreateLayout';
 
-export const getStaticProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async context => {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['common'])),
+      ...(await serverSideTranslations(context.locale as string ?? 'en', ['common'])),
+      locale: context.locale as string ?? 'en',
     },
   };
 };
 
-export default function Create() {
+export default function Create({locale}: {locale: string}) {
   const { signedInUser } = useAppContext();
 
   const handleCancel = () => {
@@ -26,16 +27,17 @@ export default function Create() {
     });
   };
 
-  async function handleCreate(
+  const handleCreate = async (
     name: string,
     description: string,
     price: number,
     category: string,
     quantity: number,
-    pictures: File[],
-  ) {
+    images: File[],
+  ) => {
+    // const bearerToken = signedInUser?.accessToken;
     const formData: FormData = new FormData();
-    pictures.map((picture: File) => {
+    images.map((picture: File) => {
       formData.append('files', picture, picture.name);
     });
 
@@ -44,22 +46,22 @@ export default function Create() {
       body: formData,
     });
 
-    const picturesIdArr: string[] = await imageData.json();
+    const imagesIdArr: string[] = await imageData.json();
 
     const graphQLClient = new GraphQLClient('http://localhost:4002/graphql');
     const query = gql`
-      mutation addProduct {
-        addProduct (input: {
-          user: "${signedInUser?.username}",
-          name: "${name}",
-          description: "${description}",
-          price: ${price},
-          category: "${category}",
-          quantity: ${quantity},
-          imagesgit: [${picturesIdArr.map((p: string) => `"${p}"`)}],
-          discount: 0,
-        }) {id}
-      }
+        mutation addProduct {
+            addProduct (input: {
+                user: "${signedInUser?.username}",
+                name: "${name}",
+                description: "${description}",
+                price: ${price},
+                category: "${category}",
+                quantity: ${quantity},
+                images: [${imagesIdArr.map((p: string) => `"${p}"`)}],
+                discount: 0,
+            }) {id}
+        }
     `;
 
     await graphQLClient
@@ -69,7 +71,7 @@ export default function Create() {
       }),
       )
       .catch(() => {
-        picturesIdArr.forEach((pic: string) => {
+        imagesIdArr.forEach((pic: string) => {
           fetch(`http://localhost:4001/api/v0/image/${pic}`, {
             method: 'DELETE',
           });

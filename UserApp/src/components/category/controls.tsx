@@ -7,6 +7,7 @@ import AttributeColor from '../attribute/color';
 import AttributeSet from '../attribute/set';
 import { useAppContext } from '../../context';
 import { useEffect } from 'react';
+import { useTranslation } from 'next-i18next';
 
 export interface Props {
   category: VerboseCategory;
@@ -14,6 +15,7 @@ export interface Props {
 
 export default function CategoryControls({ category }: Props) {
   const { refinement, setRefinement } = useAppContext();
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     const filters = category.attributes.map(attribute => {
@@ -41,7 +43,7 @@ export default function CategoryControls({ category }: Props) {
   return (
     <Stack p={2} gap={2} width={340}>
       <Link href="/product/create">
-        <Button fullWidth>Sell new product</Button>
+        <Button fullWidth>{t('createNewProduct.title')}</Button>
       </Link>
       {category.name &&
         <Typography level="h3" fontWeight={800}>
