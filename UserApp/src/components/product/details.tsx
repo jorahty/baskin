@@ -7,9 +7,11 @@ import {
   Card,
   CardOverflow,
   Chip,
-  Divider,
+  IconButton,
   Input,
+  Sheet,
   Stack,
+  Table,
   Typography,
 } from '@mui/joy';
 import Image from 'next/image';
@@ -17,6 +19,7 @@ import Link from 'next/link';
 import { gql, GraphQLClient } from 'graphql-request';
 import { useAppContext } from '../../context';
 import { Chat } from '../../graphql/chat/schema';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface FormElements extends HTMLFormControlsCollection {
   message: HTMLInputElement;
@@ -111,8 +114,28 @@ export default function ProductDetails({ product }: { product: Product }) {
             </Link>
             <Typography level="body2">{new Date(product.date).toLocaleDateString('en-US')}</Typography>
           </Stack>
-          <Divider />
-          <Typography>{product.description.slice(0, 280)}</Typography>
+          <Typography noWrap>{product.description}</Typography>
+          {product.attributes.length > 0 &&
+            <Sheet
+              variant="outlined"
+              sx={{
+                maxHeight: { sm: 'none', md: 250 },
+                overflowY: { sm: 'none', md: 'scroll' },
+                borderRadius: 'var(--joy-radius-sm)',
+              }}
+            >
+              <Table stripe="odd">
+                <tbody>
+                  {product.attributes.map(({ id, value }) => (
+                    <tr>
+                      <td><b>{id}</b></td>
+                      <td>{value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Sheet>
+          }
           <form
             onSubmit={(event: React.FormEvent<MessageFormElement>) => {
               event.preventDefault();
@@ -126,6 +149,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 name="message"
                 placeholder="Hi, is this available?"
                 defaultValue="Hi, is this available?"
+                sx={{ bgcolor: 'background.body' }}
               />
               <Button size="lg" type="submit">
                 Send
