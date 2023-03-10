@@ -26,6 +26,9 @@ const handlers = [
           images: [
             'https://images.pexels.com/whatever',
           ],
+          attributes: [
+            { id: '1', name: 'Condition', value: 'New' },
+          ],
         }],
       }),
     );

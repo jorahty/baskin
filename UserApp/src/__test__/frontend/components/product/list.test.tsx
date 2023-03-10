@@ -16,6 +16,9 @@ const products = [{
     'https://images.pexels.com/photos' +
     '/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
   ],
+  attributes: [
+    { id: '1', name: 'Condition', value: 'New' },
+  ],
 }, {
   user: 'string',
   id: 'string',
@@ -29,6 +32,9 @@ const products = [{
   images: [
     'https://images.pexels.com/photos' +
     '/930398/pexels-photo-930398.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  ],
+  attributes: [
+    { id: '1', name: 'Condition', value: 'New' },
   ],
 }];
 
@@ -130,6 +136,45 @@ test('Search by category', async () => {
       sort: 'date-new',
       search: 'cars',
       filters: [],
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+  renderView();
+});
+
+test('With filters', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: '',
+      filters: [
+        { id: '1', selection: ['New'] },
+      ],
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+  renderView();
+});
+
+test('With filters', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: '',
+      filters: [
+        { id: '1', selection: ['Used'] },
+      ],
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+  renderView();
+});
+
+test('With filters', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: '',
+      filters: [
+        { id: '1', selection: [] },
+      ],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
   renderView();

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useAppContext, Refinement } from '../../context';
+import { useAppContext, Refinement, Filter } from '../../context';
 import { Product } from '@/graphql/product/schema';
 import ProductCard from './card';
 import { Grid } from '@mui/joy';
@@ -22,7 +22,7 @@ export default function ProductList({ products }: Props) {
     <>
       {refinement.filters.map(filter => (
         <div key={filter.id}>
-        id: {filter.id}, selection: {JSON.stringify(filter.selection)}
+          id: {filter.id}, selection: {JSON.stringify(filter.selection)}
         </div>
       ))}
       <Grid container spacing={2} columns={{ xl: 4, lg: 3, md: 2, sm: 2, xs: 1 }} >
@@ -56,12 +56,37 @@ function refineProducts(
       || match(product.description, refinement.search);
   });
 
-  // filter (TODO)
-  const filtered = searched;
+  // filter
+  const filtered = filterProducts(searched, refinement.filters);
 
   // sort
   const compareFn = compareFunctions[refinement.sort];
   const sorted = filtered.sort(compareFn);
 
   return sorted;
+}
+
+function filterProducts(products: Product[], filters: Filter[]) {
+  const filtered = products.filter(product => {
+    // hide this product by returning false
+    // if it fails any filter
+    for (const filter of filters) {
+      // return false if it fails
+      if (Array.isArray(filter.selection)) {
+        if (filter.selection.length === 0) continue;
+        const value = product.attributes.find(a => a.id === filter.id)?.value;
+        if (!filter.selection.includes(value)) return false;
+        continue;
+      }
+      // if (typeof filterValue === array)
+      //   if (!filterValue.includes(product.attributes[key])) return false;
+      // else {
+      //   if (filterValue.min && product.attributes[key] < filterValue.min) return false;
+      //   if (filterValue.max && product.attributes[key] > filterValue.max) return false;
+      // }
+    }
+    return true;
+  });
+
+  return filtered;
 }

@@ -57,6 +57,11 @@ export default function ProductCard({ product }: { product: Product }) {
           </Link>
         </Tooltip>
       </Stack>
+      {product.attributes.map(attribute => (
+        <div key={attribute.id}>
+          <b>{attribute.name}</b> {attribute.value}
+        </div>
+      ))}
     </Card>
   );
 }
