@@ -19,10 +19,10 @@ const customJestConfig = {
   ],
   coverageThreshold: {
     global: {
-      statements: -1,
+      statements: 100,
       branches: -25,
-      functions: -1,
-      lines: -1,
+      functions: 100,
+      lines: 100,
     },
   },
   testMatch: ["**/?(*.)+(spec|test).[jt]s?(x)"],

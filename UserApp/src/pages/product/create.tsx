@@ -8,6 +8,7 @@ import fetch from 'node-fetch';
 import FormData from 'form-data';
 import { useAppContext } from '../../context';
 import CreateLayout from '../../components/layout/CreateLayout';
+import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps = async context => {
   return {

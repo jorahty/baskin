@@ -29,7 +29,7 @@ const product: Product = {
 const handlers = [
   rest.delete('http://localhost:4001/api/v0/image/:id', (req, res, ctx) => {
     return res(ctx.json({ login: req.params.login }));
-  })
+  }),
 ];
 
 const server = setupServer(...handlers);
