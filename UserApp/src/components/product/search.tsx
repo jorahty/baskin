@@ -3,10 +3,12 @@ import { IconButton, Input } from '@mui/joy';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import { ChangeEvent } from 'react';
+import { useTranslation } from 'next-i18next';
 
 
 export default function ProductSearch() {
   const { refinement, setRefinement } = useAppContext();
+  const { t } = useTranslation('common');
 
   const handleChange = (
     { target: { value } }: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
@@ -32,7 +34,8 @@ export default function ProductSearch() {
       onChange={handleChange}
       startDecorator={<SearchIcon />}
       sx={{ bgcolor: 'background.body' }}
-      placeholder="Search..."
+      placeholder={t('home.search.placeholder').toString()}
+      aria-label="search"
       endDecorator={
         <IconButton
           disabled={refinement.search.length === 0}

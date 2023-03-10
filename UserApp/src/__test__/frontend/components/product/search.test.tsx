@@ -16,13 +16,13 @@ test('Renders', async () => {
 
 test('Search', async () => {
   renderView();
-  const input = screen.getByPlaceholderText('Search...');
+  const input = await screen.findByLabelText('search');
   fireEvent.change(input, { target: { value: 'Air' } });
 });
 
 test('Clear Search', async () => {
   renderView();
-  const input = screen.getByPlaceholderText('Search...');
+  const input = await screen.findByLabelText('search');
   fireEvent.change(input, { target: { value: 'Air' } });
   fireEvent.click(screen.getByRole('button', { name: /clear-search/ }));
 });
