@@ -31,6 +31,7 @@
   "scripts": {
     "prebuild": "npm run swagger",
     "build": "tsc",
+    "start": "node build/src/server.js",
     "swagger": "tsoa spec-and-routes",
     "predev": "npm run swagger",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",

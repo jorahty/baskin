@@ -2,6 +2,7 @@
   "name": "baskin-webapp-user",
   "scripts": {
     "build": "next build",
+    "start": "next start",
     "dev": "next dev -p 3000",
     "lint": "next lint --fix",
     "test": "jest",

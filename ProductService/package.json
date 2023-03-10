@@ -29,6 +29,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "start": "node dist/server.js",
     "dev": "nodemon",
     "test": "jest --runInBand --coverage --forceExit",
     "lint": "eslint ./src/* --fix"
