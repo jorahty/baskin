@@ -4,6 +4,8 @@ import { afterEach } from 'jest-circus';
 import { addImage } from './productImage';
 import { Product } from '@/graphql/product/schema';
 import userEvent from '@testing-library/user-event';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
 const handleFileUpload = jest.fn();
 
@@ -21,11 +23,24 @@ const product: Product = {
   ],
   description: 'something',
   date: '2022-07-28T01:00:08.000Z',
+  attributes: [],
 };
+
+const handlers = [
+  rest.delete('http://localhost:4001/api/v0/image/:id', (req, res, ctx) => {
+    return res(ctx.json({ login: req.params.login }));
+  })
+];
+
+const server = setupServer(...handlers);
+
+beforeAll(() => server.listen());
+afterAll(() => server.close());
 
 afterEach(() => {
   handleFileUpload.mockReset();
 });
+
 const renderView = async (product?: Product) => {
   return render(<ProductImageList updatedImages={handleFileUpload} product={product} />);
 };
