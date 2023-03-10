@@ -25,8 +25,11 @@ export class ProductService {
           'attributes', COALESCE((
             SELECT jsonb_agg(jsonb_build_object(
               'id', attribute_id,
-              'value', (data ->> 'value')
-            )) FROM attribute_value WHERE product_id = p.id
+              'name', (attribute.data ->> 'name'),
+              'value', (attribute_value.data ->> 'value')
+            )) FROM attribute_value 
+            JOIN attribute ON attribute_value.attribute_id = attribute.id
+            WHERE product_id = p.id
           ), '[]'::jsonb)
         ) AS product
         FROM product p
@@ -48,8 +51,11 @@ export class ProductService {
         'attributes', COALESCE((
           SELECT jsonb_agg(jsonb_build_object(
             'id', attribute_id,
-            'value', (data ->> 'value')
-          )) FROM attribute_value WHERE product_id = product.id
+            'name', (attribute.data ->> 'name'),
+            'value', (attribute_value.data ->> 'value')
+          )) FROM attribute_value 
+          JOIN attribute ON attribute_value.attribute_id = attribute.id
+          WHERE product_id = product.id
         ), '[]'::jsonb)
       ) AS product FROM product
     `;

@@ -42,6 +42,9 @@ class AttributeValue {
     id!: string;
   @Field()
   @Length(1, 32)
+    name!: string;
+  @Field()
+  @Length(1, 32)
     value!: string;
 }
 
