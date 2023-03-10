@@ -13,7 +13,7 @@ export class MessageService {
       }
     `;
 
-    const data:{message: Message[]} = await request('http://localhost:4003/graphql', query, { id });
+    const data: { message: Message[] } = await request('http://localhost:4003/graphql', query, { id });
     return data.message;
   }
 
@@ -28,7 +28,7 @@ export class MessageService {
       }
     `;
 
-    const data:{sendMessage: Message} = await request('http://localhost:4003/graphql', query, {
+    const data: { sendMessage: Message } = await request('http://localhost:4003/graphql', query, {
       chat_id,
       sender,
       content,

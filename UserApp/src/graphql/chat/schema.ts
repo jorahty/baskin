@@ -35,3 +35,10 @@ export class ChatArgs {
   @Matches(regexUUID)
     id?: string;
 }
+
+@ArgsType()
+export class NewChat {
+  @Field()
+  @Length(1, 32)
+    name!: string;
+}

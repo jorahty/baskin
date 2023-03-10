@@ -7,11 +7,9 @@ export class Chat {
   @Field()
   @Matches(regexUUID)
     id!: string;
-
   @Field({ nullable: true })
   @Length(1, 32)
     name?: string;
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Field(type => [ChatMember])
     members!: ChatMember[];
@@ -31,4 +29,11 @@ export class ChatArgs {
   @Field({ nullable: true })
   @Matches(regexUUID)
     id?: string;
+}
+
+@ArgsType()
+export class NewChat {
+  @Field()
+  @Length(1, 32)
+    name!: string;
 }

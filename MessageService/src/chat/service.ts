@@ -26,4 +26,19 @@ export class ChatService {
     const { rows } = await pool.query(query);
     return rows;
   }
+
+  public async add(name: string): Promise<Chat> {
+    const insert = `
+      INSERT INTO chat(data)
+      VALUES ($1) 
+      RETURNING data || jsonb_build_object('id', id)
+      AS chat
+    `;
+    const query = {
+      text: insert,
+      values: [{ name }],
+    };
+    const { rows } = await pool.query(query);
+    return rows[0].chat;
+  }
 }

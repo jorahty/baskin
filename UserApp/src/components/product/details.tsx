@@ -14,8 +14,41 @@ import {
 } from '@mui/joy';
 import Image from 'next/image';
 import Link from 'next/link';
+import { gql, GraphQLClient } from 'graphql-request';
+import { useAppContext } from '../../context';
+import { Chat } from '../../graphql/chat/schema';
+
+interface FormElements extends HTMLFormControlsCollection {
+  message: HTMLInputElement;
+}
+
+interface MessageFormElement extends HTMLFormElement {
+  readonly elements: FormElements;
+}
 
 export default function ProductDetails({ product }: { product: Product }) {
+  const { signedInUser } = useAppContext();
+
+  const handleSubmit = async (message: string) => {
+    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
+      headers: {
+        Authorization: `Bearer ${signedInUser?.accessToken}`,
+      },
+    });
+
+    const mutation = gql`
+        mutation addChat {
+          addChat (name: "${product.name}") { 
+            id
+            name
+          }
+        }
+      `;
+
+    const data: { addChat: Chat } = await graphQLClient.request(mutation);
+    console.log(message, data.addChat);
+  };
+
   return (
     <Box maxWidth="lg" margin="auto" p={4}>
       <Typography pb={2} level="h2">
@@ -80,12 +113,25 @@ export default function ProductDetails({ product }: { product: Product }) {
           </Stack>
           <Divider />
           <Typography>{product.description.slice(0, 280)}</Typography>
-          <Input
-            sx={{ mt: 'auto', bgcolor: 'background.body' }}
-            placeholder="Hi, is this available?"
-            defaultValue="Hi, is this available?"
-          />
-          <Button size="lg">Send</Button>
+          <form
+            onSubmit={(event: React.FormEvent<MessageFormElement>) => {
+              event.preventDefault();
+              const formElements = event.currentTarget.elements;
+              handleSubmit(formElements.message.value);
+            }}
+            style={{ marginTop: 'auto', backgroundColor: 'background.body' }}
+          >
+            <Stack direction="column" spacing={1}>
+              <Input
+                name="message"
+                placeholder="Hi, is this available?"
+                defaultValue="Hi, is this available?"
+              />
+              <Button size="lg" type="submit">
+                Send
+              </Button>
+            </Stack>
+          </form>
         </Stack>
       </Card>
     </Box>
