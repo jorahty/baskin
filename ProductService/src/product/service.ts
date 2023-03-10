@@ -74,6 +74,7 @@ export class ProductService {
       values: values,
     };
     const { rows } = await pool.query(query);
+    console.log(rows);
     return rows.map(row => row.product);
   }
 
@@ -92,7 +93,6 @@ export class ProductService {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { user, category, ...other } = updatedProduct;
     const data = Object.assign(other, { date: dateCreated });
-    console.log(data);
     const query = {
       text: update,
       values: [id, category, JSON.stringify(data)],
