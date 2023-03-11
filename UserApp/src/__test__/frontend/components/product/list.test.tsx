@@ -148,6 +148,7 @@ test('With filters', async () => {
       search: '',
       filters: [
         { id: '1', selection: ['New'] },
+        { id: 'PRICE', selection: { min: null, max: null } },
       ],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -174,6 +175,7 @@ test('With filters', async () => {
       search: '',
       filters: [
         { id: '1', selection: [] },
+        { id: 'PRICE', selection: { min: 100, max: 200 } },
       ],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any

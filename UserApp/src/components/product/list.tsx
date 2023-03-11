@@ -72,6 +72,13 @@ function filterProducts(products: Product[], filters: Filter[]) {
     // if it fails any filter
     for (const filter of filters) {
       // return false if it fails
+      if (filter.id === 'PRICE') {
+        const { min, max } = filter.selection;
+        const tooExpensive = max && product.price > max;
+        const tooCheap = min && product.price < min;
+        if (tooExpensive || tooCheap) return false;
+        continue;
+      }
       if (Array.isArray(filter.selection)) {
         if (filter.selection.length === 0) continue;
         const value = product.attributes.find(a => a.id === filter.id)?.value;
