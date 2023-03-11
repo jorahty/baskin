@@ -80,7 +80,7 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('b5a1c785
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('82c61a7f-8ab3-48f9-bcf9-3de86cb361d8', 'molly_member', 'cabins', '{"name": "Cozy Cabin", "quantity": 2, "price": 400, "discount": 0, "description": "Rustic cabin in the woods, perfect for a weekend getaway", "date": "2023-02-12T08:22:16.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('1a06a497-92ee-41cb-a246-854c0369afcb', 'molly_member', 'apartments', '{"name": "Modern Studio Apartment", "quantity": 1, "price": 800, "discount": 0, "description": "Newly renovated studio apartment in the city", "date": "2023-02-14T12:10:45.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('7760204d-364c-4235-8236-2f6e6978b54e', 'anna_admin', 'beachfront', '{"name": "Beachfront Villa", "quantity": 1, "price": 2000, "discount": 0, "description": "Luxurious beachfront villa with private access to the beach", "date": "2023-02-18T19:01:37.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('9c0cf70d-8a17-41c3-97d6-7d1b68a1b2e9', 'mia_moderator', 'apparel', '{"name": "Vintage Hoodie Sweatshirt", "quantity": 1, "price": 250, "discount": 0, "description": "Never worn, soft fabric", "date": "2023-02-09T06:43:08.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('9c0cf70d-8a17-41c3-97d6-7d1b68a1b2e9', 'mia_moderator', 'apparel', '{"name": "MLB Baseball Hat", "quantity": 1, "price": 250, "discount": 0, "description": "Never worn, soft fabric", "date": "2023-02-09T06:43:08.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('5c14412d-5e63-4f05-853f-b52de9151cf8', 'molly_member', 'tops', '{"name": "Sleeveless Blouse", "quantity": 4, "price": 100, "discount": 0, "description": "Elegant and comfortable blouse for any occasion", "date": "2023-02-26T09:54:22.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('d9ca208f-8695-4426-8e6e-860fae0e1b9c', 'anna_admin', 'shirts', '{"name": "Denim Shirt", "quantity": 3, "price": 80, "discount": 0, "description": "Classic denim shirt for a casual look", "date": "2023-02-15T17:39:05.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('c2f7aa97-0e1c-4721-a857-8a7e0b450c9f', 'mia_moderator', 'jackets', '{"name": "Leather Jacket", "quantity": 1, "price": 500, "discount": 0, "description": "Stylish and comfortable leather jacket for any season", "date": "2023-02-10T13:28:39.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
@@ -143,17 +143,17 @@ INSERT INTO attribute (id, category_slug, data) VALUES ('dCdFfnYJ3A', 'property'
 INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Bathrooms", "type": "number", "min": 0, "max": 20 }');
 INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Square feet", "type": "number", "min": 10, "max": 10000, "step": 10 }');
 
-INSERT INTO attribute (category_slug, data) VALUES ('apparel', '{ "name": "Color", "type": "color" }');
-INSERT INTO attribute (category_slug, data) VALUES ('apparel', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('rtCdNsBjQl', 'apparel', '{ "name": "Color", "type": "color" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('vbdvBfzmmC', 'apparel', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
 
-INSERT INTO attribute (category_slug, data) VALUES ('tops', '{ "name": "Size", "type": "set", "values": ["XS", "S", "M", "L", "XL"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('tWfXcUS2K5', 'tops', '{ "name": "Size", "type": "set", "values": ["XS", "S", "M", "L", "XL"] }');
 
-INSERT INTO attribute (category_slug, data) VALUES ('shirts', '{ "name": "Sleeve type", "type": "set", "values": ["Short sleeve", "Long sleeve", "Sleeveless" ] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('pKtj6re3E1', 'shirts', '{ "name": "Sleeve type", "type": "set", "values": ["Short sleeve", "Long sleeve", "Sleeveless" ] }');
 
-INSERT INTO attribute (category_slug, data) VALUES ('bottoms', '{ "name": "Waist", "type": "number", "min": 20, "max": 50 }');
-INSERT INTO attribute (category_slug, data) VALUES ('bottoms', '{ "name": "Inseam", "type": "number", "min": 20, "max": 40 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('Z4i6HkRS9d', 'bottoms', '{ "name": "Waist", "type": "number", "min": 20, "max": 50 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('vlLlpRBs8F', 'bottoms', '{ "name": "Inseam", "type": "number", "min": 20, "max": 40 }');
 
-INSERT INTO attribute (category_slug, data) VALUES ('shoes', '{ "name": "Size", "type": "number", "min": 4, "max": 15 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('lajRCeKAW1', 'shoes', '{ "name": "Size", "type": "number", "min": 4, "max": 15 }');
 
 -- ██ attribute_value ██
 
@@ -220,3 +220,5 @@ INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'UM9PPU64GB', '{ "value": "0" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'VuLNBGpP7Z', '{ "value": "Electric" }');
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'Iwiw1QLbXP', '{ "value": "25" }');
+
+-- MLB Baseball Hat, Sleeveless Blouse, Denim Shirt, Leather Jacket, Leather Jacket, Chino Pants, Slim Fit Jeans, Cargo Shorts, Sneakers, Ankle Socks
