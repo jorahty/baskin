@@ -54,9 +54,7 @@ export default function AttributeColor({ attribute }: Props) {
         styles={{
           'input::-webkit-color-swatch': {
             borderWidth: 'var(--variant-borderWidth)',
-            borderColor: mode === 'light'
-              ? 'var(--joy-palette-neutral-outlinedBorder)'
-              : 'var(--joy-palette-neutral-outlinedBorder)',
+            borderColor: 'var(--joy-palette-neutral-outlinedBorder)',
             borderRadius: '50%',
           },
         }}

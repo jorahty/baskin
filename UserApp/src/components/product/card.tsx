@@ -57,17 +57,6 @@ export default function ProductCard({ product }: { product: Product }) {
           </Link>
         </Tooltip>
       </Stack>
-      {product.attributes.map(attribute => (
-        <Stack key={attribute.id} direction="row" alignItems="center" gap={1}>
-          <b>{attribute.name}</b> {
-            attribute.value[0] === '#'
-              ? <Box sx={{
-                border: '1px solid black', bgcolor: attribute.value, width: 25, height: 15,
-              }}></Box>
-              : attribute.value
-          }
-        </Stack>
-      ))}
     </Card>
   );
 }

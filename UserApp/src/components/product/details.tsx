@@ -167,6 +167,7 @@ function Color({ value }: { value: string }) {
       height={20}
       borderRadius={20}
       bgcolor={value}
+      border="1px solid var(--joy-palette-neutral-outlinedBorder)"
     />
   );
 }
