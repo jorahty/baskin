@@ -36,6 +36,7 @@ const products = [{
   attributes: [
     { id: '1', name: 'Condition', value: 'New' },
     { id: '3', name: 'Condition', value: '500' },
+    { id: '11', name: 'Color', value: '#ff0000' },
   ],
 }];
 
@@ -192,6 +193,32 @@ test('With filters', async () => {
         { id: '1', selection: null },
         { id: '2', selection: '#ffffff' },
         { id: '3', selection: { min: 100, max: 200 } },
+      ],
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+  renderView();
+});
+
+test('Color filter', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: '',
+      filters: [
+        { id: '11', selection: '#ff0000' },
+      ],
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+  renderView();
+});
+
+test('Color filter', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: '',
+      filters: [
+        { id: '11', selection: '#ffffff' },
       ],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any

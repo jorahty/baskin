@@ -3,6 +3,7 @@ import { useAppContext, Refinement, Filter } from '../../context';
 import { Product } from '@/graphql/product/schema';
 import ProductCard from './card';
 import { Grid } from '@mui/joy';
+import Color from 'colorjs.io';
 
 interface Props {
   products: Product[];
@@ -94,6 +95,11 @@ function filterProducts(products: Product[], filters: Filter[]) {
 
       // Filter type: color
       if (filter.selection[0] === '#') {
+        if (!value) continue;
+        const color1 = new Color(filter.selection);
+        const color2 = new Color(value as string);
+        const ΔE = color1.deltaE76(color2);
+        if (ΔE > 50) return false;
         continue;
       }
 
