@@ -46,7 +46,7 @@ export default function ProductCard({ product }: { product: Product }) {
             </Typography>
           ) : (
             <Typography fontSize="lg" fontWeight="lg">
-              ${product.price.toFixed(2)}
+              {product.price.toLocaleString('en-US', {currency: 'USD', style: 'currency'})}
             </Typography>
           )}
           <Typography>{product.name}</Typography>
