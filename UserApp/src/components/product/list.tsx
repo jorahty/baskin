@@ -68,7 +68,7 @@ function refineProducts(
 
 function filterProducts(products: Product[], filters: Filter[]) {
   const filtered = products.filter(product => {
-    // Hide this product by returning false if this
+    // Hide this product (by returning false) if this
     // product is filtered by any of the filters
 
     for (const filter of filters) {

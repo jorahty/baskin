@@ -19,6 +19,7 @@ const product = {
   discount: 0,
   attributes: [
     { id: '1', name: 'Condition', value: 'New' },
+    { id: '1', name: 'Condition', value: '#ff0000' },
   ],
 };
 
