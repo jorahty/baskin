@@ -43,7 +43,7 @@ export default function ProductInputs({
         }
       `;
 
-      const data = await graphQLClient.request(query, {
+      const data:{category: Category[]} = await graphQLClient.request(query, {
         username: `${signedInUser.username}`,
       });
 

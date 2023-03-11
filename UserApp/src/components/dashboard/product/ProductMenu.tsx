@@ -40,7 +40,7 @@ export default function ProductMenu() {
         }
       `;
 
-      const data = await graphQLClient.request(query, {
+      const data:{product: Product[]} = await graphQLClient.request(query, {
         username: `${signedInUser.username}`,
       });
 
