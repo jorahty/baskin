@@ -13,6 +13,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { Product } from '../../graphql/product/schema';
+import FormData from 'form-data';
 import fetch from 'node-fetch';
 
 export default function ProductImageList({
@@ -157,19 +158,30 @@ export default function ProductImageList({
                   aria-label={'add product image'}
                   type={'file'}
                   sx={{ display: 'none' }}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
                     if (e.target.files) {
                       const uploadedFile = e.target.files[0];
                       if (!uploadedFile) return;
 
-                      // File checks
-                      if (uploadedFile.size / 1024 / 1024 > 6) {
-                        // Has to be smaller than ~6MB
-                        alert('File too large!');
-                      } else if (!validTypes.find((img: string) => img === uploadedFile.type)) {
+                      // File checks - Wrong Format
+                      if (!validTypes.find((img: string) => img === uploadedFile.type)) {
                         alert('Image type not supported.');
                       } else {
-                        setPictures([...pictures, e.target.files[0]]);
+                        // Image compression and resizing
+                        // Make a call to image server for compression
+                        const formData: FormData = new FormData();
+                        formData.append('file', uploadedFile);
+                        const imageData = await fetch('http://localhost:4001/api/v0/image/compress', {
+                          method: 'POST',
+                          body: formData,
+                        });
+
+                        const image = await imageData.json();
+                        const blobArray: Int8Array = new Int8Array(image.buffer.data);
+                        const newFile = new File([blobArray], 'temp.jpeg', {
+                          type: 'image/jpeg',
+                        });
+                        setPictures([...pictures, newFile]);
                       }
                     }
                   }}

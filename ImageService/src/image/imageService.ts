@@ -78,7 +78,7 @@ export class ImageService {
 
     // Compress
     tmpImage.toFormat('jpeg').jpeg({
-      quality: 80,
+      quality: 70,
       chromaSubsampling: '4:4:4',
       force: true,
     });
