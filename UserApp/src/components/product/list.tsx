@@ -68,10 +68,13 @@ function refineProducts(
 
 function filterProducts(products: Product[], filters: Filter[]) {
   const filtered = products.filter(product => {
-    // hide this product by returning false
-    // if it fails any filter
+    // Hide this product by returning false if this
+    // product is filtered by any of the filters
+
     for (const filter of filters) {
-      // return false if it fails
+      if (filter.selection === null) continue;
+
+      // Filter type: price
       if (filter.id === 'PRICE') {
         const { min, max } = filter.selection;
         const tooExpensive = max && product.price > max;
@@ -79,19 +82,32 @@ function filterProducts(products: Product[], filters: Filter[]) {
         if (tooExpensive || tooCheap) return false;
         continue;
       }
+
+      const value = product.attributes.find(a => a.id === filter.id)?.value;
+
+      // Filter type: set
       if (Array.isArray(filter.selection)) {
         if (filter.selection.length === 0) continue;
-        const value = product.attributes.find(a => a.id === filter.id)?.value;
         if (!filter.selection.includes(value)) return false;
         continue;
       }
-      // if (typeof filterValue === array)
-      //   if (!filterValue.includes(product.attributes[key])) return false;
-      // else {
-      //   if (filterValue.min && product.attributes[key] < filterValue.min) return false;
-      //   if (filterValue.max && product.attributes[key] > filterValue.max) return false;
-      // }
+
+      // Filter type: color
+      if (filter.selection[0] === '#') {
+        continue;
+      }
+
+      // Filter type: number
+      if (typeof filter.selection === 'object') {
+        const { min, max } = filter.selection;
+        const number = Number(value);
+        const tooExpensive = max && number > max;
+        const tooCheap = min && number < min;
+        if (tooExpensive || tooCheap) return false;
+        continue;
+      }
     }
+
     return true;
   });
 

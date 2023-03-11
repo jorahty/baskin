@@ -35,6 +35,7 @@ const products = [{
   ],
   attributes: [
     { id: '1', name: 'Condition', value: 'New' },
+    { id: '3', name: 'Condition', value: '500' },
   ],
 }];
 
@@ -176,6 +177,21 @@ test('With filters', async () => {
       filters: [
         { id: '1', selection: [] },
         { id: 'PRICE', selection: { min: 100, max: 200 } },
+      ],
+    },
+  } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+  renderView();
+});
+
+test('With filters', async () => {
+  mockUseAppContext.mockReturnValue({
+    refinement: {
+      sort: 'date-new',
+      search: '',
+      filters: [
+        { id: '1', selection: null },
+        { id: '2', selection: '#ffffff' },
+        { id: '3', selection: { min: 100, max: 200 } },
       ],
     },
   } as any); // eslint-disable-line @typescript-eslint/no-explicit-any
