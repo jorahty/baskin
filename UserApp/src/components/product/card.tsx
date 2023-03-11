@@ -12,6 +12,10 @@ import Typography from '@mui/joy/Typography';
 import { CardOverflow, Stack, Tooltip } from '@mui/joy';
 
 export default function ProductCard({ product }: { product: Product }) {
+  const renderPrice = (price: number) => (
+    price.toLocaleString('en-US', { currency: 'USD', style: 'currency' })
+  );
+
   return (
     <Card variant="outlined">
       <CardOverflow>
@@ -30,7 +34,7 @@ export default function ProductCard({ product }: { product: Product }) {
             }}
           >
             <Chip variant="solid" color="danger" startDecorator={<SellIcon />}>
-              {product.discount * 100}% off!
+              {product.discount * 100}% off
             </Chip>
           </Box>
         )}
@@ -39,14 +43,14 @@ export default function ProductCard({ product }: { product: Product }) {
         <Box flexGrow={1}>
           {product.discount ? (
             <Typography fontSize="lg" fontWeight="lg" color="danger">
-              {`$${(product.price - product.price * product.discount).toFixed(2)} `}
+              {renderPrice(product.price - product.price * product.discount)}{' '}
               <Typography fontWeight="md" color="neutral" sx={{ textDecoration: 'line-through' }}>
-                ${product.price.toFixed(2)}
+                {renderPrice(product.price)}
               </Typography>
             </Typography>
           ) : (
             <Typography fontSize="lg" fontWeight="lg">
-              {product.price.toLocaleString('en-US', {currency: 'USD', style: 'currency'})}
+              {renderPrice(product.price)}
             </Typography>
           )}
           <Typography>{product.name}</Typography>

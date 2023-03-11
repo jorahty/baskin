@@ -128,12 +128,11 @@ export default function ProductDetails({ product }: { product: Product }) {
                 {`$${(product.price - product.price * product.discount).toFixed(2)} `}
               </Typography>
               <Typography level="h6">
-                {`Listed Price: `}
                 <Typography sx={{ textDecoration: 'line-through' }}>
                   ${product.price.toFixed(2)}
                 </Typography>
                 <Typography color="danger" fontWeight="lg">
-                  {` Save ${product.discount * 100}% off!`}
+                  {` Save ${product.discount * 100}%`}
                 </Typography>
               </Typography>
             </Box>
