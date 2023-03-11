@@ -1,4 +1,4 @@
-import { Chat } from './schema';
+import { Chat, ChatMember } from './schema';
 import request, { gql } from 'graphql-request';
 
 export class ChatService {
@@ -55,5 +55,22 @@ export class ChatService {
 
     const data: { addChat: Chat } = await request('http://localhost:4003/graphql', mutation, { name });
     return data.addChat;
+  }
+
+  public async addMember(username: string, id: string): Promise<ChatMember> {
+    const mutation = `
+      mutation addChatMember($username: String!, $id: String!) {
+        addChatMember(username: $username, id: $id) {
+          username
+        }
+      }
+    `;
+
+    const data: { addChatMember: ChatMember } = await request(
+      'http://localhost:4003/graphql',
+      mutation,
+      { username, id }
+    );
+    return data.addChatMember;
   }
 }

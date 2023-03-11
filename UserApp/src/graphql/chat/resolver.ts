@@ -1,5 +1,6 @@
-import { Authorized, Args, Resolver, Query, Mutation } from 'type-graphql';
-import { Chat, ChatArgs, NewChat } from './schema';
+import type { Request } from 'next';
+import { Authorized, Args, Resolver, Query, Mutation, Ctx } from 'type-graphql';
+import { Chat, ChatArgs, ChatMember, ChatMemberArgs, NewChat } from './schema';
 import { ChatService } from './service';
 
 @Resolver()
@@ -15,5 +16,12 @@ export class ChatResolver {
   @Mutation(returns => Chat)
   async addChat(@Args() { name }: NewChat): Promise<Chat> {
     return new ChatService().add(name);
+  }
+
+  @Authorized()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @Mutation(returns => ChatMember)
+  async addChatMember(@Args() { id }: ChatMemberArgs, @Ctx() request: Request): Promise<ChatMember> {
+    return new ChatService().addMember(request.user.username, id);
   }
 }

@@ -16,8 +16,9 @@ export class Chat {
 }
 
 @ObjectType()
-class ChatMember {
+export class ChatMember {
   @Field()
+  @Matches(regexUsername)
     username!: string;
 }
 
@@ -36,4 +37,14 @@ export class NewChat {
   @Field()
   @Length(1, 32)
     name!: string;
+}
+
+@ArgsType()
+export class ChatMemberArgs {
+  @Field()
+  @Matches(regexUsername)
+    username!: string;
+  @Field()
+  @Matches(regexUUID)
+    id!: string;
 }

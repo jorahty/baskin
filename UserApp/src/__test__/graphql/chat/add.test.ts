@@ -22,6 +22,15 @@ const handlers = [
       })
     );
   }),
+  graphql.mutation('addChatMember', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        addChatMember: {
+          username: 'molly_member',
+        },
+      })
+    );
+  }),
 ];
 
 const microServiceServer = setupServer(...handlers);
@@ -40,6 +49,8 @@ afterAll(done => {
   server.close(done);
   microServiceServer.close();
 });
+
+let chatId: string | undefined = undefined;
 
 test('Add Chat', async () => {
   const accessToken = await login.asMolly(request);
@@ -62,5 +73,31 @@ test('Add Chat', async () => {
       expect(res.body).toBeDefined();
       expect(res.body.data).toBeDefined();
       expect(res.body.data.addChat).toBeDefined();
+      chatId = res.body.data.addChat.id;
+    });
+});
+
+test('Add Chat Member', async () => {
+  const accessToken = await login.asMolly(request);
+  await request
+    .post('/api/graphql')
+    .set('Authorization', `Bearer ${accessToken}`)
+    .send({
+      query: `
+      mutation {
+        addChatMember (id: "${chatId}") { 
+          username 
+        } 
+      }`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(res => {
+      console.log(res.body);
+      expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      expect(res.body.data).toBeDefined();
+      expect(res.body.data.addChatMember).toBeDefined();
+      expect(res.body.data.addChatMember.username).toBe('molly_member');
     });
 });

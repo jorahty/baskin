@@ -1,5 +1,5 @@
 import { pool } from '../db';
-import { Chat } from './schema';
+import { Chat, ChatMember } from './schema';
 
 export class ChatService {
   public async list(username: string): Promise<Chat[]> {
@@ -40,5 +40,21 @@ export class ChatService {
     };
     const { rows } = await pool.query(query);
     return rows[0].chat;
+  }
+
+  public async addMember(username: string, chat_id: string): Promise<ChatMember> {
+    const insert = `
+      INSERT INTO chat_member(member_username, chat_id)
+      VALUES ($1, $2) 
+      RETURNING jsonb_build_object('username', member_username)
+      AS member
+    `;
+    const query = {
+      text: insert,
+      values: [username, chat_id],
+    };
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    return rows[0].member;
   }
 }

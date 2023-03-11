@@ -16,7 +16,7 @@ export default function ChatHeader({ chat }: { chat: Chat | undefined }) {
     if (otherMembers.length === 1) return otherMembers[0].name;
 
     // else, render comma-seperated list of first names
-    return otherMembers.map(member => member.name.split(' ')[0]).join(', ');
+    return otherMembers.map(member => member.name?.split(' ')[0]).join(', ');
   }
 
   return (
