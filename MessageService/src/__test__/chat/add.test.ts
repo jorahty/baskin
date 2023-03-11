@@ -42,7 +42,7 @@ test('Add a Member to Chat', async () => {
   await request
     .post('/graphql')
     .send({
-      query: `mutation { addChatMember(username: "molly_member", id: "${newChatId}"){ username } }`,
+      query: `mutation { addChatMember(username: "bob_builder", id: "${newChatId}"){ username } }`,
     })
     .expect(200)
     .then(res => {
@@ -50,6 +50,6 @@ test('Add a Member to Chat', async () => {
       expect(res.body).toBeDefined();
       expect(res.body.data).toBeDefined();
       expect(res.body.data.addChatMember).toBeDefined();
-      expect(res.body.data.addChatMember.username).toBe('molly_member');
+      expect(res.body.data.addChatMember.username).toBe('bob_builder');
     });
 });

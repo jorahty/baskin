@@ -45,6 +45,9 @@ export class NewChat {
 
 @ArgsType()
 export class ChatMemberArgs {
+  @Field({ nullable: true })
+  @Matches(regexUsername)
+    username?: string;
   @Field()
   @Matches(regexUUID)
     id!: string;

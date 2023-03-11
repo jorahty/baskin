@@ -21,7 +21,10 @@ export class ChatResolver {
   @Authorized()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Mutation(returns => ChatMember)
-  async addChatMember(@Args() { id }: ChatMemberArgs, @Ctx() request: Request): Promise<ChatMember> {
-    return new ChatService().addMember(request.user.username, id);
+  async addChatMember(
+    @Args() { username, id }: ChatMemberArgs,
+    @Ctx() request: Request
+  ): Promise<ChatMember> {
+    return new ChatService().addMember(username || request.user.username, id);
   }
 }

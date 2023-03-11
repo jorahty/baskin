@@ -5,6 +5,18 @@ import '../matchMedia';
 import { setupServer } from 'msw/node';
 import { graphql } from 'msw';
 
+jest.mock('../../../context', () => ({
+  useAppContext: () => ({
+    signIn: jest.fn(),
+    signOut: jest.fn(),
+    signedInUser: {
+      name: 'Anna Admin',
+      username: 'anna_admin',
+      accessToken: 'whatever',
+    },
+  }),
+}));
+
 const product = {
   name: 'Air Jordan 11',
   date: '2023-02-09T06:43:08.000Z',
@@ -40,6 +52,8 @@ jest.mock('next/router', () => ({
       query: { id: '123' },
     };
   },
+  push: jest.fn(),
+  pathname: '',
 }));
 
 jest.mock('react-i18next', () => ({
@@ -100,6 +114,36 @@ const handlers = [
       })
     );
   }),
+  graphql.mutation('addChatMember', async (req, res, ctx) => {
+    const username = req.variables.username;
+    if (username === 'anna_admin') {
+      return res(
+        ctx.data({
+          addChatMember: {
+            username: 'anna_admin',
+          },
+        })
+      );
+    }
+    return res(
+      ctx.data({
+        addChatMember: {
+          username: 'molly_member',
+        },
+      })
+    );
+  }),
+  graphql.mutation('sendMessage', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        sendMessage: {
+          sender: 'anna_admin',
+          content: 'Hey is this available?',
+          date: new Date().toISOString(),
+        },
+      })
+    );
+  }),
 ];
 
 const server = setupServer(...handlers);
@@ -113,10 +157,6 @@ beforeEach(() => {
 });
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
-
-const log = jest.spyOn(console, 'log').mockImplementation(() => {
-  return;
-});
 
 const renderView = async (id: string) => {
   const { props } = (await getServerSideProps({
@@ -160,11 +200,11 @@ test('Renders (Discount Item)', async () => {
   await screen.findByText(`${discountProduct.user}`);
 });
 
-test('Send User Message (Create Chat Only Right Now)', async () => {
+test('Send User Message', async () => {
   await renderView('038b7e70-a5c0-47e6-80f3-5b1772bb4a0d');
   await screen.findByText('Send');
   fireEvent.click(screen.getByText('Send'));
   await waitFor(() => {
-    expect(log).toHaveBeenCalledTimes(1);
+    expect(screen.getByText('Sent')).toBeDefined();
   });
 });

@@ -18,6 +18,8 @@ import Link from 'next/link';
 import { gql, GraphQLClient } from 'graphql-request';
 import { useAppContext } from '../../context';
 import { Chat } from '../../graphql/chat/schema';
+import Router from 'next/router';
+import { useState } from 'react';
 
 interface FormElements extends HTMLFormControlsCollection {
   message: HTMLInputElement;
@@ -29,6 +31,7 @@ interface MessageFormElement extends HTMLFormElement {
 
 export default function ProductDetails({ product }: { product: Product }) {
   const { signedInUser } = useAppContext();
+  const [sent, setSent] = useState('Send');
 
   const handleSubmit = async (message: string) => {
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
@@ -37,17 +40,54 @@ export default function ProductDetails({ product }: { product: Product }) {
       },
     });
 
-    const mutation = gql`
+    let mutation = gql`
         mutation addChat {
           addChat (name: "${product.name}") { 
             id
             name
           }
         }
-      `;
+    `;
 
     const data: { addChat: Chat } = await graphQLClient.request(mutation);
     console.log(message, data.addChat);
+
+    mutation = gql`
+        mutation addChatMember {
+          addChatMember (id: "${data.addChat.id}"){
+            username
+          }
+        }
+    `;
+
+    await graphQLClient.request(mutation);
+
+    mutation = gql`
+        mutation addChatMember {
+          addChatMember (username: "${product.user}", id: "${data.addChat.id}"){
+            username
+          }
+        }
+    `;
+
+    await graphQLClient.request(mutation);
+
+    mutation = gql`
+        mutation sendMessage {
+          sendMessage (message: {
+            chat_id: "${data.addChat.id}",
+            content: "${message}"
+          }) { sender, content, date }
+        }
+    `;
+
+    await graphQLClient.request(mutation);
+
+    setSent('Sent');
+
+    Router.push({
+      pathname: `/messages/${data.addChat.id}`,
+    });
   };
 
   return (
@@ -113,7 +153,7 @@ export default function ProductDetails({ product }: { product: Product }) {
             <Typography level="body2">{new Date(product.date).toLocaleDateString('en-US')}</Typography>
           </Stack>
           <Typography noWrap>{product.description}</Typography>
-          {product.attributes.length > 0 &&
+          {product.attributes.length > 0 && (
             <Sheet
               variant="outlined"
               sx={{
@@ -126,14 +166,16 @@ export default function ProductDetails({ product }: { product: Product }) {
                 <tbody>
                   {product.attributes.map(({ id, name, value, symbol }) => (
                     <tr key={id}>
-                      <td><b>{name}</b></td>
-                      <td>{value[0] === '#' ? <Color value={value}/> : `${value} ${symbol || ''}`}</td>
+                      <td>
+                        <b>{name}</b>
+                      </td>
+                      <td>{value[0] === '#' ? <Color value={value} /> : `${value} ${symbol || ''}`}</td>
                     </tr>
                   ))}
                 </tbody>
               </Table>
             </Sheet>
-          }
+          )}
           <form
             onSubmit={(event: React.FormEvent<MessageFormElement>) => {
               event.preventDefault();
@@ -150,7 +192,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 sx={{ bgcolor: 'background.body' }}
               />
               <Button size="lg" type="submit">
-                Send
+                {sent}
               </Button>
             </Stack>
           </form>

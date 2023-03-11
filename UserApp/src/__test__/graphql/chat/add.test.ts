@@ -23,10 +23,20 @@ const handlers = [
     );
   }),
   graphql.mutation('addChatMember', async (req, res, ctx) => {
+    const username = req.variables.username;
+    if (username === 'molly_member') {
+      return res(
+        ctx.data({
+          addChatMember: {
+            username: 'molly_member',
+          },
+        })
+      );
+    }
     return res(
       ctx.data({
         addChatMember: {
-          username: 'molly_member',
+          username: 'bob_builder',
         },
       })
     );
@@ -93,11 +103,34 @@ test('Add Chat Member', async () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then(res => {
-      console.log(res.body);
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
       expect(res.body.data).toBeDefined();
       expect(res.body.data.addChatMember).toBeDefined();
       expect(res.body.data.addChatMember.username).toBe('molly_member');
+    });
+});
+
+test('Add Chat Member (Other)', async () => {
+  const accessToken = await login.asMolly(request);
+  await request
+    .post('/api/graphql')
+    .set('Authorization', `Bearer ${accessToken}`)
+    .send({
+      query: `
+      mutation {
+        addChatMember (username: "bob_builder", id: "${chatId}") { 
+          username 
+        } 
+      }`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(res => {
+      expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      expect(res.body.data).toBeDefined();
+      expect(res.body.data.addChatMember).toBeDefined();
+      expect(res.body.data.addChatMember.username).toBe('bob_builder');
     });
 });
