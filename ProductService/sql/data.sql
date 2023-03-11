@@ -222,3 +222,4 @@ INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f
 INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f6dc-4c80-a4a1-07d9247cb22e', 'Iwiw1QLbXP', '{ "value": "25" }');
 
 -- MLB Baseball Hat, Sleeveless Blouse, Denim Shirt, Leather Jacket, Leather Jacket, Chino Pants, Slim Fit Jeans, Cargo Shorts, Sneakers, Ankle Socks
+-- Luxury Condo, Cozy Cabin, Modern Stud, Beachfront Villa
