@@ -24,21 +24,28 @@ export default function ChatCard({ chat, selected }: Props) {
     return otherMembers.map(member => member.name?.split(' ')[0]).join(', ');
   }
 
+  const bgcolor = selected
+    ? 'var(--joy-palette-primary-softBg)'
+    : 'var(--joy-palette-background-surface)';
+
+  const avatar = <Avatar size="sm" src={`https://robohash.org/${otherMembers[0].username}`} />;
+
   return (
     <ListItem key={chat.id}>
       <ListItemButton
         selected={selected}
-        variant={selected ? 'soft' : 'plain'}
+        sx={{ bgcolor: bgcolor }}
         onClick={() => Router.push(`/messages/${chat.id}`, undefined, { shallow: true })}
       >
         <Stack direction="row" alignItems="center" py={1} gap={2}>
-          {otherMembers.length - 1 ? (
+          {otherMembers.length < 2 ? avatar : (
             <Badge
               size="sm"
               anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
               badgeInset="14%"
               sx={{
                 '--joy-palette-primary-solidBg': 'var(--joy-palette-neutral-softBg)',
+                '--Badge-ringColor': bgcolor,
               }}
               badgeContent={
                 <Typography level="body3" textColor="text.primary" fontWeight="xl">
@@ -46,10 +53,8 @@ export default function ChatCard({ chat, selected }: Props) {
                 </Typography>
               }
             >
-              <Avatar size="sm" src={`https://robohash.org/${otherMembers[0].username}`} />
+              {avatar}
             </Badge>
-          ) : (
-            <Avatar size="sm" src={`https://robohash.org/${otherMembers[0].username}`} />
           )}
           <Typography>{renderChatName(chat)}</Typography>
         </Stack>
