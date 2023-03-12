@@ -178,7 +178,7 @@ export default function Signin() {
             <Box display="flex" justifyContent="flex-end">
               <Link href="/signup">
                 <Typography fontSize="sm" fontWeight="lg" color="primary">
-                  {`New to Baskin? Sign up.`}
+                  New to Baskin? Sign up →
                 </Typography>
               </Link>
             </Box>
