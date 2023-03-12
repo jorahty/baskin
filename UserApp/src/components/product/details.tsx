@@ -190,13 +190,14 @@ export default function ProductDetails({ product }: { product: Product }) {
             <Stack direction="column" spacing={1}>
               {signedInUser?.username === product.user ? (
                 <>
+                  <Input
+                    name="message"
+                    placeholder="Hi, is this available?"
+                    defaultValue="Hi, is this available?"
+                    sx={{ bgcolor: 'background.body' }}
+                  />
                   <Tooltip size="lg" title="Talk to yourself often?" arrow>
                     <Box sx={{ cursor: 'not-allowed' }}>
-                      <Input
-                        disabled
-                        placeholder="Hi, is this available?"
-                        sx={{ bgcolor: 'background.body' }}
-                      />
                       <Button size="lg" type="submit" disabled sx={{ width: '100%' }}>
                         {sent}
                       </Button>
