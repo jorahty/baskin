@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import ProductCard from '../../../../components/product/card';
 import { AppContextProvider } from '../../../../context';
 import 'whatwg-fetch';
@@ -37,5 +37,17 @@ test('Renders', async () => {
 
 test('Render Discount', async () => {
   product.discount = 0.2;
+  renderView();
+});
+
+test('Click Save', async () => {
+  renderView();
+  const save = await screen.findByLabelText('Save');
+  fireEvent.click(save);
+  fireEvent.click(save);
+});
+
+test('Already Saved', async () => {
+  localStorage.setItem('undefined-saved', '[]');
   renderView();
 });

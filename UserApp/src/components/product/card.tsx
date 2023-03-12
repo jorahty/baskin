@@ -9,9 +9,31 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SellIcon from '@mui/icons-material/Sell';
 import Typography from '@mui/joy/Typography';
-import { CardOverflow, Stack, Tooltip } from '@mui/joy';
+import { CardOverflow, IconButton, Stack, Tooltip } from '@mui/joy';
+import { useEffect, useState } from 'react';
+import { Bookmark, BookmarkBorder } from '@mui/icons-material';
+import { useAppContext } from '../../context';
 
 export default function ProductCard({ product }: { product: Product }) {
+  const { signedInUser } = useAppContext();
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    const item = localStorage.getItem(`${signedInUser?.username}-saved`);
+    const saved: string[] = item ? JSON.parse(item) : [];
+    setIsSaved(saved.includes(product.id));
+  }, [signedInUser, product]);
+
+  function handleSave() {
+    const item = localStorage.getItem(`${signedInUser?.username}-saved`);
+    const existing: string[] = item ? JSON.parse(item) : [];
+    const saved = isSaved
+      ? (existing.filter(id => id !== product.id))
+      : existing.concat(product.id);
+    localStorage.setItem(`${signedInUser?.username}-saved`, JSON.stringify(saved));
+    setIsSaved(!isSaved);
+  }
+
   const renderPrice = (price: number) => (
     price.toLocaleString('en-US', { currency: 'USD', style: 'currency' })
   );
@@ -25,19 +47,32 @@ export default function ProductCard({ product }: { product: Product }) {
           </AspectRatio>
         </Link>
         {product.discount > 0 && (
-          <Box
-            sx={{
+          <Chip
+            variant="solid"
+            color="danger" startDecorator={<SellIcon />} sx={{
               position: 'absolute',
-              zIndex: 2,
-              left: '5px',
-              top: '5px',
+              top: '0.5rem',
+              left: '0.5rem',
+            }}>
+            {product.discount * 100}% off
+          </Chip>
+        )}
+        <Tooltip title={isSaved ? 'Unsave' : 'Save'}>
+          <IconButton
+            onClick={handleSave}
+            variant="outlined"
+            color={isSaved ? 'primary' : 'neutral'}
+            sx={{
+              bgcolor: 'background.surface',
+              position: 'absolute',
+              top: '0.5rem',
+              right: '0.5rem',
+              borderRadius: '50%',
             }}
           >
-            <Chip variant="solid" color="danger" startDecorator={<SellIcon />}>
-              {product.discount * 100}% off
-            </Chip>
-          </Box>
-        )}
+            {isSaved ? <Bookmark /> : <BookmarkBorder />}
+          </IconButton>
+        </Tooltip>
       </CardOverflow>
       <Stack direction="row" pt={1} alignItems="flex-end">
         <Box flexGrow={1}>
