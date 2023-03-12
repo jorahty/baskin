@@ -4,7 +4,7 @@ import ImageGallery from '../../../../components/product/ImageGallery';
 import userEvent from '@testing-library/user-event';
 
 const product: Product = {
-  id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+  id: 'X0bZdiabca',
   user: 'molly_member',
   category: 'apparel',
   name: 'Air Jordan 15',

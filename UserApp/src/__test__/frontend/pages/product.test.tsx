@@ -20,7 +20,7 @@ jest.mock('../../../context', () => ({
 const product = {
   name: 'Air Jordan 11',
   date: '2023-02-09T06:43:08.000Z',
-  id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+  id: 'X0bZdiabca',
   price: 250,
   discount: 0,
   category: 'clothing',
@@ -32,7 +32,7 @@ const product = {
 const discountProduct = {
   name: 'Baseballs',
   date: '2022-01-21T15:43:08.000Z',
-  id: '2759559e-84f2-4c41-9512-932589163f4f',
+  id: 'X0bZdiabcc',
   price: 2,
   discount: 0.2,
   category: 'toys',
@@ -75,7 +75,7 @@ jest.mock('react-i18next', () => ({
 const handlers = [
   graphql.query('ListProducts', async (req, res, ctx) => {
     const { id } = req.variables;
-    if (id === '2759559e-84f2-4c41-9512-932589163f4f')
+    if (id === 'X0bZdiabcc')
       return res(
         ctx.data({
           product: [discountProduct],
@@ -85,7 +85,7 @@ const handlers = [
       ctx.data({
         product: [
           {
-            id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+            id: 'X0bZdiabca',
             user: 'molly_member',
             category: 'clothing',
             name: 'Air Jordan 11',
@@ -172,7 +172,7 @@ const renderView = async (id: string) => {
 
 const renderDiscountView = async () => {
   const { props } = (await getServerSideProps({
-    query: { id: '2759559e-84f2-4c41-9512-932589163f4f' },
+    query: { id: 'X0bZdiabcc' },
     locale: 'en',
   } as any)) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
@@ -184,7 +184,7 @@ const renderDiscountView = async () => {
 };
 
 test('Renders', async () => {
-  await renderView('038b7e70-a5c0-47e6-80f3-5b1772bb4a0d');
+  await renderView('X0bZdiabca');
   await screen.findByText(product.name);
   await screen.findByText('$' + product.price.toFixed(2));
   await screen.findByText(product.category);
@@ -201,7 +201,7 @@ test('Renders (Discount Item)', async () => {
 });
 
 test('Send User Message', async () => {
-  await renderView('038b7e70-a5c0-47e6-80f3-5b1772bb4a0d');
+  await renderView('X0bZdiabca');
   await screen.findByText('Send');
   fireEvent.click(screen.getByText('Send'));
   await waitFor(() => {
@@ -213,7 +213,7 @@ test('Send User Message', async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const mockRouter = jest.spyOn(require('../../../context'), 'useAppContext');
   mockRouter.mockReturnValue({ signIn: jest.fn(), signOut: jest.fn(), signedInUser: null });
-  await renderView('038b7e70-a5c0-47e6-80f3-5b1772bb4a0d');
+  await renderView('X0bZdiabca');
   await screen.findByText('Send');
   fireEvent.click(screen.getByText('Send'));
 });

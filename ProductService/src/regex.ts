@@ -8,3 +8,5 @@ export const regexSlug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export const regexISODate =
   /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)((-(\d{2}):(\d{2})|Z)?)$/;
+
+export const regexnanoID = /^[a-zA-Z0-9]{10}$/;

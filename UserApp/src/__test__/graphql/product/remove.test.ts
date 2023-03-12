@@ -57,7 +57,7 @@ const handlers = [
     return res(
       ctx.data({
         removeProduct: {
-          id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+          id: 'X0bZdiabca',
           user: 'molly_member',
           category: 'clothing',
           name: 'Toy robot',
@@ -97,7 +97,7 @@ test('Remove Product', async () => {
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
       query: `mutation {removeProduct (
-        product: "038b7e70-a5c0-47e6-80f3-5b1772bb4a0d"
+        product: "X0bZdiabca"
       ) {
         name, description, category, price, quantity, user
       }}`,

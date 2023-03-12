@@ -1,6 +1,6 @@
 import { ArgsType, Field, ObjectType } from 'type-graphql';
 import { Matches, Length, MinLength } from 'class-validator';
-import { regexSlug, regexUUID } from '../regex';
+import { regexnanoID, regexSlug, regexUUID } from '../regex';
 
 @ObjectType()
 export class Category {
@@ -13,7 +13,7 @@ export class Category {
 @ObjectType()
 export class Attribute {
   @Field()
-  @Matches(regexUUID)
+  @Matches(regexnanoID)
     id!: string;
   @Field()
   @Matches(regexSlug)

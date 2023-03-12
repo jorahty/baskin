@@ -13,7 +13,7 @@ const handlers = [
     return res(
       ctx.data({
         product: [{
-          id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+          id: 'X0bZdiabca',
           user: 'molly_member',
           category: 'clothing',
           name: 'Air Jordan 15',
@@ -95,7 +95,7 @@ test('Renders', async () => {
 });
 
 test('With Saved Products', async () => {
-  localStorage.setItem('saved', '["038b7e70-a5c0-47e6-80f3-5b1772bb4a0d"]');
+  localStorage.setItem('saved', '["X0bZdiabca"]');
   renderView();
   await new Promise(resolve => setTimeout(resolve, 500));
 });

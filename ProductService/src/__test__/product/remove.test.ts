@@ -26,7 +26,7 @@ test('Remove', async () => {
     .send({
       query: `
         mutation {
-          removeProduct(id: "038b7e70-a5c0-47e6-80f3-5b1772bb4a0d") {
+          removeProduct(id: "X0bZdiabca") {
             user
           }
         }
@@ -48,7 +48,7 @@ test('Remove Missing', async () => {
     .send({
       query: `
         mutation {
-          removeProduct(id: "038b7e70-a5c0-47e6-80f3-5b1772bb4a0d") {
+          removeProduct(id: "X0bZdiabca") {
             user
           }
         }

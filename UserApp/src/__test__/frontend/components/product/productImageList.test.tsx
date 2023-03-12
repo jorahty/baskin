@@ -12,7 +12,7 @@ jest.mock('form-data');
 const handleFileUpload = jest.fn();
 
 const product: Product = {
-  id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+  id: 'X0bZdiabca',
   user: 'molly_member',
   category: 'toys',
   name: 'Honda Civic Toy Car',
@@ -20,7 +20,7 @@ const product: Product = {
   discount: 0,
   quantity: 23,
   images: [
-    '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+    'X0bZdiabca',
     '038b7e70-a5c0-47e6-80f3-5b1772bb4a1d',
   ],
   description: 'something',

@@ -27,7 +27,7 @@ test('Edit', async () => {
       query: `
         mutation updateProduct{
           updateProduct(
-            id:"46fd42cf-e976-48a0-9ac2-d97a96e885eb",
+            id:"X0bZdiabcd",
           input:{
             user:"molly_member",
             name:"Some Cowboy Hat",
@@ -47,7 +47,7 @@ test('Edit', async () => {
       expect(data).toBeDefined();
       expect(data.body).toBeDefined();
       expect(data.body.data).toBeDefined();
-      expect(data.body.data.updateProduct.id).toEqual('46fd42cf-e976-48a0-9ac2-d97a96e885eb');
+      expect(data.body.data.updateProduct.id).toEqual('X0bZdiabcd');
     });
 });
 

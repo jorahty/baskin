@@ -83,5 +83,8 @@
   "bugs": {
     "url": "https://github.com/jorahty/baskin/issues"
   },
-  "homepage": "https://github.com/jorahty/baskin#readme"
+  "homepage": "https://github.com/jorahty/baskin#readme",
+  "dependencies": {
+    "nanoid": "^4.0.1"
+  }
 }

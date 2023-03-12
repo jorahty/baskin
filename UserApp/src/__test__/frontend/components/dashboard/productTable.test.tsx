@@ -14,7 +14,7 @@ const handlers = [
       ctx.data({
         removeProduct: [
           {
-            id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+            id: 'X0bZdiabca',
           },
         ],
       })
@@ -58,7 +58,7 @@ jest.mock('react-i18next', () => ({
 
 const products: Product[] = [
   {
-    id: '038b7e70-a5c0-47e6-80f3-5b1772bb4a0d',
+    id: 'X0bZdiabca',
     user: 'molly_member',
     category: 'toys',
     name: 'Honda Civic Toy Car',

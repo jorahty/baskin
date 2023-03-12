@@ -1,11 +1,11 @@
 import { ArgsType, Field, InputType, ObjectType } from 'type-graphql';
 import { Matches, Length, MinLength } from 'class-validator';
-import { regexISODate, regexSlug, regexUsername, regexUUID } from '../regex';
+import { regexISODate, regexnanoID, regexSlug, regexUsername } from '../regex';
 
 @ObjectType()
 export class Product {
   @Field()
-  @Matches(regexUUID)
+  @Matches(regexnanoID)
     id!: string;
   @Field()
   @Matches(regexUsername)
@@ -38,7 +38,7 @@ export class Product {
 @ObjectType()
 class AttributeValue {
   @Field()
-  @Length(10)
+  @Matches(regexnanoID)
     id!: string;
   @Field()
   @Length(1, 32)
@@ -54,7 +54,7 @@ class AttributeValue {
 @ArgsType()
 export class ProductArgs {
   @Field({ nullable: true })
-  @Matches(regexUUID)
+  @Matches(regexnanoID)
     id?: string;
   @Field({ nullable: true })
     user?: string;
@@ -90,6 +90,6 @@ export class NewProduct {
 @ArgsType()
 export class RemoveProductArgs {
   @Field()
-  @Matches(regexUUID)
+  @Matches(regexnanoID)
     id!: string;
 }

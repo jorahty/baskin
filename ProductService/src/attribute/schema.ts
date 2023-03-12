@@ -1,11 +1,11 @@
 import { ArgsType, Field, ObjectType, InputType } from 'type-graphql';
 import { Matches, Length, MinLength } from 'class-validator';
-import { regexSlug } from '../regex';
+import { regexnanoID, regexSlug } from '../regex';
 
 @ObjectType()
 export class Attribute {
   @Field()
-  @Length(10)
+  @Matches(regexnanoID)
     id!: string;
   @Field()
   @Matches(regexSlug)
@@ -72,7 +72,7 @@ export class NewAttribute {
 @InputType('EditAttributeInput')
 export class EditAttribute {
   @Field()
-  @Length(10)
+  @Matches(regexnanoID)
     id!: string;
   @Field({ nullable: true })
     category!: string;
