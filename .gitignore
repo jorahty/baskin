@@ -22,3 +22,6 @@
 
 # JetBrains
 .idea
+
+# Other
+.prettierrc
