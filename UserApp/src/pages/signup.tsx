@@ -9,11 +9,13 @@ import FormControl from '@mui/joy/FormControl';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
+// import Link from '@mui/joy/Link';
 import { useAppContext } from '../context';
 import BackRedirect from '../components/common/BackRedirect';
 import { useTranslation } from 'next-i18next';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Link from 'next/link';
 
 interface FormElements extends HTMLFormControlsCollection {
   firstname: HTMLInputElement;
@@ -29,7 +31,7 @@ interface SignInFormElement extends HTMLFormElement {
 export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...(await serverSideTranslations(context.locale ?? 'en', ['common'])),
     },
   };
 };
@@ -107,8 +109,7 @@ export default function Signup() {
       />
       <Box
         sx={theme => ({
-          width:
-            'clamp(100vw - var(--Cover-width), (var(--Collapsed-breakpoint) - 100vw) * 999, 100vw)',
+          width: 'clamp(100vw - var(--Cover-width), (var(--Collapsed-breakpoint) - 100vw) * 999, 100vw)',
           transition: 'width var(--Transition-duration)',
           transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',
           position: 'relative',
@@ -127,8 +128,7 @@ export default function Signup() {
             display: 'flex',
             flexDirection: 'column',
             minHeight: '100dvh',
-            width:
-              'clamp(var(--Form-maxWidth), (var(--Collapsed-breakpoint) - 100vw) * 999, 100%)',
+            width: 'clamp(var(--Form-maxWidth), (var(--Collapsed-breakpoint) - 100vw) * 999, 100%)',
             maxWidth: '100%',
             px: 2,
           }}
@@ -175,59 +175,35 @@ export default function Signup() {
                   email: formElements.email.value,
                   password: formElements.password.value,
                 };
-                handleSubmit(
-                  data.email,
-                  data.password,
-                  data.lastname,
-                  data.firstname,
-                  data.username
-                );
+                handleSubmit(data.email, data.password, data.lastname, data.firstname, data.username);
               }}
             >
               <FormControl required>
-                <FormLabel
-                  aria-label="Enter your first name"
-                >{ready && t('signup.form.firstName')}</FormLabel>
-                <Input
-                  placeholder={firstNamePlaceholder}
-                  type="firstname"
-                  name="firstname"
-                />
+                <FormLabel aria-label="Enter your first name">
+                  {ready && t('signup.form.firstName')}
+                </FormLabel>
+                <Input placeholder={firstNamePlaceholder} type="firstname" name="firstname" />
               </FormControl>
               <FormControl required>
-                <FormLabel
-                  aria-label="Enter your last name"
-                >{ready && t('signup.form.lastName')}</FormLabel>
-                <Input
-                  placeholder={lastNamePlaceholder}
-                  type="lastname"
-                  name="lastname"
-                />
+                <FormLabel aria-label="Enter your last name">
+                  {ready && t('signup.form.lastName')}
+                </FormLabel>
+                <Input placeholder={lastNamePlaceholder} type="lastname" name="lastname" />
               </FormControl>
               <FormControl required>
-                <FormLabel
-                  aria-label="Enter your username"
-                >{ready && t('signup.form.username')}</FormLabel>
-                <Input
-                  placeholder={usernamePlaceholder}
-                  type="username"
-                  name="username"
-                />
+                <FormLabel aria-label="Enter your username">
+                  {ready && t('signup.form.username')}
+                </FormLabel>
+                <Input placeholder={usernamePlaceholder} type="username" name="username" />
               </FormControl>
               <FormControl required>
-                <FormLabel
-                  aria-label="Enter your email"
-                >{ready && t('signup.form.email')}</FormLabel>
-                <Input
-                  placeholder={emailPlaceholder}
-                  type="email"
-                  name="email"
-                />
+                <FormLabel aria-label="Enter your email">{ready && t('signup.form.email')}</FormLabel>
+                <Input placeholder={emailPlaceholder} type="email" name="email" />
               </FormControl>
               <FormControl required>
-                <FormLabel
-                  aria-label="Enter your password"
-                >{ready && t('signup.form.password')}</FormLabel>
+                <FormLabel aria-label="Enter your password">
+                  {ready && t('signup.form.password')}
+                </FormLabel>
                 <Input placeholder="•••••••" type="password" name="password" />
               </FormControl>
               <Box
@@ -241,6 +217,13 @@ export default function Signup() {
                 {ready && t('signup.form.signup')}
               </Button>
             </form>
+            <Box display="flex" justifyContent="flex-end">
+              <Link href="/signin">
+                <Typography fontSize="sm" fontWeight="lg" color="primary">
+                  Already Have an Account?
+                </Typography>
+              </Link>
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -259,11 +242,9 @@ export default function Signup() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundImage:
-            'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8)',
+          backgroundImage: 'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8)',
           [theme.getColorSchemeSelector('dark')]: {
-            backgroundImage:
-              'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831)',
           },
         })}
       />
