@@ -32,6 +32,16 @@ const handlers = [
       }),
     );
   }),
+  graphql.query('CategoryChildren', async (req, res, ctx) => {
+    return res(
+      ctx.data({
+        categoryChildren: [{
+          slug: 'cars',
+          name: 'Cars',
+        }],
+      }),
+    );
+  }),
 ];
 
 const server = setupServer(...handlers);
@@ -84,7 +94,7 @@ test('Renders', async () => {
   await new Promise(resolve => setTimeout(resolve, 500));
 });
 
-test('With Saved Products', async () => {
+test('WithSaved Products', async () => {
   localStorage.setItem('undefined-saved', '[]');
   renderView();
   await new Promise(resolve => setTimeout(resolve, 500));

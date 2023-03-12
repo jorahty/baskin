@@ -8,6 +8,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { VerboseCategory } from './';
 import { useEffect } from 'react';
 import { useAppContext } from '../context';
+import { Stack, Typography } from '@mui/joy';
+import Image from 'next/image';
 
 // Within `getServerSideProps` we can (and should) query
 // micro services directly. https://tinyurl.com/ysfwst5r
@@ -45,7 +47,22 @@ export default function SavedPage({ category, locale }: Props) {
 
   return (
     <Layout sidebar={<CategoryControls category={category} />} locale={locale}>
-      <CategoryContent category={category}/>
+      {
+        category.products.length > 0
+          ? <CategoryContent category={category}/>
+          : <Empty />
+      }
     </Layout>
+  );
+}
+
+function Empty() {
+  return (
+    <Stack gap={5} justifyContent="center" alignItems="center" height="100%">
+      <Image src="/logo.svg" alt="" width={300} height={70} />
+      <Typography level="h4" textColor="#789">
+        You do not have any saved products
+      </Typography>
+    </Stack>
   );
 }
