@@ -208,3 +208,12 @@ test('Send User Message', async () => {
     expect(screen.getByText('Sent')).toBeDefined();
   });
 });
+
+test('Send User Message', async () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const mockRouter = jest.spyOn(require('../../../context'), 'useAppContext');
+  mockRouter.mockReturnValue({ signIn: jest.fn(), signOut: jest.fn(), signedInUser: null });
+  await renderView('038b7e70-a5c0-47e6-80f3-5b1772bb4a0d');
+  await screen.findByText('Send');
+  fireEvent.click(screen.getByText('Send'));
+});

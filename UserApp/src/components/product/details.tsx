@@ -35,6 +35,13 @@ export default function ProductDetails({ product }: { product: Product }) {
   const [sent, setSent] = useState<string | undefined>('Send');
 
   const handleSubmit = async (message: string) => {
+    if (!signedInUser) {
+      Router.push({
+        pathname: '/signin',
+      });
+      return;
+    }
+
     setSent('Sending...');
 
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
@@ -181,24 +188,33 @@ export default function ProductDetails({ product }: { product: Product }) {
             style={{ marginTop: 'auto', backgroundColor: 'background.body' }}
           >
             <Stack direction="column" spacing={1}>
-              <Input
-                name="message"
-                placeholder="Hi, is this available?"
-                defaultValue="Hi, is this available?"
-                sx={{ bgcolor: 'background.body' }}
-              />
               {signedInUser?.username === product.user ? (
-                <Tooltip size="lg" title="Talk to yourself often?" arrow>
-                  <Box sx={{ cursor: 'not-allowed' }}>
-                    <Button size="lg" type="submit" disabled sx={{ width: '100%' }}>
-                      {sent}
-                    </Button>
-                  </Box>
-                </Tooltip>
+                <>
+                  <Tooltip size="lg" title="Talk to yourself often?" arrow>
+                    <Box sx={{ cursor: 'not-allowed' }}>
+                      <Input
+                        disabled
+                        placeholder="Hi, is this available?"
+                        sx={{ bgcolor: 'background.body' }}
+                      />
+                      <Button size="lg" type="submit" disabled sx={{ width: '100%' }}>
+                        {sent}
+                      </Button>
+                    </Box>
+                  </Tooltip>
+                </>
               ) : (
-                <Button size="lg" type="submit">
-                  {sent}
-                </Button>
+                <>
+                  <Input
+                    name="message"
+                    placeholder="Hi, is this available?"
+                    defaultValue="Hi, is this available?"
+                    sx={{ bgcolor: 'background.body' }}
+                  />
+                  <Button size="lg" type="submit">
+                    {sent}
+                  </Button>
+                </>
               )}
             </Stack>
           </form>
