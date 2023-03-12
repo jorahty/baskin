@@ -14,6 +14,7 @@ import BackRedirect from '../components/common/BackRedirect';
 import { useTranslation } from 'next-i18next';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Link from 'next/link';
 
 interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
@@ -28,7 +29,7 @@ interface SignInFormElement extends HTMLFormElement {
 export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...(await serverSideTranslations(context.locale ?? 'en', ['common'])),
     },
   };
 };
@@ -156,9 +157,7 @@ export default function Signin() {
               }}
             >
               <FormControl required>
-                <FormLabel
-                  aria-label="Enter your username"
-                >{t('signin.form.username')}</FormLabel>
+                <FormLabel aria-label="Enter your username">{t('signin.form.username')}</FormLabel>
                 <Input placeholder={usernamePlaceholder} type="username" name="username" />
               </FormControl>
               <FormControl required>
@@ -176,6 +175,13 @@ export default function Signin() {
                 {ready && t('signin.form.signin')}
               </Button>
             </form>
+            <Box display="flex" justifyContent="flex-end">
+              <Link href="/signup">
+                <Typography fontSize="sm" fontWeight="lg" color="primary">
+                  {`New to Baskin? Sign up.`}
+                </Typography>
+              </Link>
+            </Box>
           </Box>
         </Box>
       </Box>
