@@ -1,11 +1,9 @@
 import { Product } from '@/graphql/product/schema';
 import {
-  AspectRatio,
   Avatar,
   Box,
   Button,
   Card,
-  CardOverflow,
   Chip,
   Input,
   Sheet,
@@ -14,13 +12,13 @@ import {
   Tooltip,
   Typography,
 } from '@mui/joy';
-import Image from 'next/image';
 import Link from 'next/link';
 import { gql, GraphQLClient } from 'graphql-request';
 import { useAppContext } from '../../context';
 import { Chat } from '../../graphql/chat/schema';
 import Router from 'next/router';
 import { useState } from 'react';
+import ImageGallery from '../../components/product/ImageGallery';
 
 interface FormElements extends HTMLFormControlsCollection {
   message: HTMLInputElement;
@@ -44,15 +42,18 @@ export default function ProductDetails({ product }: { product: Product }) {
 
     setSent('Sending...');
 
-    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-      headers: {
-        Authorization: `Bearer ${signedInUser?.accessToken}`,
+    const graphQLClient = new GraphQLClient(
+      'http://localhost:3000/api/graphql',
+      {
+        headers: {
+          Authorization: `Bearer ${signedInUser?.accessToken}`,
+        },
       },
-    });
+    );
 
     let mutation = gql`
         mutation addChat {
-          addChat (name: "${product.name}") { 
+          addChat (name: "${product.name}") {
             id
             name
           }
@@ -111,11 +112,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           },
         }}
       >
-        <CardOverflow sx={{ flexGrow: 1 }}>
-          <AspectRatio ratio="1" sx={{ borderTopRightRadius: 0 }}>
-            <Image alt={product.name} src={`http://localhost:4001/${product.images[0]}.jpeg`} fill />
-          </AspectRatio>
-        </CardOverflow>
+        <ImageGallery product={product} />
         <Stack
           gap={2}
           pb={2}
@@ -129,7 +126,9 @@ export default function ProductDetails({ product }: { product: Product }) {
           {product.discount > 0 ? (
             <Box>
               <Typography level="h2">
-                {`$${(product.price - product.price * product.discount).toFixed(2)} `}
+                {`$${(product.price - product.price * product.discount).toFixed(
+                  2,
+                )} `}
               </Typography>
               <Typography level="h6">
                 <Typography sx={{ textDecoration: 'line-through' }}>
@@ -153,7 +152,9 @@ export default function ProductDetails({ product }: { product: Product }) {
             <Link href={`/category/${product.category}`}>
               <Chip variant="soft">{product.category}</Chip>
             </Link>
-            <Typography level="body2">{new Date(product.date).toLocaleDateString('en-US')}</Typography>
+            <Typography level="body2">
+              {new Date(product.date).toLocaleDateString('en-US')}
+            </Typography>
           </Stack>
           <Typography noWrap>{product.description}</Typography>
           {product.attributes.length > 0 && (
@@ -172,7 +173,13 @@ export default function ProductDetails({ product }: { product: Product }) {
                       <td>
                         <b>{name}</b>
                       </td>
-                      <td>{value[0] === '#' ? <Color value={value} /> : `${value} ${symbol || ''}`}</td>
+                      <td>
+                        {value[0] === '#' ? (
+                          <Color value={value} />
+                        ) : (
+                          `${value} ${symbol || ''}`
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -198,7 +205,12 @@ export default function ProductDetails({ product }: { product: Product }) {
                   />
                   <Tooltip size="lg" title="Talk to yourself often?" arrow>
                     <Box sx={{ cursor: 'not-allowed' }}>
-                      <Button size="lg" type="submit" disabled sx={{ width: '100%' }}>
+                      <Button
+                        size="lg"
+                        type="submit"
+                        disabled
+                        sx={{ width: '100%' }}
+                      >
                         {sent}
                       </Button>
                     </Box>

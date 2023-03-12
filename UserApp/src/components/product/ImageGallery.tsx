@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, CardOverflow, Grid, Stack } from '@mui/joy';
+import { AspectRatio, Box, Grid, Stack } from '@mui/joy';
 import Image from 'next/image';
 import { Product } from '@/graphql/product/schema';
 import { useState } from 'react';
