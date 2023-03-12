@@ -36,7 +36,7 @@ const discountProduct = {
   price: 2,
   discount: 0.2,
   category: 'toys',
-  user: 'molly_member',
+  user: 'anna_admin',
   quantity: 40,
   description: 'something not too long',
   images: ['https://images.pexels.com/whatever'],

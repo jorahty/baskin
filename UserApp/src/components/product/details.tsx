@@ -11,6 +11,7 @@ import {
   Sheet,
   Stack,
   Table,
+  Tooltip,
   Typography,
 } from '@mui/joy';
 import Image from 'next/image';
@@ -31,9 +32,11 @@ interface MessageFormElement extends HTMLFormElement {
 
 export default function ProductDetails({ product }: { product: Product }) {
   const { signedInUser } = useAppContext();
-  const [sent, setSent] = useState('Send');
+  const [sent, setSent] = useState<string | undefined>('Send');
 
   const handleSubmit = async (message: string) => {
+    setSent('Sending...');
+
     const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
       headers: {
         Authorization: `Bearer ${signedInUser?.accessToken}`,
@@ -48,9 +51,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           }
         }
     `;
-
     const data: { addChat: Chat } = await graphQLClient.request(mutation);
-    console.log(message, data.addChat);
 
     mutation = gql`
         mutation addChatMember {
@@ -59,7 +60,6 @@ export default function ProductDetails({ product }: { product: Product }) {
           }
         }
     `;
-
     await graphQLClient.request(mutation);
 
     mutation = gql`
@@ -69,7 +69,6 @@ export default function ProductDetails({ product }: { product: Product }) {
           }
         }
     `;
-
     await graphQLClient.request(mutation);
 
     mutation = gql`
@@ -80,11 +79,9 @@ export default function ProductDetails({ product }: { product: Product }) {
           }) { sender, content, date }
         }
     `;
-
     await graphQLClient.request(mutation);
 
     setSent('Sent');
-
     Router.push({
       pathname: `/messages/${data.addChat.id}`,
     });
@@ -190,9 +187,19 @@ export default function ProductDetails({ product }: { product: Product }) {
                 defaultValue="Hi, is this available?"
                 sx={{ bgcolor: 'background.body' }}
               />
-              <Button size="lg" type="submit">
-                {sent}
-              </Button>
+              {signedInUser?.username === product.user ? (
+                <Tooltip size="lg" title="Talk to yourself often?" arrow>
+                  <Box sx={{ cursor: 'not-allowed' }}>
+                    <Button size="lg" type="submit" disabled sx={{ width: '100%' }}>
+                      {sent}
+                    </Button>
+                  </Box>
+                </Tooltip>
+              ) : (
+                <Button size="lg" type="submit">
+                  {sent}
+                </Button>
+              )}
             </Stack>
           </form>
         </Stack>
