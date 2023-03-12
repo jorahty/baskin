@@ -26,5 +26,10 @@ export default extendTheme({
         },
       },
     },
+    JoyTooltip: {
+      defaultProps: {
+        variant: 'outlined',
+      },
+    },
   },
 });

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Box, Button, IconButton, Stack } from '@mui/joy';
+import { Box, Button, IconButton, Stack, Tooltip } from '@mui/joy';
 import MenuIcon from '@mui/icons-material/Menu';
 import ModeToggle from './ModeToggle';
 import Logo from './Logo';
@@ -10,6 +10,7 @@ import { useTranslation } from 'next-i18next';
 import ProductSearch from '../product/search';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { BookmarkBorder } from '@mui/icons-material';
 
 export const headerHeight = '80px';
 
@@ -76,6 +77,18 @@ export default function Header({ handleSidebarOpen, locale }: Props) {
           </Link>
         </>
       )}
+      {searchVisible &&
+        <Tooltip title="View saved products">
+          <Link href="/saved">
+            <IconButton
+              variant="plain"
+              color="neutral"
+            >
+              <BookmarkBorder />
+            </IconButton>
+          </Link>
+        </Tooltip>
+      }
       <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
         <ModeToggle />
       </Box>

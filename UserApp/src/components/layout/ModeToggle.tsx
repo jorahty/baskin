@@ -1,7 +1,7 @@
-import { IconButton, useColorScheme } from '@mui/joy';
+import { IconButton, Tooltip, useColorScheme } from '@mui/joy';
 import { useEffect, useState } from 'react';
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
-import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
+import DarkModeOutlined from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlined from '@mui/icons-material/LightModeOutlined';
 
 export default function ModeToggle() {
   const { mode, setMode } = useColorScheme();
@@ -14,13 +14,18 @@ export default function ModeToggle() {
   if (!mounted) return <IconButton disabled />;
 
   return (
-    <IconButton
-      variant="plain"
-      color="neutral"
-      aria-label="mode-toggle"
-      onClick={() => (mode === 'light' ? setMode('dark') : setMode('light'))}
+    <Tooltip
+      title={`Turn ${mode === 'light' ? 'off' : 'on'} the light`}
+      placement="bottom-start"
     >
-      {mode === 'light' ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
-    </IconButton>
+      <IconButton
+        variant="plain"
+        color="neutral"
+        aria-label="mode-toggle"
+        onClick={() => (mode === 'light' ? setMode('dark') : setMode('light'))}
+      >
+        {mode === 'light' ? <DarkModeOutlined /> : <LightModeOutlined />}
+      </IconButton>
+    </Tooltip>
   );
 }

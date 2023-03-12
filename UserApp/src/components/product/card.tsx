@@ -90,7 +90,7 @@ export default function ProductCard({ product }: { product: Product }) {
           )}
           <Typography>{product.name}</Typography>
         </Box>
-        <Tooltip title={`${product.user}`} variant="outlined">
+        <Tooltip title={`${product.user}`}>
           <Link href={`/user/${product.user}`}>
             <Avatar src={`https://robohash.org/${product.user}`} />
           </Link>
