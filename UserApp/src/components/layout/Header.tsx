@@ -81,6 +81,7 @@ export default function Header({ handleSidebarOpen, locale }: Props) {
         <Tooltip title="View saved products">
           <Link href="/saved">
             <IconButton
+              sx={{ display: { xs: 'none', sm: 'block' } }}
               variant="plain"
               color="neutral"
             >
@@ -89,7 +90,7 @@ export default function Header({ handleSidebarOpen, locale }: Props) {
           </Link>
         </Tooltip>
       }
-      <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+      <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
         <ModeToggle />
       </Box>
     </Stack>
