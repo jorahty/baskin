@@ -6,8 +6,7 @@ import { CategoryService } from '../graphql/category/service';
 import CategoryContent from '../components/category/content';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { VerboseCategory } from './';
-import { useEffect } from 'react';
-import { useAppContext } from '../context';
+import { useEffect, useState } from 'react';
 import { Stack, Typography } from '@mui/joy';
 import Image from 'next/image';
 
@@ -36,14 +35,21 @@ interface Props {
   locale: string;
 }
 
-export default function SavedPage({ category, locale }: Props) {
-  const { signedInUser } = useAppContext();
+export default function SavedPage({ category: unfiltered, locale }: Props) {
+  const [category, setCategory] = useState<VerboseCategory>(unfiltered);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const item = localStorage.getItem(`${signedInUser?.username}-saved`);
+    const item = localStorage.getItem('saved');
     const saved: string[] = item ? JSON.parse(item) : [];
-    category.products = category.products.filter(product => saved.includes(product.id));
-  }, [signedInUser, category]);
+    setCategory({
+      ...unfiltered,
+      products: unfiltered.products.filter(product => saved.includes(product.id)),
+    });
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return <></>;
 
   return (
     <Layout sidebar={<CategoryControls category={category} />} locale={locale}>

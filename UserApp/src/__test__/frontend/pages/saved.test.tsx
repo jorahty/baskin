@@ -94,8 +94,14 @@ test('Renders', async () => {
   await new Promise(resolve => setTimeout(resolve, 500));
 });
 
-test('WithSaved Products', async () => {
-  localStorage.setItem('undefined-saved', '[]');
+test('With Saved Products', async () => {
+  localStorage.setItem('saved', '["038b7e70-a5c0-47e6-80f3-5b1772bb4a0d"]');
+  renderView();
+  await new Promise(resolve => setTimeout(resolve, 500));
+});
+
+test('With Zero Saved Products', async () => {
+  localStorage.setItem('saved', '[]');
   renderView();
   await new Promise(resolve => setTimeout(resolve, 500));
 });

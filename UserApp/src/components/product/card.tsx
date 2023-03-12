@@ -12,25 +12,23 @@ import Typography from '@mui/joy/Typography';
 import { CardOverflow, IconButton, Stack, Tooltip } from '@mui/joy';
 import { useEffect, useState } from 'react';
 import { Bookmark, BookmarkBorder } from '@mui/icons-material';
-import { useAppContext } from '../../context';
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { signedInUser } = useAppContext();
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
-    const item = localStorage.getItem(`${signedInUser?.username}-saved`);
+    const item = localStorage.getItem('saved');
     const saved: string[] = item ? JSON.parse(item) : [];
     setIsSaved(saved.includes(product.id));
-  }, [signedInUser, product]);
+  }, [product]);
 
   function handleSave() {
-    const item = localStorage.getItem(`${signedInUser?.username}-saved`);
+    const item = localStorage.getItem('saved');
     const existing: string[] = item ? JSON.parse(item) : [];
     const saved = isSaved
       ? (existing.filter(id => id !== product.id))
       : existing.concat(product.id);
-    localStorage.setItem(`${signedInUser?.username}-saved`, JSON.stringify(saved));
+    localStorage.setItem('saved', JSON.stringify(saved));
     setIsSaved(!isSaved);
   }
 
