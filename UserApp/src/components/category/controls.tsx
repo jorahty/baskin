@@ -42,9 +42,6 @@ export default function CategoryControls({ category }: Props) {
 
   return (
     <Stack p={2} gap={2} width={340}>
-      {refinement.search === 'debug' && category.attributes.map(attribute => (
-        <div key={attribute.id}>id: {attribute.id}, name: {attribute.name}</div>
-      ))}
       <Link href="/product/create">
         <Button fullWidth>{t('createNewProduct.title')}</Button>
       </Link>
