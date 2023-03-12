@@ -22,14 +22,18 @@ interface Props {
 export default function Header({ handleSidebarOpen, locale }: Props) {
   const { signedInUser } = useAppContext();
   const [searchVisible, setSearchVisible] = useState(false);
-  const router = useRouter();
+  const [savedVisible, setSavedVisible] = useState(false);
+  const { pathname } = useRouter();
   const { t } = useTranslation('common');
 
   useEffect(() => {
     setSearchVisible(
-      router.pathname === '/' || router.pathname === '/category/[slug]'
+      ['/', '/category/[slug]', '/saved'].includes(pathname)
     );
-  }, [router.pathname]);
+    setSavedVisible(
+      ['/', '/category/[slug]'].includes(pathname)
+    );
+  }, [pathname]);
 
   return (
     <Stack
@@ -77,7 +81,7 @@ export default function Header({ handleSidebarOpen, locale }: Props) {
           </Link>
         </>
       )}
-      {searchVisible &&
+      {savedVisible &&
         <Tooltip title="View saved products">
           <Link href="/saved">
             <IconButton
