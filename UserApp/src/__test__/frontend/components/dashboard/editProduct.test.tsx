@@ -12,20 +12,36 @@ const product: Product = {
   id: 'aa8efe0c-8eeb-4bd3-95a5-e8e3526e9bb9',
   user: 'molly_member',
   name: 'iPad 19',
-  description: 'Latest and greatest update, not even in the market for 90 years.',
+  description:
+    'Latest and greatest update, not even in the market for 90 years.',
   price: 190000000,
   category: 'electronics',
   quantity: 1,
   images: ['1630caf6-fab4-43ac-8e43-bdc692fe19df'],
   discount: 0,
   date: '2022-01-21T15:43:08.000Z',
+  attributes: [],
 };
+
+const productList: Product[] = [product];
 
 const handlers = [
   graphql.mutation('updateProduct', async (req, res, ctx) => {
     return res(
       ctx.data({
-        updateProduct: {},
+        updateProduct: {
+          id: 'aa8efe0c-8eeb-4bd3-95a5-e8e3526e9bb9',
+          user: 'molly_member',
+          name: 'iPad 19 (blew up)',
+          description: 'Sorry... it blew up oop.',
+          price: 10,
+          category: 'electronics',
+          quantity: 1,
+          images: ['1630caf6-fab4-43ac-8e43-bdc692fe19df'],
+          discount: 0,
+          date: '2022-01-21T15:43:08.000Z',
+          attributes: [],
+        },
       }),
     );
   }),
@@ -80,10 +96,17 @@ jest.mock('react-i18next', () => ({
 }));
 
 const renderView = async () => {
+  const handleCancel = jest.fn();
+  const updateProductList = jest.fn();
   render(
     <CssVarsProvider>
       <AppContextProvider>
-        <ProductEdit product={product} />
+        <ProductEdit
+          product={product}
+          handleCancel={handleCancel}
+          productList={productList}
+          updateProductList={updateProductList}
+        />
       </AppContextProvider>
     </CssVarsProvider>,
   );
@@ -95,11 +118,19 @@ test('Renders Edit Modal - All exists', async () => {
     '{"accessToken":"whatever","name":"molly","email":"molly_admin@ucsc.edu"}',
   );
   await renderView();
-  const productNameInput = (await screen.findByLabelText('Enter Name')) as HTMLInputElement;
+  const productNameInput = (await screen.findByLabelText(
+    'Enter Name',
+  )) as HTMLInputElement;
   // const categoryInput = (await screen.findByLabelText('category')) as HTMLInputElement;
-  const priceInput = (await screen.findByLabelText('Enter Price')) as HTMLInputElement;
-  const quantityInput = (await screen.findByLabelText('Enter Quantity')) as HTMLInputElement;
-  const descriptionInput = (await screen.findByLabelText('Enter Description')) as HTMLInputElement;
+  const priceInput = (await screen.findByLabelText(
+    'Enter Price',
+  )) as HTMLInputElement;
+  const quantityInput = (await screen.findByLabelText(
+    'Enter Quantity',
+  )) as HTMLInputElement;
+  const descriptionInput = (await screen.findByLabelText(
+    'Enter Description',
+  )) as HTMLInputElement;
 
   expect(productNameInput.value).toBe(product.name);
   // expect(categoryInput.value).toBe(product.category);
@@ -121,11 +152,19 @@ test('Renders Edit Modal - Edit fields', async () => {
     price: 10,
   };
 
-  const productNameInput = (await screen.findByLabelText('Enter Name')) as HTMLInputElement;
+  const productNameInput = (await screen.findByLabelText(
+    'Enter Name',
+  )) as HTMLInputElement;
   // const categoryInput = (await screen.findByLabelText('category')) as HTMLInputElement;
-  const priceInput = (await screen.findByLabelText('Enter Price')) as HTMLInputElement;
-  const quantityInput = (await screen.findByLabelText('Enter Quantity')) as HTMLInputElement;
-  const descriptionInput = (await screen.findByLabelText('Enter Description')) as HTMLInputElement;
+  const priceInput = (await screen.findByLabelText(
+    'Enter Price',
+  )) as HTMLInputElement;
+  const quantityInput = (await screen.findByLabelText(
+    'Enter Quantity',
+  )) as HTMLInputElement;
+  const descriptionInput = (await screen.findByLabelText(
+    'Enter Description',
+  )) as HTMLInputElement;
 
   await userEvent.clear(productNameInput);
   await userEvent.type(productNameInput, updatedValues.name);

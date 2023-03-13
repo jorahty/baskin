@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { Button, Sheet, Table, Typography, Avatar, Modal, ModalDialog, ModalClose } from '@mui/joy';
+import {
+  Button,
+  Sheet,
+  Table,
+  Typography,
+  Avatar,
+  Modal,
+  ModalDialog,
+  ModalClose,
+} from '@mui/joy';
 import { Product } from '../../../graphql/product/schema';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/joy/Menu';
@@ -18,7 +27,7 @@ import ProductEdit from '../../../components/dashboard/product/ProductEdit';
 
 export default function ProductTable({ products }: { products: Product[] }) {
   const { signedInUser } = useAppContext();
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = React.useState<boolean>(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [product, setProduct] = React.useState('');
   const [selectedProduct, setSelectedProduct] = React.useState<Product>();
@@ -48,11 +57,14 @@ export default function ProductTable({ products }: { products: Product[] }) {
   const handleDelete = async () => {
     setAnchorEl(null);
     const bearerToken = signedInUser?.accessToken;
-    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
-      headers: {
-        Authorization: `Bearer ${bearerToken}`,
+    const graphQLClient = new GraphQLClient(
+      'http://localhost:3000/api/graphql',
+      {
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+        },
       },
-    });
+    );
     const query = gql`mutation removeProduct {removeProduct (product: "${product}") { id }}`;
     await graphQLClient.request(query);
     setProductList(productList.filter(row => row.id != product));
@@ -83,10 +95,18 @@ export default function ProductTable({ products }: { products: Product[] }) {
       >
         <thead>
           <tr>
-            <th style={{ width: 140, padding: 12 }}>{t('dashboard.products.table.image')}</th>
-            <th style={{ width: 220, padding: 12 }}>{t('dashboard.products.table.product')}</th>
-            <th style={{ width: 160, padding: 12 }}>{t('dashboard.products.table.category')}</th>
-            <th style={{ width: 120, padding: 12 }}>{t('dashboard.products.table.price')}</th>
+            <th style={{ width: 140, padding: 12 }}>
+              {t('dashboard.products.table.image')}
+            </th>
+            <th style={{ width: 220, padding: 12 }}>
+              {t('dashboard.products.table.product')}
+            </th>
+            <th style={{ width: 160, padding: 12 }}>
+              {t('dashboard.products.table.category')}
+            </th>
+            <th style={{ width: 120, padding: 12 }}>
+              {t('dashboard.products.table.price')}
+            </th>
             <th style={{ width: 100, padding: 12 }}></th>
           </tr>
         </thead>
@@ -101,7 +121,7 @@ export default function ProductTable({ products }: { products: Product[] }) {
                 />
               </td>
               <td>
-                <Typography fontWeight="md">{row.name}</Typography>
+                <Typography fontWeight={'md'}>{row.name}</Typography>
               </td>
               <td>{row.category}</td>
               <td>{row.price}</td>
@@ -140,7 +160,12 @@ export default function ProductTable({ products }: { products: Product[] }) {
           Edit product
         </MenuItem>
         <ListDivider />
-        <MenuItem onClick={handleDelete} variant="soft" color="danger" aria-label="delete">
+        <MenuItem
+          onClick={handleDelete}
+          variant="soft"
+          color="danger"
+          aria-label="delete"
+        >
           <ListItemDecorator sx={{ color: 'inherit' }}>
             <DeleteForever />
           </ListItemDecorator>{' '}
@@ -156,7 +181,16 @@ export default function ProductTable({ products }: { products: Product[] }) {
       >
         <ModalDialog layout={'fullscreen'} style={{ overflow: 'scroll' }}>
           <ModalClose aria-label={'close-modal'} />
-          {selectedProduct && <ProductEdit product={selectedProduct} />}
+          {selectedProduct && (
+            <ProductEdit
+              product={selectedProduct}
+              handleCancel={() => {
+                setModalOpen(false);
+              }}
+              productList={productList}
+              updateProductList={setProductList}
+            />
+          )}
         </ModalDialog>
       </Modal>
     </Sheet>
