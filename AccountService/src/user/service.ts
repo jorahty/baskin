@@ -81,7 +81,7 @@ export class UserService {
     const update = 'UPDATE account SET data = jsonb_set(data, $1, $2) WHERE username = $3 RETURNING *';
     const query = {
       text: update,
-      values: ['{roles}', `"${roles}"`, username],
+      values: ['{roles}', `[${roles.map(((s:string) => `"${s}"`))}]`, username],
     };
     const { rows } = await pool.query(query);
     const user: SignUpPayload = {
