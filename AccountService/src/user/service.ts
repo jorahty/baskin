@@ -76,4 +76,19 @@ export class UserService {
     };
     return user;
   }
+
+  public async updateRoles(username: string, roles: string[]): Promise<SignUpPayload> {
+    const update = 'UPDATE account SET data = jsonb_set(data, $1, $2) WHERE username = $3 RETURNING *';
+    const query = {
+      text: update,
+      values: ['{roles}', `"${roles}"`, username],
+    };
+    const { rows } = await pool.query(query);
+    const user: SignUpPayload = {
+      username: rows[0].username,
+      name: rows[0].data.name,
+      email: rows[0].data.email,
+    };
+    return user;
+  }
 }
