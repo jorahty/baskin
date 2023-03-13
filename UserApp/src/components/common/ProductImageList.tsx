@@ -63,7 +63,7 @@ export default function ProductImageList({
   return (
     <Grid xs={10}>
       <Sheet
-        variant='outlined'
+        variant="outlined"
         sx={{
           minHeight: '150px',
           borderRadius: 'sm',
@@ -85,11 +85,11 @@ export default function ProductImageList({
         >
           {product &&
             existingPictures.map((id: string, index: number) => (
-              <Card variant='outlined' key={index}>
-                <AspectRatio ratio='1' sx={{ minWidth: { xs: 100, md: 150 } }}>
+              <Card variant="outlined" key={index}>
+                <AspectRatio ratio="1" sx={{ minWidth: { xs: 100, md: 150 } }}>
                   <Image
                     src={`http://localhost:4001/${id}.jpeg`}
-                    alt='Picture not available'
+                    alt="Picture not available"
                     fill
                   />
                 </AspectRatio>
@@ -107,9 +107,9 @@ export default function ProductImageList({
                     >
                       <IconButton
                         aria-label={'existing-remove-' + index}
-                        value='pict'
-                        size='sm'
-                        color='neutral'
+                        value="pict"
+                        size="sm"
+                        color="neutral"
                         onClick={() => deletePicture(index)}
                       >
                         <CloseIcon />
@@ -120,11 +120,11 @@ export default function ProductImageList({
               </Card>
             ))}
           {pictures.map((picture, index) => (
-            <Card variant='outlined' key={index}>
-              <AspectRatio ratio='1' sx={{ minWidth: { xs: 100, md: 150 } }}>
+            <Card variant="outlined" key={index}>
+              <AspectRatio ratio="1" sx={{ minWidth: { xs: 100, md: 150 } }}>
                 <Image
                   src={URL.createObjectURL(picture)}
-                  alt='Picture not available'
+                  alt="Picture not available"
                   fill
                 />
               </AspectRatio>
@@ -142,9 +142,9 @@ export default function ProductImageList({
                   >
                     <IconButton
                       aria-label={'remove' + index}
-                      value='pict'
-                      size='sm'
-                      color='neutral'
+                      value="pict"
+                      size="sm"
+                      color="neutral"
                       onClick={() => removePicture(index)}
                     >
                       <CloseIcon />
@@ -155,8 +155,8 @@ export default function ProductImageList({
             </Card>
           ))}
 
-          <Card variant='outlined'>
-            <AspectRatio ratio='1' sx={{ minWidth: { xs: 100, md: 150 } }}>
+          <Card variant="outlined">
+            <AspectRatio ratio="1" sx={{ minWidth: { xs: 100, md: 150 } }}>
               <FormControl>
                 <FormLabel
                   sx={{
