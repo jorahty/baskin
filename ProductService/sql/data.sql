@@ -59,74 +59,176 @@ INSERT INTO category (slug, parent_slug, data) VALUES ('apparel', NULL, '{"name"
 INSERT INTO attribute (id, category_slug, data) VALUES ('rtCdNsBjQl', 'apparel', '{ "name": "Color", "type": "color" }');
 INSERT INTO attribute (id, category_slug, data) VALUES ('vbdvBfzmmC', 'apparel', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
 
+-- tops
 INSERT INTO category (slug, parent_slug, data) VALUES ('tops', 'apparel', '{"name": "Tops"}');
 INSERT INTO attribute (id, category_slug, data) VALUES ('tWfXcUS2K5', 'tops', '{ "name": "Size", "type": "set", "values": ["XS", "S", "M", "L", "XL"] }');
 
+-- shirts
 INSERT INTO category (slug, parent_slug, data) VALUES ('shirts', 'tops', '{"name": "Shirts"}');
 INSERT INTO attribute (id, category_slug, data) VALUES ('pKtj6re3E1', 'shirts', '{ "name": "Sleeve type", "type": "set", "values": ["Short sleeve", "Long sleeve", "Sleeveless" ] }');
 
-INSERT INTO category (slug, parent_slug, data) VALUES ('jackets', 'tops', '{"name": "Jackets"}');
-
-INSERT INTO category (slug, parent_slug, data) VALUES ('sweatshirts', 'tops', '{"name": "Sweatshirts"}');
-
+-- bottoms
 INSERT INTO category (slug, parent_slug, data) VALUES ('bottoms', 'apparel', '{"name": "Bottoms"}');
 INSERT INTO attribute (id, category_slug, data) VALUES ('Z4i6HkRS9d', 'bottoms', '{ "name": "Waist", "type": "number", "min": 20, "max": 50 }');
 INSERT INTO attribute (id, category_slug, data) VALUES ('vlLlpRBs8F', 'bottoms', '{ "name": "Inseam", "type": "number", "min": 20, "max": 40 }');
 
+-- shoes
 INSERT INTO category (slug, parent_slug, data) VALUES ('shoes', 'apparel', '{"name": "Shoes"}');
 INSERT INTO attribute (id, category_slug, data) VALUES ('lajRCeKAW1', 'shoes', '{ "name": "Size", "type": "number", "min": 4, "max": 15 }');
 
+-- jackets
+INSERT INTO category (slug, parent_slug, data) VALUES ('jackets', 'tops', '{"name": "Jackets"}');
+
+-- sweatshirts
+INSERT INTO category (slug, parent_slug, data) VALUES ('sweatshirts', 'tops', '{"name": "Sweatshirts"}');
+
+-- jeans
 INSERT INTO category (slug, parent_slug, data) VALUES ('jeans', 'bottoms', '{"name": "Jeans"}');
 
+-- shorts
 INSERT INTO category (slug, parent_slug, data) VALUES ('shorts', 'bottoms', '{"name": "Shorts"}');
 
+-- socks
 INSERT INTO category (slug, parent_slug, data) VALUES ('socks', 'apparel', '{"name": "Socks"}');
 
+-- electronics
 INSERT INTO category (slug, parent_slug, data) VALUES ('electronics', NULL, '{"name": "Electronics"}');
 
+-- audio
 INSERT INTO category (slug, parent_slug, data) VALUES ('audio', 'electronics', '{"name": "Audio"}');
 
+-- speakers
 INSERT INTO category (slug, parent_slug, data) VALUES ('speakers', 'audio', '{"name": "Speakers"}');
 
+-- microphones
 INSERT INTO category (slug, parent_slug, data) VALUES ('microphones', 'audio', '{"name": "Microphones"}');
 
+-- cameras
 INSERT INTO category (slug, parent_slug, data) VALUES ('cameras', 'electronics', '{"name": "Cameras"}');
 
+-- film
 INSERT INTO category (slug, parent_slug, data) VALUES ('film', 'cameras', '{"name": "Film"}');
 
+-- digital
 INSERT INTO category (slug, parent_slug, data) VALUES ('digital', 'cameras', '{"name": "Digital"}');
 
+-- computers
 INSERT INTO category (slug, parent_slug, data) VALUES ('computers', NULL, '{"name": "Computers"}');
 
+-- laptops
 INSERT INTO category (slug, parent_slug, data) VALUES ('laptops', 'computers', '{"name": "Laptops"}');
 
+-- desktops
 INSERT INTO category (slug, parent_slug, data) VALUES ('desktops', 'computers', '{"name": "Desktop computers"}');
 
+-- instruments
 INSERT INTO category (slug, parent_slug, data) VALUES ('instruments', NULL, '{"name": "Instruments"}');
 
+-- brass
 INSERT INTO category (slug, parent_slug, data) VALUES ('brass', 'instruments', '{"name": "Brass"}');
 
+-- trumpets
 INSERT INTO category (slug, parent_slug, data) VALUES ('trumpets', 'brass', '{"name": "Trumpets"}');
 
+-- string
 INSERT INTO category (slug, parent_slug, data) VALUES ('string', 'instruments', '{"name": "String"}');
 
+-- guitars
 INSERT INTO category (slug, parent_slug, data) VALUES ('guitars', 'string', '{"name": "Guitars"}');
 
+-- violins
 INSERT INTO category (slug, parent_slug, data) VALUES ('violins', 'string', '{"name": "Violins"}');
 
+-- toys
 INSERT INTO category (slug, parent_slug, data) VALUES ('toys', NULL, '{"name": "Toys & Games"}');
+
+-- puzzles
 INSERT INTO category (slug, parent_slug, data) VALUES ('puzzles', 'toys', '{"name": "Puzzles"}');
 
+-- sports
 INSERT INTO category (slug, parent_slug, data) VALUES ('sports', NULL, '{"name": "Sporting Goods"}');
 
+-- home
 INSERT INTO category (slug, parent_slug, data) VALUES ('home', NULL, '{"name": "Home Goods"}');
+
+-- furniture
 INSERT INTO category (slug, parent_slug, data) VALUES ('furniture', 'home', '{"name": "Furniture"}');
+
+-- appliances
 INSERT INTO category (slug, parent_slug, data) VALUES ('appliances', 'home', '{"name": "Appliances"}');
+
+-- kitchen
 INSERT INTO category (slug, parent_slug, data) VALUES ('kitchen', 'home', '{"name": "Kitchen"}');
 
--- ██ product ██
+-- ██ Product definitions:
 
-DELETE FROM product;
+-- Racing Sailboat
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcn', 'mia_moderator', 'sailboats', '{"name": "Racing Sailboat", "quantity": 1,"price": 75000, "discount": 0, "description": "Fast and sleek, perfect for competitions", "date": "2023-02-11T16:20:15.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'X0bZdioM6D', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 't6guOpyORQ', '{ "value": "2017" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'UM9PPU64GB', '{ "value": "40000" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'VuLNBGpP7Z', '{ "value": "Other" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'Iwiw1QLbXP', '{ "value": "80" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', '3GZ3ozPoCS', '{ "value": "30" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', '4gDdn60Dbd', '{ "value": "#ffffff" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'iiAoJcJ5RH', '{ "value": "#ffffff" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'R2BDfhnUXF', '{ "value": "Aluminum" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', '767cAm6pTR', '{ "value": "11" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcn', '6B1BUxiIys', '{ "value": "Dacron" }');
+
+-- Island Yacht
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcm', 'anna_admin', 'boats', '{"name": "Island Yacht", "quantity": 1,"price": 50000, "discount": 0, "description": "Classic beauty, fully restored", "date": "2023-02-10T09:12:47.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'X0bZdioM6D', '{ "value": "Used" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 't6guOpyORQ', '{ "value": "2014" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'UM9PPU64GB', '{ "value": "60000" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'Iwiw1QLbXP', '{ "value": "40" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcm', '3GZ3ozPoCS', '{ "value": "200" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcm', '4gDdn60Dbd', '{ "value": "#ffffff" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'iiAoJcJ5RH', '{ "value": "#ffffff" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'R2BDfhnUXF', '{ "value": "Steel" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcm', '767cAm6pTR', '{ "value": "50" }');
+
+-- Harley Davidson
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcq', 'mia_moderator', 'motorcycles', '{"name": "Harley Davidson", "quantity": 1,"price": 20000, "discount": 0, "description": "Vintage model, in great condition", "date": "2023-02-14T10:23:16.000Z", "images": ["0425bf9c-c603-4bbf-86bb-d2a2444b7292","401fe716-44b8-4016-803e-8d0918854d50"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 'X0bZdioM6D', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 't6guOpyORQ', '{ "value": "2019" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 'UM9PPU64GB', '{ "value": "0" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 'Iwiw1QLbXP', '{ "value": "125" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 'S8xteMD6V5', '{ "value": "#ff0000" }');
+
+-- Pickup Truck
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcp', 'anna_admin', 'trucks', '{"name": "Pickup Truck", "quantity": 1,"price": 35000, "discount": 0, "description": "Heavy-duty, perfect for hauling", "date": "2023-02-13T22:48:02.000Z", "images": ["fbe51a7c-4ad9-42e4-9e44-39a9c45916f1","47cda44d-8cbb-4180-8781-ed77acd682a0"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'X0bZdioM6D', '{ "value": "Used" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 't6guOpyORQ', '{ "value": "2006" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'UM9PPU64GB', '{ "value": "150000" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'Iwiw1QLbXP', '{ "value": "95" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'ni6pEhjovT', '{ "value": "Manual" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcp', '7O5s6eKwwh', '{ "value": "2" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'lRriZmW7bx', '{ "value": "#000080" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'QxCtZcsWVh', '{ "value": "#ffffff" }');
+
+-- Sports Car
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabco', 'molly_member', 'cars', '{"name": "Sports Car", "quantity": 1,"price": 90000, "discount": 0, "description": "Brand new, top of the line model", "date": "2023-02-12T18:59:33.000Z", "images": ["ba445183-0dc9-4de7-93e5-60b226cf8add","2cf19783-8d06-42d7-880c-7e48650ddddc"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'X0bZdioM6D', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabco', 't6guOpyORQ', '{ "value": "2020" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'UM9PPU64GB', '{ "value": "0" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'VuLNBGpP7Z', '{ "value": "Electric" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'Iwiw1QLbXP', '{ "value": "216" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'ni6pEhjovT', '{ "value": "Automatic" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabco', '7O5s6eKwwh', '{ "value": "5" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'lRriZmW7bx', '{ "value": "#000000" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'QxCtZcsWVh', '{ "value": "#ff00ff" }');
+
+-- Electric Skateboard
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcl', 'molly_member', 'vehicles', '{"name": "Electric Skateboard", "quantity": 2,"price": 480, "discount": 0, "description": "20-mile range, battery and remote included", "date": "2023-02-09T06:43:08.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 'X0bZdioM6D', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 't6guOpyORQ', '{ "value": "2023" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 'UM9PPU64GB', '{ "value": "0" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 'VuLNBGpP7Z', '{ "value": "Electric" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 'Iwiw1QLbXP', '{ "value": "25" }');
 
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabca', 'molly_member', 'apparel', '{"name": "Air Jordan 15", "quantity": 1,"price": 250, "discount": 0, "description": "Never worn. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2023-02-09T06:43:08.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcb', 'molly_member', 'toys', '{"name": "Honda Civic Toy Car", "quantity": 1,"price": 25, "discount": 0, "description": "Great toy car for kids, barely used. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2023-01-21T15:43:08.000Z", "images": ["3b0664c7-8af6-4747-9775-b92ac9ab395f"]}');
@@ -139,21 +241,14 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiab
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabci', 'anna_admin', 'apparel', '{"name": "Resistol Cowboy Hat", "quantity": 1,"price": 550.75, "discount": 0, "description": "Never worn Resistol cowboy hat, comes in box, size medium. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2020-07-19T11:43:08.000Z", "images": ["bd4e0f00-5494-4d27-ba4f-2b27baaf19a7"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcj', 'anna_admin', 'electronics', '{"name": "Canon EOS R6", "quantity": 1,"price": 1000, "discount": 0, "description": "Used but no damage, has about 20,000 shutter count. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2022-01-19T02:43:08.000Z", "images": ["84bb26c6-1172-4fff-bc34-80cdd697b8f4"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabck', 'anna_admin', 'sports', '{"name": "Surfboard", "quantity": 4,"price": 400, "discount": 0, "description": "Brand new custom made surf boards, different size. Ut porta, lectus nec sodales semper, leo est dictum massa, non tristique mi mauris id orci. Pellentesque volutpat dapibus ipsum lobortis convallis. Morbi vel mi non ligula euismod feugiat feugiat sit amet enim. Fusce mattis porta ante, non euismod tortor condimentum eget. Pellentesque dapibus orci cursus purus aliquet, et lobortis tellus faucibus. Nullam eu libero eget tortor euismod ullamcorper. Quisque eget nibh eros. Mauris porttitor tincidunt felis, sed aliquam eros venenatis ultricies.", "date": "2022-02-09T00:15:08.000Z", "images": ["6d1dd747-8172-4dd1-88b9-093dde1ba612"]}');
-
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcl', 'molly_member', 'vehicles', '{"name": "Electric Skateboard", "quantity": 2,"price": 480, "discount": 0, "description": "20-mile range, battery and remote included", "date": "2023-02-09T06:43:08.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcm', 'anna_admin', 'boats', '{"name": "Island Yacht", "quantity": 1,"price": 50000, "discount": 0, "description": "Classic beauty, fully restored", "date": "2023-02-10T09:12:47.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcn', 'mia_moderator', 'sailboats', '{"name": "Racing Sailboat", "quantity": 1,"price": 75000, "discount": 0, "description": "Fast and sleek, perfect for competitions", "date": "2023-02-11T16:20:15.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabco', 'molly_member', 'cars', '{"name": "Sports Car", "quantity": 1,"price": 90000, "discount": 0, "description": "Brand new, top of the line model", "date": "2023-02-12T18:59:33.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcp', 'anna_admin', 'trucks', '{"name": "Pickup Truck", "quantity": 1,"price": 35000, "discount": 0, "description": "Heavy-duty, perfect for hauling", "date": "2023-02-13T22:48:02.000Z", "images": ["fbe51a7c-4ad9-42e4-9e44-39a9c45916f1","47cda44d-8cbb-4180-8781-ed77acd682a0"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcq', 'mia_moderator', 'motorcycles', '{"name": "Harley Davidson", "quantity": 1,"price": 20000, "discount": 0, "description": "Vintage model, in great condition", "date": "2023-02-14T10:23:16.000Z", "images": ["0425bf9c-c603-4bbf-86bb-d2a2444b7292","401fe716-44b8-4016-803e-8d0918854d50"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcr', 'molly_member', 'property', '{"name": "Luxury Condo", "quantity": 1,"price": 1500000, "discount": 0, "description": "Spacious, with beautiful views", "date": "2023-02-15T14:36:44.000Z", "images": ["3c38072f-d1e3-4ae0-b9eb-88eb03aecd0e","9d5e6e71-c4a5-4f2e-ba7f-981a9467cdfc"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcs', 'molly_member', 'cabins', '{"name": "Cozy Cabin", "quantity": 2, "price": 400, "discount": 0, "description": "Rustic cabin in the woods, perfect for a weekend getaway", "date": "2023-02-12T08:22:16.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabct', 'molly_member', 'apartments', '{"name": "Modern Studio Apartment", "quantity": 1, "price": 800, "discount": 0, "description": "Newly renovated studio apartment in the city", "date": "2023-02-14T12:10:45.000Z", "images": ["0c421b08-f2c1-4103-b83d-6fbbb5173713","5c84c746-0ad4-434b-9660-36b3c1adcc64"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcu', 'anna_admin', 'beachfront', '{"name": "Beachfront Villa", "quantity": 1, "price": 2000, "discount": 0, "description": "Luxurious beachfront villa with private access to the beach", "date": "2023-01-18T19:01:37.000Z", "images": ["39070ccf-9b97-4aad-a41d-9561cfde67a1","bc64e5b5-35fc-43c3-8133-1f374b42f19a"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcv', 'mia_moderator', 'apparel', '{"name": "MLB Baseball Hat", "quantity": 1, "price": 250, "discount": 0, "description": "Never worn, soft fabric", "date": "2023-02-09T06:43:08.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcw', 'molly_member', 'tops', '{"name": "Mens Robe", "quantity": 4, "price": 100, "discount": 0, "description": "Elegant and comfortable blouse for any occasion", "date": "2023-01-26T09:54:22.000Z", "images": ["afac48ee-1976-4190-b062-035dc475a212","e4232605-0471-44ea-bd47-7efb035cca24"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcy', 'mia_moderator', 'jackets', '{"name": "Leather Jacket", "quantity": 1, "price": 500, "discount": 0, "description": "Stylish and comfortable leather jacket for any season", "date": "2023-02-10T13:28:39.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcz', 'molly_member', 'sweatshirts', '{"name": "Leather Jacket", "quantity": 2, "price": 120, "discount": 0, "description": "Warm and stylish", "date": "2023-02-12T09:45:21.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcy', 'mia_moderator', 'jackets', '{"name": "Leather Jacket", "quantity": 1, "price": 500, "discount": 0, "description": "Stylish and comfortable leather jacket for any season", "date": "2023-02-10T13:28:39.000Z", "images": ["88cba487-8df6-4da2-9467-5f94431f7581","f6b888fa-4ea4-437f-b293-ab221c7b1da7"]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcz', 'molly_member', 'sweatshirts', '{"name": "Casual Sweatshirt", "quantity": 2, "price": 120, "discount": 0, "description": "Warm and stylish", "date": "2023-02-12T09:45:21.000Z", "images": ["0cd6420d-8156-4660-a048-21e9faddfad1","008183ab-af0b-4f54-8be2-985f92c9cbe3"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc1', 'molly_member', 'bottoms', '{"name": "Chino Pants", "quantity": 4, "price": 50, "discount": 0, "description": "Comfortable and stylish", "date": "2023-02-15T14:22:17.000Z", "images": ["16ff22c8-b525-4401-b0cd-69c8ca24b7f6","562b0615-3345-46f2-ba32-ef0357ca4ce0"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc2', 'molly_member', 'jeans', '{"name": "Slim Fit Jeans", "quantity": 3, "price": 70, "discount": 0, "description": "Comfortable and stylish", "date": "2023-02-17T10:17:33.000Z", "images": ["97247a71-cee5-4f10-9fd9-e4880872e0ad","8e4c8923-8d3f-463c-bbf1-c15ee45eca42"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc3', 'molly_member', 'shorts', '{"name": "Cargo Shorts", "quantity": 2, "price": 40, "discount": 0, "description": "Comfortable and stylish", "date": "2022-02-19T08:56:11.000Z", "images": ["b1f8761d-42c0-45b1-8e32-fccf4e6ed76e","196fed79-4b37-4247-af14-82348a1c1ca5"]}');
@@ -165,7 +260,7 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiab
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc9', 'anna_admin', 'microphones', '{"name": "Condenser Microphone", "quantity": 1, "price": 200, "discount": 0, "description": "High-quality condenser microphone with crystal-clear sound", "date": "2022-02-23T11:35:21.000Z", "images": ["af66b32e-c049-4442-8663-ec396fa4f01c","380e5588-b0a8-4a7b-899e-9834e5e5405a"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123a', 'mia_moderator', 'cameras', '{"name": "Mirrorless Camera", "quantity": 1, "price": 1000, "discount": 0, "description": "Professional-grade mirrorless camera with advanced features", "date": "2023-02-17T14:49:12.000Z", "images": ["b1e0acd7-0736-4751-a4d2-c1f54d6941c5","3eed0bf5-9a7d-4dc7-a85d-b9fc95f63a8b"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123b', 'molly_member', 'film', '{"name": "Color Film Pack", "quantity": 2, "price": 15, "discount": 0, "description": "Pack of 5 rolls of high-quality color film for photography enthusiasts", "date": "2022-02-22T09:27:04.000Z", "images": ["03bb42a4-7127-4303-b6ac-a9d9b46c6d8f","10482388-f353-4635-9799-7b3ab8bd660c"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123c', 'anna_admin', 'digital', '{"name": "External Hard Drive", "quantity": 1, "price": 150, "discount": 0, "description": "High-capacity external hard drive for secure data storage", "date": "2023-02-12T17:54:39.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123c', 'anna_admin', 'digital', '{"name": "External Hard Drive", "quantity": 1, "price": 150, "discount": 0, "description": "High-capacity external hard drive for secure data storage", "date": "2023-02-12T17:54:39.000Z", "images": ["4601e217-0109-4722-9030-460b01d2a849","ec42762a-9c3b-4ed4-9ebd-2903a7f2d714"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123d', 'mia_moderator', 'computers', '{"name": "Gaming Laptop", "quantity": 1, "price": 2000, "discount": 0, "description": "Powerful gaming laptop with high-end specs", "date": "2022-02-19T12:01:18.000Z", "images": ["9540f773-a794-42b4-9f9a-746970a77ed0","ff294e9d-9fcd-41a3-981f-cbdedd764790"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123e', 'molly_member', 'laptops', '{"name": "Ultrabook Laptop", "quantity": 1, "price": 1200, "discount": 0, "description": "Slim and lightweight ultrabook laptop with long battery life", "date": "2023-02-14T09:16:27.000Z", "images": ["3fcb3aa0-03ea-4337-bac0-0b00340f08d3"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123f', 'anna_admin', 'desktops', '{"name": "Gaming Desktop Computer", "quantity": 2, "price": 1500, "discount": 0, "description": "Powerful gaming desktop computer with high-end graphics card and CPU", "date": "2023-02-10T15:48:22.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
@@ -178,80 +273,10 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi12
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123m', 'molly_member', 'toys', '{"name": "Lego Classic Creative Bricks", "quantity": 2, "price": 35, "discount": 0, "description": "A set of 1500 pieces to build anything you can imagine", "date": "2023-02-10T21:11:25.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123n', 'anna_admin', 'puzzles', '{"name": "1000-Piece Puzzle", "quantity": 1, "price": 20, "discount": 0, "description": "Beautiful puzzle with a vibrant forest scene", "date": "2023-02-11T06:23:48.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123o', 'mia_moderator', 'sports', '{"name": "Basketball", "quantity": 1, "price": 25, "discount": 0, "description": "Official size and weight basketball for indoor or outdoor play", "date": "2023-02-11T14:02:13.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123p', 'molly_member', 'home', '{"name": "Cotton Sheet Set", "quantity": 1, "price": 50, "discount": 0, "description": "100% cotton, queen size sheet set with a 400 thread count", "date": "2023-02-12T09:47:01.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123q', 'anna_admin', 'furniture', '{"name": "Mid-Century Modern Sofa", "quantity": 1, "price": 600, "discount": 0, "description": "A comfortable and stylish sofa for any living room", "date": "2023-02-12T19:55:39.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123r', 'mia_moderator', 'appliances', '{"name": "KitchenAid Stand Mixer", "quantity": 1, "price": 300, "discount": 0, "description": "A powerful and versatile kitchen appliance for baking and cooking", "date": "2023-02-13T06:34:58.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123p', 'molly_member', 'home', '{"name": "Cotton Sheet Set", "quantity": 1, "price": 50, "discount": 0, "description": "100% cotton, queen size sheet set with a 400 thread count", "date": "2023-02-12T09:47:01.000Z", "images": ["adea7631-d08b-4357-a2ff-5f024cdafb81","b34d7076-eca5-41d8-855c-781221eb1148"]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123q', 'anna_admin', 'furniture', '{"name": "Mid-Century Modern Sofa", "quantity": 1, "price": 600, "discount": 0, "description": "A comfortable and stylish sofa for any living room", "date": "2023-02-12T19:55:39.000Z", "images": ["86bc7ca8-f79d-40ae-9536-56724a5a069e","d1bbb70c-fbb8-4bc4-824b-3a0b0b77aae2"]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123r', 'mia_moderator', 'appliances', '{"name": "KitchenAid Stand Mixer", "quantity": 1, "price": 300, "discount": 0, "description": "A powerful and versatile kitchen appliance for baking and cooking", "date": "2023-02-13T06:34:58.000Z", "images": ["ca58a498-86a3-47df-a848-96d40c0bb9e9"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123s', 'molly_member', 'kitchen', '{"name": "Stainless Steel Cookware Set", "quantity": 1, "price": 200, "discount": 0, "description": "A set of pots and pans made with durable and easy-to-clean stainless steel", "date": "2023-02-13T17:22:58.000Z", "images": ["5179b8c7-a327-4fc5-84b2-5804465c2cf7","ac6feefc-dc56-44c8-92c0-a3f906c6a5bd"]}');
-
-
--- ██ attribute_value ██
-
-DELETE FROM attribute_value;
-
--- Racing Sailboat
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'X0bZdioM6D', '{ "value": "New" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 't6guOpyORQ', '{ "value": "2017" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'UM9PPU64GB', '{ "value": "40000" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'VuLNBGpP7Z', '{ "value": "Other" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'Iwiw1QLbXP', '{ "value": "80" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', '3GZ3ozPoCS', '{ "value": "30" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', '4gDdn60Dbd', '{ "value": "#ffffff" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'iiAoJcJ5RH', '{ "value": "#ffffff" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', 'R2BDfhnUXF', '{ "value": "Aluminum" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', '767cAm6pTR', '{ "value": "11" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcn', '6B1BUxiIys', '{ "value": "Dacron" }');
-
--- Island Yacht
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'X0bZdioM6D', '{ "value": "Used" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 't6guOpyORQ', '{ "value": "2014" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'UM9PPU64GB', '{ "value": "60000" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'Iwiw1QLbXP', '{ "value": "40" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcm', '3GZ3ozPoCS', '{ "value": "200" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcm', '4gDdn60Dbd', '{ "value": "#ffffff" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'iiAoJcJ5RH', '{ "value": "#ffffff" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcm', 'R2BDfhnUXF', '{ "value": "Steel" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcm', '767cAm6pTR', '{ "value": "50" }');
-
--- Harley Davidson
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 'X0bZdioM6D', '{ "value": "New" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 't6guOpyORQ', '{ "value": "2019" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 'UM9PPU64GB', '{ "value": "0" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 'Iwiw1QLbXP', '{ "value": "125" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcq', 'S8xteMD6V5', '{ "value": "#ff0000" }');
-
--- Pickup Truck
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'X0bZdioM6D', '{ "value": "Used" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 't6guOpyORQ', '{ "value": "2006" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'UM9PPU64GB', '{ "value": "150000" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'VuLNBGpP7Z', '{ "value": "Gasoline" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'Iwiw1QLbXP', '{ "value": "95" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'ni6pEhjovT', '{ "value": "Manual" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcp', '7O5s6eKwwh', '{ "value": "2" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'lRriZmW7bx', '{ "value": "#000080" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcp', 'QxCtZcsWVh', '{ "value": "#ffffff" }');
-
--- Sports Car
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'X0bZdioM6D', '{ "value": "New" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabco', 't6guOpyORQ', '{ "value": "2020" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'UM9PPU64GB', '{ "value": "0" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'VuLNBGpP7Z', '{ "value": "Electric" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'Iwiw1QLbXP', '{ "value": "216" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'ni6pEhjovT', '{ "value": "Automatic" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabco', '7O5s6eKwwh', '{ "value": "5" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'lRriZmW7bx', '{ "value": "#000000" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabco', 'QxCtZcsWVh', '{ "value": "#ff00ff" }');
-
--- Electric Skateboard
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 'X0bZdioM6D', '{ "value": "New" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 't6guOpyORQ', '{ "value": "2023" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 'UM9PPU64GB', '{ "value": "0" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 'VuLNBGpP7Z', '{ "value": "Electric" }');
-INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 'Iwiw1QLbXP', '{ "value": "25" }');
-
--- MLB Baseball Hat, Sleeveless Blouse, Denim Shirt, Leather Jacket, Leather Jacket, Chino Pants, Slim Fit Jeans, Cargo Shorts, Sneakers, Ankle Socks
--- Luxury Condo, Cozy Cabin, Modern Stud, Beachfront Villa
 
 -- SHIRTS BEGIN
 
