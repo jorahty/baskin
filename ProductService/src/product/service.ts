@@ -1,4 +1,4 @@
-import { NewProduct, Product } from './schema';
+import { NewProduct, Product, ProductStat } from './schema';
 import { pool } from '../db';
 
 export class ProductService {
@@ -142,5 +142,15 @@ export class ProductService {
     product.id = rows[0].id;
 
     return product;
+  }
+
+  public async stat(): Promise<ProductStat>{
+    const update = 'SELECT COUNT(*) FROM product';
+    const query = {
+      text: update
+    };
+    const { rows } = await pool.query(query);
+
+    return rows[0]
   }
 }

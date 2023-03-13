@@ -1,4 +1,4 @@
-import { Category } from './schema';
+import { Category, CategoryStat } from './schema';
 import { Attribute } from '../attribute/schema';
 
 import { pool } from '../db';
@@ -138,5 +138,15 @@ export class CategoryService {
     const { rows } = await pool.query(query);
 
     return rows.map(row => row.category)[0];
+  }
+
+  public async stat(): Promise<CategoryStat>{
+    const update = 'SELECT COUNT(*) FROM category';
+    const query = {
+      text: update
+    };
+    const { rows } = await pool.query(query);
+
+    return rows[0]
   }
 }

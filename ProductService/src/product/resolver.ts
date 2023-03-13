@@ -1,5 +1,5 @@
 import { Args, Resolver, Query, Mutation, Arg } from 'type-graphql';
-import { NewProduct, Product, ProductArgs, RemoveProductArgs } from './schema';
+import { NewProduct, Product, ProductArgs, ProductStat, RemoveProductArgs } from './schema';
 import { ProductService } from './service';
 @Resolver()
 export class ProductResolver {
@@ -33,4 +33,10 @@ export class ProductResolver {
   ): Promise<Product> {
     return new ProductService().remove(id);
   }
+
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   @Query(returns => ProductStat)
+   async productStat(): Promise<ProductStat> {
+    return new ProductService().stat();
+   }
 }

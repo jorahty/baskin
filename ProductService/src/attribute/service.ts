@@ -1,4 +1,4 @@
-import { Attribute, EditAttribute, NewAttribute } from './schema';
+import { Attribute, AttributeStat, EditAttribute, NewAttribute } from './schema';
 
 import { pool } from '../db';
 
@@ -81,5 +81,15 @@ export class AttributeService {
     const { rows } = await pool.query(query);
 
     return rows.map(row => row.attribute)[0];
+  }
+
+  public async stat(): Promise<AttributeStat>{
+    const update = 'SELECT COUNT(*) FROM attribute';
+    const query = {
+      text: update
+    };
+    const { rows } = await pool.query(query);
+
+    return rows[0]
   }
 }

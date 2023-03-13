@@ -90,3 +90,20 @@ test('List by Category', async () => {
       expect(res.body.data.product).toBeDefined();
     });
 });
+
+test('productStat', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `{productStat{ count }}`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.productStat.count).toBeDefined();
+    });
+});
+

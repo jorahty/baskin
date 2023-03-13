@@ -91,3 +91,19 @@ test('List attributes', async () => {
       expect(res.body.data.categoryAttributes).toBeDefined();
     });
 });
+
+test('categoryStat', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `{categoryStat{ count }}`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.categoryStat.count).toBeDefined();
+    });
+});

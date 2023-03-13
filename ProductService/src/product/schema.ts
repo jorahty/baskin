@@ -93,3 +93,10 @@ export class RemoveProductArgs {
   @Matches(regexnanoID)
     id!: string;
 }
+
+@ObjectType()
+export class ProductStat {
+  @Field()
+    count!: number;
+}
+
