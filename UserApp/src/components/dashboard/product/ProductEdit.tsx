@@ -52,8 +52,8 @@ export default function ProductEdit({
                   description: "${description}",
                   price: ${price},
                   category: "${
-                    category === 'Choose Category' ? product.category : category
-                  }",
+  category === 'Choose Category' ? product.category : category
+}",
                   quantity: ${quantity},
                   images: [${allImages.map((p: string) => `"${p}"`)}],
                   discount: 0,

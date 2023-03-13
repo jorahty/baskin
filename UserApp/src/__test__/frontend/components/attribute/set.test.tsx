@@ -69,7 +69,7 @@ test('Click', async () => {
   renderView(attribute);
 
   fireEvent.click(screen.getByText('New'));
-  fireEvent.click(await screen.findByText('Used'));
-  fireEvent.click(await screen.findByText('New'));
-  fireEvent.click((await screen.findAllByText('New'))[1]);
+
+  fireEvent.pointerDown(await screen.findByTestId('New'));
+  fireEvent.pointerDown(await screen.findByTestId('Used'));
 });

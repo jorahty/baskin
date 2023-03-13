@@ -9,8 +9,7 @@ interface Props {
 export default function AttributeSet({ attribute }: Props) {
   const { refinement, setRefinement } = useAppContext();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleClick = ({ target: { textContent: value } }: any) => {
+  const handleClick = (value: string) => {
     const filters: Filter[] = refinement.filters.map(filter => {
       // skip filters unrelated to this attribute
       if (filter.id !== attribute.id) return filter;
@@ -56,18 +55,23 @@ export default function AttributeSet({ attribute }: Props) {
         sx={{ bgcolor: 'background.body' }}
       >
         {attribute.values?.map(value => (
-          <Option
+          <div
             key={value}
-            color="neutral"
-            value={value}
-            sx={{ fontWeight: 'md', bgcolor: 'var(--joy-palette-background-popup) !important' }}
-            onClick={handleClick}
+            onPointerDown={() => handleClick(value)}
+            data-testid={value}
+            id="HELLO??"
           >
-            <ListItemDecorator>
-              <Checkbox checked={selection?.includes(value)}/>
-            </ListItemDecorator>
-            {value}
-          </Option>
+            <Option
+              color="neutral"
+              value={value}
+              sx={{ fontWeight: 'md', bgcolor: 'var(--joy-palette-background-popup) !important' }}
+            >
+              <ListItemDecorator>
+                <Checkbox checked={selection?.includes(value)}/>
+              </ListItemDecorator>
+              {value}
+            </Option>
+          </div>
         ))}
       </Select>
     </Box>
