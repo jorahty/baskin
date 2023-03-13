@@ -25,7 +25,7 @@ export default function ImageGallery({ images }: Props) {
 
   return (
     <>
-      {['previous', 'next'].map(type => (
+      {images.length > 1 && ['previous', 'next'].map(type => (
         <IconButton
           key={type}
           aria-label={type}
