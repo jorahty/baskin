@@ -52,8 +52,8 @@ export default function ProductEdit({
                   description: "${description}",
                   price: ${price},
                   category: "${
-                    category === 'Choose Category' ? product.category : category
-                  }",
+  category === 'Choose Category' ? product.category : category
+}",
                   quantity: ${quantity},
                   images: [${allImages.map((p: string) => `"${p}"`)}],
                   discount: 0,
@@ -61,19 +61,19 @@ export default function ProductEdit({
         }
     `;
 
-    await graphQLClient.request(query).then(res => {
-      product = res.updateProduct;
-      // Remove product from product list
-      const index = productList.findIndex(
-        (tempProd: Product) => tempProd.id === product.id,
-      );
-      productList.splice(index, 1);
-      productList.push(product);
-      updateProductList(productList);
+    const res:{updateProduct: Product} = await graphQLClient.request(query);
 
-      // Return to dashboard
-      handleCancel();
-    });
+    product = res.updateProduct;
+    // Remove product from product list
+    const index = productList.findIndex(
+      (tempProd: Product) => tempProd.id === product.id,
+    );
+    productList.splice(index, 1);
+    productList.push(product);
+    updateProductList(productList);
+
+    // Return to dashboard
+    handleCancel();
   };
 
   return (

@@ -93,7 +93,6 @@ export class StatService {
 
     const product = data.productStat.count;
 
-    console.log({ user: user, chat: chat, message: message });
     return {
       user: user,
       chat: chat,
