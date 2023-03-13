@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...(await serverSideTranslations(context.locale ?? 'en', ['common'])),
       locale: context.locale ?? 'en',
       category: verboseCategory,
     },
@@ -52,12 +52,8 @@ export default function SavedPage({ category: unfiltered, locale }: Props) {
   if (!mounted) return <></>;
 
   return (
-    <Layout sidebar={<CategoryControls category={category} />} locale={locale}>
-      {
-        category.products.length > 0
-          ? <CategoryContent category={category}/>
-          : <Empty />
-      }
+    <Layout sidebar={<CategoryControls category={category} />} locale={locale} menuIconVisible>
+      {category.products.length > 0 ? <CategoryContent category={category} /> : <Empty />}
     </Layout>
   );
 }

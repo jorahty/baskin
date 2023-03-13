@@ -17,9 +17,10 @@ export const headerHeight = '80px';
 interface Props {
   handleSidebarOpen: () => void;
   locale: string;
+  menuIconVisible: boolean | undefined;
 }
 
-export default function Header({ handleSidebarOpen, locale }: Props) {
+export default function Header({ handleSidebarOpen, locale, menuIconVisible }: Props) {
   const { signedInUser } = useAppContext();
   const [searchVisible, setSearchVisible] = useState(false);
   const [savedVisible, setSavedVisible] = useState(false);
@@ -27,12 +28,8 @@ export default function Header({ handleSidebarOpen, locale }: Props) {
   const { t } = useTranslation('common');
 
   useEffect(() => {
-    setSearchVisible(
-      ['/', '/category/[slug]', '/saved'].includes(pathname)
-    );
-    setSavedVisible(
-      ['/', '/category/[slug]'].includes(pathname)
-    );
+    setSearchVisible(['/', '/category/[slug]', '/saved'].includes(pathname));
+    setSavedVisible(['/', '/category/[slug]'].includes(pathname));
   }, [pathname]);
 
   return (
@@ -43,60 +40,60 @@ export default function Header({ handleSidebarOpen, locale }: Props) {
       sx={{ p: { xs: 2, sm: 3 } }}
       gap={2}
     >
-      <IconButton
-        aria-label="menu-icon"
-        onClick={handleSidebarOpen}
-        sx={{ display: { xs: 'block', md: 'none' } }}
-      >
-        <MenuIcon />
-      </IconButton>
-      <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
-        <Link href="/">
-          <Logo />
-        </Link>
-      </Box>
-      <Box ml="auto" sx={{ display: { xs: 'none', sm: 'block' } }} />
-      {searchVisible && <ProductSearch />}
-      <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-        <LangSelect localeG={locale}/>
-      </Box>
-      {signedInUser ? (
-        <UserMenu />
-      ) : (
-        <>
-          <Link href="/signin">
-            <Button
-              variant="soft"
-              aria-label="Sign in"
-            >
-              {t('header.signin')}
-            </Button>
+      <Stack direction="row" gap={2} flexGrow={1}>
+        {menuIconVisible && (
+          <IconButton
+            aria-label="menu-icon"
+            onClick={handleSidebarOpen}
+            sx={{ display: { xs: 'block', md: 'none' } }}
+            variant="plain"
+            color="neutral"
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
+        <Box sx={{ display: { xs: (!menuIconVisible && 'block') || 'none', md: 'block' } }}>
+          <Link href="/">
+            <Logo />
           </Link>
-          <Link href="/signup">
-            <Button
-              aria-label="Sign up"
-            >
-              {t('header.signup')}
-            </Button>
-          </Link>
-        </>
-      )}
-      {savedVisible &&
-        <Tooltip title="View saved products">
-          <Link href="/saved">
-            <IconButton
-              sx={{ display: { xs: 'none', sm: 'block' } }}
-              variant="plain"
-              color="neutral"
-            >
-              <BookmarkBorder />
-            </IconButton>
-          </Link>
-        </Tooltip>
-      }
-      <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
-        <ModeToggle />
-      </Box>
+        </Box>
+      </Stack>
+      <Stack direction="row" gap={2} minWidth={0} flexGrow={0}>
+        {searchVisible && (
+          <Box minWidth={0}>
+            <ProductSearch />
+          </Box>
+        )}
+        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <LangSelect localeG={locale} />
+        </Box>
+        {signedInUser ? (
+          <UserMenu />
+        ) : (
+          <>
+            <Link href="/signin">
+              <Button variant="soft" aria-label="Sign in">
+                {t('header.signin')}
+              </Button>
+            </Link>
+            <Link href="/signup">
+              <Button aria-label="Sign up">{t('header.signup')}</Button>
+            </Link>
+          </>
+        )}
+        {savedVisible && (
+          <Tooltip title="View saved products">
+            <Link href="/saved">
+              <IconButton sx={{ display: { xs: 'none', sm: 'block' } }} variant="plain" color="neutral">
+                <BookmarkBorder />
+              </IconButton>
+            </Link>
+          </Tooltip>
+        )}
+        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
+          <ModeToggle />
+        </Box>
+      </Stack>
     </Stack>
   );
 }

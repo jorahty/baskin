@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Card,
+  CardOverflow,
   Chip,
   Input,
   Sheet,
@@ -18,7 +19,7 @@ import { useAppContext } from '../../context';
 import { Chat } from '../../graphql/chat/schema';
 import Router from 'next/router';
 import { useState } from 'react';
-import ImageGallery from '../../components/product/ImageGallery';
+import ImageGallery from '../image/gallery';
 
 interface FormElements extends HTMLFormControlsCollection {
   message: HTMLInputElement;
@@ -108,17 +109,18 @@ export default function ProductDetails({ product }: { product: Product }) {
           pb: 0,
           flexDirection: {
             md: 'row',
-            sm: 'column',
           },
         }}
       >
-        <ImageGallery product={product} />
+        <CardOverflow sx={{ flexGrow: 1 }}>
+          <ImageGallery images={product.images}/>
+        </CardOverflow>
         <Stack
           gap={2}
           pb={2}
           sx={{
             width: {
-              md: 'min(500px, 30vw)',
+              md: 'min(500px, 50vw)',
               sm: '100%',
             },
           }}
@@ -126,9 +128,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           {product.discount > 0 ? (
             <Box>
               <Typography level="h2">
-                {`$${(product.price - product.price * product.discount).toFixed(
-                  2,
-                )} `}
+                {`$${(product.price - product.price * product.discount).toFixed(2)} `}
               </Typography>
               <Typography level="h6">
                 <Typography sx={{ textDecoration: 'line-through' }}>

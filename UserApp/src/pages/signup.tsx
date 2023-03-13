@@ -220,7 +220,7 @@ export default function Signup() {
             <Box display="flex" justifyContent="flex-end">
               <Link href="/signin">
                 <Typography fontSize="sm" fontWeight="lg" color="primary">
-                  Already have an account?
+                  Already have an account? Sign in →
                 </Typography>
               </Link>
             </Box>

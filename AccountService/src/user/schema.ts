@@ -30,6 +30,17 @@ export class UserArgs {
 }
 
 @ObjectType()
+@InputType('UpdateRolesInput')
+export class UpdateRoles {
+  @Field()
+  @Matches(regexUsername)
+    username!: string;
+  @Field(() => [String])
+    roles!: string[];
+}
+
+
+@ObjectType()
 export class SignUpPayload {
   @Field()
   @Matches(regexUsername)

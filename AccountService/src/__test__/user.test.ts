@@ -137,3 +137,25 @@ test('Change Email', async () => {
       expect(data.body.data.updateEmail.email).toEqual('john@gmail.com');
     });
 });
+
+test('Change Roles', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `mutation {updateRoles (input:{
+        username: "mia_moderator",
+        roles: ["admin", "member"]
+      }) {
+        name, username, email
+      }}`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.updateRoles.name).toEqual('Mia Moderator');
+      expect(data.body.data.updateRoles.username).toEqual('mia_moderator');
+    });
+});

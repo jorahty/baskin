@@ -8,6 +8,7 @@ interface Props {
   children: React.ReactNode;
   sidebar?: React.ReactNode;
   locale: string;
+  menuIconVisible?: boolean | undefined;
 }
 
 const sx = {
@@ -19,7 +20,7 @@ const sx = {
 // Do not hard-code the width of the sidebar.
 // Instead, adjust the width of the content inside the sidebar
 
-export default function Layout({ children, sidebar, locale }: Props) {
+export default function Layout({ children, sidebar, locale, menuIconVisible }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleSidebarOpen = () => {
@@ -30,7 +31,11 @@ export default function Layout({ children, sidebar, locale }: Props) {
     <>
       <GlobalStyles styles={{ body: { overflow: 'hidden' } }} />
       <Box bgcolor="background.surface">
-        <Header handleSidebarOpen={handleSidebarOpen} locale={locale}/>
+        <Header
+          handleSidebarOpen={handleSidebarOpen}
+          locale={locale}
+          menuIconVisible={menuIconVisible}
+        />
       </Box>
       <Divider />
       <Stack direction="row" height="100%" alignItems="flex-start">
