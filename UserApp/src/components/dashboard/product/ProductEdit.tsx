@@ -52,8 +52,8 @@ export default function ProductEdit({
                   description: "${description}",
                   price: ${price},
                   category: "${
-  category === 'Choose Category' ? product.category : category
-}",
+                    category === 'Choose Category' ? product.category : category
+                  }",
                   quantity: ${quantity},
                   images: [${allImages.map((p: string) => `"${p}"`)}],
                   discount: 0,
@@ -67,7 +67,7 @@ export default function ProductEdit({
       const index = productList.findIndex(
         (tempProd: Product) => tempProd.id === product.id,
       );
-      productList.splice(index);
+      productList.splice(index, 1);
       productList.push(product);
       updateProductList(productList);
 
