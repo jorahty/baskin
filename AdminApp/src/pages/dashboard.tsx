@@ -6,13 +6,14 @@ import CategoryPage from '../components/category/CategoryPage';
 import AuthGuard from '../components/AuthGuard';
 import AttributePage from '../components/attribute/AttributePage';
 import RolesPage from '../components/roles/RolesPage';
+import OverviewPage from '../components/OverviewPage';
 
 
 export default function Dashoard(){
   const [current, setCurrent] = useState<string>('');
 
   const comps: Record<string, JSX.Element> = {
-    'Overview': <div>Welcome to the dashboard</div>,
+    'Overview': <OverviewPage />,
     'Category': <CategoryPage />,
     'Attribute': <AttributePage />,
     'Set Roles': <RolesPage />,

@@ -8,12 +8,21 @@ import ListItemButton from '@mui/joy/ListItemButton';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Router from 'next/router';
 import { useAppContext } from '../../context';
 
 export default function Sidebar({ tabs, current, setCurrent }:
   {tabs: string[], current:string, setCurrent: (item: string) => void}) {
 
-  const { signedInUser } = useAppContext();
+  const { signedInUser, signOut } = useAppContext();
+
+  const handleSignout = () => {
+    signOut();
+    Router.push({
+      pathname: '/',
+    });
+  };
 
   return (
     <React.Fragment>
@@ -63,8 +72,11 @@ export default function Sidebar({ tabs, current, setCurrent }:
             </Typography>
             <Typography level="body2">{signedInUser?.username}</Typography>
           </div>
-          <IconButton variant="plain" sx={{ ml: 'auto' }}>
-            <i data-feather="log-out" />
+          <IconButton variant="plain" sx={{ ml: 'auto' }}
+            aria-label="logout"
+            onClick={handleSignout}
+          >
+            <LogoutIcon />
           </IconButton>
         </Box>
       </Sheet>

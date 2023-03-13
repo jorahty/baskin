@@ -21,6 +21,8 @@ interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
+//Citation: https://mui.com/joy-ui/getting-started/templates/sign-in-side/
+
 export default function Signin() {
   const { signIn, signOut } = useAppContext();
 

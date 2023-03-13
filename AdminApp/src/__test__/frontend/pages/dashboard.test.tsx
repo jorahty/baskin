@@ -5,6 +5,8 @@ import { setupServer } from 'msw/node';
 import { graphql } from 'msw';
 
 import Dashboard from '../../../pages/dashboard';
+import { AppContextProvider } from '../../../context';
+
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -38,7 +40,9 @@ afterAll(() => server.close());
 const renderView = async () => {
   render(
     <CssVarsProvider>
-      <Dashboard />
+      <AppContextProvider>
+        <Dashboard />
+      </AppContextProvider>
     </CssVarsProvider>,
   );
 };
@@ -53,10 +57,16 @@ test('Clicks on sidebar', async () => {
   fireEvent.click(sidebar);
 });
 
+test('Clicks on logout', async () => {
+  renderView();
+  const logout = await screen.findByLabelText('logout');
+  fireEvent.click(logout);
+});
+
 
 test('Shows differnt menu', async () => {
   renderView();
-  fireEvent.click(screen.getByText('Welcome to the dashboard'));
+  fireEvent.click(screen.getByText('Overview Stats'));
   const sidebar = await screen.findByText('Category');
   fireEvent.click(sidebar);
   expect(screen.queryByText('Welcome to the dashboard')).not.toBeInTheDocument();

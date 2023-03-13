@@ -26,6 +26,9 @@ interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
+//Citation: https://mui.com/joy-ui/getting-started/templates/sign-in-side/
+
+
 export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
