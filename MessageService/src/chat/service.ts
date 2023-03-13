@@ -1,5 +1,5 @@
 import { pool } from '../db';
-import { Chat, ChatMember } from './schema';
+import { Chat, ChatMember, ChatStat } from './schema';
 
 export class ChatService {
   public async list(username: string): Promise<Chat[]> {
@@ -56,5 +56,15 @@ export class ChatService {
     const { rows } = await pool.query(query);
     console.log(rows);
     return rows[0].member;
+  }
+
+  public async stat(): Promise<ChatStat>{
+    const update = 'SELECT COUNT(*) FROM chat';
+    const query = {
+      text: update
+    };
+    const { rows } = await pool.query(query);
+
+    return rows[0]
   }
 }

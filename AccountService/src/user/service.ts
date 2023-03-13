@@ -1,4 +1,4 @@
-import { User, NewUser, SignUpPayload } from './schema';
+import { User, NewUser, SignUpPayload, UserStat } from './schema';
 import { pool } from '../db';
 import { hashSync } from 'bcrypt';
 
@@ -90,5 +90,15 @@ export class UserService {
       email: rows[0].data.email,
     };
     return user;
+  }
+
+  public async stat(): Promise<UserStat>{
+    const update = 'SELECT COUNT(*) FROM account';
+    const query = {
+      text: update
+    };
+    const { rows } = await pool.query(query);
+
+    return rows[0]
   }
 }

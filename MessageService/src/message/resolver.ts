@@ -1,5 +1,5 @@
 import { Arg, Args, Mutation, Resolver, Query } from 'type-graphql';
-import { Message, MessageArgs, NewMessage } from './schema';
+import { Message, MessageArgs, NewMessage, MessageStat } from './schema';
 import { MessageService } from './service';
 
 @Resolver()
@@ -14,5 +14,11 @@ export class MessageResolver {
   @Mutation(returns => Message)
   async sendMessage(@Arg('message') { chat_id, sender, content }: NewMessage): Promise<Message> {
     return new MessageService().send(chat_id, sender, content);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @Query(returns => MessageStat)
+  async messageStat(): Promise<MessageStat> {
+   return new MessageService().stat();
   }
 }

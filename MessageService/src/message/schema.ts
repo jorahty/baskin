@@ -37,3 +37,9 @@ export class NewMessage {
   @Field()
     content!: string;
 }
+
+@ObjectType()
+export class MessageStat {
+  @Field()
+    count!: number;
+}

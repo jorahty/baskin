@@ -1,5 +1,5 @@
 import { Args, Query, Resolver, Mutation, Arg} from 'type-graphql';
-import { User, UserArgs, NewUser, SignUpPayload, UpdateRoles } from './schema';
+import { User, UserArgs, NewUser, SignUpPayload, UpdateRoles, UserStat } from './schema';
 import { UserService } from './service';
 
 @Resolver()
@@ -42,5 +42,11 @@ export class UserResolver {
      @Arg('input') input: UpdateRoles
    ): Promise<SignUpPayload> {
     return new UserService().updateRoles(input.username, input.roles);
+   }
+
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   @Query(returns => UserStat)
+   async userStat(): Promise<UserStat> {
+    return new UserService().stat();
    }
 }

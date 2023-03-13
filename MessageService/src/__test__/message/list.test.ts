@@ -49,3 +49,19 @@ test('Fetch by Chat Id: List Mia and Nobby Messages', async () => {
       expect(res.body.data.message).toBeDefined();
     });
 });
+
+test('messageStat', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `{messageStat{ count }}`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.messageStat.count).toBeDefined();
+    });
+});
