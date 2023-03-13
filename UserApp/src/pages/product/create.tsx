@@ -13,13 +13,13 @@ import { GetStaticProps } from 'next';
 export const getStaticProps: GetStaticProps = async context => {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale as string ?? 'en', ['common'])),
-      locale: context.locale as string ?? 'en',
+      ...(await serverSideTranslations((context.locale as string) ?? 'en', ['common'])),
+      locale: (context.locale as string) ?? 'en',
     },
   };
 };
 
-export default function Create({ locale }: {locale: string}) {
+export default function Create({ locale }: { locale: string }) {
   const { signedInUser } = useAppContext();
 
   const handleCancel = () => {
@@ -34,7 +34,7 @@ export default function Create({ locale }: {locale: string}) {
     price: number,
     category: string,
     quantity: number,
-    images: File[],
+    images: File[]
   ) => {
     // const bearerToken = signedInUser?.accessToken;
     const formData: FormData = new FormData();
@@ -69,7 +69,7 @@ export default function Create({ locale }: {locale: string}) {
       .request(query)
       .then(() => Router.push({
         pathname: '/',
-      }),
+      })
       )
       .catch(() => {
         imagesIdArr.forEach((pic: string) => {

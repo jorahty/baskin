@@ -12,12 +12,13 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 export const getServerSideProps: GetServerSideProps = async context => {
   const [category] = await new CategoryService().list(context.query.slug as string);
 
-  if (!category) return {
-    redirect: {
-      permanent: false,
-      destination: '/',
-    },
-  };
+  if (!category)
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
 
   const verboseCategory = {
     name: category.name,
@@ -29,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...(await serverSideTranslations(context.locale ?? 'en', ['common'])),
       locale: context.locale ?? 'en',
       category: verboseCategory,
     },
@@ -43,8 +44,8 @@ interface Props {
 
 export default function CategoryPage({ category, locale }: Props) {
   return (
-    <Layout sidebar={<CategoryControls category={category} />} locale={locale}>
-      <CategoryContent category={category}/>
+    <Layout sidebar={<CategoryControls category={category} />} locale={locale} menuIconVisible>
+      <CategoryContent category={category} />
     </Layout>
   );
 }

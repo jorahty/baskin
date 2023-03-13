@@ -17,9 +17,10 @@ export const headerHeight = '80px';
 interface Props {
   handleSidebarOpen: () => void;
   locale: string;
+  menuIconVisible: boolean | undefined;
 }
 
-export default function Header({ handleSidebarOpen, locale }: Props) {
+export default function Header({ handleSidebarOpen, locale, menuIconVisible }: Props) {
   const { signedInUser } = useAppContext();
   const [searchVisible, setSearchVisible] = useState(false);
   const [savedVisible, setSavedVisible] = useState(false);
@@ -40,16 +41,18 @@ export default function Header({ handleSidebarOpen, locale }: Props) {
       gap={2}
     >
       <Stack direction="row" gap={2} flexGrow={1}>
-        <IconButton
-          aria-label="menu-icon"
-          onClick={handleSidebarOpen}
-          sx={{ display: { xs: 'block', md: 'none' } }}
-          variant="plain"
-          color="neutral"
-        >
-          <MenuIcon />
-        </IconButton>
-        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
+        {menuIconVisible && (
+          <IconButton
+            aria-label="menu-icon"
+            onClick={handleSidebarOpen}
+            sx={{ display: { xs: 'block', md: 'none' } }}
+            variant="plain"
+            color="neutral"
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
+        <Box sx={{ display: { xs: (!menuIconVisible && 'block') || 'none', md: 'block' } }}>
           <Link href="/">
             <Logo />
           </Link>

@@ -9,8 +9,8 @@ import { GetServerSideProps } from 'next';
 export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
-      ...await serverSideTranslations(context.locale as string ?? 'en', ['common']),
-      locale: context.locale as string ?? 'en',
+      ...(await serverSideTranslations((context.locale as string) ?? 'en', ['common'])),
+      locale: (context.locale as string) ?? 'en',
     },
   };
 };
@@ -33,7 +33,7 @@ export default function Dashboard({ locale }: Props) {
 
   const comps: Record<string, JSX.Element> = {
     'Profile Settings': <ProfileEdit />,
-    'Products': <ProductMenu />,
+    Products: <ProductMenu />,
   };
 
   useEffect(() => {
@@ -44,9 +44,11 @@ export default function Dashboard({ locale }: Props) {
   return (
     <>
       <AuthGuard>
-        <Layout sidebar={
-          <DashSidebar items={items} current={current} setCurrent={setCurrent} />
-        } locale={locale}>
+        <Layout
+          sidebar={<DashSidebar items={items} current={current} setCurrent={setCurrent} />}
+          locale={locale}
+          menuIconVisible
+        >
           {comps[current]}
         </Layout>
       </AuthGuard>

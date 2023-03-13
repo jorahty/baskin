@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const [user] = await new UserService().list(context.query.username as string);
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...(await serverSideTranslations(context.locale ?? 'en', ['common'])),
       locale: context.locale ?? 'en',
       user: user,
       products: await new ProductService().list({ user: context.query.username as string }),
@@ -23,9 +23,15 @@ export const getServerSideProps: GetServerSideProps = async context => {
   };
 };
 
-export default function UserPage(
-  { user, products, locale }: { user: User; products: Product[], locale: string }
-) {
+export default function UserPage({
+  user,
+  products,
+  locale,
+}: {
+  user: User;
+  products: Product[];
+  locale: string;
+}) {
   return (
     <Layout locale={locale}>
       <Stack p={3} gap={3} maxWidth={1200} m="auto">

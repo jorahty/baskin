@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async context => ({
   },
 });
 
-export default function MessagesPage({ locale }: { locale: string}) {
+export default function MessagesPage({ locale }: { locale: string }) {
   const { signedInUser } = useAppContext();
   const router = useRouter();
   const [chats, setChats] = useState([]);
@@ -78,7 +78,11 @@ export default function MessagesPage({ locale }: { locale: string}) {
 
   return (
     <AuthGuard>
-      <Layout sidebar={<ChatList chats={chats} selectedChat={selectedChat} />} locale={locale}>
+      <Layout
+        sidebar={<ChatList chats={chats} selectedChat={selectedChat} />}
+        locale={locale}
+        menuIconVisible
+      >
         <Stack direction="column" height="100%">
           <ChatHeader chat={selectedChat} />
           <Divider />

@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   };
 };
 
-export default function ProductPage({ product, locale }: { product: Product, locale: string }) {
+export default function ProductPage({ product, locale }: { product: Product; locale: string }) {
   return (
     <Layout locale={locale}>
       <ProductDetails product={product} />
