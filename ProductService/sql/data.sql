@@ -82,7 +82,6 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('1a06a497
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('7760204d-364c-4235-8236-2f6e6978b54e', 'anna_admin', 'beachfront', '{"name": "Beachfront Villa", "quantity": 1, "price": 2000, "discount": 0, "description": "Luxurious beachfront villa with private access to the beach", "date": "2023-02-18T19:01:37.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('9c0cf70d-8a17-41c3-97d6-7d1b68a1b2e9', 'mia_moderator', 'apparel', '{"name": "MLB Baseball Hat", "quantity": 1, "price": 250, "discount": 0, "description": "Never worn, soft fabric", "date": "2023-02-09T06:43:08.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('5c14412d-5e63-4f05-853f-b52de9151cf8', 'molly_member', 'tops', '{"name": "Sleeveless Blouse", "quantity": 4, "price": 100, "discount": 0, "description": "Elegant and comfortable blouse for any occasion", "date": "2023-02-26T09:54:22.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('d9ca208f-8695-4426-8e6e-860fae0e1b9c', 'anna_admin', 'shirts', '{"name": "Denim Shirt", "quantity": 3, "price": 80, "discount": 0, "description": "Classic denim shirt for a casual look", "date": "2023-02-15T17:39:05.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('c2f7aa97-0e1c-4721-a857-8a7e0b450c9f', 'mia_moderator', 'jackets', '{"name": "Leather Jacket", "quantity": 1, "price": 500, "discount": 0, "description": "Stylish and comfortable leather jacket for any season", "date": "2023-02-10T13:28:39.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('5c5d0023-bb5c-4563-9770-8a87a04789cf', 'molly_member', 'sweatshirts', '{"name": "Leather Jacket", "quantity": 2, "price": 120, "discount": 0, "description": "Warm and stylish", "date": "2023-02-12T09:45:21.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('7b636227-ee7d-46eb-97c7-94d5f47a49c8', 'molly_member', 'bottoms', '{"name": "Chino Pants", "quantity": 4, "price": 50, "discount": 0, "description": "Comfortable and stylish", "date": "2023-02-15T14:22:17.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
@@ -223,3 +222,217 @@ INSERT INTO attribute_value (product_id, attribute_id, data) VALUES ('6f1de6c7-f
 
 -- MLB Baseball Hat, Sleeveless Blouse, Denim Shirt, Leather Jacket, Leather Jacket, Chino Pants, Slim Fit Jeans, Cargo Shorts, Sneakers, Ankle Socks
 -- Luxury Condo, Cozy Cabin, Modern Stud, Beachfront Villa
+
+-- SHIRTS BEGIN
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('564471a0-1728-4770-9a42-57fb445746a2', 'molly_member',  'shirts', '{"name": "Sunny Days Halter Top",     "quantity": 1, "price": 35, "discount": 0, "description": "Classic shirt for a casual look", "date": "2022-03-13", "images": ["564471a0-1728-4770-9a42-57fb445746a2"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('564471a0-1728-4770-9a42-57fb445746a2', 'rtCdNsBjQl', '{ "value": "#ccd12d" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('564471a0-1728-4770-9a42-57fb445746a2', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('564471a0-1728-4770-9a42-57fb445746a2', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('564471a0-1728-4770-9a42-57fb445746a2', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('9f9e61c2-bef3-4919-aef2-dc04a34d7d57', 'anna_admin',    'shirts', '{"name": "Cosmic Tie-Dye Tee",        "quantity": 1, "price": 20, "discount": 0, "description": "Classic shirt for a casual look", "date": "2022-02-27", "images": ["9f9e61c2-bef3-4919-aef2-dc04a34d7d57"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('9f9e61c2-bef3-4919-aef2-dc04a34d7d57', 'rtCdNsBjQl', '{ "value": "#0b0c10" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('9f9e61c2-bef3-4919-aef2-dc04a34d7d57', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('9f9e61c2-bef3-4919-aef2-dc04a34d7d57', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('9f9e61c2-bef3-4919-aef2-dc04a34d7d57', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('a72a37ee-2eb7-4a77-95bc-229c10b2067c', 'mia_moderator', 'shirts', '{"name": "Rustic Romance Shirt",      "quantity": 1, "price": 15, "discount": 0, "description": "Classic shirt for a casual look", "date": "2022-02-13", "images": ["a72a37ee-2eb7-4a77-95bc-229c10b2067c"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a72a37ee-2eb7-4a77-95bc-229c10b2067c', 'rtCdNsBjQl', '{ "value": "#dc3261" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a72a37ee-2eb7-4a77-95bc-229c10b2067c', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a72a37ee-2eb7-4a77-95bc-229c10b2067c', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a72a37ee-2eb7-4a77-95bc-229c10b2067c', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('a7a1ccc1-a051-4b86-94f6-b0f946b3b58f', 'molly_member',  'shirts', '{"name": "Ocean Breeze Tee",          "quantity": 1, "price": 25, "discount": 0, "description": "Classic shirt for a casual look", "date": "2022-01-30", "images": ["a7a1ccc1-a051-4b86-94f6-b0f946b3b58f"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a7a1ccc1-a051-4b86-94f6-b0f946b3b58f', 'rtCdNsBjQl', '{ "value": "#1f4d8b" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a7a1ccc1-a051-4b86-94f6-b0f946b3b58f', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a7a1ccc1-a051-4b86-94f6-b0f946b3b58f', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a7a1ccc1-a051-4b86-94f6-b0f946b3b58f', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('2ca0a526-0ab2-44dc-abaf-f86866ce7cb5', 'anna_admin',    'shirts', '{"name": "Sunset Stripe Shirt",       "quantity": 1, "price": 190, "discount": 0, "description": "Classic shirt for a casual look", "date": "2022-01-16", "images": ["2ca0a526-0ab2-44dc-abaf-f86866ce7cb5"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2ca0a526-0ab2-44dc-abaf-f86866ce7cb5', 'rtCdNsBjQl', '{ "value": "#565ca8" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2ca0a526-0ab2-44dc-abaf-f86866ce7cb5', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2ca0a526-0ab2-44dc-abaf-f86866ce7cb5', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2ca0a526-0ab2-44dc-abaf-f86866ce7cb5', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('25cbaf2f-f15d-4592-8506-ceb465166b36', 'mia_moderator', 'shirts', '{"name": "Coastal Cruiser Top",       "quantity": 1, "price": 75, "discount": 0, "description": "Classic shirt for a casual look", "date": "2022-01-02", "images": ["25cbaf2f-f15d-4592-8506-ceb465166b36"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('25cbaf2f-f15d-4592-8506-ceb465166b36', 'rtCdNsBjQl', '{ "value": "#7ac2b6" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('25cbaf2f-f15d-4592-8506-ceb465166b36', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('25cbaf2f-f15d-4592-8506-ceb465166b36', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('25cbaf2f-f15d-4592-8506-ceb465166b36', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('d14233b4-fd56-43cb-829d-50eb475925e5', 'molly_member',  'shirts', '{"name": "Desert Oasis",         "quantity": 1, "price": 40, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-12-19", "images": ["d14233b4-fd56-43cb-829d-50eb475925e5"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('d14233b4-fd56-43cb-829d-50eb475925e5', 'rtCdNsBjQl', '{ "value": "#2e3586" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('d14233b4-fd56-43cb-829d-50eb475925e5', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('d14233b4-fd56-43cb-829d-50eb475925e5', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('d14233b4-fd56-43cb-829d-50eb475925e5', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('5dabd148-b63b-460e-ad15-ea83e79b8176', 'anna_admin',    'shirts', '{"name": "Mountain View Shirt",       "quantity": 1, "price": 235, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-12-05", "images": ["5dabd148-b63b-460e-ad15-ea83e79b8176"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('5dabd148-b63b-460e-ad15-ea83e79b8176', 'rtCdNsBjQl', '{ "value": "#004aa9" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('5dabd148-b63b-460e-ad15-ea83e79b8176', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('5dabd148-b63b-460e-ad15-ea83e79b8176', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('5dabd148-b63b-460e-ad15-ea83e79b8176', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('98484af4-df32-4460-a1df-16aa60c1fc12', 'mia_moderator', 'shirts', '{"name": "Island Breeze Tank",       "quantity": 1, "price": 155, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-11-21", "images": ["98484af4-df32-4460-a1df-16aa60c1fc12"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('98484af4-df32-4460-a1df-16aa60c1fc12', 'rtCdNsBjQl', '{ "value": "#daa030" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('98484af4-df32-4460-a1df-16aa60c1fc12', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('98484af4-df32-4460-a1df-16aa60c1fc12', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('98484af4-df32-4460-a1df-16aa60c1fc12', 'pKtj6re3E1', '{ "value": "Sleeveless" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('3b66d72a-ab0c-4e5f-bdf6-ebe744747bea', 'molly_member',  'shirts', '{"name": "Rustic Charm Shirt",        "quantity": 1, "price": 265, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-11-07", "images": ["3b66d72a-ab0c-4e5f-bdf6-ebe744747bea"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('3b66d72a-ab0c-4e5f-bdf6-ebe744747bea', 'rtCdNsBjQl', '{ "value": "#a9cee9" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('3b66d72a-ab0c-4e5f-bdf6-ebe744747bea', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('3b66d72a-ab0c-4e5f-bdf6-ebe744747bea', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('3b66d72a-ab0c-4e5f-bdf6-ebe744747bea', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('fab6c3fe-f8c8-4339-b85f-ccb3b2cdcafa', 'anna_admin',    'shirts', '{"name": "Urban Explorer Tee",        "quantity": 1, "price": 130, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-10-24", "images": ["fab6c3fe-f8c8-4339-b85f-ccb3b2cdcafa"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('fab6c3fe-f8c8-4339-b85f-ccb3b2cdcafa', 'rtCdNsBjQl', '{ "value": "#01bab5" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('fab6c3fe-f8c8-4339-b85f-ccb3b2cdcafa', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('fab6c3fe-f8c8-4339-b85f-ccb3b2cdcafa', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('fab6c3fe-f8c8-4339-b85f-ccb3b2cdcafa', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('2b5b8e46-0b33-4c1f-a6a1-4a452aa33b6f', 'mia_moderator', 'shirts', '{"name": "Weekend Getaway Top",       "quantity": 1, "price": 185, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-10-10", "images": ["2b5b8e46-0b33-4c1f-a6a1-4a452aa33b6f"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2b5b8e46-0b33-4c1f-a6a1-4a452aa33b6f', 'rtCdNsBjQl', '{ "value": "#f5e7b6" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2b5b8e46-0b33-4c1f-a6a1-4a452aa33b6f', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2b5b8e46-0b33-4c1f-a6a1-4a452aa33b6f', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2b5b8e46-0b33-4c1f-a6a1-4a452aa33b6f', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('f4fcf221-9a3e-494a-a9d9-b01bdcae357e', 'molly_member',  'shirts', '{"name": "Bohemian Dream Shirt",      "quantity": 1, "price": 85, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-09-26", "images": ["f4fcf221-9a3e-494a-a9d9-b01bdcae357e"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('f4fcf221-9a3e-494a-a9d9-b01bdcae357e', 'rtCdNsBjQl', '{ "value": "#222c73" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('f4fcf221-9a3e-494a-a9d9-b01bdcae357e', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('f4fcf221-9a3e-494a-a9d9-b01bdcae357e', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('f4fcf221-9a3e-494a-a9d9-b01bdcae357e', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('8357d87d-8123-4fde-b49e-105472090e70', 'anna_admin',    'shirts', '{"name": "Seaside Soiree Shirt",      "quantity": 1, "price": 150, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-09-12", "images": ["8357d87d-8123-4fde-b49e-105472090e70"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('8357d87d-8123-4fde-b49e-105472090e70', 'rtCdNsBjQl', '{ "value": "#fed045" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('8357d87d-8123-4fde-b49e-105472090e70', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('8357d87d-8123-4fde-b49e-105472090e70', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('8357d87d-8123-4fde-b49e-105472090e70', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('ee943cb7-97e7-4b59-bd67-a740b1c3d837', 'mia_moderator', 'shirts', '{"name": "Summer Solstice",      "quantity": 1, "price": 295, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-08-29", "images": ["ee943cb7-97e7-4b59-bd67-a740b1c3d837"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('ee943cb7-97e7-4b59-bd67-a740b1c3d837', 'rtCdNsBjQl', '{ "value": "#fe6110" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('ee943cb7-97e7-4b59-bd67-a740b1c3d837', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('ee943cb7-97e7-4b59-bd67-a740b1c3d837', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('ee943cb7-97e7-4b59-bd67-a740b1c3d837', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('2e266e82-d0ef-4b8e-a2da-64d3dd030d7c', 'molly_member',  'shirts', '{"name": "Wildflower Meadow Tee",     "quantity": 1, "price": 270, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-08-15", "images": ["2e266e82-d0ef-4b8e-a2da-64d3dd030d7c"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2e266e82-d0ef-4b8e-a2da-64d3dd030d7c', 'rtCdNsBjQl', '{ "value": "#623a93" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2e266e82-d0ef-4b8e-a2da-64d3dd030d7c', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2e266e82-d0ef-4b8e-a2da-64d3dd030d7c', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('2e266e82-d0ef-4b8e-a2da-64d3dd030d7c', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('e4b8678d-967b-4cfd-8297-1e516ab3ade9', 'anna_admin',    'shirts', '{"name": "Cityscape Graphic T-Shirt", "quantity": 1, "price": 115, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-08-01", "images": ["e4b8678d-967b-4cfd-8297-1e516ab3ade9"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('e4b8678d-967b-4cfd-8297-1e516ab3ade9', 'rtCdNsBjQl', '{ "value": "#31625f" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('e4b8678d-967b-4cfd-8297-1e516ab3ade9', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('e4b8678d-967b-4cfd-8297-1e516ab3ade9', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('e4b8678d-967b-4cfd-8297-1e516ab3ade9', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('927f9131-aa44-4273-965c-a4dd7ad8919a', 'mia_moderator', 'shirts', '{"name": "Coastal Cottage Shirt",     "quantity": 1, "price": 225, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-07-18", "images": ["927f9131-aa44-4273-965c-a4dd7ad8919a"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('927f9131-aa44-4273-965c-a4dd7ad8919a', 'rtCdNsBjQl', '{ "value": "#a33051" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('927f9131-aa44-4273-965c-a4dd7ad8919a', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('927f9131-aa44-4273-965c-a4dd7ad8919a', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('927f9131-aa44-4273-965c-a4dd7ad8919a', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('6f73a174-10d4-4b36-a29c-872f38c05ca7', 'molly_member',  'shirts', '{"name": "Zen Garden Top",            "quantity": 1, "price": 165, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-07-04", "images": ["6f73a174-10d4-4b36-a29c-872f38c05ca7"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('6f73a174-10d4-4b36-a29c-872f38c05ca7', 'rtCdNsBjQl', '{ "value": "#fe6507" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('6f73a174-10d4-4b36-a29c-872f38c05ca7', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('6f73a174-10d4-4b36-a29c-872f38c05ca7', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('6f73a174-10d4-4b36-a29c-872f38c05ca7', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('1613fd76-4848-422d-a875-32cb1ebf6200', 'anna_admin',    'shirts', '{"name": "Festival Vibes Shirt",      "quantity": 1, "price": 60, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-06-20", "images": ["1613fd76-4848-422d-a875-32cb1ebf6200"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('1613fd76-4848-422d-a875-32cb1ebf6200', 'rtCdNsBjQl', '{ "value": "#96001d" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('1613fd76-4848-422d-a875-32cb1ebf6200', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('1613fd76-4848-422d-a875-32cb1ebf6200', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('1613fd76-4848-422d-a875-32cb1ebf6200', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('c5a2a92a-c7db-4a21-b400-c45fa909bf55', 'mia_moderator', 'shirts', '{"name": "Surf Shack Tank",            "quantity": 1, "price": 55, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-06-06", "images": ["c5a2a92a-c7db-4a21-b400-c45fa909bf55"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('c5a2a92a-c7db-4a21-b400-c45fa909bf55', 'rtCdNsBjQl', '{ "value": "#03472e" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('c5a2a92a-c7db-4a21-b400-c45fa909bf55', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('c5a2a92a-c7db-4a21-b400-c45fa909bf55', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('c5a2a92a-c7db-4a21-b400-c45fa909bf55', 'pKtj6re3E1', '{ "value": "Sleeveless" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('b3337e35-0a78-43c4-b97a-e999da3b0cc1', 'molly_member',  'shirts', '{"name": "Midnight Garden Shirt",     "quantity": 1, "price": 265, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-05-23", "images": ["b3337e35-0a78-43c4-b97a-e999da3b0cc1"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('b3337e35-0a78-43c4-b97a-e999da3b0cc1', 'rtCdNsBjQl', '{ "value": "#f0bfd2" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('b3337e35-0a78-43c4-b97a-e999da3b0cc1', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('b3337e35-0a78-43c4-b97a-e999da3b0cc1', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('b3337e35-0a78-43c4-b97a-e999da3b0cc1', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('d8999d60-a58c-4787-94b3-2fb7a8a9154c', 'anna_admin',    'shirts', '{"name": "Tropical Getaway Shirt",    "quantity": 1, "price": 250, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-05-09", "images": ["d8999d60-a58c-4787-94b3-2fb7a8a9154c"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('d8999d60-a58c-4787-94b3-2fb7a8a9154c', 'rtCdNsBjQl', '{ "value": "#fcc25e" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('d8999d60-a58c-4787-94b3-2fb7a8a9154c', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('d8999d60-a58c-4787-94b3-2fb7a8a9154c', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('d8999d60-a58c-4787-94b3-2fb7a8a9154c', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('a5d6aa6e-aa64-479e-a23d-e9036e0a8936', 'molly_member',  'shirts', '{"name": "Canyon Adventure Tee",      "quantity": 1, "price": 20, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-04-25", "images": ["a5d6aa6e-aa64-479e-a23d-e9036e0a8936"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a5d6aa6e-aa64-479e-a23d-e9036e0a8936', 'rtCdNsBjQl', '{ "value": "#ff6f05" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a5d6aa6e-aa64-479e-a23d-e9036e0a8936', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a5d6aa6e-aa64-479e-a23d-e9036e0a8936', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('a5d6aa6e-aa64-479e-a23d-e9036e0a8936', 'pKtj6re3E1', '{ "value": "Sleeveless" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('754c06c8-674d-4206-a129-671b7ad68253', 'anna_admin',    'shirts', '{"name": "Palm Springs Top",          "quantity": 1, "price": 100, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-04-11", "images": ["754c06c8-674d-4206-a129-671b7ad68253"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('754c06c8-674d-4206-a129-671b7ad68253', 'rtCdNsBjQl', '{ "value": "#b04468" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('754c06c8-674d-4206-a129-671b7ad68253', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('754c06c8-674d-4206-a129-671b7ad68253', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('754c06c8-674d-4206-a129-671b7ad68253', 'pKtj6re3E1', '{ "value": "Sleeveless" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('43afb3a9-3a91-4568-ba10-2a3c88d7d47a', 'mia_moderator', 'shirts', '{"name": "Wanderlust Tank",           "quantity": 1, "price": 10, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-03-28", "images": ["43afb3a9-3a91-4568-ba10-2a3c88d7d47a"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('43afb3a9-3a91-4568-ba10-2a3c88d7d47a', 'rtCdNsBjQl', '{ "value": "#03449e" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('43afb3a9-3a91-4568-ba10-2a3c88d7d47a', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('43afb3a9-3a91-4568-ba10-2a3c88d7d47a', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('43afb3a9-3a91-4568-ba10-2a3c88d7d47a', 'pKtj6re3E1', '{ "value": "Sleeveless" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('e88cfada-e4ff-4836-b16e-71e6ee03ce37', 'molly_member',  'shirts', '{"name": "Sunflower Fields Tunic",    "quantity": 1, "price": 215, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-03-14", "images": ["e88cfada-e4ff-4836-b16e-71e6ee03ce37"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('e88cfada-e4ff-4836-b16e-71e6ee03ce37', 'rtCdNsBjQl', '{ "value": "#601f27" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('e88cfada-e4ff-4836-b16e-71e6ee03ce37', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('e88cfada-e4ff-4836-b16e-71e6ee03ce37', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('e88cfada-e4ff-4836-b16e-71e6ee03ce37', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('779cbe32-dc28-4b2a-a7dd-2a508ae33fc6', 'anna_admin',    'shirts', '{"name": "Retro Surf Shirt",          "quantity": 1, "price": 110, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-02-28", "images": ["779cbe32-dc28-4b2a-a7dd-2a508ae33fc6"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('779cbe32-dc28-4b2a-a7dd-2a508ae33fc6', 'rtCdNsBjQl', '{ "value": "#263451" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('779cbe32-dc28-4b2a-a7dd-2a508ae33fc6', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('779cbe32-dc28-4b2a-a7dd-2a508ae33fc6', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('779cbe32-dc28-4b2a-a7dd-2a508ae33fc6', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('f5ae9113-17da-4af4-bcdc-011856bcab0a', 'mia_moderator', 'shirts', '{"name": "Golden Hour Tee",           "quantity": 1, "price": 275, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-02-14", "images": ["f5ae9113-17da-4af4-bcdc-011856bcab0a"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('f5ae9113-17da-4af4-bcdc-011856bcab0a', 'rtCdNsBjQl', '{ "value": "#f5c139" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('f5ae9113-17da-4af4-bcdc-011856bcab0a', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('f5ae9113-17da-4af4-bcdc-011856bcab0a', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('f5ae9113-17da-4af4-bcdc-011856bcab0a', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('0bb33afe-a810-4b48-a37a-4537c16712c1', 'molly_member',  'shirts', '{"name": "Beachcomber Shirt",         "quantity": 1, "price": 45, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-01-31", "images": ["0bb33afe-a810-4b48-a37a-4537c16712c1"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('0bb33afe-a810-4b48-a37a-4537c16712c1', 'rtCdNsBjQl', '{ "value": "#654e96" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('0bb33afe-a810-4b48-a37a-4537c16712c1', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('0bb33afe-a810-4b48-a37a-4537c16712c1', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('0bb33afe-a810-4b48-a37a-4537c16712c1', 'pKtj6re3E1', '{ "value": "Sleeveless" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('bbb7839d-ceb9-4f09-b07c-f4233b28f441', 'anna_admin',    'shirts', '{"name": "City Lights T-Shirt",       "quantity": 1, "price": 80, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-01-17", "images": ["bbb7839d-ceb9-4f09-b07c-f4233b28f441"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('bbb7839d-ceb9-4f09-b07c-f4233b28f441', 'rtCdNsBjQl', '{ "value": "#432f76" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('bbb7839d-ceb9-4f09-b07c-f4233b28f441', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('bbb7839d-ceb9-4f09-b07c-f4233b28f441', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('bbb7839d-ceb9-4f09-b07c-f4233b28f441', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('17d6b315-d9ed-434e-b197-1eb84618e556', 'mia_moderator', 'shirts', '{"name": "Canyon Vista Top",          "quantity": 1, "price": 145, "discount": 0, "description": "Classic shirt for a casual look", "date": "2021-01-03", "images": ["17d6b315-d9ed-434e-b197-1eb84618e556"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('17d6b315-d9ed-434e-b197-1eb84618e556', 'rtCdNsBjQl', '{ "value": "#dfdee3" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('17d6b315-d9ed-434e-b197-1eb84618e556', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('17d6b315-d9ed-434e-b197-1eb84618e556', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('17d6b315-d9ed-434e-b197-1eb84618e556', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('7e219eb5-5cd4-4828-8468-098595abbdd6', 'molly_member',  'shirts', '{"name": "Vintage Florals Shirt",     "quantity": 1, "price": 120, "discount": 0, "description": "Classic shirt for a casual look", "date": "2022-02-06", "images": ["7e219eb5-5cd4-4828-8468-098595abbdd6"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('7e219eb5-5cd4-4828-8468-098595abbdd6', 'rtCdNsBjQl', '{ "value": "#0b4b33" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('7e219eb5-5cd4-4828-8468-098595abbdd6', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('7e219eb5-5cd4-4828-8468-098595abbdd6', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('7e219eb5-5cd4-4828-8468-098595abbdd6', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('fdf78b5c-0508-488d-ad60-0a574507edde', 'anna_admin',    'shirts', '{"name": "Oceanfront Tee",            "quantity": 1, "price": 195, "discount": 0, "description": "Classic shirt for a casual look", "date": "2022-03-06", "images": ["fdf78b5c-0508-488d-ad60-0a574507edde"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('fdf78b5c-0508-488d-ad60-0a574507edde', 'rtCdNsBjQl', '{ "value": "#f7f5f6" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('fdf78b5c-0508-488d-ad60-0a574507edde', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('fdf78b5c-0508-488d-ad60-0a574507edde', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('fdf78b5c-0508-488d-ad60-0a574507edde', 'pKtj6re3E1', '{ "value": "Short sleeve" }');
+
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('586c8403-7424-4c0a-8180-e7a052878fc0', 'mia_moderator', 'shirts', '{"name": "Boho Chic Shirt",           "quantity": 1, "price": 190, "discount": 0, "description": "Classic shirt for a casual look", "date": "2022-01-09", "images": ["586c8403-7424-4c0a-8180-e7a052878fc0"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('586c8403-7424-4c0a-8180-e7a052878fc0', 'rtCdNsBjQl', '{ "value": "#2f3728" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('586c8403-7424-4c0a-8180-e7a052878fc0', 'vbdvBfzmmC', '{ "value": "New" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('586c8403-7424-4c0a-8180-e7a052878fc0', 'tWfXcUS2K5', '{ "value": "XL" }');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('586c8403-7424-4c0a-8180-e7a052878fc0', 'pKtj6re3E1', '{ "value": "Long sleeve" }');
+
+-- SHIRTS END
