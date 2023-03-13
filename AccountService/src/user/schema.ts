@@ -74,3 +74,9 @@ export class NewUser {
   @Length(8, 16)
     password!: string;
 }
+
+@ObjectType()
+export class UserStat {
+  @Field()
+    count!: number;
+}

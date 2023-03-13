@@ -79,3 +79,19 @@ test('List Mia\'s Chats', async () => {
       expect(res.body.data.chat).toBeDefined();
     });
 });
+
+test('UserStat', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `{chatStat{ count }}`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.chatStat.count).toBeDefined();
+    });
+});

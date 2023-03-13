@@ -159,3 +159,20 @@ test('Change Roles', async () => {
       expect(data.body.data.updateRoles.username).toEqual('mia_moderator');
     });
 });
+
+
+test('UserStat', async () => {
+  await request
+    .post('/graphql')
+    .send({
+      query: `{userStat{ count }}`,
+    })
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then(data => {
+      expect(data).toBeDefined();
+      expect(data.body).toBeDefined();
+      expect(data.body.data).toBeDefined();
+      expect(data.body.data.userStat.count).toBeDefined();
+    });
+});

@@ -52,7 +52,7 @@ export default function ProductImageList({
     if (product) {
       const temp = [...existingPictures];
       temp.splice(index, 1);
-      fetch(`http://localhost:4001/api/v0/image/${temp[index]}`, {
+      fetch(`http://localhost:4001/api/v0/image/${product.images[index]}`, {
         method: 'DELETE',
       });
       setExistingPictures(temp);
@@ -87,7 +87,11 @@ export default function ProductImageList({
             existingPictures.map((id: string, index: number) => (
               <Card variant="outlined" key={index}>
                 <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
-                  <Image src={`http://localhost:4001/${id}.jpeg`} alt="Picture not available" fill />
+                  <Image
+                    src={`http://localhost:4001/${id}.jpeg`}
+                    alt="Picture not available"
+                    fill
+                  />
                 </AspectRatio>
                 <CardCover>
                   <Box>
@@ -118,7 +122,11 @@ export default function ProductImageList({
           {pictures.map((picture, index) => (
             <Card variant="outlined" key={index}>
               <AspectRatio ratio="1" sx={{ minWidth: 150 }}>
-                <Image src={URL.createObjectURL(picture)} alt="Picture not available" fill />
+                <Image
+                  src={URL.createObjectURL(picture)}
+                  alt="Picture not available"
+                  fill
+                />
               </AspectRatio>
               <CardCover>
                 <Box>
@@ -150,7 +158,14 @@ export default function ProductImageList({
           <Card variant="outlined">
             <AspectRatio ratio="1" sx={{ minWidth: 100 }}>
               <FormControl sx={{}}>
-                <FormLabel sx={{ margin: 'auto', flex: 1, width: '100%', cursor: 'pointer' }}>
+                <FormLabel
+                  sx={{
+                    margin: 'auto',
+                    flex: 1,
+                    width: '100%',
+                    cursor: 'pointer',
+                  }}
+                >
                   <PhotoCameraIcon />
                   Add Picture
                 </FormLabel>
@@ -164,20 +179,29 @@ export default function ProductImageList({
                       if (!uploadedFile) return;
 
                       // File checks - Wrong Format
-                      if (!validTypes.find((img: string) => img === uploadedFile.type)) {
+                      if (
+                        !validTypes.find(
+                          (img: string) => img === uploadedFile.type,
+                        )
+                      ) {
                         alert('Image type not supported.');
                       } else {
                         // Image compression and resizing
                         // Make a call to image server for compression
                         const formData: FormData = new FormData();
                         formData.append('file', uploadedFile);
-                        const imageData = await fetch('http://localhost:4001/api/v0/image/compress', {
-                          method: 'POST',
-                          body: formData,
-                        });
+                        const imageData = await fetch(
+                          'http://localhost:4001/api/v0/image/compress',
+                          {
+                            method: 'POST',
+                            body: formData,
+                          },
+                        );
 
                         const image = await imageData.json();
-                        const blobArray: Int8Array = new Int8Array(image.buffer.data);
+                        const blobArray: Int8Array = new Int8Array(
+                          image.buffer.data,
+                        );
                         const newFile = new File([blobArray], 'temp.jpeg', {
                           type: 'image/jpeg',
                         });

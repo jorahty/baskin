@@ -48,3 +48,9 @@ export class ChatMemberArgs {
   @Matches(regexUUID)
     id!: string;
 }
+
+@ObjectType()
+export class ChatStat {
+  @Field()
+    count!: number;
+}

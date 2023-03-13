@@ -2,16 +2,22 @@ import * as React from 'react';
 import { useAppContext } from '../../../context';
 import { Product } from '../../../graphql/product/schema';
 import CreateLayout from '../../../components/layout/CreateLayout';
-import Router from 'next/router';
 import FormData from 'form-data';
 import fetch from 'node-fetch';
 import { gql, GraphQLClient } from 'graphql-request';
 
-export default function ProductEdit({ product }: { product: Product }) {
+export default function ProductEdit({
+  product,
+  handleCancel,
+  updateProductList,
+  productList,
+}: {
+  product: Product;
+  handleCancel: () => void;
+  updateProductList: React.Dispatch<React.SetStateAction<Product[]>>;
+  productList: Product[];
+}) {
   const { signedInUser } = useAppContext();
-  const handleCancel = () => {
-    Router.back();
-  };
 
   const handleUpdate = async (
     name: string,
@@ -21,7 +27,6 @@ export default function ProductEdit({ product }: { product: Product }) {
     quantity: number,
     pictures: File[],
   ) => {
-
     const existingImages: string[] = product.images;
     const formData: FormData = new FormData();
     pictures.map((picture: File) => {
@@ -46,16 +51,36 @@ export default function ProductEdit({ product }: { product: Product }) {
                   name: "${name}",
                   description: "${description}",
                   price: ${price},
-                  category: "${category === 'Choose Category' ? product.category : category}",
+                  category: "${
+  category === 'Choose Category' ? product.category : category
+}",
                   quantity: ${quantity},
                   images: [${allImages.map((p: string) => `"${p}"`)}],
                   discount: 0,
-            }) {id}
+            }) {id, user, name, description, date, price, category, quantity, images, discount}
         }
     `;
 
-    await graphQLClient.request(query).then(handleCancel);
+    await graphQLClient.request(query).then(res => {
+      product = res.updateProduct;
+      // Remove product from product list
+      const index = productList.findIndex(
+        (tempProd: Product) => tempProd.id === product.id,
+      );
+      productList.splice(index);
+      productList.push(product);
+      updateProductList(productList);
+
+      // Return to dashboard
+      handleCancel();
+    });
   };
 
-  return <CreateLayout handleCancel={handleCancel} handleCreate={handleUpdate} product={product} />;
+  return (
+    <CreateLayout
+      handleCancel={handleCancel}
+      handleCreate={handleUpdate}
+      product={product}
+    />
+  );
 }
