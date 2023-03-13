@@ -46,9 +46,7 @@ export default function UserMenu() {
         </Stack>
         <Divider />
         <Link href={`/user/${signedInUser.username}`}>
-          <MenuItem
-            aria-label="Profile"
-            onClick={handleClose}>
+          <MenuItem aria-label="Profile" onClick={handleClose}>
             <ListItemDecorator>
               <PersonIcon />
             </ListItemDecorator>
@@ -56,9 +54,7 @@ export default function UserMenu() {
           </MenuItem>
         </Link>
         <Link href={`/dashboard`}>
-          <MenuItem
-            aria-label="Dashboard"
-            onClick={handleClose}>
+          <MenuItem aria-label="Dashboard" onClick={handleClose}>
             <ListItemDecorator>
               <DashboardCustomize />
             </ListItemDecorator>
@@ -66,20 +62,14 @@ export default function UserMenu() {
           </MenuItem>
         </Link>
         <Link href={`/messages`}>
-          <MenuItem
-            aria-label="Messages"
-            onClick={handleClose}>
+          <MenuItem aria-label="Messages" onClick={handleClose}>
             <ListItemDecorator>
               <ForumIcon />
             </ListItemDecorator>
             {t('header.dropdown.messages')}
           </MenuItem>
         </Link>
-        <MenuItem
-          onClick={() => signOut()}
-          color="danger"
-          aria-label="Sign out"
-        >
+        <MenuItem onClick={() => signOut()} color="danger" aria-label="Sign out">
           <ListItemDecorator sx={{ color: 'inherit' }}>
             <SignOutIcon />
           </ListItemDecorator>
