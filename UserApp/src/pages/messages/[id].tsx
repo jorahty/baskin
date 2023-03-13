@@ -81,7 +81,6 @@ export default function MessagesPage({ locale }: { locale: string }) {
       <Layout
         sidebar={<ChatList chats={chats} selectedChat={selectedChat} />}
         locale={locale}
-        menuIconVisible
         disableScrollable
       >
         <Stack direction="column" height="100%">

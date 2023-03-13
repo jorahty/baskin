@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
 export default function ProductPage({ product, locale }: { product: Product; locale: string }) {
   return (
-    <Layout locale={locale}>
+    <Layout locale={locale} disableSidebarToggle>
       <ProductDetails product={product} />
     </Layout>
   );

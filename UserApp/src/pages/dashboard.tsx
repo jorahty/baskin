@@ -47,7 +47,6 @@ export default function Dashboard({ locale }: Props) {
         <Layout
           sidebar={<DashSidebar items={items} current={current} setCurrent={setCurrent} />}
           locale={locale}
-          menuIconVisible
         >
           {comps[current]}
         </Layout>

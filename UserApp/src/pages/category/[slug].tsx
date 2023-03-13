@@ -44,7 +44,7 @@ interface Props {
 
 export default function CategoryPage({ category, locale }: Props) {
   return (
-    <Layout sidebar={<CategoryControls category={category} />} locale={locale} menuIconVisible>
+    <Layout sidebar={<CategoryControls category={category} />} locale={locale}>
       <CategoryContent category={category} />
     </Layout>
   );

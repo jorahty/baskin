@@ -33,7 +33,7 @@ export default function UserPage({
   locale: string;
 }) {
   return (
-    <Layout locale={locale}>
+    <Layout locale={locale} disableSidebarToggle>
       <Stack p={3} gap={3} maxWidth={1200} m="auto">
         <UserDetails user={user} />
         <ProductList products={products} />

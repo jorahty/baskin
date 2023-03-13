@@ -8,7 +8,8 @@ interface Props {
   children: React.ReactNode;
   sidebar?: React.ReactNode;
   locale: string;
-  menuIconVisible?: boolean | undefined;
+  disableSidebarToggle?: boolean | true;
+  // menuIconVisible?: boolean | undefined;
   disableScrollable?: boolean | undefined;
 }
 
@@ -25,7 +26,8 @@ export default function Layout({
   children,
   sidebar,
   locale,
-  menuIconVisible,
+  disableSidebarToggle,
+  // menuIconVisible,
   disableScrollable,
 }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -41,7 +43,7 @@ export default function Layout({
         <Header
           handleSidebarOpen={handleSidebarOpen}
           locale={locale}
-          menuIconVisible={menuIconVisible}
+          disableSidebarToggle={disableSidebarToggle}
         />
       </Box>
       <Divider />

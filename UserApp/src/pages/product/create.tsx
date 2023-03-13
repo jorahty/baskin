@@ -83,7 +83,7 @@ export default function Create({ locale }: { locale: string }) {
 
   return (
     <AuthGuard>
-      <Layout locale={locale}>
+      <Layout locale={locale} disableSidebarToggle>
         <CreateLayout handleCreate={handleCreate} handleCancel={handleCancel} />
       </Layout>
     </AuthGuard>

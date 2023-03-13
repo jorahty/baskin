@@ -52,7 +52,7 @@ export default function SavedPage({ category: unfiltered, locale }: Props) {
   if (!mounted) return <></>;
 
   return (
-    <Layout sidebar={<CategoryControls category={category} />} locale={locale} menuIconVisible>
+    <Layout sidebar={<CategoryControls category={category} />} locale={locale}>
       {category.products.length > 0 ? <CategoryContent category={category} /> : <Empty />}
     </Layout>
   );
