@@ -1,5 +1,5 @@
 import { ArgsType, Field, ObjectType, InputType } from 'type-graphql';
-import { Length, Matches, MinLength } from 'class-validator';
+import { Length, Matches } from 'class-validator';
 
 import { regexUsername, regexEmail } from '../regex';
 
