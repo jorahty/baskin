@@ -16,14 +16,14 @@ const handlers = [
   graphql.query('ListProducts', async (req, res, ctx) => {
     const { id } = req.variables;
 
-    if (id === '5555a266-a631-4598-9bd5-52bd5ee2d9aa')
+    if (id === 'abcZdiabca')
       return res(
         ctx.data({
           product: [],
         })
       );
 
-    if (id === '7777a266-a631-4598-9bd5-52bd5ee2d9aa')
+    if (id === 'dbcZdiabca')
       return res(
         ctx.data({
           product: [
@@ -118,7 +118,7 @@ test('Remove Missing Product', async () => {
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
       query: `mutation {removeProduct (
-        product: "5555a266-a631-4598-9bd5-52bd5ee2d9aa"
+        product: "abcZdiabca"
       ) {
         name, description, category, price, quantity, user
       }}`,
@@ -135,7 +135,7 @@ test('Remove Product as not Owner', async () => {
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
       query: `mutation {removeProduct (
-        product: "7777a266-a631-4598-9bd5-52bd5ee2d9aa"
+        product: "dbcZdiabca"
       ) {
         name, description, category, price, quantity, user
       }}`,

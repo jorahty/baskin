@@ -1,6 +1,6 @@
 import { ArgsType, Field, ObjectType } from 'type-graphql';
 import { Matches, Length, MinLength } from 'class-validator';
-import { regexISODate, regexnanoID, regexSlug, regexUsername} from '../regex';
+import { regexISODate, regexnanoID, regexSlug, regexUsername } from '../regex';
 
 @ObjectType()
 export class Product {

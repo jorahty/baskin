@@ -55,8 +55,10 @@ export class ProductService {
   public async remove(id: string, { user }: Request): Promise<Product> {
     const products = await this.list({ id: id });
     if (products.length == 0) {
+      //eslint-disable-next-line
       throw new Error('Product does not exist');
     } else if (products[0].user != user.username) {
+      //eslint-disable-next-line
       throw new Error('Not owner of product');
     }
 
