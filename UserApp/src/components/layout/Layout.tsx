@@ -9,10 +9,11 @@ interface Props {
   sidebar?: React.ReactNode;
   locale: string;
   menuIconVisible?: boolean | undefined;
+  disableScrollable?: boolean | undefined;
 }
 
 const sx = {
-  overflowY: 'scroll',
+  // overflowY: 'scroll',
   height: `calc(100vh - ${headerHeight} - ${footerHeight})`,
 };
 
@@ -20,7 +21,13 @@ const sx = {
 // Do not hard-code the width of the sidebar.
 // Instead, adjust the width of the content inside the sidebar
 
-export default function Layout({ children, sidebar, locale, menuIconVisible }: Props) {
+export default function Layout({
+  children,
+  sidebar,
+  locale,
+  menuIconVisible,
+  disableScrollable,
+}: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleSidebarOpen = () => {
@@ -57,7 +64,7 @@ export default function Layout({ children, sidebar, locale, menuIconVisible }: P
             <Divider orientation="vertical" />
           </Stack>
         )}
-        <Box sx={{ ...sx, flexGrow: 1 }}>
+        <Box sx={{ ...sx, overflowY: (!disableScrollable && 'scroll') || 'hidden', flexGrow: 1 }}>
           {sidebarOpen && (
             <Box
               onClick={handleSidebarOpen}
