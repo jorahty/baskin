@@ -11,7 +11,8 @@ const product: Product = {
   id: 'aa8efe0c-8eeb-4bd3-95a5-e8e3526e9bb9',
   user: 'molly_member',
   name: 'iPad 19',
-  description: 'Latest and greatest update, not even in the market for 90 years.',
+  description:
+    'Latest and greatest update, not even in the market for 90 years.',
   price: 190000000,
   category: 'electronics',
   quantity: 1,
@@ -21,24 +22,16 @@ const product: Product = {
   attributes: [],
 };
 
-jest.mock('../../../../components/layout/CreateLayout', () => (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function CreateLayout({ handleCreate }: any) {
+jest.mock(
+  '../../../../components/layout/CreateLayout',
+  () =>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any,implicit-arrow-linebreak
+    function CreateLayout({ handleCreate }: any) {
+      handleCreate('string', 'string', 0, 'string', 0, ['whatever']);
 
-    handleCreate(
-      'string',
-      'string',
-      0,
-      'string',
-      0,
-      ['whatever'],
-    );
-
-    return (
-      <div>Hello World!</div>
-    );
-  }
-));
+      return <div>Hello World!</div>;
+    },
+);
 
 jest.mock('next/router', () => ({
   back: jest.fn(),
@@ -50,7 +43,22 @@ const handlers = [
   }),
   graphql.mutation('updateProduct', async (req, res, ctx) => {
     return res(
-      ctx.data({}),
+      ctx.data({
+        updateProduct: {
+          id: 'aa8efe0c-8eeb-4bd3-95a5-e8e3526e9bb9',
+          user: 'molly_member',
+          name: 'iPad 19',
+          description:
+            'Latest and greatest update, not even in the market for 90 years.',
+          price: 190000000,
+          category: 'electronics',
+          quantity: 1,
+          images: ['1630caf6-fab4-43ac-8e43-bdc692fe19df'],
+          discount: 0,
+          date: '2022-01-21T15:43:08.000Z',
+          attributes: [],
+        },
+      }),
     );
   }),
 ];
@@ -64,7 +72,12 @@ afterAll(() => server.close());
 const renderView = async () => {
   render(
     <CssVarsProvider>
-      <ProductEdit product={product} />
+      <ProductEdit
+        product={product}
+        handleCancel={jest.fn}
+        updateProductList={jest.fn}
+        productList={[product]}
+      />
     </CssVarsProvider>,
   );
 };

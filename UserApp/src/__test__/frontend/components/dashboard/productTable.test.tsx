@@ -17,7 +17,7 @@ const handlers = [
             id: 'X0bZdiabca',
           },
         ],
-      })
+      }),
     );
   }),
   graphql.query('getAllCategories', async (req, res, ctx) => {
@@ -29,7 +29,7 @@ const handlers = [
             slug: 'toys',
           },
         ],
-      })
+      }),
     );
   }),
 ];
@@ -67,14 +67,18 @@ const products: Product[] = [
     quantity: 23,
     images: [
       'https://images.pexels.com/photos/6020432/' +
-      'pexels-photo-6020432.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'pexels-photo-6020432.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     ],
     description: 'something',
     date: '2022-07-28T01:00:08.000Z',
+    attributes: [],
   },
 ];
 const renderView = async () => {
-  localStorage.setItem('user', `{"username": "molly_member", "accessToken": "blergh"}`);
+  localStorage.setItem(
+    'user',
+    `{"username": "molly_member", "accessToken": "blergh"}`,
+  );
   render(
     <CssVarsProvider>
       <AppContextProvider>
@@ -101,4 +105,11 @@ test('Deletes product', async () => {
   fireEvent.click(screen.getByLabelText('delete'));
   await new Promise(resolve => setTimeout(resolve, 1000));
   expect(screen.queryByText('Honda Civic Toy Car')).not.toBeInTheDocument();
+});
+
+test('Edits product', async () => {
+  await renderView();
+  fireEvent.click(screen.getByLabelText('menu-0'));
+  fireEvent.click(screen.getByLabelText('edit'));
+  fireEvent.click(screen.getByLabelText('cancel'));
 });
