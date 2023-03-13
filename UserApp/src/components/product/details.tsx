@@ -109,7 +109,6 @@ export default function ProductDetails({ product }: { product: Product }) {
           pb: 0,
           flexDirection: {
             md: 'row',
-            sm: 'column',
           },
         }}
       >
