@@ -76,3 +76,10 @@ export class NewCategory {
   @Matches(regexSlug)
     parent?: string;
 }
+
+@ObjectType()
+export class CategoryStat {
+  @Field()
+    count!: number;
+}
+

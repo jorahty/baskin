@@ -5,6 +5,7 @@ import {
   CategoryArgs,
   CategoryAttributesArgs,
   CategoryChildrenArgs,
+  CategoryStat,
   EditCategoryArgs,
   NewCategory,
   RemoveCategoryArgs,
@@ -62,4 +63,10 @@ export class CategoryResolver {
   ): Promise<Category> {
     return new CategoryService().edit(slug, name, parent);
   }
+
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   @Query(returns => CategoryStat)
+   async categoryStat(): Promise<CategoryStat> {
+    return new CategoryService().stat();
+   }
 }

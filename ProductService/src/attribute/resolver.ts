@@ -5,6 +5,7 @@ import {
   RemoveAttributeArgs,
   NewAttribute,
   EditAttribute,
+  AttributeStat,
 } from './schema';
 import { AttributeService } from './service';
 
@@ -38,4 +39,10 @@ export class AttributeResolver {
   ): Promise<Attribute> {
     return new AttributeService().remove(id);
   }
+
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   @Query(returns => AttributeStat)
+   async attributeStat(): Promise<AttributeStat> {
+    return new AttributeService().stat();
+   }
 }

@@ -94,3 +94,10 @@ export class EditAttribute {
   @Field(() => [String], { nullable: true })
     values?: string[];
 }
+
+@ObjectType()
+export class AttributeStat {
+  @Field()
+    count!: number;
+}
+
