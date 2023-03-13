@@ -6,12 +6,14 @@ import { AuthResolver } from '../../graphql/auth/resolver';
 import { nextAuthChecker } from '../../graphql/auth/checker';
 import { CategoryResolver } from '../../graphql/category/resolver';
 import { AttributeResolver } from '../../graphql/attribute/resolver';
+import { UserResolver } from '../../graphql/user/resolver';
 
 const schema = buildSchemaSync({
   resolvers: [
     AuthResolver,
     CategoryResolver,
     AttributeResolver,
+    UserResolver,
   ],
   validate: { forbidUnknownValues: false },
   authChecker: nextAuthChecker,
