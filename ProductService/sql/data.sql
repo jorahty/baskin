@@ -1,47 +1,117 @@
--- ██ category ██
-
 DELETE FROM category;
+DELETE FROM attribute;
+DELETE FROM product;
+DELETE FROM attribute_value;
 
+-- ██ Category definitions: 
+
+-- vehicles
 INSERT INTO category (slug, parent_slug, data) VALUES ('vehicles', NULL, '{"name": "Vehicles"}');
-INSERT INTO category (slug, parent_slug, data) VALUES ('boats', 'vehicles', '{"name": "Boats"}');
-INSERT INTO category (slug, parent_slug, data) VALUES ('sailboats', 'boats', '{"name": "Sailboats"}');
-INSERT INTO category (slug, parent_slug, data) VALUES ('cars', 'vehicles', '{"name": "Cars"}');
-INSERT INTO category (slug, parent_slug, data) VALUES ('trucks', 'cars', '{"name": "Trucks"}');
-INSERT INTO category (slug, parent_slug, data) VALUES ('motorcycles', 'vehicles', '{"name": "Motorcycles"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('X0bZdioM6D', 'vehicles', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('t6guOpyORQ', 'vehicles', '{ "name": "Model year", "type": "number", "min": 1886, "max": 2023 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('UM9PPU64GB', 'vehicles', '{ "name": "Miles driven", "type": "number", "min": 0, "step": 100 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('VuLNBGpP7Z', 'vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel", "Other"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('Iwiw1QLbXP', 'vehicles', '{ "name": "Top speed", "type": "number", "min": 5, "max": 300, "step": 5, "symbol": "mph" }');
 
+-- cars
+INSERT INTO category (slug, parent_slug, data) VALUES ('cars', 'vehicles', '{"name": "Cars"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('ni6pEhjovT', 'cars', '{ "name": "Transmission type", "type": "set", "values": ["Automatic", "Manual"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('7O5s6eKwwh', 'cars', '{ "name": "Seats", "type": "number", "min": 1, "max": 10 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('lRriZmW7bx', 'cars', '{ "name": "Interior", "type": "color" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('QxCtZcsWVh', 'cars', '{ "name": "Exterior", "type": "color" }');
+
+-- motorcycles
+INSERT INTO category (slug, parent_slug, data) VALUES ('motorcycles', 'vehicles', '{"name": "Motorcycles"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('S8xteMD6V5', 'motorcycles', '{ "name": "Color", "type": "color" }');
+
+-- boats
+INSERT INTO category (slug, parent_slug, data) VALUES ('boats', 'vehicles', '{"name": "Boats"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('3GZ3ozPoCS', 'boats', '{ "name": "Length", "type": "number", "min": 1, "max": 300, "symbol": "ft" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('4gDdn60Dbd', 'boats', '{ "name": "Interior", "type": "color" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('iiAoJcJ5RH', 'boats', '{ "name": "Exterior", "type": "color" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('R2BDfhnUXF', 'boats', '{ "name": "Hull material", "type": "set", "values": ["Steel", "Aluminum", "Fiberglass", "Plastic", "Wood"] }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('767cAm6pTR', 'boats', '{ "name": "Passenger capacity", "type": "number", "min": 1, "max": 100 }');
+
+-- sailboats
+INSERT INTO category (slug, parent_slug, data) VALUES ('sailboats', 'boats', '{"name": "Sailboats"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('6B1BUxiIys', 'sailboats', '{ "name": "Sail material", "type": "set", "values": ["Dacron", "Kevlar", "Carbon fiber", "Spectra", "Technora", "Vectran"] }');
+
+-- trucks
+INSERT INTO category (slug, parent_slug, data) VALUES ('trucks', 'cars', '{"name": "Trucks"}');
+
+-- property
 INSERT INTO category (slug, parent_slug, data) VALUES ('property', NULL, '{"name": "Property"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('dCdFfnYJ3A', 'property', '{ "name": "Bedrooms", "type": "number", "min": 0, "max": 20 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('eCdFfnYJ3A', 'property', '{ "name": "Bathrooms", "type": "number", "min": 0, "max": 20 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('fCdFfnYJ3A', 'property', '{ "name": "Square feet", "type": "number", "min": 10, "max": 10000, "step": 10 }');
+
+-- cabins
 INSERT INTO category (slug, parent_slug, data) VALUES ('cabins', 'property', '{"name": "Cabins"}');
+
+-- apartments
 INSERT INTO category (slug, parent_slug, data) VALUES ('apartments', 'property', '{"name": "Apartments"}');
+
+-- beachfront
 INSERT INTO category (slug, parent_slug, data) VALUES ('beachfront', 'apartments', '{"name": "Beachfront"}');
 
+-- apparel
 INSERT INTO category (slug, parent_slug, data) VALUES ('apparel', NULL, '{"name": "Apparel"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('rtCdNsBjQl', 'apparel', '{ "name": "Color", "type": "color" }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('vbdvBfzmmC', 'apparel', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('tops', 'apparel', '{"name": "Tops"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('tWfXcUS2K5', 'tops', '{ "name": "Size", "type": "set", "values": ["XS", "S", "M", "L", "XL"] }');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('shirts', 'tops', '{"name": "Shirts"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('pKtj6re3E1', 'shirts', '{ "name": "Sleeve type", "type": "set", "values": ["Short sleeve", "Long sleeve", "Sleeveless" ] }');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('jackets', 'tops', '{"name": "Jackets"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('sweatshirts', 'tops', '{"name": "Sweatshirts"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('bottoms', 'apparel', '{"name": "Bottoms"}');
-INSERT INTO category (slug, parent_slug, data) VALUES ('jeans', 'bottoms', '{"name": "Jeans"}');
-INSERT INTO category (slug, parent_slug, data) VALUES ('shorts', 'bottoms', '{"name": "Shorts"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('Z4i6HkRS9d', 'bottoms', '{ "name": "Waist", "type": "number", "min": 20, "max": 50 }');
+INSERT INTO attribute (id, category_slug, data) VALUES ('vlLlpRBs8F', 'bottoms', '{ "name": "Inseam", "type": "number", "min": 20, "max": 40 }');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('shoes', 'apparel', '{"name": "Shoes"}');
+INSERT INTO attribute (id, category_slug, data) VALUES ('lajRCeKAW1', 'shoes', '{ "name": "Size", "type": "number", "min": 4, "max": 15 }');
+
+INSERT INTO category (slug, parent_slug, data) VALUES ('jeans', 'bottoms', '{"name": "Jeans"}');
+
+INSERT INTO category (slug, parent_slug, data) VALUES ('shorts', 'bottoms', '{"name": "Shorts"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('socks', 'apparel', '{"name": "Socks"}');
 
 INSERT INTO category (slug, parent_slug, data) VALUES ('electronics', NULL, '{"name": "Electronics"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('audio', 'electronics', '{"name": "Audio"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('speakers', 'audio', '{"name": "Speakers"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('microphones', 'audio', '{"name": "Microphones"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('cameras', 'electronics', '{"name": "Cameras"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('film', 'cameras', '{"name": "Film"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('digital', 'cameras', '{"name": "Digital"}');
 
 INSERT INTO category (slug, parent_slug, data) VALUES ('computers', NULL, '{"name": "Computers"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('laptops', 'computers', '{"name": "Laptops"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('desktops', 'computers', '{"name": "Desktop computers"}');
 
 INSERT INTO category (slug, parent_slug, data) VALUES ('instruments', NULL, '{"name": "Instruments"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('brass', 'instruments', '{"name": "Brass"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('trumpets', 'brass', '{"name": "Trumpets"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('string', 'instruments', '{"name": "String"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('guitars', 'string', '{"name": "Guitars"}');
+
 INSERT INTO category (slug, parent_slug, data) VALUES ('violins', 'string', '{"name": "Violins"}');
 
 INSERT INTO category (slug, parent_slug, data) VALUES ('toys', NULL, '{"name": "Toys & Games"}');
@@ -74,11 +144,9 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiab
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcm', 'anna_admin', 'boats', '{"name": "Island Yacht", "quantity": 1,"price": 50000, "discount": 0, "description": "Classic beauty, fully restored", "date": "2023-02-10T09:12:47.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcn', 'mia_moderator', 'sailboats', '{"name": "Racing Sailboat", "quantity": 1,"price": 75000, "discount": 0, "description": "Fast and sleek, perfect for competitions", "date": "2023-02-11T16:20:15.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabco', 'molly_member', 'cars', '{"name": "Sports Car", "quantity": 1,"price": 90000, "discount": 0, "description": "Brand new, top of the line model", "date": "2023-02-12T18:59:33.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcp', 'anna_admin', 'trucks', '{"name": "Pickup Truck", "quantity": 1,"price": 35000, "discount": 0, "description": "Heavy-duty, perfect for hauling", "date": "2023-02-13T22:48:02.000Z", "images": ["fbe51a7c-4ad9-42e4-9e44-39a9c45916f1","47cda44d-8cbb-4180-8781-ed77acd682a0"
-]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcp', 'anna_admin', 'trucks', '{"name": "Pickup Truck", "quantity": 1,"price": 35000, "discount": 0, "description": "Heavy-duty, perfect for hauling", "date": "2023-02-13T22:48:02.000Z", "images": ["fbe51a7c-4ad9-42e4-9e44-39a9c45916f1","47cda44d-8cbb-4180-8781-ed77acd682a0"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcq', 'mia_moderator', 'motorcycles', '{"name": "Harley Davidson", "quantity": 1,"price": 20000, "discount": 0, "description": "Vintage model, in great condition", "date": "2023-02-14T10:23:16.000Z", "images": ["0425bf9c-c603-4bbf-86bb-d2a2444b7292","401fe716-44b8-4016-803e-8d0918854d50"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcr', 'molly_member', 'property', '{"name": "Luxury Condo", "quantity": 1,"price": 1500000, "discount": 0, "description": "Spacious, with beautiful views", "date": "2023-02-15T14:36:44.000Z", "images": ["3c38072f-d1e3-4ae0-b9eb-88eb03aecd0e","9d5e6e71-c4a5-4f2e-ba7f-981a9467cdfc"
-]}');
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcr', 'molly_member', 'property', '{"name": "Luxury Condo", "quantity": 1,"price": 1500000, "discount": 0, "description": "Spacious, with beautiful views", "date": "2023-02-15T14:36:44.000Z", "images": ["3c38072f-d1e3-4ae0-b9eb-88eb03aecd0e","9d5e6e71-c4a5-4f2e-ba7f-981a9467cdfc"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcs', 'molly_member', 'cabins', '{"name": "Cozy Cabin", "quantity": 2, "price": 400, "discount": 0, "description": "Rustic cabin in the woods, perfect for a weekend getaway", "date": "2023-02-12T08:22:16.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabct', 'molly_member', 'apartments', '{"name": "Modern Studio Apartment", "quantity": 1, "price": 800, "discount": 0, "description": "Newly renovated studio apartment in the city", "date": "2023-02-14T12:10:45.000Z", "images": ["0c421b08-f2c1-4103-b83d-6fbbb5173713","5c84c746-0ad4-434b-9660-36b3c1adcc64"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcu', 'anna_admin', 'beachfront', '{"name": "Beachfront Villa", "quantity": 1, "price": 2000, "discount": 0, "description": "Luxurious beachfront villa with private access to the beach", "date": "2023-01-18T19:01:37.000Z", "images": ["39070ccf-9b97-4aad-a41d-9561cfde67a1","bc64e5b5-35fc-43c3-8133-1f374b42f19a"]}');
@@ -115,46 +183,6 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi12
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123r', 'mia_moderator', 'appliances', '{"name": "KitchenAid Stand Mixer", "quantity": 1, "price": 300, "discount": 0, "description": "A powerful and versatile kitchen appliance for baking and cooking", "date": "2023-02-13T06:34:58.000Z", "images": ["acc44792-f0f3-4970-8dda-d20c0423c305"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdi123s', 'molly_member', 'kitchen', '{"name": "Stainless Steel Cookware Set", "quantity": 1, "price": 200, "discount": 0, "description": "A set of pots and pans made with durable and easy-to-clean stainless steel", "date": "2023-02-13T17:22:58.000Z", "images": ["5179b8c7-a327-4fc5-84b2-5804465c2cf7","ac6feefc-dc56-44c8-92c0-a3f906c6a5bd"]}');
 
--- ██ attribute ██
-
-DELETE FROM attribute;
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('X0bZdioM6D', 'vehicles', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('t6guOpyORQ', 'vehicles', '{ "name": "Model year", "type": "number", "min": 1886, "max": 2023 }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('UM9PPU64GB', 'vehicles', '{ "name": "Miles driven", "type": "number", "min": 0, "step": 100 }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('VuLNBGpP7Z', 'vehicles', '{ "name": "Fuel type", "type": "set", "values": ["Gasoline", "Electric", "Diesel", "Other"] }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('Iwiw1QLbXP', 'vehicles', '{ "name": "Top speed", "type": "number", "min": 5, "max": 300, "step": 5, "symbol": "mph" }');
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('ni6pEhjovT', 'cars', '{ "name": "Transmission type", "type": "set", "values": ["Automatic", "Manual"] }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('7O5s6eKwwh', 'cars', '{ "name": "Seats", "type": "number", "min": 1, "max": 10 }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('lRriZmW7bx', 'cars', '{ "name": "Interior", "type": "color" }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('QxCtZcsWVh', 'cars', '{ "name": "Exterior", "type": "color" }');
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('S8xteMD6V5', 'motorcycles', '{ "name": "Color", "type": "color" }');
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('3GZ3ozPoCS', 'boats', '{ "name": "Length", "type": "number", "min": 1, "max": 300, "symbol": "ft" }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('4gDdn60Dbd', 'boats', '{ "name": "Interior", "type": "color" }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('iiAoJcJ5RH', 'boats', '{ "name": "Exterior", "type": "color" }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('R2BDfhnUXF', 'boats', '{ "name": "Hull material", "type": "set", "values": ["Steel", "Aluminum", "Fiberglass", "Plastic", "Wood"] }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('767cAm6pTR', 'boats', '{ "name": "Passenger capacity", "type": "number", "min": 1, "max": 100 }');
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('6B1BUxiIys', 'sailboats', '{ "name": "Sail material", "type": "set", "values": ["Dacron", "Kevlar", "Carbon fiber", "Spectra", "Technora", "Vectran"] }');
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('dCdFfnYJ3A', 'property', '{ "name": "Bedrooms", "type": "number", "min": 0, "max": 20 }');
-INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Bathrooms", "type": "number", "min": 0, "max": 20 }');
-INSERT INTO attribute (category_slug, data) VALUES ('property', '{ "name": "Square feet", "type": "number", "min": 10, "max": 10000, "step": 10 }');
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('rtCdNsBjQl', 'apparel', '{ "name": "Color", "type": "color" }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('vbdvBfzmmC', 'apparel', '{ "name": "Condition", "type": "set", "values": ["New", "Used"] }');
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('tWfXcUS2K5', 'tops', '{ "name": "Size", "type": "set", "values": ["XS", "S", "M", "L", "XL"] }');
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('pKtj6re3E1', 'shirts', '{ "name": "Sleeve type", "type": "set", "values": ["Short sleeve", "Long sleeve", "Sleeveless" ] }');
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('Z4i6HkRS9d', 'bottoms', '{ "name": "Waist", "type": "number", "min": 20, "max": 50 }');
-INSERT INTO attribute (id, category_slug, data) VALUES ('vlLlpRBs8F', 'bottoms', '{ "name": "Inseam", "type": "number", "min": 20, "max": 40 }');
-
-INSERT INTO attribute (id, category_slug, data) VALUES ('lajRCeKAW1', 'shoes', '{ "name": "Size", "type": "number", "min": 4, "max": 15 }');
 
 -- ██ attribute_value ██
 
