@@ -173,7 +173,7 @@ export default function AttributeTable({ attributes, setAttributes }:
           </Typography>
           <Divider />
           <Typography id="alert-dialog-modal-description" textColor="text.tertiary">
-            Are you sure you want to discard delete this category?
+            Are you sure you want to discard delete this attribute?
           </Typography>
           <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end', pt: 2 }}>
             <Button variant="plain" color="neutral" onClick={handleClose}>
@@ -181,7 +181,7 @@ export default function AttributeTable({ attributes, setAttributes }:
             </Button>
             <Button variant="solid" color="danger"
               aria-label="delete" onClick={handleDelete}>
-              Delete Category
+              Delete Attribute
             </Button>
           </Box>
         </ModalDialog>
