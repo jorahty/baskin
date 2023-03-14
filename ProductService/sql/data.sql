@@ -230,6 +230,26 @@ INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiab
 INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 'VuLNBGpP7Z', '{ "value": "Electric" }');
 INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabcl', 'Iwiw1QLbXP', '{ "value": "25" }');
 
+-- Winter Boots
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('hUsowTyhs6', 'mia_moderator', 'shoes', '{"name": "Winter Boots", "quantity": 1, "price": 90, "discount": 0, "description": "Comfortable and stylish", "date": "2022-02-20T19:03:42.000Z", "images": ["7e16fafb-18d9-4928-9cd0-31a9c6e42549","e2fd6e80-63b8-41e0-9321-858fd8e2caa7"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('hUsowTyhs6', 'lajRCeKAW1', '{ "value": "14" }');
+
+-- Classic Sneakers
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc4', 'mia_moderator', 'shoes', '{"name": "Classic Sneakers", "quantity": 1, "price": 80, "discount": 0, "description": "Comfortable and stylish", "date": "2022-02-20T19:03:42.000Z", "images": ["0f9399f4-76d5-43f9-81e4-d40e195b0e1e","c53b3a6c-5188-4827-97d0-f938d2ffdb38","44dba03b-26b7-4a48-a6ca-fae666b6f576","d4131af4-f40d-4ab4-a7ed-f214ca0d8592"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('X0bZdiabc4', 'lajRCeKAW1', '{ "value": "6" }');
+
+-- Air Low
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('eUsowTyhs6', 'mia_moderator', 'shoes', '{"name": "Air Low", "quantity": 1, "price": 25, "discount": 0, "description": "Comfortable and stylish", "date": "2022-02-20T19:03:42.000Z", "images": ["d8f39e38-3346-44bf-a0e0-2fcb3891c9be","3ff349c5-cbed-4c95-bb4e-59736f4d5137"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('eUsowTyhs6', 'lajRCeKAW1', '{ "value": "8" }');
+
+-- Hiking Boots
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('gUsowTyhs6', 'mia_moderator', 'shoes', '{"name": "Hiking Boots", "quantity": 1, "price": 65, "discount": 0, "description": "Comfortable and stylish", "date": "2022-02-20T19:03:42.000Z", "images": ["c28c131f-ae2b-445c-b6e3-5db614ae5ba3","005db097-da7e-400a-900f-e47308979a8b"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('gUsowTyhs6', 'lajRCeKAW1', '{ "value": "12" }');
+
+-- Excellent Shoe
+INSERT INTO product (id, member_username, category_slug, data) VALUES ('fUsowTyhs6', 'mia_moderator', 'shoes', '{"name": "Excellent shoe", "quantity": 1, "price": 60, "discount": 0, "description": "Comfortable and stylish", "date": "2022-02-20T19:03:42.000Z", "images": ["6a9d495b-1b3d-4dfe-91f9-356063ed0c2c","e831eb05-41af-40cc-846d-ac23f888208a"]}');
+INSERT INTO attribute_value   (product_id, attribute_id, data) VALUES ('fUsowTyhs6', 'lajRCeKAW1', '{ "value": "10" }');
+
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabca', 'molly_member', 'apparel', '{"name": "Air Jordan 42", "quantity": 1,"price": 250, "discount": 0, "description": "Never worn. Ut porta, lectus nec sodales semper, leo est dictum massa, non.", "date": "2023-02-09T06:43:08.000Z", "images": ["c8d79347-04b0-4b14-9012-77daa697bc1f","773ecc98-048a-4530-a70f-c48fa58eb9e7"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcb', 'molly_member', 'toys', '{"name": "Honda Civic Toy Car", "quantity": 1,"price": 25, "discount": 0, "description": "Great toy car for kids, barely used. Ut porta, lectus ultricies.", "date": "2023-01-21T15:43:08.000Z", "images": ["3b0664c7-8af6-4747-9775-b92ac9ab395f"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabcc', 'molly_member', 'toys', '{"name": "Baseballs", "quantity": 40,"price": 2, "discount": 0.20, "description": "Used baseball, need to get rid off them. Ut porta, lectus.", "date": "2022-01-21T15:43:08.000Z", "images": ["27397fe4-f681-4f8c-960d-97eaaa7f33d6"]}');
@@ -252,7 +272,6 @@ INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiab
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc1', 'molly_member', 'bottoms', '{"name": "Chino Pants", "quantity": 4, "price": 50, "discount": 0, "description": "Comfortable and stylish", "date": "2023-02-15T14:22:17.000Z", "images": ["16ff22c8-b525-4401-b0cd-69c8ca24b7f6","562b0615-3345-46f2-ba32-ef0357ca4ce0"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc2', 'molly_member', 'jeans', '{"name": "Slim Fit Jeans", "quantity": 3, "price": 70, "discount": 0, "description": "Comfortable and stylish", "date": "2023-02-17T10:17:33.000Z", "images": ["97247a71-cee5-4f10-9fd9-e4880872e0ad","8e4c8923-8d3f-463c-bbf1-c15ee45eca42"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc3', 'molly_member', 'shorts', '{"name": "Cargo Shorts", "quantity": 2, "price": 40, "discount": 0, "description": "Comfortable and stylish", "date": "2022-02-19T08:56:11.000Z", "images": ["b1f8761d-42c0-45b1-8e32-fccf4e6ed76e","196fed79-4b37-4247-af14-82348a1c1ca5"]}');
-INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc4', 'molly_member', 'shoes', '{"name": "Sneakers", "quantity": 1, "price": 80, "discount": 0, "description": "Comfortable and stylish", "date": "2022-02-20T19:03:42.000Z", "images": ["0f9399f4-76d5-43f9-81e4-d40e195b0e1e","c53b3a6c-5188-4827-97d0-f938d2ffdb38","44dba03b-26b7-4a48-a6ca-fae666b6f576","d4131af4-f40d-4ab4-a7ed-f214ca0d8592"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc5', 'molly_member', 'socks', '{"name": "Ankle Socks", "quantity": 5, "price": 10, "discount": 0, "description": "Comfortable and stylish", "date": "2022-02-22T15:11:39.000Z", "images": ["d241fd44-afbe-4cfb-9b76-eea9818c4420","ad5a1c9f-60e4-4ea8-a91b-fb73437f1e96"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc6', 'molly_member', 'electronics', '{"name": "Wireless Headphones", "quantity": 1, "price": 120, "discount": 0, "description": "High-quality sound and comfortable fit", "date": "2022-02-24T12:08:12.000Z", "images": ["a0ab4f24-e0dd-4513-999f-64c5a19efceb","9b66b0ed-542e-4051-8035-fc97628300e1"]}');
 INSERT INTO product (id, member_username, category_slug, data) VALUES ('X0bZdiabc7', 'mia_moderator', 'audio', '{"name": "Wireless Earbuds", "quantity": 2,"price": 120, "discount": 0, "description": "High-quality wireless earbuds with noise-cancelling technology", "date": "2023-01-28T09:15:42.000Z", "images": ["a85c8ab1-75e3-4074-b8db-99c1ec734e9a","7f08f47a-0766-4ee2-a198-b4e6e9755256"]}');

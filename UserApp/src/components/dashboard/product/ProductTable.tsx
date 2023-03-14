@@ -4,10 +4,10 @@ import {
   Sheet,
   Table,
   Typography,
-  Avatar,
   Modal,
   ModalDialog,
   ModalClose,
+  AspectRatio,
 } from '@mui/joy';
 import { Product } from '../../../graphql/product/schema';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -21,6 +21,7 @@ import { useAppContext } from '../../../context';
 import { GraphQLClient, gql } from 'graphql-request';
 import { useTranslation } from 'next-i18next';
 import ProductEdit from '../../../components/dashboard/product/ProductEdit';
+import Image from 'next/image';
 
 // Reference: https://codesandbox.io/s/6bmeke?file=/components/OrderTable.tsx:7018-12425
 // Reference: https://mui.com/joy-ui/react-menu/
@@ -114,11 +115,14 @@ export default function ProductTable({ products }: { products: Product[] }) {
           {productList.map((row: Product, index: number) => (
             <tr key={row.id}>
               <td>
-                <Avatar
-                  src={`http://localhost:4001/${row.images[0]}.jpeg`}
-                  alt={`Product image of ${row.name}`}
-                  sx={{ borderRadius: 'sm', height: '100px', width: '100px' }}
-                />
+                <AspectRatio ratio="1/1" sx={{ width: 100 }}>
+                  <Image
+                    src={`http://localhost:4001/${row.images[0]}.jpeg`}
+                    alt={`Product image of ${row.name}`}
+                    style={{ borderRadius: '10px' }}
+                    fill
+                  />
+                </AspectRatio>
               </td>
               <td>
                 <Typography fontWeight={'md'}>{row.name}</Typography>
