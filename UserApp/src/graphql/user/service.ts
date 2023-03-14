@@ -24,7 +24,8 @@ export class UserService {
       `mutation addNewUser { addUser (input: {
         username: "${newMember.username}",
         email: "${newMember.email}",
-        password: "${newMember.password}"}
+        password: "${newMember.password}"
+        name: "${newMember.name}"}
         ) { name, email, username } }`,
     );
     return data.addUser;

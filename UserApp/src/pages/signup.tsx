@@ -217,7 +217,7 @@ export default function Signup() {
                 }}
               ></Box>
               <Button type="submit" fullWidth aria-label="signup">
-                {ready && t('signup.form.signup')}
+                {ready && t('header.signup')}
               </Button>
             </form>
             <Box display="flex" justifyContent="flex-end">
