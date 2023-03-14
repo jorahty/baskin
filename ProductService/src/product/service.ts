@@ -1,4 +1,4 @@
-import { NewProduct, Product, ProductStat } from './schema';
+import { NewProduct, Product, ProductStat, AttributeValueArg } from './schema';
 import { pool } from '../db';
 
 export class ProductService {
@@ -142,6 +142,21 @@ export class ProductService {
     product.id = rows[0].id;
 
     return product;
+  }
+
+  public async setAttributeValue(attribute: AttributeValueArg, product: string): Promise<AttributeValueArg>{
+    const insert = `
+      INSERT INTO attribute_value(product_id, attribute_id, data)
+      VALUES ($1, $2, $3) 
+      RETURNING data || jsonb_build_object('id', id, 'attribute_id', attribute_id) AS attribute
+    `;
+    const query = {
+      text: insert,
+      values: [product, attribute.id, {value: attribute.value}],
+    };
+    const { rows } = await pool.query(query);
+
+    return rows[0].attribute;
   }
 
   public async stat(): Promise<ProductStat>{

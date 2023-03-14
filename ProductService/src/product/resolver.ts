@@ -14,7 +14,16 @@ export class ProductResolver {
   async addProduct(
     @Arg('input') input: NewProduct,
   ): Promise<Product> {
-    return new ProductService().add(input);
+    const productService = new ProductService();
+    const product = await productService.add(input);
+    const newAttributes = [];
+    if (input.attributes) {
+      for (const attribute of (input.attributes)) {
+        newAttributes.push(await productService.setAttributeValue(attribute, product.id))
+      }
+    }
+
+    return product;
   }
 
   @Mutation(() => Product)

@@ -51,6 +51,17 @@ class AttributeValue {
     symbol?: string;
 }
 
+@ObjectType()
+@InputType('AttributeValueArg')
+export class AttributeValueArg {
+  @Field()
+  @Matches(regexnanoID)
+    id!: string;
+  @Field()
+  @Length(1, 32)
+    value!: string;
+}
+
 @ArgsType()
 export class ProductArgs {
   @Field({ nullable: true })
@@ -85,6 +96,8 @@ export class NewProduct {
     description!: string;
   @Field(() => [String])
     images!: string[];
+  @Field(() => [AttributeValueArg], { nullable: true })
+    attributes!: AttributeValueArg[];
 }
 
 @ArgsType()
