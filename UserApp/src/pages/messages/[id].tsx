@@ -69,7 +69,7 @@ export default function MessagesPage({ locale }: { locale: string }) {
 
     fetchMessages();
 
-    const myInterval = setInterval(fetchMessages, 10000);
+    const myInterval = setInterval(fetchMessages, 2000);
     return () => {
       // should clear the interval when the component unmounts
       clearInterval(myInterval);

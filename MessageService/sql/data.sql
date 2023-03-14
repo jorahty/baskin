@@ -41,4 +41,11 @@ INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b6
 INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "I cannot pay more than $300"}');
 INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "This is a one-of-a-kind Samsung TV, worth at least $500"}');
 INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "How about $350?"}');
-INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "Deal"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "My Brother in Christ, are you serious???"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "I just told you that this TV is one-of-a-kind >:("}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "The lowest I will go is $450"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "How about $400?? I really need this TV"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "Look, I have a buddy, his name is Raj"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "Raj is willing to pay $450, any lower would not be worth it for me"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "molly_member", "date": "2023-01-21T15:30:08.000Z", "content": "Hmmmm... okay you have a deal at $450"}');
+INSERT INTO message (chat_id, data) VALUES ('3f37a49c-7d13-4764-9568-8c5e13050b68', '{"sender": "mia_moderator", "date": "2023-01-21T15:30:08.000Z", "content": "That is great!"}');
