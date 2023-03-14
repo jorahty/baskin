@@ -9,7 +9,7 @@ import CategoryContent from '../components/category/content';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import * as deepl from 'deepl-node';
 
-const translator: deepl.Translator = new deepl.Translator('9cc0a417-01a3-549d-babd-f22f9a021beb:fx');
+const translator: deepl.Translator = new deepl.Translator('d138d914-080f-f266-18d0-f12135025563:fx');
 
 // Within `getServerSideProps` we can (and should) query
 // micro services directly. https://tinyurl.com/ysfwst5r

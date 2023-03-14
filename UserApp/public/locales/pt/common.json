@@ -95,5 +95,18 @@
 "password": "Senha",
 "signup": "Registrar"
 }
+},
+"common": {
+  "footer": {
+    "baskin": "Baskin",
+    "terms": "Termos",
+    "guidelines": "Diretrizes",
+    "about": "Sobre"
+  },
+  "price": {
+    "price": "Preço",
+    "min": "Min",
+    "max": "Max"
+  }
 }
 }

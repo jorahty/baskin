@@ -2,9 +2,6 @@
 const { i18n } = require('./next-i18next.config')
 
 module.exports = {
-  future: {
-    webpack5: true
-  },
   webpack(config) {
     config.resolve.fallback = {
       ...config.resolve.fallback,
@@ -29,7 +26,7 @@ module.exports = {
       },
       {
         protocol: 'https',
-        hostname: 'api-free.deepl.com',
+        hostname: 'api.deepl.com',
         port: '',
         pathname: '/**',
       }

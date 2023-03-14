@@ -37,10 +37,10 @@ export class MessageService {
   public async stat(): Promise<MessageStat>{
     const update = 'SELECT COUNT(*) FROM message';
     const query = {
-      text: update
+      text: update,
     };
     const { rows } = await pool.query(query);
 
-    return rows[0]
+    return rows[0];
   }
 }

@@ -143,10 +143,10 @@ export class CategoryService {
   public async stat(): Promise<CategoryStat>{
     const update = 'SELECT COUNT(*) FROM category';
     const query = {
-      text: update
+      text: update,
     };
     const { rows } = await pool.query(query);
 
-    return rows[0]
+    return rows[0];
   }
 }

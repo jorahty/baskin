@@ -42,7 +42,7 @@ export class AttributeResolver {
 
    // eslint-disable-next-line @typescript-eslint/no-unused-vars
    @Query(returns => AttributeStat)
-   async attributeStat(): Promise<AttributeStat> {
+  async attributeStat(): Promise<AttributeStat> {
     return new AttributeService().stat();
-   }
+  }
 }

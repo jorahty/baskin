@@ -95,10 +95,10 @@ export class UserService {
   public async stat(): Promise<UserStat>{
     const update = 'SELECT COUNT(*) FROM account';
     const query = {
-      text: update
+      text: update,
     };
     const { rows } = await pool.query(query);
 
-    return rows[0]
+    return rows[0];
   }
 }

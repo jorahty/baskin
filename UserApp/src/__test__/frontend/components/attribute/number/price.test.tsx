@@ -27,8 +27,8 @@ test('Renders', async () => {
 
 test('Change Min and Max', async () => {
   renderView();
-  const minInput = screen.getByPlaceholderText('Min');
-  const maxInput = screen.getByPlaceholderText('Max');
+  const minInput = screen.getByLabelText('min');
+  const maxInput = screen.getByLabelText('max');
   fireEvent.change(minInput, { target: { value: '3' } });
   fireEvent.change(maxInput, { target: { value: '11' } });
   fireEvent.change(minInput, { target: { value: '' } });

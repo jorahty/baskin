@@ -145,7 +145,7 @@ export class ProductService {
   }
 
   public async setAttributeValue(
-    attribute: AttributeValueArg, 
+    attribute: AttributeValueArg,
     product: string
   ): Promise<AttributeValueArg>{
     const insert = `
@@ -155,7 +155,7 @@ export class ProductService {
     `;
     const query = {
       text: insert,
-      values: [product, attribute.id, {value: attribute.value}],
+      values: [product, attribute.id, { value: attribute.value }],
     };
     const { rows } = await pool.query(query);
 
@@ -165,10 +165,10 @@ export class ProductService {
   public async stat(): Promise<ProductStat>{
     const update = 'SELECT COUNT(*) FROM product';
     const query = {
-      text: update
+      text: update,
     };
     const { rows } = await pool.query(query);
 
-    return rows[0]
+    return rows[0];
   }
 }
