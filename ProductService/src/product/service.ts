@@ -144,7 +144,10 @@ export class ProductService {
     return product;
   }
 
-  public async setAttributeValue(attribute: AttributeValueArg, product: string): Promise<AttributeValueArg>{
+  public async setAttributeValue(
+    attribute: AttributeValueArg, 
+    product: string
+  ): Promise<AttributeValueArg>{
     const insert = `
       INSERT INTO attribute_value(product_id, attribute_id, data)
       VALUES ($1, $2, $3) 
