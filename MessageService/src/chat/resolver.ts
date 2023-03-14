@@ -25,6 +25,6 @@ export class ChatResolver {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Query(returns => ChatStat)
   async chatStat(): Promise<ChatStat> {
-   return new ChatService().stat();
+    return new ChatService().stat();
   }
 }

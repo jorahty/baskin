@@ -19,7 +19,7 @@ export class ProductResolver {
     const newAttributes = [];
     if (input.attributes) {
       for (const attribute of (input.attributes)) {
-        newAttributes.push(await productService.setAttributeValue(attribute, product.id))
+        newAttributes.push(await productService.setAttributeValue(attribute, product.id));
       }
     }
 
@@ -45,7 +45,7 @@ export class ProductResolver {
 
    // eslint-disable-next-line @typescript-eslint/no-unused-vars
    @Query(returns => ProductStat)
-   async productStat(): Promise<ProductStat> {
+  async productStat(): Promise<ProductStat> {
     return new ProductService().stat();
-   }
+  }
 }

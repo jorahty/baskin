@@ -86,10 +86,10 @@ export class AttributeService {
   public async stat(): Promise<AttributeStat>{
     const update = 'SELECT COUNT(*) FROM attribute';
     const query = {
-      text: update
+      text: update,
     };
     const { rows } = await pool.query(query);
 
-    return rows[0]
+    return rows[0];
   }
 }

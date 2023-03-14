@@ -96,5 +96,18 @@
   "password": "Mot de passe",
   "signup": "S'inscrire"
   }
+  },
+  "common": {
+    "footer": {
+      "baskin": "Baskin",
+      "terms": "Termes",
+      "guidelines": "Lignes directrices",
+      "about": "Sur"
+    },
+    "price": {
+      "price": "Prix",
+      "min": "Min",
+      "max": "Max"
+    }
   }
   }

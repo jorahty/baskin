@@ -19,6 +19,6 @@ export class MessageResolver {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Query(returns => MessageStat)
   async messageStat(): Promise<MessageStat> {
-   return new MessageService().stat();
+    return new MessageService().stat();
   }
 }

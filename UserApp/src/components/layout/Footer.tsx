@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { Stack, Typography } from '@mui/joy';
+import { useTranslation } from 'next-i18next';
 
 export const footerHeight = '50px';
 
 export default function Footer() {
+  const { t } = useTranslation('common');
   return (
     <Stack
       height={footerHeight}
@@ -12,8 +14,17 @@ export default function Footer() {
       justifyContent="center"
       p={2}
     >
-      <Typography>© Baskin</Typography>
-      {[
+      <Typography>© {t('common.footer.baskin')}</Typography>
+      <Typography>
+          &nbsp;• <Link href={'/terms'}>{t('common.footer.terms')}</Link>
+      </Typography>
+      <Typography>
+          &nbsp;• <Link href={'/guidelines'}>{t('common.footer.guidelines')}</Link>
+      </Typography>
+      <Typography>
+          &nbsp;• <Link href={'/about'}>{t('common.footer.about')}</Link>
+      </Typography>
+      {/* {[
         'Terms',
         'Guidelines',
         'About',
@@ -21,7 +32,7 @@ export default function Footer() {
         <Typography key={page}>
           &nbsp;• <Link href={`/${page.toLowerCase()}`}>{page}</Link>
         </Typography>
-      ))}
+      ))} */}
     </Stack>
   );
 }

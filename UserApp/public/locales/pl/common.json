@@ -96,5 +96,18 @@
 "password": "Hasło",
 "signup": "Zarejestruj się"
 }
+},
+"common": {
+  "footer": {
+    "baskin": "Baskin",
+    "terms": "Warunki",
+    "guidelines": "Zasady",
+    "about": "O nas"
+  },
+  "price": {
+    "price": "Cena",
+    "min": "min",
+    "max": "max"
+  }
 }
 }

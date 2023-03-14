@@ -61,10 +61,10 @@ export class ChatService {
   public async stat(): Promise<ChatStat>{
     const update = 'SELECT COUNT(*) FROM chat';
     const query = {
-      text: update
+      text: update,
     };
     const { rows } = await pool.query(query);
 
-    return rows[0]
+    return rows[0];
   }
 }

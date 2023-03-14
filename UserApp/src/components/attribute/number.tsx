@@ -2,6 +2,7 @@ import { Filter, useAppContext } from '../../context';
 import { Attribute } from '@/graphql/category/schema';
 import { Box, Input, Slider, Stack, Typography } from '@mui/joy';
 import { ChangeEvent, useState } from 'react';
+import { useTranslation } from 'next-i18next';
 
 interface Props {
   attribute: Attribute;
@@ -140,6 +141,7 @@ export function Unrestricted({ attribute }: Props) {
 // set up that way. Therefore filtering by price needs to be handled
 // differently.
 export function AttributePrice() {
+  const { t } = useTranslation('common');
   const { refinement, setRefinement } = useAppContext();
 
   function handleChange(
@@ -175,26 +177,28 @@ export function AttributePrice() {
 
   return (
     <Box>
-      <Typography fontWeight="lg" pb={1}>
-        Price
+      <Typography aria-label="price" fontWeight="lg" pb={1}>
+        {t('common.price.price')}
       </Typography>
       <Stack direction="row" alignItems="center" gap={2}>
         <Input
           onChange={e => handleChange(e, 'min')}
           type="number"
-          placeholder="Min"
+          placeholder={t('common.price.min').toString()}
           startDecorator={'$'}
           sx={{ bgcolor: 'background.body' }}
           slotProps={slotProps}
+          aria-label="min"
         />
-        <Typography>to</Typography>
+        <Typography>-</Typography>
         <Input
           onChange={e => handleChange(e, 'max')}
           type="number"
-          placeholder="Max"
+          placeholder={t('common.price.max').toString()}
           startDecorator={'$'}
           sx={{ bgcolor: 'background.body' }}
           slotProps={slotProps}
+          aria-label="max"
         />
       </Stack>
     </Box>

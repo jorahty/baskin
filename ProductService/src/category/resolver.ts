@@ -66,7 +66,7 @@ export class CategoryResolver {
 
    // eslint-disable-next-line @typescript-eslint/no-unused-vars
    @Query(returns => CategoryStat)
-   async categoryStat(): Promise<CategoryStat> {
+  async categoryStat(): Promise<CategoryStat> {
     return new CategoryService().stat();
-   }
+  }
 }

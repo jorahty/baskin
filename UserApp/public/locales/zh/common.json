@@ -95,5 +95,18 @@
 "password": "密码",
 "signup": "注册"
 }
+},
+"common": {
+  "footer": {
+    "baskin": "Baskin",
+    "terms": "条款",
+    "guidelines": "指南",
+    "about": "关于"
+  },
+  "price": {
+    "price": "价格",
+    "min": "最低",
+    "max": "最高"
+  }
 }
 }

@@ -95,5 +95,18 @@
       "emailPlaceholder": "Enter your email",
       "password": "Password"
     }
+  },
+  "common": {
+    "footer": {
+      "baskin": "Baskin",
+      "terms": "Terms",
+      "guidelines": "Guidelines",
+      "about": "About"
+    },
+    "price": {
+      "price": "Price",
+      "min": "Min",
+      "max": "Max"
+    }
   }
 }
