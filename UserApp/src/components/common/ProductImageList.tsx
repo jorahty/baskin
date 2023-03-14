@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Sheet from '@mui/joy/Sheet';
 import Box from '@mui/joy/Box';
-import { CardCover, IconButton } from '@mui/joy';
+import { CardCover, IconButton, Stack } from '@mui/joy';
 import Card from '@mui/joy/Card';
 import AspectRatio from '@mui/joy/AspectRatio';
 import FormControl from '@mui/joy/FormControl';
@@ -164,10 +164,14 @@ export default function ProductImageList({
                     flex: 1,
                     width: '100%',
                     cursor: 'pointer',
+                    display: 'flex',
+                    justifyContent: 'center',
                   }}
                 >
-                  <PhotoCameraIcon />
-                  Add Picture
+                  <Stack gap={1} direction="row" alignItems="center">
+                    <PhotoCameraIcon />
+                    Add Picture
+                  </Stack>
                 </FormLabel>
                 <Input
                   aria-label={'add product image'}
