@@ -39,6 +39,10 @@ const handlers = [
         category: [{
           slug: 'cars',
           name: 'Cars',
+        },
+        {
+          slug: 'electronics',
+          name: 'Electronics',
         }],
       }),
     );
@@ -49,6 +53,10 @@ const handlers = [
         categoryChildren: [{
           slug: 'cars',
           name: 'Cars',
+        },
+        {
+          slug: 'electronics',
+          name: 'Electronics',
         }],
       }),
     );
@@ -63,9 +71,10 @@ afterAll(() => server.close());
 jest.mock('next/router', () => ({
   useRouter() {
     return {
-      query: { id: '123' },
+
     };
   },
+  push: jest.fn(),
 }));
 
 jest.mock('react-i18next', () => ({
@@ -85,8 +94,10 @@ jest.mock('react-i18next', () => ({
 }));
 
 const renderView = async () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { props } = await getServerSideProps({} as any) as any;
+  const { props } = await getServerSideProps({
+    locale: 'en',
+    category: 'cars',
+  } as any) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
   render(
     <CssVarsProvider>
       <AppContextProvider>

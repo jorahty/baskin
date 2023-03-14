@@ -16,6 +16,8 @@ const customJestConfig = {
     "src/pages/_document.tsx",
     "src/pages/_app.tsx",
     "src/pages/product/create.tsx",
+    "src/pages/index.tsx",
+    "src/pages/category/",
   ],
   coverageThreshold: {
     global: {
