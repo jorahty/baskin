@@ -54,14 +54,14 @@ test('Create new product without header', async () => {
   await request
     .post('/api/graphql')
     .send({
-      query: `mutation {addProduct (
+      query: `mutation {addProduct (product: {
         name:"Toy robot"
         description: "brand new"
         category:"toys"
         price:100
         quantity: 1
         images: ["temp"]
-      ) {
+      }) {
         name, description, category, price, quantity, user
       }}`,
     })
@@ -75,14 +75,14 @@ test('Create new product corrupt header', async () => {
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + 'garbage')
     .send({
-      query: `mutation {addProduct (
+      query: `mutation {addProduct (product: {
         name:"Toy robot"
         description: "brand new"
         category:"toys"
         price:100
         quantity: 1
         images: ["temp"]
-      ) {
+      }) {
         name, description, category, price, quantity, user
       }}`,
     })
@@ -97,14 +97,14 @@ test('Create new product without member roles', async () => {
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
-      query: `mutation {addProduct (
+      query: `mutation {addProduct (product: {
         name:"Toy robot"
         description: "brand new"
         category:"toys"
         price:100
         quantity: 1
         images: ["temp"]
-      ) {
+      }) {
         name, description, category, price, quantity, user
       }}`,
     })
@@ -119,14 +119,14 @@ test('Create new product', async () => {
     .post('/api/graphql')
     .set('Authorization', 'Bearer ' + accessToken)
     .send({
-      query: `mutation {addProduct (
+      query: `mutation {addProduct (product: {
         name:"Toy robot"
         description: "brand new"
         category:"toys"
         price:100
         quantity: 1
         images: ["temp"]
-      ) {
+      }) {
         name, description, category, price, quantity, user
       }}`,
     })

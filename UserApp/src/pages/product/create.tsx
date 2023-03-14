@@ -49,18 +49,20 @@ export default function Create({ locale }: { locale: string }) {
 
     const imagesIdArr: string[] = await imageData.json();
 
-    const graphQLClient = new GraphQLClient('http://localhost:4002/graphql');
+    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql',  {
+      headers: {
+        Authorization: `Bearer ${signedInUser?.accessToken}`,
+      },
+    });
     const query = gql`
         mutation addProduct {
-            addProduct (input: {
-                user: "${signedInUser?.username}",
+            addProduct (product: {
                 name: "${name}",
                 description: "${description}",
                 price: ${price},
                 category: "${category}",
                 quantity: ${quantity},
                 images: [${imagesIdArr.map((p: string) => `"${p}"`)}],
-                discount: 0,
             }) {id}
         }
     `;
@@ -71,12 +73,13 @@ export default function Create({ locale }: { locale: string }) {
         pathname: '/',
       })
       )
-      .catch(() => {
+      .catch(err => {
         imagesIdArr.forEach((pic: string) => {
           fetch(`http://localhost:4001/api/v0/image/${pic}`, {
             method: 'DELETE',
           });
         });
+        console.log(err);
         alert('Error creating product, Try again');
       });
   };

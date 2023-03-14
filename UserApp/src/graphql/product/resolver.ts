@@ -1,4 +1,4 @@
-import { Args, Resolver, Query, Authorized, Ctx, Mutation } from 'type-graphql';
+import { Arg, Args, Resolver, Query, Authorized, Ctx, Mutation } from 'type-graphql';
 import { NewProductArgs, Product, ProductArgs, SingleProductArgs } from './schema';
 import { ProductService } from './service';
 import type { Request } from 'next';
@@ -15,10 +15,10 @@ export class ProductResolver {
   @Authorized('member')
   @Mutation(() => Product)
   async addProduct(
-    @Args() args: NewProductArgs,
+    @Arg('product') product: NewProductArgs,
     @Ctx() { user: { username } }: Request,
   ): Promise<Product> {
-    const input = { user: username, discount: 0, ...args };
+    const input = { user: username, discount: 0, ...product };
     return new ProductService().add(input);
   }
 

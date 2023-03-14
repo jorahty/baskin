@@ -1,4 +1,4 @@
-import { ArgsType, Field, ObjectType } from 'type-graphql';
+import { ArgsType, Field, InputType, ObjectType } from 'type-graphql';
 import { Matches, Length, MinLength } from 'class-validator';
 import { regexISODate, regexnanoID, regexSlug, regexUsername } from '../regex';
 
@@ -69,7 +69,7 @@ export class SingleProductArgs {
     product!: string;
 }
 
-@ArgsType()
+@InputType('ProductInput')
 export class NewProductArgs {
   @Field()
   @Matches(regexSlug)
