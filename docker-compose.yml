@@ -10,6 +10,7 @@ services:
       - "3000:3000"
       - "3001:3001"
       - "3002:3002"
+      - "4001:4001"
 
   postgres:
     container_name: database
