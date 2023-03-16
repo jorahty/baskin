@@ -1,4 +1,4 @@
-import { Product } from '../../pages/dashboard';
+import { Product } from '../../../../ProductService/src/product/schema';
 
 interface Props{
   product: Product;

@@ -1,8 +1,8 @@
-import { Product } from '../../pages/dashboard';
+import { Product } from '../../../../ProductService/src/product/schema';
 import ProductCard from './card';
 
 
-interface Props{
+interface Props {
   products: Product[];
 }
 
