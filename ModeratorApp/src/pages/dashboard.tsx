@@ -30,8 +30,6 @@ export async function getServerSideProps() {
 }
 
 export default function Dashboard({ products }: Props){
-
-  // call product microservice => list these product with a delete button that recalls the delete service
   return(
     <ProductList products={products}/>
   );

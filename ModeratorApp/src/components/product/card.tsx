@@ -6,9 +6,9 @@ interface Props{
 
 export default function ProductCard({ product }: Props){
   return (
-    <div>
-      <h1>{product.name}</h1>
-      <p>{product.price}</p>
-    </div>
+    <tr>
+      <td>{product.name}</td>
+      <td>{product.user}</td>
+    </tr>
   );
 }
