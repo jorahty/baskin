@@ -21,7 +21,7 @@ const handlers = [
           username: 'anna_admin',
           name: 'Anna Admin',
           password: password,
-          roles: ['admin', 'moderator', 'member'],
+          roles: ['moderator', 'member'],
         }],
       } }),
     );
