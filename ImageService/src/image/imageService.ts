@@ -29,7 +29,8 @@ export class ImageService {
       }
 
       // Determine file path
-      const filePath = path.join(__dirname, '../../public', `${id}.jpeg`);
+      const dirname = __dirname.replace('build/', '');
+      const filePath = path.join(dirname, '../../public') + `/${id}.jpeg`;
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -87,7 +88,9 @@ export class ImageService {
   }
 
   public async delete(id: string): Promise<boolean> {
-    const pathName = path.join(__dirname, '../../public') + `/${id}.jpeg`;
+    const dirname = __dirname.replace('build/', '');
+    const pathName = path.join(dirname, '../../public') + `/${id}.jpeg`;
+    console.log(pathName)
     if (fs.existsSync(pathName)) {
       fs.unlinkSync(pathName);
     } else {

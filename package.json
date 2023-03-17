@@ -36,6 +36,7 @@
     "build-userapp": "cd UserApp && npm run build",
     "build-adminapp": "cd AdminApp && npm run build",
     "build-moderatorapp": "cd ModeratorApp && npm run build",
+    "prestart": "chmod 777 ImageService/public",
     "start": "concurrently --kill-others \"npm run start-account\" \"npm run start-image\" \"npm run start-product\" \"npm run start-message\" \"npm run start-userapp\" \"npm run start-adminapp\" \"npm run start-moderatorapp\"",
     "start-account": "cd AccountService && npm start",
     "start-image": "cd ImageService && npm start",
