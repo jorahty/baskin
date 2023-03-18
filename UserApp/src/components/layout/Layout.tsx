@@ -60,7 +60,7 @@ export default function Layout({
               },
             }}
           >
-            <Box bgcolor="background.surface" minWidth="min-content" sx={sx}>
+            <Box bgcolor="background.surface" minWidth="min-content" sx={{ overflowY: 'scroll', ...sx }}>
               {sidebar}
             </Box>
             <Divider orientation="vertical" />
