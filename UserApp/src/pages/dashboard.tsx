@@ -29,7 +29,7 @@ export default function Dashboard({ locale }: Props) {
   // let profileSettings = t("dashboard.sidebar.profileSettings");
   // let products = t("dashboard.sidebar.products");
 
-  const tabs = ['Profile Settings', 'Products', 'Favorites'];
+  const tabs = ['Profile Settings', 'Products'];
 
   const comps: Record<string, JSX.Element> = {
     'Profile Settings': <ProfileEdit />,
