@@ -28,6 +28,9 @@ const customJestConfig = {
     },
   },
   testMatch: ["**/?(*.)+(spec|test).[jt]s?(x)"],
+  testEnvironmentOptions: {
+    url: "http://localhost:3000"
+  },
 };
 
 module.exports = createJestConfig(customJestConfig);

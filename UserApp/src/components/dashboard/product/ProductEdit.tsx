@@ -33,7 +33,7 @@ export default function ProductEdit({
       formData.append('files', picture, picture.name);
     });
 
-    const imageData = await fetch('http://localhost:4001/api/v0/image', {
+    const imageData = await fetch('http://localhost:3000/api/image', {
       method: 'POST',
       body: formData,
     });
@@ -41,13 +41,19 @@ export default function ProductEdit({
     const picturesIdArr: string[] = await imageData.json();
     const allImages = existingImages.concat(picturesIdArr);
 
-    const graphQLClient = new GraphQLClient('http://localhost:4002/graphql');
+    const graphQLClient = new GraphQLClient(
+      'http://localhost:3000/api/graphql',
+      {
+        headers: {
+          Authorization: `Bearer ${signedInUser?.accessToken}`,
+        },
+      },
+    );
     const query = gql`
         mutation updateProduct {
             updateProduct (
                 id: "${product.id}",
                 input: {
-                  user: "${signedInUser?.username}",
                   name: "${name}",
                   description: "${description}",
                   price: ${price},
@@ -56,7 +62,6 @@ export default function ProductEdit({
 }",
                   quantity: ${quantity},
                   images: [${allImages.map((p: string) => `"${p}"`)}],
-                  discount: 0,
             }) {id, user, name, description, date, price, category, quantity, images, discount}
         }
     `;

@@ -195,7 +195,7 @@ export default function ProductImageList({
                         const formData: FormData = new FormData();
                         formData.append('file', uploadedFile);
                         const imageData = await fetch(
-                          'http://localhost:4001/api/v0/image/compress',
+                          'http://localhost:3000/api/image/compress',
                           {
                             method: 'POST',
                             body: formData,

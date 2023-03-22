@@ -24,6 +24,19 @@ export class ProductResolver {
 
   @Authorized('member')
   @Mutation(() => Product)
+  async updateProduct(
+    @Arg('id') id: string,
+    @Arg('input') product: NewProductArgs,
+    @Ctx() request: Request,
+  ): Promise<Product> {
+    const { username } = request.user;
+    console.log(username);
+    const input = { user: username, discount: 0, ...product };
+    return new ProductService().update(id, input, request);
+  }
+
+  @Authorized('member')
+  @Mutation(() => Product)
   async removeProduct(
     @Args() { product }: SingleProductArgs,
     @Ctx() request: Request,

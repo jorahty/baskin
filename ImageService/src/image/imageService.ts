@@ -9,6 +9,7 @@ export class ImageService {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+
       // Generate new id
       const id = uuidv4();
 
@@ -17,13 +18,15 @@ export class ImageService {
 
       const tmpImage = sharp(file.buffer);
 
-      let width;
-      let height;
+      let width = 0;
+      let height = 0;
 
       try {
-        const meta = await tmpImage.metadata();
-        width = meta.width;
-        height = meta.height;
+        const meta = await tmpImage.metadata().catch(e => {
+          console.log('error', e);
+        });
+        width = meta?.width || 0;
+        height = meta?.height || 0;
       } catch (e) {
         continue;
       }
@@ -57,7 +60,9 @@ export class ImageService {
     return filePaths;
   }
 
-  public async compress(file: Express.Multer.File): Promise<undefined | Express.Multer.File> {
+  public async compress(
+    file: Express.Multer.File,
+  ): Promise<undefined | Express.Multer.File> {
     const tmpImage = sharp(file.buffer);
 
     let width;

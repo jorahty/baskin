@@ -79,4 +79,34 @@ export class ProductService {
 
     return data.removeProduct;
   }
+
+  public async update(id: string, product: NewProduct, { user }: Request): Promise<Product> {
+    const products = await this.list({ id: id });
+    if (products.length == 0) {
+      //eslint-disable-next-line
+      throw new Error('Product does not exist');
+    } else if (products[0].user != user.username) {
+      //eslint-disable-next-line
+      throw new Error('Not owner of product');
+    }
+
+    const mutation = gql`
+      mutation updateProduct($id: String!, $input: ProductInput!) {
+        updateProduct(id: $id, input: $input) {
+            id, user, name, description, date, price, category, quantity, images, discount
+          }
+      }
+    `;
+
+    const data:{updateProduct:Product}  = await request(
+      'http://localhost:4002/graphql',
+      mutation,
+      {
+        id: id,
+        input: product,
+      },
+    );
+
+    return data.updateProduct;
+  }
 }

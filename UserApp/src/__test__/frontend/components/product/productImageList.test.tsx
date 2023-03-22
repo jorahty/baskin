@@ -37,6 +37,14 @@ const handlers = [
       buffer: { data: '' },
     }));
   }),
+  rest.delete('http://localhost:3000/api/image/:id', (req, res, ctx) => {
+    return res(ctx.json({ login: req.params.login }));
+  }),
+  rest.post('http://localhost:3000/api/image/compress', (req, res, ctx) => {
+    return res(ctx.json({
+      buffer: { data: '' },
+    }));
+  }),
 ];
 
 const server = setupServer(...handlers);

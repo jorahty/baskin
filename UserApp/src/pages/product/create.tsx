@@ -13,7 +13,9 @@ import { GetStaticProps } from 'next';
 export const getStaticProps: GetStaticProps = async context => {
   return {
     props: {
-      ...(await serverSideTranslations((context.locale as string) ?? 'en', ['common'])),
+      ...(await serverSideTranslations((context.locale as string) ?? 'en', [
+        'common',
+      ])),
       locale: (context.locale as string) ?? 'en',
     },
   };
@@ -34,48 +36,53 @@ export default function Create({ locale }: { locale: string }) {
     price: number,
     category: string,
     quantity: number,
-    images: File[]
+    images: File[],
   ) => {
     // const bearerToken = signedInUser?.accessToken;
-    const formData: FormData = new FormData();
+    const formData = new FormData();
     images.map((picture: File) => {
       formData.append('files', picture, picture.name);
     });
+    console.log('formData', formData);
 
-    const imageData = await fetch('http://localhost:4001/api/v0/image', {
+    const imageData = await fetch('http://localhost:3000/api/image', {
       method: 'POST',
       body: formData,
     });
 
     const imagesIdArr: string[] = await imageData.json();
 
-    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql',  {
-      headers: {
-        Authorization: `Bearer ${signedInUser?.accessToken}`,
+    const graphQLClient = new GraphQLClient(
+      'http://localhost:3000/api/graphql',
+      {
+        headers: {
+          Authorization: `Bearer ${signedInUser?.accessToken}`,
+        },
       },
-    });
+    );
     const query = gql`
-        mutation addProduct {
-            addProduct (product: {
-                name: "${name}",
-                description: "${description}",
-                price: ${price},
-                category: "${category}",
-                quantity: ${quantity},
-                images: [${imagesIdArr.map((p: string) => `"${p}"`)}],
-            }) {id}
-        }
+      mutation addProduct {
+        addProduct (product: {
+          name: "${name}",
+          description: "${description}",
+          price: ${price},
+          category: "${category}",
+          quantity: ${quantity},
+          images: [${imagesIdArr.map((p: string) => `"${p}"`)}],
+        }) {id}
+      }
     `;
 
     await graphQLClient
       .request(query)
-      .then(() => Router.push({
-        pathname: '/',
+      .then(() => {
+        Router.push({
+          pathname: '/',
+        });
       })
-      )
       .catch(err => {
         imagesIdArr.forEach((pic: string) => {
-          fetch(`http://localhost:4001/api/v0/image/${pic}`, {
+          fetch(`http://localhost:3000/api/image/${pic}`, {
             method: 'DELETE',
           });
         });

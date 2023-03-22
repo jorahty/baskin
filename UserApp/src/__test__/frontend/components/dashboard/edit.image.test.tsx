@@ -41,6 +41,9 @@ const handlers = [
   rest.post('http://localhost:4001/api/v0/image', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json([]));
   }),
+  rest.post('http://localhost:3000/api/image', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json([]));
+  }),
   graphql.mutation('updateProduct', async (req, res, ctx) => {
     return res(
       ctx.data({

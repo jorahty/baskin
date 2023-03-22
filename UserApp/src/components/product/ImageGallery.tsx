@@ -4,7 +4,6 @@ import { Product } from '@/graphql/product/schema';
 import { useState } from 'react';
 
 export default function ImageGallery({ product }: { product: Product }) {
-  console.log(product);
   const [currentImageId, setCurrentImageId] = useState<string>(
     product.images[0],
   );
