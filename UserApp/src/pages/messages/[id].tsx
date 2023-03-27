@@ -57,9 +57,11 @@ export default function MessagesPage({ locale }: { locale: string }) {
 
   // Fetch messages
   useEffect(() => {
+    const url = window.location.protocol + '//' + window.location.host;
+
     const fetchMessages = async () => {
       queryGQL(
-        'http://localhost:3000/api/graphql',
+        url + '/api/graphql',
         `query message { message(id: "${selectedChat?.id}" ) { content, sender, date } }`,
         signedInUser?.accessToken
       ).then(data => {
