@@ -45,21 +45,20 @@ export default function Create({ locale }: { locale: string }) {
     });
     console.log('formData', formData);
 
-    const imageData = await fetch('http://localhost:3000/api/image', {
+    const url = window.location.protocol + '//' + window.location.host;
+
+    const imageData = await fetch(url + '/api/image', {
       method: 'POST',
       body: formData,
     });
 
     const imagesIdArr: string[] = await imageData.json();
 
-    const graphQLClient = new GraphQLClient(
-      'http://localhost:3000/api/graphql',
-      {
-        headers: {
-          Authorization: `Bearer ${signedInUser?.accessToken}`,
-        },
+    const graphQLClient = new GraphQLClient(url +'/api/graphql', {
+      headers: {
+        Authorization: `Bearer ${signedInUser?.accessToken}`,
       },
-    );
+    });
     const query = gql`
       mutation addProduct {
         addProduct (product: {
@@ -82,7 +81,7 @@ export default function Create({ locale }: { locale: string }) {
       })
       .catch(err => {
         imagesIdArr.forEach((pic: string) => {
-          fetch(`http://localhost:3000/api/image/${pic}`, {
+          fetch(url+`/api/image/${pic}`, {
             method: 'DELETE',
           });
         });

@@ -43,14 +43,12 @@ export default function ProductDetails({ product }: { product: Product }) {
 
     setSent('Sending...');
 
-    const graphQLClient = new GraphQLClient(
-      'http://localhost:3000/api/graphql',
-      {
-        headers: {
-          Authorization: `Bearer ${signedInUser?.accessToken}`,
-        },
+    const url = window.location.protocol + '//' + window.location.host;
+    const graphQLClient = new GraphQLClient(url +'/api/graphql', {
+      headers: {
+        Authorization: `Bearer ${signedInUser?.accessToken}`,
       },
-    );
+    });
 
     let mutation = gql`
         mutation addChat {

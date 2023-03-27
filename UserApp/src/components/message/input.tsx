@@ -25,7 +25,8 @@ export default function MessageInput({ chat, messages, setMessages }: MessageInp
   const [text, setText] = useState('');
 
   const handleSubmit = async (message: string) => {
-    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
+    const url = window.location.protocol + '//' + window.location.host;
+    const graphQLClient = new GraphQLClient(url +'/api/graphql', {
       headers: {
         Authorization: `Bearer ${signedInUser?.accessToken}`,
       },

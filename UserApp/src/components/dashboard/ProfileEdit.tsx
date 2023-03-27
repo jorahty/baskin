@@ -28,7 +28,8 @@ export default function ProfileEdit() {
 
   const changeUsername = async () => {
     const accessToken = signedInUser?.accessToken;
-    const graphQLClient = new GraphQLClient('http://localhost:3000/api/graphql', {
+    const url = window.location.protocol + '//' + window.location.host;
+    const graphQLClient = new GraphQLClient(url +'/api/graphql', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

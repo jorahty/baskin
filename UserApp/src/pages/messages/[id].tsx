@@ -31,8 +31,10 @@ export default function MessagesPage({ locale }: { locale: string }) {
   // Fetch chats
   useEffect(() => {
     if (!signedInUser) return;
+    const url = window.location.protocol + '//' + window.location.host;
+
     queryGQL(
-      'http://localhost:3000/api/graphql',
+      url +'/api/graphql',
       `query chat {
         chat(username: "${signedInUser?.username}") {
           id, name, members { name, username }

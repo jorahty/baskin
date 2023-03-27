@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(req: NextRequest) {
-  let host = req.headers.get('host');
+  const host = req.headers.get('host');
   if (host) {
-    host = host.split(':').at(0) ?? 'Unknown';
-    if (host === 'localhost') {
+    const local = host.split(':').at(0) ?? 'Unknown';
+    if (local === 'localhost' || host === process.env.HOST) {
       return NextResponse.next();
     }
   }

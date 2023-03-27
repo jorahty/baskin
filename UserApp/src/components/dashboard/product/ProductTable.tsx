@@ -58,8 +58,8 @@ export default function ProductTable({ products }: { products: Product[] }) {
   const handleDelete = async () => {
     setAnchorEl(null);
     const bearerToken = signedInUser?.accessToken;
-    const graphQLClient = new GraphQLClient(
-      'http://localhost:3000/api/graphql',
+    const url = window.location.protocol + '//' + window.location.host;
+    const graphQLClient = new GraphQLClient(url +'/api/graphql',
       {
         headers: {
           Authorization: `Bearer ${bearerToken}`,
