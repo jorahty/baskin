@@ -178,7 +178,7 @@ export default function Signup() {
                   email: formElements.email.value,
                   password: formElements.password.value,
                 };
-                handleSubmit(data.email, data.password, data.lastname, data.firstname, data.username);
+                handleSubmit(data.email, data.password, data.firstname, data.lastname, data.username);
               }}
             >
               <FormControl required>

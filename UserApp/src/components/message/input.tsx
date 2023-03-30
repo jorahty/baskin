@@ -55,6 +55,7 @@ export default function MessageInput({ chat, messages, setMessages }: MessageInp
       }}
     >
       <Input
+        disabled={chat === undefined}
         placeholder="Aa"
         autoComplete="off"
         name="message"

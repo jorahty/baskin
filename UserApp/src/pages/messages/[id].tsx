@@ -46,10 +46,10 @@ export default function MessagesPage({ locale }: { locale: string }) {
 
       // Select chat with id from URL path
       const selected = data.chat.find((chat: Chat) => chat.id === router.query.id);
-
+      console.log(selected);
       if (selected) {
         setSelectedChat(selected);
-      } else {
+      } else if (data.chat.length) {
         router.push(data.chat[0].id, undefined, { shallow: true });
       }
     });
