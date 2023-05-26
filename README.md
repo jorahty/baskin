@@ -4,6 +4,11 @@
 - Full stack web application
 - Group project for [CSE 187](https://courses.engineering.ucsc.edu/courses/cse187)
 
+<img src="https://misc.jorahty.repl.co/slide1.png" height="300">
+<img src="https://misc.jorahty.repl.co/slide2.png" height="300">
+<img src="https://misc.jorahty.repl.co/slide3.png" height="300">
+<img src="https://misc.jorahty.repl.co/slide4.png" height="300">
+
 ## Team Resources
 
 - [Vision](https://www.figma.com/file/hkqIc1NAWjC28zoSLmA1uI/Baskin?node-id=0%3A1&t=Ze5xpN8lw7xfEws1-1)
