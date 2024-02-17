@@ -26,7 +26,10 @@ export default function ProductImageList({
   const [pictures, setPictures] = React.useState<File[]>([]);
   const [existingPictures, setExistingPictures] = React.useState<string[]>([]);
   const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
-
+  let url = '';
+  if (typeof window !== 'undefined') {
+    url = window.location.protocol + '//' + window.location.host;
+  }
   // Update existingPictures ONLY IF `product` exists
   useEffect(() => {
     if (product) {
@@ -52,7 +55,11 @@ export default function ProductImageList({
     if (product) {
       const temp = [...existingPictures];
       temp.splice(index, 1);
-      fetch(`http://localhost:4001/api/v0/image/${product.images[index]}`, {
+      let url = '';
+      if (typeof window !== 'undefined') {
+        url = window.location.protocol + '//' + window.location.host;
+      }
+      fetch(url +`/api/v0/image/${product.images[index]}`, {
         method: 'DELETE',
       });
       setExistingPictures(temp);
@@ -88,7 +95,7 @@ export default function ProductImageList({
               <Card variant="outlined" key={index}>
                 <AspectRatio ratio="1" sx={{ minWidth: { xs: 100, md: 150 } }}>
                   <Image
-                    src={`http://localhost:4001/${id}.jpeg`}
+                    src={url + `/${id}.jpeg`}
                     alt="Picture not available"
                     fill
                   />
@@ -195,7 +202,7 @@ export default function ProductImageList({
                         const formData: FormData = new FormData();
                         formData.append('file', uploadedFile);
                         const imageData = await fetch(
-                          'http://localhost:3000/api/image/compress',
+                          url + '/api/image/compress',
                           {
                             method: 'POST',
                             body: formData,
