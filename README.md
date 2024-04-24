@@ -3,17 +3,6 @@
 - A social marketplace
 - Full stack web application
 
-
-<img src="https://misc.jorahty.repl.co/slide1.1.png" height="300">
-<img src="https://misc.jorahty.repl.co/slide2.png" height="300">
-<a href="https://www.figma.com/file/hkqIc1NAWjC28zoSLmA1uI/Baskin?node-id=0%3A1&t=Ze5xpN8lw7xfEws1-1">
-  <img src="https://misc.jorahty.repl.co/slide3.png" height="300">
-</a>
-<br/>
-<a href="https://baskin.app">
-  <img src="https://misc.jorahty.repl.co/slide4.png" height="300">
-</a>
-
 ## Team Resources
 
 - [Vision](https://www.figma.com/file/hkqIc1NAWjC28zoSLmA1uI/Baskin?node-id=0%3A1&t=Ze5xpN8lw7xfEws1-1)
